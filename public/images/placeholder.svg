@@ -1,0 +1,13 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#111827"/>
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  <text x="600" y="280" text-anchor="middle" fill="url(#gradient)" font-family="Arial, sans-serif" font-size="48" font-weight="bold">Tafara Rugara</text>
+  <text x="600" y="330" text-anchor="middle" fill="#D1D5DB" font-family="Arial, sans-serif" font-size="24">Junior Cloud &amp; DevOps Engineer</text>
+  <text x="600" y="370" text-anchor="middle" fill="#9CA3AF" font-family="Arial, sans-serif" font-size="18">AWS • Terraform • Docker • Kubernetes • CI/CD</text>
+  <text x="600" y="400" text-anchor="middle" fill="#9CA3AF" font-family="Arial, sans-serif" font-size="18">Infrastructure as Code • Platform Engineering</text>
+</svg>

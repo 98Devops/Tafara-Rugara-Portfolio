@@ -1,0 +1,322 @@
+import { Metadata } from 'next';
+
+export interface SEOProps {
+  title?: string;
+  description?: string;
+  keywords?: string[];
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'profile';
+  canonicalUrl?: string;
+  structuredData?: Record<string, any>;
+}
+
+export interface PageSEOConfig {
+  home: SEOProps;
+  whatIDo: SEOProps;
+  projects: SEOProps;
+  experience: SEOProps;
+  contact: SEOProps;
+}
+
+// SEO configuration for all pages
+export const pageSEOConfig: PageSEOConfig = {
+  home: {
+    title: 'Tafara Rugara - Junior Cloud & DevOps Engineer',
+    description: 'Junior Cloud Engineer & DevOps Engineer specializing in AWS, Terraform, Docker, Kubernetes, CI/CD, Automation, Infrastructure as Code, and Observability. Platform Engineer based in Harare, Zimbabwe with remote availability worldwide.',
+    keywords: [
+      'Junior Cloud Engineer',
+      'DevOps Engineer',
+      'AWS Engineer',
+      'Infrastructure as Code',
+      'Kubernetes',
+      'CI/CD',
+      'Terraform',
+      'Docker',
+      'Platform Engineer',
+      'Cloud Architecture',
+      'Automation Engineering',
+      'Monitoring',
+      'Observability',
+      'Harare Zimbabwe',
+      'Remote Developer'
+    ],
+    ogImage: '/images/placeholder.svg',
+    ogType: 'profile',
+    canonicalUrl: 'https://tafara-rugara.com',
+  },
+  whatIDo: {
+    title: 'What I Do - Technical Capabilities | Tafara Rugara',
+    description: 'Cloud Architecture, DevOps & CI/CD, Automation Engineering, and Monitoring & Reliability expertise. AWS Engineer specializing in Kubernetes, Terraform, Docker, and modern DevOps practices. Platform Engineer with Infrastructure as Code experience.',
+    keywords: [
+      'Cloud Architecture',
+      'DevOps CI/CD',
+      'Automation Engineering',
+      'Monitoring Reliability',
+      'AWS Services',
+      'Kubernetes Management',
+      'Infrastructure as Code',
+      'Docker Containers',
+      'GitHub Actions',
+      'Prometheus Grafana',
+      'System Observability'
+    ],
+    ogImage: '/images/placeholder.svg',
+    canonicalUrl: 'https://tafara-rugara.com/what-i-do',
+  },
+  projects: {
+    title: 'Featured Projects - Cloud & DevOps Portfolio | Tafara Rugara',
+    description: 'Cloud & DevOps projects showcasing AWS infrastructure, Kubernetes deployment, and CI/CD automation. Junior Cloud Engineer portfolio featuring Acquisitions API, Voice-to-Vector API, Serverless Resume, and Tomcat Modernization projects.',
+    keywords: [
+      'Cloud Projects',
+      'DevOps Portfolio',
+      'AWS Projects',
+      'Kubernetes Deployment',
+      'Terraform Infrastructure',
+      'CI/CD Pipelines',
+      'Serverless Architecture',
+      'API Development',
+      'Docker Containerization',
+      'Automation Solutions'
+    ],
+    ogImage: '/images/placeholder.svg',
+    canonicalUrl: 'https://tafara-rugara.com/projects',
+  },
+  experience: {
+    title: 'Professional Experience - DevOps Engineer | Tafara Rugara',
+    description: 'DevOps Engineer at Excellessence with 60% downtime reduction achievement. Junior Cloud Engineer experience in production AI workflow deployment, Docker environments, CI/CD optimization, and Infrastructure as Code security hardening.',
+    keywords: [
+      'DevOps Engineer Experience',
+      'Production Deployment',
+      'System Reliability',
+      'Infrastructure Optimization',
+      'Docker Environments',
+      'CI/CD Reliability',
+      'Linux Administration',
+      'Security Hardening',
+      'Monitoring Systems',
+      'Downtime Reduction'
+    ],
+    ogImage: '/images/placeholder.svg',
+    canonicalUrl: 'https://tafara-rugara.com/experience',
+  },
+  contact: {
+    title: 'Contact - Get in Touch | Tafara Rugara',
+    description: 'Contact Junior Cloud Engineer & DevOps Engineer for remote opportunities. AWS Engineer and Platform Engineer available worldwide with expertise in Kubernetes, Terraform, Infrastructure as Code, and CI/CD automation.',
+    keywords: [
+      'Contact Cloud Engineer',
+      'Hire DevOps Engineer',
+      'Remote Cloud Engineer',
+      'AWS Engineer Contact',
+      'Kubernetes Expert Hire',
+      'Infrastructure Engineer',
+      'DevOps Consultant',
+      'Cloud Architect Contact'
+    ],
+    ogImage: '/images/placeholder.svg',
+    canonicalUrl: 'https://tafara-rugara.com/contact',
+  },
+};
+
+// Utility function to generate metadata
+export function generatePageMetadata(pageKey: keyof PageSEOConfig): Metadata {
+  const config = pageSEOConfig[pageKey];
+  
+  const baseMetadata: Metadata = {
+    metadataBase: new URL('https://tafara-rugara.com'),
+    title: pageKey === 'home' ? {
+      default: config.title!,
+      template: "%s | Tafara Rugara",
+    } : config.title,
+    description: config.description,
+    keywords: config.keywords,
+    authors: [{ name: "Tafara Rugara" }],
+    creator: "Tafara Rugara",
+    publisher: "Tafara Rugara",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    openGraph: {
+      title: config.title,
+      description: config.description,
+      type: config.ogType || 'website',
+      locale: "en_US",
+      url: config.canonicalUrl,
+      siteName: "Tafara Rugara Portfolio",
+      images: config.ogImage ? [
+        {
+          url: config.ogImage,
+          width: 1200,
+          height: 630,
+          alt: config.title,
+        }
+      ] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: config.title,
+      description: config.description,
+      images: config.ogImage ? [config.ogImage] : undefined,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    alternates: {
+      canonical: config.canonicalUrl,
+    },
+  };
+
+  // Add verification only for home page
+  if (pageKey === 'home') {
+    baseMetadata.verification = {
+      google: "google-site-verification-code",
+    };
+  }
+
+  return baseMetadata;
+}
+
+// Enhanced structured data for different page types
+export function generateStructuredData(pageKey: keyof PageSEOConfig) {
+  const basePersonData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Tafara Rugara",
+    jobTitle: "Junior Cloud & DevOps Engineer",
+    description: "Junior Cloud & DevOps Engineer specializing in AWS, Terraform, Docker, Kubernetes, CI/CD, Automation, Infrastructure as Code, and Observability.",
+    url: "https://tafara-rugara.com",
+    image: "https://tafara-rugara.com/images/placeholder.svg",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Harare",
+      addressCountry: "Zimbabwe"
+    },
+    worksFor: {
+      "@type": "Organization",
+      name: "Excellessence (YourEKA Services)"
+    },
+    knowsAbout: [
+      "AWS",
+      "Terraform",
+      "Docker",
+      "Kubernetes",
+      "CI/CD",
+      "Infrastructure as Code",
+      "DevOps",
+      "Cloud Architecture",
+      "Automation Engineering",
+      "Monitoring",
+      "Observability"
+    ],
+    sameAs: [
+      "https://github.com/tafara-rugara",
+      "https://linkedin.com/in/tafara-rugara"
+    ]
+  };
+
+  switch (pageKey) {
+    case 'projects':
+      return {
+        ...basePersonData,
+        "@type": ["Person", "CreativeWork"],
+        mainEntity: {
+          "@type": "ItemList",
+          name: "Featured Projects",
+          description: "Cloud infrastructure and DevOps automation projects",
+          numberOfItems: 4,
+          itemListElement: [
+            {
+              "@type": "SoftwareApplication",
+              name: "Acquisitions API",
+              description: "Enterprise-grade REST API with JWT authentication and Kubernetes deployment",
+              applicationCategory: "WebApplication",
+              operatingSystem: "Linux",
+              programmingLanguage: ["Node.js", "JavaScript"],
+              runtimePlatform: "Kubernetes"
+            },
+            {
+              "@type": "SoftwareApplication", 
+              name: "Voice-to-Vector Semantic Memory API",
+              description: "AI-powered semantic search API with vector embeddings",
+              applicationCategory: "WebApplication",
+              programmingLanguage: ["Python"],
+              runtimePlatform: "AWS Lambda"
+            },
+            {
+              "@type": "SoftwareApplication",
+              name: "Serverless Resume",
+              description: "Dynamic serverless resume built with AWS services",
+              applicationCategory: "WebApplication",
+              runtimePlatform: "AWS Lambda"
+            },
+            {
+              "@type": "SoftwareApplication",
+              name: "Tomcat App Modernization",
+              description: "Legacy application modernization using AWS cloud services",
+              applicationCategory: "WebApplication",
+              runtimePlatform: "AWS Elastic Beanstalk"
+            }
+          ]
+        }
+      };
+
+    case 'experience':
+      return {
+        ...basePersonData,
+        hasOccupation: {
+          "@type": "Occupation",
+          name: "DevOps Engineer",
+          occupationLocation: {
+            "@type": "Place",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Harare",
+              addressCountry: "Zimbabwe"
+            }
+          },
+          skills: [
+            "AWS Cloud Services",
+            "Infrastructure as Code",
+            "Container Orchestration", 
+            "CI/CD Pipeline Development",
+            "System Monitoring",
+            "Automation Scripting"
+          ],
+          experienceRequirements: "Production AI workflow deployment, Docker environments, CI/CD optimization"
+        },
+        worksFor: {
+          "@type": "Organization",
+          name: "Excellessence (YourEKA Services)",
+          description: "Technology services company"
+        }
+      };
+
+    case 'contact':
+      return {
+        ...basePersonData,
+        "@type": ["Person", "ContactPoint"],
+        contactType: "Professional Contact",
+        availableLanguage: ["English"],
+        areaServed: "Worldwide",
+        serviceType: [
+          "Cloud Architecture",
+          "DevOps Engineering", 
+          "Infrastructure as Code",
+          "CI/CD Implementation",
+          "System Monitoring"
+        ]
+      };
+
+    default:
+      return basePersonData;
+  }
+}

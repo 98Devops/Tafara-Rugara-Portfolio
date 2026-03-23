@@ -1,0 +1,135 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "Tafara Rugara - Junior Cloud & DevOps Engineer - Go to homepage" [ref=e5]:
+        - /url: /
+        - text: Tafara Rugara
+      - generic [ref=e6]:
+        - link "Home" [ref=e7]:
+          - /url: /
+        - link "What I Do" [ref=e8]:
+          - /url: /what-i-do
+        - link "Projects" [ref=e9]:
+          - /url: /projects
+          - text: Projects
+        - link "Experience" [ref=e10]:
+          - /url: /experience
+        - link "Contact" [ref=e11]:
+          - /url: /contact
+      - button "Toggle mobile menu" [ref=e12]
+  - generic [ref=e15]:
+    - generic [ref=e16]:
+      - heading "Featured Projects" [level=1] [ref=e17]
+      - paragraph [ref=e18]: A showcase of my work in cloud infrastructure, DevOps automation, and full-stack development. Each project demonstrates practical application of modern technologies and best practices.
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - img [ref=e23]
+          - textbox "Search projects..." [ref=e25]
+        - generic [ref=e26]:
+          - generic [ref=e27]:
+            - combobox [ref=e28]:
+              - option "All Projects (4)" [selected]
+              - option "AWS (4)"
+              - option "APIs (3)"
+              - option "AI/ML (1)"
+              - option "Serverless (2)"
+            - img [ref=e29]
+          - generic [ref=e31]:
+            - combobox [ref=e32]:
+              - option "Default Order" [selected]
+              - option "Sort by Title"
+              - option "Sort by Tech Count"
+            - img [ref=e33]
+      - paragraph [ref=e36]: Showing all 4 projects
+      - generic [ref=e37]:
+        - generic [ref=e39]:
+          - generic [ref=e41]:
+            - heading "Acquisitions API" [level=3] [ref=e42]
+            - paragraph [ref=e43]: Enterprise-grade REST API for managing business acquisitions with comprehensive security and scalability features.
+          - generic [ref=e45]: Node.jsExpressJWTRBACKubernetesAWSTerraformGitHub Actions
+          - generic [ref=e46]:
+            - heading "Key Features:" [level=4] [ref=e47]
+            - list [ref=e48]:
+              - listitem [ref=e49]: JWT Authentication & Role-Based Access Control (RBAC)
+              - listitem [ref=e50]: Kubernetes Deployment with Auto-scaling
+              - listitem [ref=e51]: AWS Infrastructure as Code with Terraform
+              - listitem [ref=e52]: CI/CD Pipeline with GitHub Actions
+              - listitem [ref=e53]: +2 more features...
+          - generic [ref=e54]:
+            - link "View Acquisitions API source code on GitHub" [ref=e55]:
+              - /url: https://github.com/tafara-rugara/acquisitions-api
+              - img [ref=e56]
+              - text: View Code
+            - link "View Acquisitions API live demo" [ref=e58]:
+              - /url: https://acquisitions-api.demo.com
+              - img [ref=e59]
+              - text: Live Demo
+        - generic [ref=e62]:
+          - generic [ref=e64]:
+            - heading "Voice-to-Vector Semantic Memory API" [level=3] [ref=e65]
+            - paragraph [ref=e66]: AI-powered semantic search API that converts voice inputs to vector embeddings for intelligent information retrieval.
+          - generic [ref=e68]: PythonFlaskVector DatabaseLLMREST APIDockerAWS Lambda
+          - generic [ref=e69]:
+            - heading "Key Features:" [level=4] [ref=e70]
+            - list [ref=e71]:
+              - listitem [ref=e72]: Flask Backend with RESTful Architecture
+              - listitem [ref=e73]: Vector Database Integration (Pinecone/Weaviate)
+              - listitem [ref=e74]: LLM Orchestration for Semantic Processing
+              - listitem [ref=e75]: Scalable REST API Design
+              - listitem [ref=e76]: +2 more features...
+          - link "View Voice-to-Vector Semantic Memory API source code on GitHub" [ref=e78]:
+            - /url: https://github.com/tafara-rugara/voice-to-vector-api
+            - img [ref=e79]
+            - text: View Code
+        - generic [ref=e82]:
+          - generic [ref=e84]:
+            - heading "Serverless Resume" [level=3] [ref=e85]
+            - paragraph [ref=e86]: Dynamic, serverless resume website built with modern AWS services and Infrastructure as Code practices.
+          - generic [ref=e88]: AWS LambdaDynamoDBAPI GatewayTerraformCloudFrontCI/CD
+          - generic [ref=e89]:
+            - heading "Key Features:" [level=4] [ref=e90]
+            - list [ref=e91]:
+              - listitem [ref=e92]: AWS Lambda Functions for Dynamic Content
+              - listitem [ref=e93]: DynamoDB for Resume Data Storage
+              - listitem [ref=e94]: API Gateway for RESTful Endpoints
+              - listitem [ref=e95]: Terraform Infrastructure as Code
+              - listitem [ref=e96]: +2 more features...
+          - generic [ref=e97]:
+            - link "View Serverless Resume source code on GitHub" [ref=e98]:
+              - /url: https://github.com/tafara-rugara/serverless-resume
+              - img [ref=e99]
+              - text: View Code
+            - link "View Serverless Resume live demo" [ref=e101]:
+              - /url: https://resume.tafara-rugara.com
+              - img [ref=e102]
+              - text: Live Demo
+        - generic [ref=e105]:
+          - generic [ref=e107]:
+            - heading "Tomcat App Modernization" [level=3] [ref=e108]
+            - paragraph [ref=e109]: Legacy Tomcat application modernization project using AWS cloud services and scalability optimization.
+          - generic [ref=e111]: JavaTomcatAWS Elastic BeanstalkRDSElastiCacheCloudFront
+          - generic [ref=e112]:
+            - heading "Key Features:" [level=4] [ref=e113]
+            - list [ref=e114]:
+              - listitem [ref=e115]: Lift-and-Shift Migration Strategy
+              - listitem [ref=e116]: AWS Elastic Beanstalk Deployment
+              - listitem [ref=e117]: RDS Database Migration & Optimization
+              - listitem [ref=e118]: ElastiCache for Performance Enhancement
+              - listitem [ref=e119]: +2 more features...
+          - link "View Tomcat App Modernization source code on GitHub" [ref=e121]:
+            - /url: https://github.com/tafara-rugara/tomcat-modernization
+            - img [ref=e122]
+            - text: View Code
+    - generic [ref=e125]:
+      - heading "Interested in Collaboration?" [level=2] [ref=e126]
+      - paragraph [ref=e127]: I'm always excited to work on challenging projects that push the boundaries of cloud technology and automation. Let's discuss how we can build something amazing together.
+      - generic [ref=e128]:
+        - link "Get In Touch" [ref=e129]:
+          - /url: /contact
+        - link "View GitHub" [ref=e130]:
+          - /url: https://github.com/tafara-rugara
+```

@@ -1,0 +1,63 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "Tafara Rugara - Junior Cloud & DevOps Engineer - Go to homepage" [ref=e5]:
+        - /url: /
+        - text: Tafara Rugara
+      - generic [ref=e6]:
+        - link "Home" [ref=e7]:
+          - /url: /
+        - link "What I Do" [ref=e8]:
+          - /url: /what-i-do
+        - link "Projects" [ref=e9]:
+          - /url: /projects
+        - link "Experience" [ref=e10]:
+          - /url: /experience
+        - link "Contact" [ref=e11]:
+          - /url: /contact
+          - text: Contact
+      - button "Toggle mobile menu" [ref=e12]
+  - main [ref=e14]:
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - heading "Let's Work Together" [level=1] [ref=e18]
+        - paragraph [ref=e19]: Ready to discuss Cloud & DevOps opportunities? I'm passionate about building scalable, reliable systems and would love to contribute to your next project.
+      - generic [ref=e20]:
+        - generic [ref=e22]:
+          - generic [ref=e23]:
+            - heading "Get In Touch" [level=3] [ref=e24]
+            - paragraph [ref=e25]: Ready to discuss Cloud Engineering & DevOps opportunities? I'm a Junior Cloud Engineer and Platform Engineer available for remote work worldwide, excited to contribute to innovative AWS, Kubernetes, and Infrastructure as Code projects. Let's build something amazing together.
+          - generic [ref=e26]:
+            - heading "Contact Information" [level=4] [ref=e27]
+            - generic [ref=e28]:
+              - 'link "Contact Tafara Rugara via Email: tafara.rugara@example.com" [ref=e29]':
+                - /url: mailto:tafara.rugara@example.com
+                - img [ref=e31]
+                - generic [ref=e33]:
+                  - paragraph [ref=e34]: Email
+                  - paragraph [ref=e35]: tafara.rugara@example.com
+              - 'link "Contact Tafara Rugara via LinkedIn: linkedin.com/in/tafara-rugara" [ref=e36]':
+                - /url: https://linkedin.com/in/tafara-rugara
+                - img [ref=e38]
+                - generic [ref=e40]:
+                  - paragraph [ref=e41]: LinkedIn
+                  - paragraph [ref=e42]: linkedin.com/in/tafara-rugara
+              - 'link "Contact Tafara Rugara via GitHub: github.com/tafara-rugara" [ref=e43]':
+                - /url: https://github.com/tafara-rugara
+                - img [ref=e45]
+                - generic [ref=e47]:
+                  - paragraph [ref=e48]: GitHub
+                  - paragraph [ref=e49]: github.com/tafara-rugara
+          - generic [ref=e50]:
+            - heading "Availability" [level=4] [ref=e51]
+            - paragraph [ref=e53]: Available for remote Cloud Engineering and DevOps opportunities worldwide
+            - paragraph [ref=e54]: Based in Harare, Zimbabwe (Remote Available)
+        - heading "Send a Message" [level=2] [ref=e57]
+      - generic [ref=e59]:
+        - heading "Ready to Scale Your Infrastructure?" [level=3] [ref=e60]
+        - paragraph [ref=e61]: With expertise in AWS, Kubernetes, CI/CD, and Infrastructure as Code, I help teams build reliable, scalable systems that drive business value.
+        - generic [ref=e62]: AWS CertifiedRemote AvailableDevOps Expert
+```
