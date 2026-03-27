@@ -9,8 +9,8 @@ module.exports = {
         'http://localhost:3000/contact',
       ],
       startServerCommand: 'npm run build && npm run start',
-      startServerReadyPattern: 'ready on',
-      startServerReadyTimeout: 30000,
+      startServerReadyPattern: /listening|ready|started/i,
+      startServerReadyTimeout: 60000,
     },
     assert: {
       assertions: {
