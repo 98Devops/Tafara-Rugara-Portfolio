@@ -13,6 +13,11 @@ const customJestConfig = {
     '**/__tests__/**/*.(js|jsx|ts|tsx)',
     '**/*.(test|spec).(js|jsx|ts|tsx)'
   ],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '/.next/',
+    '/e2e/', // Exclude E2E tests - run with Playwright separately
+  ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },

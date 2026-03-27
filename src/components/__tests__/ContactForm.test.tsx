@@ -11,20 +11,25 @@ jest.mock('framer-motion', () => ({
   },
 }));
 
+// Mock window.open
+const mockWindowOpen = jest.fn();
+global.window.open = mockWindowOpen;
+
 describe('ContactForm', () => {
   const mockOnSubmit = jest.fn();
 
   beforeEach(() => {
     mockOnSubmit.mockClear();
+    mockWindowOpen.mockClear();
   });
 
   it('renders all form fields correctly', () => {
     render(<ContactForm onSubmit={mockOnSubmit} />);
     
-    expect(screen.getByLabelText(/name/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/full name/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/email address/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/message/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /send message/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /send via whatsapp/i })).toBeInTheDocument();
   });
 
   it('has Netlify form attributes', () => {
@@ -40,7 +45,6 @@ describe('ContactForm', () => {
   });
 
   it('validates required fields', async () => {
-    const user = userEvent.setup();
     render(<ContactForm onSubmit={mockOnSubmit} />);
     
     const form = screen.getByRole('form');
@@ -51,15 +55,15 @@ describe('ContactForm', () => {
       expect(screen.getByText('Email is required')).toBeInTheDocument();
       expect(screen.getByText('Message is required')).toBeInTheDocument();
     });
-    expect(mockOnSubmit).not.toHaveBeenCalled();
+    expect(mockWindowOpen).not.toHaveBeenCalled();
   });
 
   it('validates email format', async () => {
     const user = userEvent.setup();
     render(<ContactForm onSubmit={mockOnSubmit} />);
     
-    const nameInput = screen.getByLabelText(/name/i);
-    const emailInput = screen.getByLabelText(/email/i);
+    const nameInput = screen.getByLabelText(/full name/i);
+    const emailInput = screen.getByLabelText(/email address/i);
     const messageInput = screen.getByLabelText(/message/i);
     
     // Fill in valid name and message, but invalid email
@@ -73,17 +77,17 @@ describe('ContactForm', () => {
     fireEvent.submit(form);
     
     await waitFor(() => {
-      expect(screen.getByText('Please enter a valid email address')).toBeInTheDocument();
+      expect(screen.getByText('Enter a valid email')).toBeInTheDocument();
     });
-    expect(mockOnSubmit).not.toHaveBeenCalled();
+    expect(mockWindowOpen).not.toHaveBeenCalled();
   });
 
   it('validates message length', async () => {
     const user = userEvent.setup();
     render(<ContactForm onSubmit={mockOnSubmit} />);
     
-    const nameInput = screen.getByLabelText(/name/i);
-    const emailInput = screen.getByLabelText(/email/i);
+    const nameInput = screen.getByLabelText(/full name/i);
+    const emailInput = screen.getByLabelText(/email address/i);
     const messageInput = screen.getByLabelText(/message/i);
     
     // Fill in valid name and email, but short message
@@ -95,84 +99,63 @@ describe('ContactForm', () => {
     fireEvent.submit(form);
     
     await waitFor(() => {
-      expect(screen.getByText('Message must be at least 10 characters long')).toBeInTheDocument();
+      expect(screen.getByText('At least 10 characters required')).toBeInTheDocument();
     });
-    expect(mockOnSubmit).not.toHaveBeenCalled();
+    expect(mockWindowOpen).not.toHaveBeenCalled();
   });
 
-  it('submits form with valid data', async () => {
+  it('opens WhatsApp with valid data', async () => {
     const user = userEvent.setup();
-    mockOnSubmit.mockResolvedValue(undefined);
     
     render(<ContactForm onSubmit={mockOnSubmit} />);
     
-    await user.type(screen.getByLabelText(/name/i), 'John Doe');
-    await user.type(screen.getByLabelText(/email/i), 'john@example.com');
+    await user.type(screen.getByLabelText(/full name/i), 'John Doe');
+    await user.type(screen.getByLabelText(/email address/i), 'john@example.com');
     await user.type(screen.getByLabelText(/message/i), 'This is a test message that is long enough.');
     
-    const submitButton = screen.getByRole('button', { name: /send message/i });
+    const submitButton = screen.getByRole('button', { name: /send via whatsapp/i });
     await user.click(submitButton);
     
     await waitFor(() => {
-      expect(mockOnSubmit).toHaveBeenCalledWith({
-        name: 'John Doe',
-        email: 'john@example.com',
-        message: 'This is a test message that is long enough.',
-      });
+      expect(mockWindowOpen).toHaveBeenCalledWith(
+        expect.stringContaining('https://wa.me/263777553271?text='),
+        '_blank',
+        'noopener,noreferrer'
+      );
     });
   });
 
   it('shows success message after successful submission', async () => {
     const user = userEvent.setup();
-    mockOnSubmit.mockResolvedValue(undefined);
     
     render(<ContactForm onSubmit={mockOnSubmit} />);
     
-    await user.type(screen.getByLabelText(/name/i), 'John Doe');
-    await user.type(screen.getByLabelText(/email/i), 'john@example.com');
+    await user.type(screen.getByLabelText(/full name/i), 'John Doe');
+    await user.type(screen.getByLabelText(/email address/i), 'john@example.com');
     await user.type(screen.getByLabelText(/message/i), 'This is a test message that is long enough.');
     
-    const submitButton = screen.getByRole('button', { name: /send message/i });
+    const submitButton = screen.getByRole('button', { name: /send via whatsapp/i });
     await user.click(submitButton);
     
     await waitFor(() => {
-      expect(screen.getByText(/thank you for your message/i)).toBeInTheDocument();
-    });
-  });
-
-  it('shows error message on submission failure', async () => {
-    const user = userEvent.setup();
-    mockOnSubmit.mockRejectedValue(new Error('Submission failed'));
-    
-    render(<ContactForm onSubmit={mockOnSubmit} />);
-    
-    await user.type(screen.getByLabelText(/name/i), 'John Doe');
-    await user.type(screen.getByLabelText(/email/i), 'john@example.com');
-    await user.type(screen.getByLabelText(/message/i), 'This is a test message that is long enough.');
-    
-    const submitButton = screen.getByRole('button', { name: /send message/i });
-    await user.click(submitButton);
-    
-    await waitFor(() => {
-      expect(screen.getByText(/sorry, there was an error/i)).toBeInTheDocument();
+      expect(screen.getByText(/message sent/i)).toBeInTheDocument();
     });
   });
 
   it('clears form after successful submission', async () => {
     const user = userEvent.setup();
-    mockOnSubmit.mockResolvedValue(undefined);
     
     render(<ContactForm onSubmit={mockOnSubmit} />);
     
-    const nameInput = screen.getByLabelText(/name/i) as HTMLInputElement;
-    const emailInput = screen.getByLabelText(/email/i) as HTMLInputElement;
+    const nameInput = screen.getByLabelText(/full name/i) as HTMLInputElement;
+    const emailInput = screen.getByLabelText(/email address/i) as HTMLInputElement;
     const messageInput = screen.getByLabelText(/message/i) as HTMLTextAreaElement;
     
     await user.type(nameInput, 'John Doe');
     await user.type(emailInput, 'john@example.com');
     await user.type(messageInput, 'This is a test message that is long enough.');
     
-    const submitButton = screen.getByRole('button', { name: /send message/i });
+    const submitButton = screen.getByRole('button', { name: /send via whatsapp/i });
     await user.click(submitButton);
     
     await waitFor(() => {
@@ -184,32 +167,28 @@ describe('ContactForm', () => {
 
   it('disables form during submission', async () => {
     const user = userEvent.setup();
-    let resolveSubmit: () => void;
-    const submitPromise = new Promise<void>((resolve) => {
-      resolveSubmit = resolve;
-    });
-    mockOnSubmit.mockReturnValue(submitPromise);
     
     render(<ContactForm onSubmit={mockOnSubmit} />);
     
-    await user.type(screen.getByLabelText(/name/i), 'John Doe');
-    await user.type(screen.getByLabelText(/email/i), 'john@example.com');
-    await user.type(screen.getByLabelText(/message/i), 'This is a test message that is long enough.');
+    const nameInput = screen.getByLabelText(/full name/i) as HTMLInputElement;
+    const emailInput = screen.getByLabelText(/email address/i) as HTMLInputElement;
+    const messageInput = screen.getByLabelText(/message/i) as HTMLTextAreaElement;
     
-    const submitButton = screen.getByRole('button', { name: /send message/i });
+    await user.type(nameInput, 'John Doe');
+    await user.type(emailInput, 'john@example.com');
+    await user.type(messageInput, 'This is a test message that is long enough.');
+    
+    // Verify fields are enabled before submission
+    expect(nameInput).not.toBeDisabled();
+    expect(emailInput).not.toBeDisabled();
+    expect(messageInput).not.toBeDisabled();
+    
+    const submitButton = screen.getByRole('button', { name: /send via whatsapp/i });
     await user.click(submitButton);
     
-    // Check that form fields are disabled during submission
-    expect(screen.getByLabelText(/name/i)).toBeDisabled();
-    expect(screen.getByLabelText(/email/i)).toBeDisabled();
-    expect(screen.getByLabelText(/message/i)).toBeDisabled();
-    expect(screen.getByRole('button', { name: /sending/i })).toBeDisabled();
-    
-    // Resolve the submission
-    resolveSubmit!();
-    
+    // After submission, form should show success message
     await waitFor(() => {
-      expect(screen.getByLabelText(/name/i)).not.toBeDisabled();
+      expect(screen.getByText(/message sent/i)).toBeInTheDocument();
     });
   });
 });

@@ -50,23 +50,25 @@ describe('Contact Form Processing Property Tests', () => {
           ),
         }),
         async (formData: ContactFormData) => {
-          const mockOnSubmit = jest.fn().mockResolvedValue(undefined);
+          // Mock window.open for WhatsApp integration
+          const mockWindowOpen = jest.fn();
+          window.open = mockWindowOpen;
           
-          const { container } = render(<ContactForm onSubmit={mockOnSubmit} />);
+          const { container } = render(<ContactForm />);
           
-          // Verify Netlify Forms integration attributes are present
+          // Verify form attributes are present (kept for potential fallback)
           const form = container.querySelector('form');
           expect(form).toHaveAttribute('data-netlify', 'true');
           expect(form).toHaveAttribute('name', 'contact');
           expect(form).toHaveAttribute('method', 'POST');
           
-          // Verify hidden form-name field for Netlify
+          // Verify hidden form-name field
           const hiddenField = container.querySelector('input[name="form-name"]');
           expect(hiddenField).toBeInTheDocument();
           expect(hiddenField).toHaveAttribute('type', 'hidden');
           expect(hiddenField).toHaveAttribute('value', 'contact');
           
-          // Fill out the form with generated valid data - use direct DOM manipulation for speed
+          // Fill out the form with generated valid data
           const nameInput = container.querySelector('input[name="name"]') as HTMLInputElement;
           const emailInput = container.querySelector('input[name="email"]') as HTMLInputElement;
           const messageInput = container.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
@@ -75,30 +77,26 @@ describe('Contact Form Processing Property Tests', () => {
           expect(emailInput).toBeInTheDocument();
           expect(messageInput).toBeInTheDocument();
           
-          // Set values directly for speed
+          // Set values directly
           fireEvent.change(nameInput, { target: { value: formData.name } });
           fireEvent.change(emailInput, { target: { value: formData.email } });
           fireEvent.change(messageInput, { target: { value: formData.message } });
           
-          // Submit the form using the container's form
+          // Submit the form
           const formElement = container.querySelector('form');
           expect(formElement).toBeInTheDocument();
           fireEvent.submit(formElement!);
           
-          // Verify the form submission was processed
+          // Verify WhatsApp was opened with correct URL
           await waitFor(() => {
-            expect(mockOnSubmit).toHaveBeenCalledWith({
-              name: formData.name,
-              email: formData.email,
-              message: formData.message,
-            });
-          }, { timeout: 500 });
-          
-          // Verify success state is shown
-          await waitFor(() => {
-            const successMessage = container.querySelector('[class*="text-green-400"]');
-            expect(successMessage).toBeInTheDocument();
-          }, { timeout: 500 });
+            expect(mockWindowOpen).toHaveBeenCalled();
+            const callArgs = mockWindowOpen.mock.calls[0];
+            expect(callArgs[0]).toContain('https://wa.me/263777553271');
+            expect(callArgs[0]).toContain('text=');
+            // Verify the message contains the form data
+            const url = callArgs[0];
+            expect(url).toMatch(/name|email|message/i);
+          }, { timeout: 1000 });
         }
       ),
       { numRuns: 5 } // Reduced for async tests

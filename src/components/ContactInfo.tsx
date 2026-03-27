@@ -1,8 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { portfolioData } from '@/data/portfolio';
-import { downloadDocument } from '@/utils/downloadUtils';
 
 const contactMethods = [
   {
@@ -83,7 +81,7 @@ export default function ContactInfo() {
         <h3 className="text-2xl font-bold text-white mb-3">Let's Build Together</h3>
         <p className="text-sm leading-relaxed" style={{ color: 'rgba(148,163,184,0.9)' }}>
           Open to Cloud & DevOps engineering roles, AI automation consulting, and workflow architecture projects.
-          Based in Harare & Johannesburg — available 100% remote worldwide.
+          Based in Harare & Johannesburg.
         </p>
       </div>
 
@@ -93,7 +91,7 @@ export default function ContactInfo() {
         <span className="pulse-dot flex-shrink-0" />
         <div>
           <p className="text-sm font-semibold" style={{ color: '#34d399' }}>Open to Opportunities</p>
-          <p className="text-xs mt-0.5" style={{ color: '#64748b' }}>Harare, Zimbabwe & Johannesburg, South Africa · 100% Remote</p>
+          <p className="text-xs mt-0.5" style={{ color: '#64748b' }}>Harare, Zimbabwe & Johannesburg, South Africa</p>
         </div>
       </div>
 

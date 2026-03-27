@@ -88,7 +88,7 @@ describe('ExperienceTimeline', () => {
     
     // Check for section headers
     expect(screen.getByText('Key Achievements')).toBeInTheDocument();
-    expect(screen.getByText('Technologies Used')).toBeInTheDocument();
+    expect(screen.getByText('Technologies')).toBeInTheDocument();
   });
 
   it('handles multiple experiences', () => {

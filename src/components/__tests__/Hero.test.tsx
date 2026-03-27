@@ -1,28 +1,29 @@
 import { render, screen } from '@testing-library/react';
 import { Hero } from '../Hero';
 import { PersonalInfo } from '@/types';
+import userEvent from '@testing-library/user-event';
 
-// Mock framer-motion to avoid animation issues in tests
-jest.mock('framer-motion', () => ({
-  motion: {
-    div: ({ children, whileHover, whileTap, variants, initial, animate, transition, style, ...props }: any) => <div {...props}>{children}</div>,
-    h1: ({ children, whileHover, whileTap, variants, initial, animate, transition, ...props }: any) => <h1 {...props}>{children}</h1>,
-    h2: ({ children, whileHover, whileTap, variants, initial, animate, transition, ...props }: any) => <h2 {...props}>{children}</h2>,
-    p: ({ children, whileHover, whileTap, variants, initial, animate, transition, ...props }: any) => <p {...props}>{children}</p>,
-    a: ({ children, whileHover, whileTap, variants, initial, animate, transition, ...props }: any) => <a {...props}>{children}</a>,
-    section: ({ children, whileHover, whileTap, variants, initial, animate, transition, ...props }: any) => <section {...props}>{children}</section>,
+// Mock Next.js Image component
+jest.mock('next/image', () => ({
+  __esModule: true,
+  default: ({ priority, ...props }: any) => {
+    // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+    return <img {...props} data-priority={priority ? 'true' : 'false'} />;
   },
 }));
 
 const mockPersonalInfo: PersonalInfo = {
   name: 'Tafara Rugara',
-  title: 'Junior Cloud & DevOps Engineer',
-  location: 'Harare, Zimbabwe (Remote Available)',
-  summary: 'Passionate Cloud & DevOps Engineer specializing in AWS, Terraform, Docker, Kubernetes, CI/CD, Automation, Infrastructure as Code, and Observability. Focused on building scalable, reliable systems that drive business value through modern cloud-native practices.',
+  title: 'Cloud & DevOps + AI Automation Specialist',
+  location: 'Harare, Zimbabwe & Johannesburg, South Africa',
+  summary: 'Cloud & DevOps Engineer specializing in AI-powered automation systems, container orchestration, and infrastructure that ships. I build production-grade pipelines, automate complex workflows with n8n and LLMs, and turn operational chaos into intelligent, self-managing systems — deployable on AWS, Docker, and Kubernetes.',
+  profileImage: '/images/tafara-rugara.jpg',
   socialLinks: {
-    github: 'https://github.com/tafara-rugara',
-    linkedin: 'https://linkedin.com/in/tafara-rugara',
-    email: 'tafara.rugara@example.com',
+    github: 'https://github.com/98Devops',
+    linkedin: 'https://www.linkedin.com/in/tafara-rugara-0627b819b/',
+    email: 'tfrsuperfx@gmail.com',
+    youtube: 'https://www.youtube.com/@techwithtaf',
+    whatsapp: 'https://wa.me/263777553271',
   },
   documents: {
     cv: '/documents/tafara-rugara-cv.pdf',
@@ -37,25 +38,24 @@ describe('Hero Component', () => {
     // Check name is displayed as main heading
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Tafara Rugara');
     
-    // Check title is displayed
-    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('Junior Cloud & DevOps Engineer');
-    
-    // Check location is displayed
-    expect(screen.getByText('Harare, Zimbabwe (Remote Available)')).toBeInTheDocument();
-    
     // Check professional summary is displayed
-    expect(screen.getByText(/Passionate Cloud & DevOps Engineer specializing in AWS/)).toBeInTheDocument();
+    expect(screen.getByText(/Cloud & DevOps Engineer specializing in AI-powered automation systems/)).toBeInTheDocument();
   });
 
   it('includes all required technical keywords in summary', () => {
     render(<Hero personal={mockPersonalInfo} />);
     
     const requiredKeywords = [
-      'AWS', 'Terraform', 'Docker', 'Kubernetes', 
-      'CI/CD', 'Automation', 'Infrastructure as Code', 'Observability'
+      'AI-powered automation',
+      'container orchestration',
+      'n8n',
+      'LLMs',
+      'AWS',
+      'Docker',
+      'Kubernetes'
     ];
     
-    const summaryText = screen.getByText(/Passionate Cloud & DevOps Engineer specializing in AWS/).textContent;
+    const summaryText = screen.getByText(/Cloud & DevOps Engineer specializing in AI-powered automation systems/).textContent;
     
     requiredKeywords.forEach(keyword => {
       expect(summaryText).toContain(keyword);
@@ -65,55 +65,85 @@ describe('Hero Component', () => {
   it('provides all required call-to-action buttons', () => {
     render(<Hero personal={mockPersonalInfo} />);
     
-    // Check all required buttons are present using their accessible names
-    expect(screen.getByRole('link', { name: /view featured cloud and devops projects portfolio/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /download tafara rugara cv pdf/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /download professional reference letter pdf/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /visit tafara rugara's github profile/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /connect with tafara rugara on linkedin/i })).toBeInTheDocument();
+    // Check all required buttons/links are present
+    expect(screen.getByRole('link', { name: /view projects/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /download cv/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /contact me/i })).toBeInTheDocument();
   });
 
   it('has correct links for call-to-action buttons', () => {
     render(<Hero personal={mockPersonalInfo} />);
     
     // Check View Projects link
-    expect(screen.getByRole('link', { name: /view featured cloud and devops projects portfolio/i })).toHaveAttribute('href', '/projects');
+    expect(screen.getByRole('link', { name: /view projects/i })).toHaveAttribute('href', '/projects');
     
-    // Check CV download link
-    expect(screen.getByRole('link', { name: /download tafara rugara cv pdf/i })).toHaveAttribute('href', '/documents/tafara-rugara-cv.pdf');
-    
-    // Check Reference download link
-    expect(screen.getByRole('link', { name: /download professional reference letter pdf/i })).toHaveAttribute('href', '/documents/tafara-rugara-reference.pdf');
-    
-    // Check GitHub link
-    expect(screen.getByRole('link', { name: /visit tafara rugara's github profile/i })).toHaveAttribute('href', 'https://github.com/tafara-rugara');
-    
-    // Check LinkedIn link
-    expect(screen.getByRole('link', { name: /connect with tafara rugara on linkedin/i })).toHaveAttribute('href', 'https://linkedin.com/in/tafara-rugara');
+    // Check Contact link
+    expect(screen.getByRole('link', { name: /contact me/i })).toHaveAttribute('href', '/contact');
   });
 
-  it('has proper external link attributes for social links', () => {
+  it('displays availability badge', () => {
     render(<Hero personal={mockPersonalInfo} />);
     
-    const githubLink = screen.getByRole('link', { name: /visit tafara rugara's github profile/i });
-    const linkedinLink = screen.getByRole('link', { name: /connect with tafara rugara on linkedin/i });
-    
-    // Check external links have proper attributes
-    expect(githubLink).toHaveAttribute('target', '_blank');
-    expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer');
-    
-    expect(linkedinLink).toHaveAttribute('target', '_blank');
-    expect(linkedinLink).toHaveAttribute('rel', 'noopener noreferrer');
+    // Check availability badge is displayed
+    expect(screen.getByText(/open to opportunities/i)).toBeInTheDocument();
+    expect(screen.getByText(/harare & johannesburg/i)).toBeInTheDocument();
   });
 
-  it('has download attributes for document links', () => {
+  it('displays stats section', () => {
     render(<Hero personal={mockPersonalInfo} />);
     
-    const cvLink = screen.getByRole('link', { name: /download tafara rugara cv pdf/i });
-    const referenceLink = screen.getByRole('link', { name: /download professional reference letter pdf/i });
+    // Check stats are displayed
+    expect(screen.getByText('60%')).toBeInTheDocument();
+    expect(screen.getByText(/pipeline downtime reduced/i)).toBeInTheDocument();
+    expect(screen.getByText('3+')).toBeInTheDocument();
+    expect(screen.getByText(/ai systems built/i)).toBeInTheDocument();
+    expect(screen.getByText('5+')).toBeInTheDocument();
+    expect(screen.getByText(/cloud projects delivered/i)).toBeInTheDocument();
+  });
+
+  it('displays tech badges', () => {
+    render(<Hero personal={mockPersonalInfo} />);
     
-    // Check download links have download attribute
-    expect(cvLink).toHaveAttribute('download');
-    expect(referenceLink).toHaveAttribute('download');
+    const expectedTags = ['Cloud Platform', 'DevOps & CI/CD', 'AI Automation', 'n8n Workflows', 'Kubernetes', 'Terraform', 'AWS'];
+    
+    expectedTags.forEach(tag => {
+      expect(screen.getByText(tag)).toBeInTheDocument();
+    });
+  });
+
+  it('handles CV download button click', async () => {
+    const user = userEvent.setup();
+    
+    render(<Hero personal={mockPersonalInfo} />);
+    
+    // Mock document.createElement and appendChild after render
+    const mockAnchor = {
+      href: '',
+      download: '',
+      rel: '',
+      click: jest.fn(),
+    };
+    const createElementSpy = jest.spyOn(document, 'createElement').mockReturnValue(mockAnchor as any);
+    const appendChildSpy = jest.spyOn(document.body, 'appendChild').mockImplementation(() => mockAnchor as any);
+    const removeChildSpy = jest.spyOn(document.body, 'removeChild').mockImplementation(() => mockAnchor as any);
+    
+    const downloadButton = screen.getByRole('button', { name: /download cv/i });
+    await user.click(downloadButton);
+    
+    expect(createElementSpy).toHaveBeenCalledWith('a');
+    expect(mockAnchor.click).toHaveBeenCalled();
+    
+    // Cleanup
+    createElementSpy.mockRestore();
+    appendChildSpy.mockRestore();
+    removeChildSpy.mockRestore();
+  });
+
+  it('displays profile image', () => {
+    render(<Hero personal={mockPersonalInfo} />);
+    
+    const profileImage = screen.getByAltText('Tafara Rugara');
+    expect(profileImage).toBeInTheDocument();
+    expect(profileImage).toHaveAttribute('src', '/images/tafara-rugara.jpg');
   });
 });

@@ -282,3 +282,13 @@ body {
   50%       { opacity: 0.4; }
 }
 .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+/* ─── Hero Fade-in ───────────────────────────────────────── */
+@keyframes heroFadeIn {
+  0%   { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.hero-fade-in {
+  opacity: 0;
+  animation: heroFadeIn 0.7s ease-out forwards;
+}

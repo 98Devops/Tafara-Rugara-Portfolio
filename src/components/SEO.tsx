@@ -21,23 +21,24 @@ export interface PageSEOConfig {
 // SEO configuration for all pages
 export const pageSEOConfig: PageSEOConfig = {
   home: {
-    title: 'Tafara Rugara - Junior Cloud & DevOps Engineer',
-    description: 'Junior Cloud Engineer & DevOps Engineer specializing in AWS, Terraform, Docker, Kubernetes, CI/CD, Automation, Infrastructure as Code, and Observability. Platform Engineer based in Harare, Zimbabwe with remote availability worldwide.',
+    title: 'Tafara Rugara — Cloud & DevOps + AI Automation Specialist',
+    description: 'Cloud & DevOps Engineer specializing in AI-powered automation systems, container orchestration, and infrastructure that ships. AWS Certified Cloud Practitioner building production-grade pipelines with n8n, Docker, Kubernetes, and Terraform. Based in Harare & Johannesburg.',
     keywords: [
-      'Junior Cloud Engineer',
-      'DevOps Engineer',
-      'AWS Engineer',
+      'Cloud DevOps Engineer',
+      'AI Automation Specialist',
+      'AWS Certified Cloud Practitioner',
+      'n8n Workflow Automation',
       'Infrastructure as Code',
       'Kubernetes',
-      'CI/CD',
       'Terraform',
       'Docker',
       'Platform Engineer',
-      'Cloud Architecture',
-      'Automation Engineering',
-      'Monitoring',
+      'GitOps',
+      'MLOps',
+      'SRE',
       'Observability',
       'Harare Zimbabwe',
+      'Johannesburg South Africa',
       'Remote Developer'
     ],
     ogImage: '/images/placeholder.svg',
@@ -65,7 +66,7 @@ export const pageSEOConfig: PageSEOConfig = {
   },
   projects: {
     title: 'Featured Projects - Cloud & DevOps Portfolio | Tafara Rugara',
-    description: 'Cloud & DevOps projects showcasing AWS infrastructure, Kubernetes deployment, and CI/CD automation. Junior Cloud Engineer portfolio featuring Acquisitions API, Voice-to-Vector API, Serverless Resume, and Tomcat Modernization projects.',
+    description: 'Cloud & DevOps projects showcasing AWS infrastructure, Kubernetes deployment, and CI/CD automation. Portfolio featuring Acquisitions API, Voice-to-Vector AI workflow, Legacy migration, and Serverless IaC patterns.',
     keywords: [
       'Cloud Projects',
       'DevOps Portfolio',
@@ -83,7 +84,7 @@ export const pageSEOConfig: PageSEOConfig = {
   },
   experience: {
     title: 'Professional Experience - DevOps Engineer | Tafara Rugara',
-    description: 'DevOps Engineer at Excellessence with 60% downtime reduction achievement. Junior Cloud Engineer experience in production AI workflow deployment, Docker environments, CI/CD optimization, and Infrastructure as Code security hardening.',
+    description: 'DevOps & Automation Engineer at Your EKA Services — 60% pipeline downtime reduction, production AI workflow deployment, Docker container orchestration, and infrastructure hardening.',
     keywords: [
       'DevOps Engineer Experience',
       'Production Deployment',
@@ -101,7 +102,7 @@ export const pageSEOConfig: PageSEOConfig = {
   },
   contact: {
     title: 'Contact - Get in Touch | Tafara Rugara',
-    description: 'Contact Junior Cloud Engineer & DevOps Engineer for remote opportunities. AWS Engineer and Platform Engineer available worldwide with expertise in Kubernetes, Terraform, Infrastructure as Code, and CI/CD automation.',
+    description: 'Contact Tafara Rugara for Cloud & DevOps engineering roles, AI automation consulting, and workflow architecture. AWS Certified — based in Harare & Johannesburg.',
     keywords: [
       'Contact Cloud Engineer',
       'Hire DevOps Engineer',
@@ -191,8 +192,8 @@ export function generateStructuredData(pageKey: keyof PageSEOConfig) {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Tafara Rugara",
-    jobTitle: "Junior Cloud & DevOps Engineer",
-    description: "Junior Cloud & DevOps Engineer specializing in AWS, Terraform, Docker, Kubernetes, CI/CD, Automation, Infrastructure as Code, and Observability.",
+    jobTitle: "Cloud & DevOps + AI Automation Specialist",
+    description: "Cloud & DevOps Engineer specializing in AI-powered automation, container orchestration, and production-grade infrastructure on AWS.",
     url: "https://tafara-rugara.com",
     image: "https://tafara-rugara.com/images/placeholder.svg",
     address: {
