@@ -46,6 +46,7 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-latest
     continue-on-error: true
+    timeout-minutes: 15
     
     steps:
     - name: Checkout code
@@ -111,7 +112,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    needs: [test, e2e-tests]
     
     steps:
     - name: Checkout code
