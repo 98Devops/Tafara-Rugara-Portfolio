@@ -131,14 +131,15 @@ jobs:
         NODE_ENV: production
     
     - name: Deploy to Netlify
-      uses: nwtgck/actions-netlify@v3.0
+      uses: nwtgck/actions-netlify@v2.1
       with:
         publish-dir: '.'
-        production-deploy: true
+        production-branch: main
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        deploy-message: Deploy from GitHub Actions
+        deploy-message: "Deploy from GitHub Actions"
         enable-pull-request-comment: false
         enable-commit-comment: false
+        overwrites-pull-request-comment: false
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
