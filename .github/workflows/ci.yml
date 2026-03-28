@@ -112,6 +112,10 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      deployments: write
+      statuses: write
     
     steps:
     - name: Checkout code
@@ -131,14 +135,15 @@ jobs:
         NODE_ENV: production
     
     - name: Deploy to Netlify
-      uses: nwtgck/actions-netlify@v2.1
+      uses: nwtgck/actions-netlify@v3.0
       with:
-        publish-dir: '.'
+        publish-dir: './out'
         production-branch: main
         github-token: ${{ secrets.GITHUB_TOKEN }}
         deploy-message: "Deploy from GitHub Actions"
         enable-pull-request-comment: false
         enable-commit-comment: false
+        enable-commit-status: true
         overwrites-pull-request-comment: false
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
