@@ -5,14 +5,19 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const nextConfig: NextConfig = {
+  // Static export configuration for Netlify
+  output: 'export',
+  trailingSlash: true,
+  
   // Performance optimizations
   experimental: {
     optimizePackageImports: ['@heroicons/react', 'framer-motion', 'fast-check'],
     // optimizeCss: true, // Disabled due to critters dependency issue
   },
   
-  // Image optimization
+  // Image optimization - disabled for static export
   images: {
+    unoptimized: true, // Required for static export
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -77,68 +82,8 @@ const nextConfig: NextConfig = {
     return config;
   },
   
-  // Headers for caching and security
-  async headers() {
-    return [
-      {
-        source: '/documents/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-        ],
-      },
-      {
-        source: '/images/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/:path*.svg',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/_next/static/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
-        ],
-      },
-    ];
-  },
+  // Headers for caching and security - handled by netlify.toml for static export
+  // async headers() removed - not compatible with output: 'export'
 };
 
 export default withBundleAnalyzer(nextConfig);
