@@ -6,10 +6,6 @@ on:
   pull_request:
     branches: [ main ]
 
-defaults:
-  run:
-    working-directory: ./tafara-portfolio
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -30,15 +26,19 @@ jobs:
     
     - name: Install dependencies
       run: npm ci --legacy-peer-deps
+      working-directory: ./tafara-portfolio
     
     - name: Run type checking
       run: npm run type-check
+      working-directory: ./tafara-portfolio
     
     - name: Run linting
       run: npm run lint
+      working-directory: ./tafara-portfolio
     
     - name: Run unit tests
       run: npm run test -- --coverage --watchAll=false
+      working-directory: ./tafara-portfolio
     
     - name: Upload coverage reports
       uses: codecov/codecov-action@v3
@@ -62,15 +62,19 @@ jobs:
     
     - name: Install dependencies
       run: npm ci --legacy-peer-deps
+      working-directory: ./tafara-portfolio
     
     - name: Install Playwright browsers
       run: npx playwright install --with-deps
+      working-directory: ./tafara-portfolio
     
     - name: Build application
       run: npm run build
+      working-directory: ./tafara-portfolio
     
     - name: Run Playwright tests
       run: npm run test:e2e
+      working-directory: ./tafara-portfolio
     
     - name: Upload Playwright report
       uses: actions/upload-artifact@v4
@@ -95,12 +99,15 @@ jobs:
     
     - name: Install dependencies
       run: npm ci --legacy-peer-deps
+      working-directory: ./tafara-portfolio
     
     - name: Build application
       run: npm run build
+      working-directory: ./tafara-portfolio
     
     - name: Run Lighthouse CI
       run: npm run lighthouse || true
+      working-directory: ./tafara-portfolio
       env:
         LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
     
@@ -128,9 +135,11 @@ jobs:
     
     - name: Install dependencies
       run: npm ci --legacy-peer-deps
+      working-directory: ./tafara-portfolio
     
     - name: Build application
       run: npm run build
+      working-directory: ./tafara-portfolio
       env:
         NODE_ENV: production
     
