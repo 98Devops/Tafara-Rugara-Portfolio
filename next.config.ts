@@ -5,8 +5,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const nextConfig: NextConfig = {
-  // Static export configuration for Netlify
-  output: 'export',
+  // Static export configuration for Netlify (production only)
+  ...(process.env.NODE_ENV === 'production' && { output: 'export' }),
   trailingSlash: true,
   
   // Performance optimizations
