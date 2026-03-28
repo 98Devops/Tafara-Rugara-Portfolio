@@ -26,24 +26,20 @@ jobs:
     
     - name: Install dependencies
       run: npm ci --legacy-peer-deps
-      working-directory: ./tafara-portfolio
     
     - name: Run type checking
       run: npm run type-check
-      working-directory: ./tafara-portfolio
     
     - name: Run linting
       run: npm run lint
-      working-directory: ./tafara-portfolio
     
     - name: Run unit tests
       run: npm run test -- --coverage --watchAll=false
-      working-directory: ./tafara-portfolio
     
     - name: Upload coverage reports
       uses: codecov/codecov-action@v3
       with:
-        file: ./tafara-portfolio/coverage/lcov.info
+        file: ./coverage/lcov.info
         flags: unittests
         name: codecov-umbrella
 
@@ -62,26 +58,22 @@ jobs:
     
     - name: Install dependencies
       run: npm ci --legacy-peer-deps
-      working-directory: ./tafara-portfolio
     
     - name: Install Playwright browsers
       run: npx playwright install --with-deps
-      working-directory: ./tafara-portfolio
     
     - name: Build application
       run: npm run build
-      working-directory: ./tafara-portfolio
     
     - name: Run Playwright tests
       run: npm run test:e2e
-      working-directory: ./tafara-portfolio
     
     - name: Upload Playwright report
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: playwright-report
-        path: tafara-portfolio/playwright-report/
+        path: playwright-report/
         retention-days: 30
 
   lighthouse:
@@ -99,15 +91,12 @@ jobs:
     
     - name: Install dependencies
       run: npm ci --legacy-peer-deps
-      working-directory: ./tafara-portfolio
     
     - name: Build application
       run: npm run build
-      working-directory: ./tafara-portfolio
     
     - name: Run Lighthouse CI
       run: npm run lighthouse || true
-      working-directory: ./tafara-portfolio
       env:
         LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
     
@@ -116,7 +105,7 @@ jobs:
       if: always()
       with:
         name: lighthouse-results
-        path: tafara-portfolio/.lighthouseci/
+        path: .lighthouseci/
         retention-days: 30
 
   build-and-deploy:
@@ -135,18 +124,16 @@ jobs:
     
     - name: Install dependencies
       run: npm ci --legacy-peer-deps
-      working-directory: ./tafara-portfolio
     
     - name: Build application
       run: npm run build
-      working-directory: ./tafara-portfolio
       env:
         NODE_ENV: production
     
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v3.0
       with:
-        publish-dir: './tafara-portfolio'
+        publish-dir: '.'
         production-deploy: true
         github-token: ${{ secrets.GITHUB_TOKEN }}
         deploy-message: Deploy from GitHub Actions
