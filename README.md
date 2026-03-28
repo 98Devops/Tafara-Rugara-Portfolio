@@ -1,49 +1,163 @@
 # Tafara Rugara Portfolio Website
 
-A production-ready, modern portfolio website built with Next.js 14, TypeScript, Tailwind CSS, and Framer Motion, showcasing the professional capabilities of Tafara Rugara, a Junior Cloud & DevOps Engineer based in Harare, Zimbabwe.
+A production-ready, modern portfolio website built with Next.js 15, TypeScript, Tailwind CSS, and custom CSS animations, showcasing the professional capabilities of Tafara Rugara, a Cloud & DevOps + AI Automation Specialist based in Harare, Zimbabwe & Johannesburg, South Africa.
+
+## 🎯 Use Case & Purpose
+
+This portfolio website serves as a comprehensive professional showcase designed to:
+
+- **Demonstrate Technical Expertise**: Highlight Cloud & DevOps engineering skills, AI automation capabilities, and production-grade project experience
+- **Attract Opportunities**: Present a compelling case for employment, consulting, and collaboration opportunities in Cloud Engineering, DevOps, and AI Automation
+- **Showcase Real Projects**: Display production-ready systems including AI-powered delivery health monitoring, voice-to-vector workflows, and enterprise-grade APIs
+- **Professional Credibility**: Provide verifiable evidence of technical capabilities through live demos, GitHub repositories, and detailed project documentation
+- **Contact & Networking**: Enable direct communication with potential employers, clients, and collaborators through integrated contact forms and social links
+
+### Target Audience
+- **Recruiters & Hiring Managers**: Looking for Cloud/DevOps engineers with AI automation experience
+- **Technical Leaders**: Seeking contractors or consultants for infrastructure and automation projects
+- **Potential Collaborators**: Interested in partnering on Cloud, DevOps, or AI automation initiatives
+- **Professional Network**: LinkedIn connections, GitHub followers, and industry peers
+
+## 🏗️ How It Was Built
+
+### Development Approach
+
+This portfolio was built using a **production-first methodology**, emphasizing:
+
+1. **Performance & Optimization**: Every component optimized for speed, with Lighthouse scores >90
+2. **Test-Driven Development**: Comprehensive test coverage (unit, integration, E2E, property-based)
+3. **Static Site Generation**: Next.js static export for blazing-fast load times and global CDN distribution
+4. **Accessibility-First**: WCAG 2.1 AA compliance with semantic HTML and ARIA attributes
+5. **SEO Optimization**: Structured data, meta tags, sitemaps, and robots.txt for maximum discoverability
+
+### Technical Architecture
+
+**Frontend Stack**:
+- **Next.js 15** with App Router for modern React architecture and static site generation
+- **TypeScript** for type safety and better developer experience
+- **Tailwind CSS** for utility-first styling with custom design system
+- **Custom CSS Animations** replacing Framer Motion for better performance and smaller bundle size
+- **Next.js Image Component** with unoptimized mode for static export compatibility
+
+**Development & Quality**:
+- **Jest + React Testing Library** for unit and integration testing
+- **fast-check** for property-based testing with 100 iterations per test
+- **Playwright** for cross-browser end-to-end testing
+- **Lighthouse CI** for automated performance auditing
+- **ESLint + Prettier** for code quality and consistency
+
+**Deployment & Infrastructure**:
+- **Netlify** for hosting with global CDN, automatic HTTPS, and form handling
+- **GitHub Actions** for CI/CD pipeline with automated testing and deployment
+- **Static Export** for optimal performance and cost-effective hosting
+- **Custom Domain** support with automatic SSL/TLS certificates
+
+### Build Process Evolution
+
+The project went through several iterations to achieve optimal deployment:
+
+1. **Initial Setup**: Standard Next.js SSR configuration
+2. **Static Export Migration**: Converted to static export for Netlify compatibility
+3. **Image Optimization Fix**: Configured `unoptimized: true` for static export
+4. **Development/Production Split**: Made static export conditional to fix local dev server
+5. **Performance Tuning**: Optimized bundle size, code splitting, and caching strategies
+
+### Key Technical Decisions
+
+**Why Static Export?**
+- Faster load times (no server-side rendering overhead)
+- Lower hosting costs (static files only)
+- Better security (no server-side vulnerabilities)
+- Global CDN distribution for worldwide performance
+- Simpler deployment and maintenance
+
+**Why Custom CSS Animations?**
+- Smaller bundle size compared to Framer Motion
+- Better performance (60fps animations)
+- More control over animation timing and behavior
+- Reduced JavaScript execution overhead
+
+**Why Netlify?**
+- Free tier with generous limits
+- Automatic deployments from GitHub
+- Built-in form handling (no backend needed)
+- Global CDN with automatic HTTPS
+- Easy custom domain configuration
+
+### Recent Fixes & Improvements
+
+**Profile Image Deployment Fix** (Latest):
+- **Issue**: Profile image not appearing on Netlify deployment
+- **Root Cause**: Incorrect build configuration for static export
+- **Solution**: 
+  - Added `output: 'export'` to Next.js config for production builds
+  - Updated Netlify publish directory from `.next` to `out`
+  - Added `unoptimized: true` to images config for static export compatibility
+  - Made static export conditional (production only) to fix dev server
+  - Added `dynamic: 'force-static'` to robots.ts and sitemap.ts
+  - Created proper not-found.tsx page for 404 handling
+
+**Development Server Fix**:
+- **Issue**: Dev server broken with webpack module errors
+- **Root Cause**: Static export mode enabled in development
+- **Solution**: Made `output: 'export'` conditional on `NODE_ENV === 'production'`
+
+### Content Management
+
+All portfolio content is centralized in `src/data/portfolio.ts` for easy updates:
+- Personal information and social links
+- Technical capabilities and skills
+- Project portfolio with demos and GitHub links
+- Professional experience timeline
+- Certifications and testimonials
+
+This approach allows non-technical updates without touching component code.
 
 ## 🚀 Features
 
 ### Core Functionality
-- **Five Main Pages**: Home, What I Do, Projects, Experience, and Contact
-- **Professional Showcase**: Comprehensive display of Cloud Engineering and DevOps capabilities
-- **Interactive Contact Form**: Netlify Forms integration with spam protection
-- **Document Downloads**: Direct PDF access for CV and references
-- **Project Portfolio**: Four detailed production projects with live demos
+- **Five Main Pages**: Home (Hero with profile), What I Do (Capabilities), Projects (Portfolio), Experience (Timeline), and Contact (Form)
+- **Professional Showcase**: Comprehensive display of Cloud Engineering, DevOps, and AI Automation capabilities
+- **Interactive Contact Form**: Netlify Forms integration with client-side validation and spam protection
+- **Document Downloads**: Direct PDF access for CV and professional references
+- **Project Portfolio**: Detailed production projects with live demos, GitHub links, and technical highlights
+- **Responsive Navigation**: Mobile-friendly navigation with smooth transitions
+- **Profile Image**: Professional headshot with gradient border and animated glow effect
 
 ### Technical Excellence
-- **Modern Tech Stack**: Next.js 14 with App Router, TypeScript, Tailwind CSS, Framer Motion
-- **Performance Optimized**: Sub-2 second load times, 90+ Lighthouse scores
-- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
-- **Dark Theme**: Professional dark theme with minimalist design
-- **SEO Optimized**: Comprehensive meta tags, structured data, and keyword optimization
-- **Accessibility**: WCAG compliant with semantic HTML structure
-- **Security Headers**: CSP, HSTS, and other security best practices
+- **Modern Tech Stack**: Next.js 15 with App Router, TypeScript, Tailwind CSS, Custom CSS Animations
+- **Performance Optimized**: Sub-2 second load times, 90+ Lighthouse scores, static site generation
+- **Responsive Design**: Optimized for desktop (1920px+), tablet (768px+), and mobile (320px+) devices
+- **Dark Theme**: Professional dark theme (#0A0F1E) with cyan (#00D4FF) and purple (#7C3AED) accents
+- **SEO Optimized**: Comprehensive meta tags, structured data (JSON-LD), dynamic sitemap, and robots.txt
+- **Accessibility**: WCAG 2.1 AA compliant with semantic HTML, ARIA labels, and keyboard navigation
+- **Security Headers**: CSP, HSTS, X-Frame-Options, and other security best practices via Netlify
 
 ## 🛠️ Technology Stack
 
 ### Frontend Framework
-- **Next.js 14**: App Router architecture with static site generation
+- **Next.js 15**: App Router architecture with static site generation for optimal performance
 - **React 18**: Latest React features with concurrent rendering
-- **TypeScript**: Full type safety throughout the codebase
+- **TypeScript**: Full type safety throughout the codebase with strict mode enabled
 
 ### Styling & Animation
 - **Tailwind CSS**: Utility-first CSS framework with custom design system
-- **Framer Motion**: Performant animations with 60fps target
+- **Custom CSS Animations**: Performant 60fps animations with pure CSS (replaced Framer Motion for better performance)
 - **Custom Fonts**: Inter (sans-serif) and JetBrains Mono (monospace)
 
 ### Development & Testing
-- **Jest**: Unit and property-based testing framework
-- **React Testing Library**: Component testing utilities
-- **fast-check**: Property-based testing library
-- **Playwright**: Cross-browser end-to-end testing
-- **Lighthouse CI**: Automated performance and SEO auditing
+- **Jest**: Unit and property-based testing framework with >80% coverage target
+- **React Testing Library**: Component testing utilities following best practices
+- **fast-check**: Property-based testing library with 100 iterations per test
+- **Playwright**: Cross-browser end-to-end testing (Chrome, Firefox, Safari)
+- **Lighthouse CI**: Automated performance and SEO auditing with >90 score targets
 
 ### Deployment & Performance
-- **Netlify**: Hosting with global CDN and form handling
+- **Netlify**: Hosting with global CDN, automatic HTTPS, and form handling
+- **Static Export**: Next.js static site generation for optimal performance
 - **Bundle Analyzer**: Code splitting and optimization analysis
-- **Image Optimization**: WebP/AVIF formats with responsive sizing
-- **Compression**: Gzip/Brotli compression enabled
+- **Image Optimization**: Responsive sizing with Next.js Image component
+- **Compression**: Gzip/Brotli compression enabled via Netlify
 
 ## 📁 Project Structure
 
@@ -404,19 +518,32 @@ npm run test:deployment   # Validate deployment config
 ```
 
 2. **Deploy via Git** (Recommended):
-   - Push to GitHub/GitLab/Bitbucket
-   - Connect repository to Netlify
+   - Push to GitHub repository
+   - Connect repository to Netlify (Import from GitHub)
    - Configure build settings:
      - **Build command**: `npm run build`
-     - **Publish directory**: `.next`
-     - **Node version**: `18`
+     - **Publish directory**: `out` (for static export)
+     - **Node version**: `18` or `20`
+   - Set environment variables:
+     ```env
+     NODE_ENV=production
+     NEXT_TELEMETRY_DISABLED=1
+     NEXT_PUBLIC_SITE_URL=https://your-domain.com
+     ```
+   - Deploy automatically on every push to main branch
 
 3. **Manual deployment**:
 ```bash
 npm install -g netlify-cli
 netlify login
-netlify deploy --prod --dir=.next
+netlify deploy --prod --dir=out
 ```
+
+**Important Notes**:
+- The project uses static export (`output: 'export'`) for production builds
+- Publish directory is `out`, not `.next`
+- Static export is only enabled for production (`NODE_ENV=production`)
+- Dev server runs in normal SSR mode for hot reload and debugging
 
 ### Environment Configuration
 
