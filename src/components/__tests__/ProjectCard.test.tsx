@@ -6,17 +6,69 @@ import { Project } from '@/types';
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, variants, initial, animate, whileHover, whileInView, viewport, transition, className, ...props }: any) => (
-      <div className={className} {...props}>{children}</div>
+    div: ({
+      children,
+      variants,
+      initial,
+      animate,
+      whileHover,
+      whileInView,
+      viewport,
+      transition,
+      className,
+      ...props
+    }: any) => (
+      <div className={className} {...props}>
+        {children}
+      </div>
     ),
-    span: ({ children, variants, initial, animate, whileHover, whileInView, viewport, transition, className, ...props }: any) => (
-      <span className={className} {...props}>{children}</span>
+    span: ({
+      children,
+      variants,
+      initial,
+      animate,
+      whileHover,
+      whileInView,
+      viewport,
+      transition,
+      className,
+      ...props
+    }: any) => (
+      <span className={className} {...props}>
+        {children}
+      </span>
     ),
-    ul: ({ children, variants, initial, animate, whileHover, whileInView, viewport, transition, className, ...props }: any) => (
-      <ul className={className} {...props}>{children}</ul>
+    ul: ({
+      children,
+      variants,
+      initial,
+      animate,
+      whileHover,
+      whileInView,
+      viewport,
+      transition,
+      className,
+      ...props
+    }: any) => (
+      <ul className={className} {...props}>
+        {children}
+      </ul>
     ),
-    li: ({ children, variants, initial, animate, whileHover, whileInView, viewport, transition, className, ...props }: any) => (
-      <li className={className} {...props}>{children}</li>
+    li: ({
+      children,
+      variants,
+      initial,
+      animate,
+      whileHover,
+      whileInView,
+      viewport,
+      transition,
+      className,
+      ...props
+    }: any) => (
+      <li className={className} {...props}>
+        {children}
+      </li>
     ),
   },
 }));
@@ -43,7 +95,9 @@ describe('ProjectCard', () => {
     render(<ProjectCard project={mockProject} index={0} />);
 
     expect(screen.getByText('Test Project')).toBeInTheDocument();
-    expect(screen.getByText('A test project for unit testing')).toBeInTheDocument();
+    expect(
+      screen.getByText('A test project for unit testing')
+    ).toBeInTheDocument();
   });
 
   it('displays all technologies', () => {
@@ -67,10 +121,15 @@ describe('ProjectCard', () => {
   it('renders GitHub and demo links when provided', () => {
     render(<ProjectCard project={mockProject} index={0} />);
 
-    const githubLink = screen.getByRole('link', { name: /view.*source code.*github/i });
+    const githubLink = screen.getByRole('link', {
+      name: /view.*source code.*github/i,
+    });
     const demoLink = screen.getByRole('link', { name: /view.*live demo/i });
 
-    expect(githubLink).toHaveAttribute('href', 'https://github.com/test/project');
+    expect(githubLink).toHaveAttribute(
+      'href',
+      'https://github.com/test/project'
+    );
     expect(demoLink).toHaveAttribute('href', 'https://demo.test.com');
     expect(githubLink).toHaveAttribute('target', '_blank');
     expect(demoLink).toHaveAttribute('target', '_blank');
@@ -85,8 +144,12 @@ describe('ProjectCard', () => {
 
     render(<ProjectCard project={projectWithoutLinks} index={0} />);
 
-    expect(screen.queryByRole('link', { name: /view.*source code.*github/i })).not.toBeInTheDocument();
-    expect(screen.queryByRole('link', { name: /view.*live demo/i })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('link', { name: /view.*source code.*github/i })
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('link', { name: /view.*live demo/i })
+    ).not.toBeInTheDocument();
   });
 
   it('handles projects with few highlights correctly', () => {
@@ -103,8 +166,10 @@ describe('ProjectCard', () => {
   });
 
   it('applies correct CSS classes for styling', () => {
-    const { container } = render(<ProjectCard project={mockProject} index={0} />);
-    
+    const { container } = render(
+      <ProjectCard project={mockProject} index={0} />
+    );
+
     const cardElement = container.querySelector('.group');
     expect(cardElement).toBeInTheDocument();
     expect(cardElement).toHaveClass('relative');

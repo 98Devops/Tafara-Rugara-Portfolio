@@ -10,15 +10,23 @@ interface FloatingCardProps {
 
 export function FloatingCard({ children, className = '' }: FloatingCardProps) {
   const ref = useRef<HTMLDivElement>(null);
-  
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
   const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
   const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['7.5deg', '-7.5deg']);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-7.5deg', '7.5deg']);
+  const rotateX = useTransform(
+    mouseYSpring,
+    [-0.5, 0.5],
+    ['7.5deg', '-7.5deg']
+  );
+  const rotateY = useTransform(
+    mouseXSpring,
+    [-0.5, 0.5],
+    ['-7.5deg', '7.5deg']
+  );
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current) return;
@@ -56,9 +64,7 @@ export function FloatingCard({ children, className = '' }: FloatingCardProps) {
       whileHover={{ scale: 1.02 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
-      <div style={{ transform: 'translateZ(50px)' }}>
-        {children}
-      </div>
+      <div style={{ transform: 'translateZ(50px)' }}>{children}</div>
     </motion.div>
   );
 }

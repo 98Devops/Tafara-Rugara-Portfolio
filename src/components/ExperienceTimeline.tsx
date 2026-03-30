@@ -7,14 +7,17 @@ interface ExperienceTimelineProps {
   experiences: Experience[];
 }
 
-export default function ExperienceTimeline({ experiences }: ExperienceTimelineProps) {
+export default function ExperienceTimeline({
+  experiences,
+}: ExperienceTimelineProps) {
   return (
     <div className="relative">
       {/* Glowing vertical line */}
       <motion.div
-        className="absolute left-8 top-0 bottom-0 w-px"
+        className="absolute bottom-0 left-8 top-0 w-px"
         style={{
-          background: 'linear-gradient(to bottom, #00D4FF, #7C3AED, rgba(0,212,255,0.1))',
+          background:
+            'linear-gradient(to bottom, #00D4FF, #7C3AED, rgba(0,212,255,0.1))',
           boxShadow: '0 0 8px rgba(0,212,255,0.3)',
         }}
         initial={{ scaleY: 0, originY: 0 }}
@@ -26,7 +29,7 @@ export default function ExperienceTimeline({ experiences }: ExperienceTimelinePr
       {experiences.map((experience, index) => (
         <motion.div
           key={`${experience.company}-${experience.position}`}
-          className="relative pl-20 pb-14 last:pb-0"
+          className="relative pb-14 pl-20 last:pb-0"
           initial={{ opacity: 0, x: -24 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: '-80px' }}
@@ -40,9 +43,21 @@ export default function ExperienceTimeline({ experiences }: ExperienceTimelinePr
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="w-4 h-4 rounded-full flex items-center justify-center"
-              style={{ background: 'rgba(0,212,255,0.15)', border: '2px solid #00D4FF', boxShadow: '0 0 12px rgba(0,212,255,0.4)' }}>
-              <div className="w-2 h-2 rounded-full" style={{ background: '#00D4FF', animation: 'pulseDot 2s ease-in-out infinite' }} />
+            <div
+              className="flex h-4 w-4 items-center justify-center rounded-full"
+              style={{
+                background: 'rgba(0,212,255,0.15)',
+                border: '2px solid #00D4FF',
+                boxShadow: '0 0 12px rgba(0,212,255,0.4)',
+              }}
+            >
+              <div
+                className="h-2 w-2 rounded-full"
+                style={{
+                  background: '#00D4FF',
+                  animation: 'pulseDot 2s ease-in-out infinite',
+                }}
+              />
             </div>
           </motion.div>
 
@@ -52,16 +67,25 @@ export default function ExperienceTimeline({ experiences }: ExperienceTimelinePr
             className="glass-card p-6 shadow-xl"
           >
             {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-5">
+            <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <h3 className="text-xl font-bold text-white mb-1">{experience.position}</h3>
-                <p className="font-semibold" style={{ color: '#00D4FF' }}>{experience.company}</p>
-                <p className="text-sm mt-1 font-mono" style={{ color: '#64748b' }}>{experience.duration}</p>
+                <h3 className="mb-1 text-xl font-bold text-white">
+                  {experience.position}
+                </h3>
+                <p className="font-semibold" style={{ color: '#00D4FF' }}>
+                  {experience.company}
+                </p>
+                <p
+                  className="mt-1 font-mono text-sm"
+                  style={{ color: '#64748b' }}
+                >
+                  {experience.duration}
+                </p>
               </div>
               {/* Impact badge */}
               {experience.impact && (
                 <motion.div
-                  className="flex-shrink-0 px-4 py-2 rounded-xl text-center"
+                  className="flex-shrink-0 rounded-xl px-4 py-2 text-center"
                   style={{
                     background: 'rgba(16,185,129,0.12)',
                     border: '1px solid rgba(16,185,129,0.35)',
@@ -72,10 +96,16 @@ export default function ExperienceTimeline({ experiences }: ExperienceTimelinePr
                   viewport={{ once: true }}
                   transition={{ delay: 0.35 }}
                 >
-                  <div className="text-xs font-mono uppercase tracking-widest mb-1" style={{ color: '#34d399' }}>
+                  <div
+                    className="mb-1 font-mono text-xs uppercase tracking-widest"
+                    style={{ color: '#34d399' }}
+                  >
                     Key Impact
                   </div>
-                  <div className="text-sm font-bold" style={{ color: '#6ee7b7' }}>
+                  <div
+                    className="text-sm font-bold"
+                    style={{ color: '#6ee7b7' }}
+                  >
                     {experience.impact}
                   </div>
                 </motion.div>
@@ -84,7 +114,10 @@ export default function ExperienceTimeline({ experiences }: ExperienceTimelinePr
 
             {/* Achievements */}
             <div className="mb-5">
-              <h4 className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: 'rgba(0,212,255,0.7)' }}>
+              <h4
+                className="mb-3 text-sm font-semibold uppercase tracking-widest"
+                style={{ color: 'rgba(0,212,255,0.7)' }}
+              >
                 Key Achievements
               </h4>
               <motion.ul
@@ -97,11 +130,24 @@ export default function ExperienceTimeline({ experiences }: ExperienceTimelinePr
                 {experience.achievements.map((item, i) => (
                   <motion.li
                     key={i}
-                    variants={{ hidden: { opacity: 0, x: -12 }, visible: { opacity: 1, x: 0, transition: { duration: 0.4 } } }}
+                    variants={{
+                      hidden: { opacity: 0, x: -12 },
+                      visible: {
+                        opacity: 1,
+                        x: 0,
+                        transition: { duration: 0.4 },
+                      },
+                    }}
                     className="flex items-start gap-3 text-sm leading-relaxed"
                     style={{ color: 'rgba(203,213,225,0.85)' }}
                   >
-                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#00D4FF', boxShadow: '0 0 6px rgba(0,212,255,0.5)' }} />
+                    <span
+                      className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full"
+                      style={{
+                        background: '#00D4FF',
+                        boxShadow: '0 0 6px rgba(0,212,255,0.5)',
+                      }}
+                    />
                     {item}
                   </motion.li>
                 ))}
@@ -110,7 +156,10 @@ export default function ExperienceTimeline({ experiences }: ExperienceTimelinePr
 
             {/* Technologies */}
             <div>
-              <h4 className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: 'rgba(124,58,237,0.8)' }}>
+              <h4
+                className="mb-3 text-sm font-semibold uppercase tracking-widest"
+                style={{ color: 'rgba(124,58,237,0.8)' }}
+              >
                 Technologies
               </h4>
               <div className="flex flex-wrap gap-2">

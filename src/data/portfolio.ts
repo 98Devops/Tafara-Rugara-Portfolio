@@ -4,7 +4,8 @@ export const automationSystems = {
   flagship: {
     id: 'delivery-health-ai',
     title: 'AI-Powered Delivery Health & Operations Intelligence System',
-    subtitle: 'Production-grade pilot built for Crebos.online — shortlisted in senior-facing evaluation',
+    subtitle:
+      'Production-grade pilot built for Crebos.online — shortlisted in senior-facing evaluation',
     description:
       'A production-grade automation system built for Crebos.online that monitors delivery health across multiple concurrent projects, scores them objectively, uses AI for diagnostics, and pushes consolidated reports to leadership — replacing gut-feel decisions with reliable, data-driven escalation paths.',
     businessContext:
@@ -26,8 +27,19 @@ export const automationSystems = {
     ],
     outcome:
       'Delivered as a ClickUp pilot assignment for Crebos.online — shortlisted in senior evaluation. Demonstrates system-level thinking and production readiness for real operational automation.',
-    technologies: ['n8n', 'Docker', 'ClickUp', 'AI/LLMs', 'Observability', 'Retry Logic', 'JSON Schema Validation'],
+    technologies: [
+      'n8n',
+      'Docker',
+      'ClickUp',
+      'AI/LLMs',
+      'Observability',
+      'Retry Logic',
+      'JSON Schema Validation',
+    ],
     demoUrl: 'https://www.youtube.com/watch?v=c8ETK5kOh08',
+    githubUrl:
+      'https://github.com/98Devops/AI-Powered-Delivery-Health-Operations-Intelligence-System',
+    documentationUrl: '/documents/crebos-documentation.pdf',
   },
   supporting: [
     {
@@ -43,7 +55,14 @@ export const automationSystems = {
         'Integrates Whisper transcription and LLM reasoning',
         'Exposed as a reliable internal service for downstream workflows',
       ],
-      tools: ['n8n', 'Qdrant', 'Whisper API', 'Gemini Pro', 'Docker', 'Workflow Automation'],
+      tools: [
+        'n8n',
+        'Qdrant',
+        'Whisper API',
+        'Gemini Pro',
+        'Docker',
+        'Workflow Automation',
+      ],
       demoUrl: 'https://www.youtube.com/watch?v=b5xatvQ6TQQ',
     },
     {
@@ -59,7 +78,13 @@ export const automationSystems = {
         'Telegram Bot API as the delivery interface',
         'Lightweight deployment for rapid iteration and validation',
       ],
-      tools: ['RAG', 'AI/LLMs', 'Telegram Bot API', 'Document Parsing', 'Workflow Automation'],
+      tools: [
+        'RAG',
+        'AI/LLMs',
+        'Telegram Bot API',
+        'Document Parsing',
+        'Workflow Automation',
+      ],
       demoUrl: 'https://www.youtube.com/watch?v=IEMl8c1U_4s',
     },
   ],
@@ -67,7 +92,7 @@ export const automationSystems = {
 
 export const testimonial = {
   quote:
-    "I recommend him without reservation. I would rehire him for DevOps and automation work. He is a systems thinker who traces cause and effect through the stack before he acts. Prototype deployments became routine and recoverable, and non-technical teammates could trigger reliable automations because his n8n flows were robust.",
+    'I recommend him without reservation. I would rehire him for DevOps and automation work. He is a systems thinker who traces cause and effect through the stack before he acts. Prototype deployments became routine and recoverable, and non-technical teammates could trigger reliable automations because his n8n flows were robust.',
   author: 'Bongani Wilson',
   title: 'Director',
   company: 'Excellessence (Your EKA Services)',
@@ -103,21 +128,22 @@ export const portfolioData: PortfolioData = {
       'Cloud & DevOps Engineer specializing in AI-powered automation systems, container orchestration, and infrastructure that ships. I build production-grade pipelines, automate complex workflows with n8n and LLMs, and turn operational chaos into intelligent, self-managing systems — deployable on AWS, Docker, and Kubernetes.',
     profileImage: '/images/tafara-rugara.jpg',
     socialLinks: {
-      github:   'https://github.com/98Devops',
+      github: 'https://github.com/98Devops',
       linkedin: 'https://www.linkedin.com/in/tafara-rugara-0627b819b/',
-      email:    'tfrsuperfx@gmail.com',
-      youtube:  'https://www.youtube.com/@techwithtaf',
+      email: 'tfrsuperfx@gmail.com',
+      youtube: 'https://www.youtube.com/@techwithtaf',
       whatsapp: 'https://wa.me/263777553271',
     },
     documents: {
-      cv:        '/documents/tafara-rugara-cv.pdf',
+      cv: '/documents/tafara-rugara-cv.pdf',
       reference: '/documents/tafara-rugara-reference.pdf',
     },
   },
   capabilities: [
     {
       category: 'Cloud Architecture',
-      description: 'Designing and deploying scalable cloud infrastructure on AWS with focus on cost efficiency, security, and operational excellence.',
+      description:
+        'Designing and deploying scalable cloud infrastructure on AWS with focus on cost efficiency, security, and operational excellence.',
       skills: [
         'AWS (EC2, S3, Lambda, API Gateway, RDS, CloudFront, Route 53, IAM)',
         'Infrastructure as Code — Terraform',
@@ -129,7 +155,8 @@ export const portfolioData: PortfolioData = {
     },
     {
       category: 'DevOps & CI/CD',
-      description: 'Building robust CI/CD pipelines and container orchestration for reliable, automated software delivery.',
+      description:
+        'Building robust CI/CD pipelines and container orchestration for reliable, automated software delivery.',
       skills: [
         'GitHub Actions CI/CD Pipelines',
         'Docker & Multi-Container Environments',
@@ -143,7 +170,8 @@ export const portfolioData: PortfolioData = {
     },
     {
       category: 'Automation Engineering',
-      description: 'Creating intelligent automation workflows with n8n, LLMs, and APIs that replace manual processes with reliable, self-managing systems.',
+      description:
+        'Creating intelligent automation workflows with n8n, LLMs, and APIs that replace manual processes with reliable, self-managing systems.',
       skills: [
         'n8n Workflow Orchestration',
         'Voice-to-Insight AI Pipelines',
@@ -157,7 +185,8 @@ export const portfolioData: PortfolioData = {
     },
     {
       category: 'Monitoring & Reliability',
-      description: 'Implementing observability and ensuring system reliability through proactive monitoring, structured logging, and continuous deployment.',
+      description:
+        'Implementing observability and ensuring system reliability through proactive monitoring, structured logging, and continuous deployment.',
       skills: [
         'Prometheus & Grafana Dashboards',
         'Winston Structured Logging',
@@ -169,20 +198,188 @@ export const portfolioData: PortfolioData = {
         'Alert Aggregation & Anti-Spam Logic',
       ],
     },
+    {
+      category: 'Website Development',
+      description:
+        'Building modern, performant websites with React, Next.js, and cutting-edge web technologies. Specializing in interactive UI, 3D visualizations, performance optimization, and SEO-ready implementations.',
+      skills: [
+        'Next.js & React',
+        'TypeScript',
+        'Tailwind CSS',
+        'Responsive Design',
+        'Performance Optimization',
+        'SEO Best Practices',
+        'Framer Motion',
+        'Property-Based Testing',
+        'Static Site Generation',
+        'Netlify Deployment',
+      ],
+    },
   ],
   projects: [
+    {
+      id: 'litho-solutions',
+      title: 'Litho Solutions',
+      description:
+        'A cutting-edge web platform dedicated to modernizing mineral exploration. By leveraging high-accuracy data and dynamic visualization, provides decision-ready data to prevent blind drilling and maximize targeting precision.',
+      technicalArchitecture:
+        'Next.js 15 App Router with React 19, Tailwind CSS v4 for styling, Three.js and React Three Fiber for 3D visualizations, Framer Motion for animations, fully static export for optimal performance.',
+      operationalValue:
+        'Transforms complex geological data into interactive 3D visualizations, enabling mining companies to make data-driven exploration decisions and reduce costly blind drilling operations.',
+      outcome:
+        'Deployed on Netlify with fully static export, featuring interactive 3D floating gold nuggets, smooth animations, and responsive design across all devices.',
+      technologies: [
+        'Next.js 15',
+        'React 19',
+        'Tailwind CSS v4',
+        'Framer Motion',
+        'Three.js',
+        'React Three Fiber',
+        'Drei',
+        'Lucide React',
+        'Netlify',
+      ],
+      highlights: [
+        'Interactive 3D visualizations with floating gold nuggets using Three.js',
+        'Smooth page transitions and micro-interactions with Framer Motion',
+        'Performant static export optimized for fast loading',
+        'Responsive layout adapting to mobile, tablet, and desktop',
+        'Mineral categorization system for exploration data',
+        'Modern UI with Tailwind CSS v4 utility-first approach',
+        'Deployed on Netlify with continuous deployment',
+      ],
+      githubUrl: 'https://github.com/98Devops/Litho-Solutions',
+      demoUrl: 'https://litho-solution.netlify.app/',
+    },
+    {
+      id: 'proair-zimbabwe',
+      title: 'ProAir Zimbabwe',
+      description:
+        "High-performance business website for Zimbabwe's leading air conditioning, heating & ventilation specialists. Multi-page Vite build with WhatsApp-first lead generation.",
+      technicalArchitecture:
+        'Vite 5 build system with vanilla JavaScript, CSS3 for styling and animations, vite-plugin-image-optimizer with Sharp for asset optimization, Open-Meteo API integration for live weather data.',
+      operationalValue:
+        'Provides instant customer engagement through WhatsApp integration, showcases services with interactive UI elements, and demonstrates technical expertise through live weather integration.',
+      outcome:
+        'Deployed on Netlify with CI/CD from main branch, achieving ~45% image file size reduction through optimization, SEO-ready with Schema.org structured data.',
+      technologies: [
+        'Vite 5',
+        'HTML5',
+        'CSS3',
+        'Vanilla JavaScript',
+        'Google Fonts',
+        'Lucide Icons',
+        'Sharp',
+        'Open-Meteo API',
+        'Netlify',
+      ],
+      highlights: [
+        'WhatsApp integration for instant lead generation',
+        'Live weather widget powered by Open-Meteo API',
+        'Particle system background effects',
+        '3D tilt card interactions',
+        'Counter animations and typing effects',
+        'Smooth page transitions and scroll progress bar',
+        'Image optimization achieving ~45% file size reduction',
+        'SEO optimized with Schema.org LocalBusiness JSON-LD and Open Graph tags',
+        'Button micro-interactions for enhanced UX',
+      ],
+      githubUrl: '',
+      demoUrl: 'https://proairzw.netlify.app/',
+    },
+    {
+      id: 'mero-tech-ai',
+      title: 'Mero Tech AI',
+      description:
+        'A premium, highly interactive marketing website showcasing AI automation, internal tools, and cloud infrastructure services. Built with modern web technologies and featuring stunning animations.',
+      technicalArchitecture:
+        'Next.js 14 App Router with TypeScript for type safety, Tailwind CSS for styling, Framer Motion for animations, Zod for form validation, DOMPurify for XSS sanitization, comprehensive testing with Jest and Fast-check.',
+      operationalValue:
+        'Demonstrates technical expertise through interactive UI, validates business credibility through comprehensive testing (235+ tests), and provides secure contact form processing with XSS protection.',
+      outcome:
+        'Production-ready marketing site with 235+ tests, property-based testing for correctness guarantees, bundle size optimization, and WCAG accessibility considerations.',
+      technologies: [
+        'Next.js 14',
+        'TypeScript',
+        'Tailwind CSS',
+        'Framer Motion',
+        'Zod',
+        'DOMPurify',
+        'Jest',
+        'React Testing Library',
+        'Fast-check',
+        'Netlify',
+      ],
+      highlights: [
+        'Interactive animations: custom cursor, parallax effects, 3D card tilts, floating particles',
+        'Performance optimized: bundle size optimization, WebP/AVIF images, lazy loading',
+        'Fully responsive design across all devices',
+        'SEO ready with Open Graph tags, structured data, and sitemap',
+        'Type-safe with TypeScript throughout',
+        'Comprehensive testing: 235+ tests with Jest, React Testing Library, and Fast-check property-based testing',
+        'Accessible with WCAG considerations',
+        'Services showcased: AI Automation, Internal Tools, Web Applications, Cloud Infrastructure, AI Consulting',
+      ],
+      githubUrl: '',
+      demoUrl: 'https://mero-tech-ai.netlify.app/',
+    },
+    {
+      id: 'aws-cloud-resume',
+      title: 'AWS Cloud Resume Challenge',
+      description:
+        'Reusable serverless application platform built with Terraform IaC and GitHub Actions — standardising lightweight API and static app deployments with security-by-default principles.',
+      technicalArchitecture:
+        'Infrastructure entirely in Terraform; secure-by-default config; fully automated GitHub Actions CI/CD.',
+      operationalValue:
+        'Reduces deployment time from days to minutes with zero configuration drift across projects.',
+      outcome:
+        'Reusable pattern adopted across multiple projects including this portfolio site.',
+      technologies: [
+        'AWS Lambda',
+        'API Gateway',
+        'S3',
+        'CloudFront',
+        'IAM',
+        'Terraform',
+        'VPC',
+        'GitHub Actions',
+      ],
+      highlights: [
+        'Infrastructure-as-Code with Terraform (100% automation)',
+        'Secure-by-default: IAM least privilege, HTTPS-only, signed CDN',
+        'GitHub Actions pipeline with full deployment gates',
+        'Adopted across multiple projects — zero config drift',
+      ],
+      githubUrl: '',
+      demoUrl: 'https://d3tr9ufxy7e85m.cloudfront.net/',
+    },
     {
       id: 'acquisitions-api',
       title: 'Acquisitions — SaaS M&A Platform',
       description:
         'Production-ready API platform for SaaS business acquisitions with JWT/RBAC authentication, deal state management, Kubernetes orchestration, and a full DevOps lifecycle.',
-      problem: 'SaaS businesses needed a secure, scalable platform for managing acquisition transactions with role-based access, deal workflows, and comprehensive monitoring.',
+      problem:
+        'SaaS businesses needed a secure, scalable platform for managing acquisition transactions with role-based access, deal workflows, and comprehensive monitoring.',
       technicalArchitecture:
         'Microservices API on AWS with JWT/RBAC, Kubernetes, Terraform IaC, serverless Postgres (Neon + Drizzle ORM), Prometheus/Grafana observability.',
       operationalValue:
         'Demonstrates end-to-end production engineering: security, automation, and DevOps lifecycle for a real business workflow domain.',
-      outcome: 'Fully deployed API with automated CI/CD, rolling Kubernetes deployments, and monitoring stack. Docker image available: devops263/acquisitions-api:latest',
-      technologies: ['Node.js', 'JWT', 'Zod', 'Winston', 'Docker', 'Kubernetes', 'GitHub Actions', 'Neon DB', 'Terraform', 'Prometheus', 'Grafana', 'Jest'],
+      outcome:
+        'Fully deployed API with automated CI/CD, rolling Kubernetes deployments, and monitoring stack. Docker image available: devops263/acquisitions-api:latest',
+      technologies: [
+        'Node.js',
+        'JWT',
+        'Zod',
+        'Winston',
+        'Docker',
+        'Kubernetes',
+        'GitHub Actions',
+        'Neon DB',
+        'Terraform',
+        'Prometheus',
+        'Grafana',
+        'Jest',
+      ],
       highlights: [
         'JWT authentication with role-based access control (Admin, User)',
         'Deal lifecycle management — pending → active → completed state transitions',
@@ -195,17 +392,30 @@ export const portfolioData: PortfolioData = {
         'Jest + Supertest for integration and unit tests',
       ],
       githubUrl: 'https://github.com/98Devops/acqusitions',
+      documentationUrl: '/documents/crebos-documentation.pdf',
     },
     {
       id: 'voice-to-vector-api',
       title: 'Voice-to-Vector Platform API',
       description:
         'Flask-based internal platform service exposing an end-to-end AI pipeline — converting voice inputs into vector embeddings for semantic search and downstream workflow automation.',
-      problem: 'Teams needed a reliable internal service to process voice inputs, transcribe, enrich, and store vector embeddings for semantic retrieval.',
-      technicalArchitecture: 'Flask REST API with Whisper transcription, LLM reasoning, and Qdrant vector storage; containerised for portability.',
-      operationalValue: 'Turns AI workflows into reliable internal platform services — consistent voice intelligence processing and semantic search.',
-      outcome: 'Containerised internal-service API with vector storage, transcript enrichment, and REST endpoints for downstream consumption.',
-      technologies: ['Python', 'Flask', 'Qdrant', 'Whisper', 'LLMs', 'Docker', 'REST API'],
+      problem:
+        'Teams needed a reliable internal service to process voice inputs, transcribe, enrich, and store vector embeddings for semantic retrieval.',
+      technicalArchitecture:
+        'Flask REST API with Whisper transcription, LLM reasoning, and Qdrant vector storage; containerised for portability.',
+      operationalValue:
+        'Turns AI workflows into reliable internal platform services — consistent voice intelligence processing and semantic search.',
+      outcome:
+        'Containerised internal-service API with vector storage, transcript enrichment, and REST endpoints for downstream consumption.',
+      technologies: [
+        'Python',
+        'Flask',
+        'Qdrant',
+        'Whisper',
+        'LLMs',
+        'Docker',
+        'REST API',
+      ],
       highlights: [
         'End-to-end voice-to-vector intelligence pipeline',
         'Whisper API transcription + LLM reasoning + Qdrant vector storage',
@@ -220,11 +430,22 @@ export const portfolioData: PortfolioData = {
       title: 'Legacy Java App — AWS Platform Migration',
       description:
         'Strategic migration of a 15-year-old Java application from manual on-premises server management to a fully managed AWS platform with a documented "Golden Path" for onboarding.',
-      problem: 'Legacy Java app faced operational overhead, scalability limits, and manual server management complexity.',
-      technicalArchitecture: 'AWS Elastic Beanstalk for orchestrated deployment, RDS & ElastiCache for managed data layers, CloudFront for distribution.',
-      operationalValue: '60% operational overhead reduction, dramatically improved scalability, and reusable migration template for future projects.',
-      outcome: 'Successfully migrated with documented patterns adopted as a reusable playbook.',
-      technologies: ['Java', 'AWS Elastic Beanstalk', 'RDS', 'ElastiCache', 'CloudFront', 'Platform Engineering'],
+      problem:
+        'Legacy Java app faced operational overhead, scalability limits, and manual server management complexity.',
+      technicalArchitecture:
+        'AWS Elastic Beanstalk for orchestrated deployment, RDS & ElastiCache for managed data layers, CloudFront for distribution.',
+      operationalValue:
+        '60% operational overhead reduction, dramatically improved scalability, and reusable migration template for future projects.',
+      outcome:
+        'Successfully migrated with documented patterns adopted as a reusable playbook.',
+      technologies: [
+        'Java',
+        'AWS Elastic Beanstalk',
+        'RDS',
+        'ElastiCache',
+        'CloudFront',
+        'Platform Engineering',
+      ],
       highlights: [
         'Migrated 15-year-old application with zero downtime strategy',
         'Elastic Beanstalk for automated deployment orchestration',
@@ -239,11 +460,22 @@ export const portfolioData: PortfolioData = {
       title: 'Serverless IaC Platform Pattern',
       description:
         'Reusable serverless application platform built with Terraform IaC and GitHub Actions — standardising lightweight API and static app deployments with security-by-default principles.',
-      problem: 'Teams needed repeatable, secure patterns for rapid API and static application deployments.',
-      technicalArchitecture: 'Infrastructure entirely in Terraform; secure-by-default config; fully automated GitHub Actions CI/CD.',
-      operationalValue: 'Reduces deployment time from days to minutes with zero configuration drift across projects.',
-      outcome: 'Reusable pattern adopted across multiple projects including this portfolio site.',
-      technologies: ['Terraform', 'AWS Lambda', 'GitHub Actions', 'CloudFront', 'API Gateway', 'S3'],
+      problem:
+        'Teams needed repeatable, secure patterns for rapid API and static application deployments.',
+      technicalArchitecture:
+        'Infrastructure entirely in Terraform; secure-by-default config; fully automated GitHub Actions CI/CD.',
+      operationalValue:
+        'Reduces deployment time from days to minutes with zero configuration drift across projects.',
+      outcome:
+        'Reusable pattern adopted across multiple projects including this portfolio site.',
+      technologies: [
+        'Terraform',
+        'AWS Lambda',
+        'GitHub Actions',
+        'CloudFront',
+        'API Gateway',
+        'S3',
+      ],
       highlights: [
         'Infrastructure-as-Code with Terraform (100% automation)',
         'Secure-by-default: IAM least privilege, HTTPS-only, signed CDN',
@@ -270,7 +502,18 @@ export const portfolioData: PortfolioData = {
         'Replaced low-code nodes with custom JavaScript for intelligent workflow routing and data flow control',
         'Synced voice-to-insight outputs with Obsidian via Syncthing for structured knowledge capture',
       ],
-      technologies: ['Docker', 'n8n', 'Linux', 'CI/CD', 'Whisper API', 'Gemini Pro', 'ClickUp', 'SSH', 'Security Hardening', 'AI/ML Ops'],
+      technologies: [
+        'Docker',
+        'n8n',
+        'Linux',
+        'CI/CD',
+        'Whisper API',
+        'Gemini Pro',
+        'ClickUp',
+        'SSH',
+        'Security Hardening',
+        'AI/ML Ops',
+      ],
     },
   ],
 };

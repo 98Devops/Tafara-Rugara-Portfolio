@@ -28,14 +28,17 @@ export async function checkDocumentExists(filePath: string): Promise<boolean> {
  * @param fileName - The name for the downloaded file
  * @returns Promise<DownloadResult> - Result of the download attempt
  */
-export async function downloadDocument(filePath: string, fileName: string): Promise<DownloadResult> {
+export async function downloadDocument(
+  filePath: string,
+  fileName: string
+): Promise<DownloadResult> {
   try {
     // Check if file exists first
     const exists = await checkDocumentExists(filePath);
     if (!exists) {
       return {
         success: false,
-        error: 'Document not found. Please contact the site administrator.'
+        error: 'Document not found. Please contact the site administrator.',
       };
     }
 
@@ -44,18 +47,19 @@ export async function downloadDocument(filePath: string, fileName: string): Prom
     link.href = filePath;
     link.download = fileName;
     link.style.display = 'none';
-    
+
     // Add to DOM, click, and remove
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    
+
     return { success: true };
   } catch (error) {
     console.error(`Error downloading document: ${filePath}`, error);
     return {
       success: false,
-      error: 'Failed to download document. Please try again or contact support.'
+      error:
+        'Failed to download document. Please try again or contact support.',
     };
   }
 }

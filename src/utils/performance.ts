@@ -3,16 +3,21 @@
  */
 
 // Preload critical resources
-export function preloadResource(href: string, as: string, type?: string, crossorigin?: string) {
+export function preloadResource(
+  href: string,
+  as: string,
+  type?: string,
+  crossorigin?: string
+) {
   if (typeof window === 'undefined') return;
-  
+
   const link = document.createElement('link');
   link.rel = 'preload';
   link.href = href;
   link.as = as;
   if (type) link.type = type;
   if (crossorigin) link.crossOrigin = crossorigin;
-  
+
   document.head.appendChild(link);
 }
 
@@ -27,13 +32,15 @@ export function preloadImage(src: string): Promise<void> {
 }
 
 // Lazy load images with intersection observer
-export function createImageObserver(callback: (entry: IntersectionObserverEntry) => void) {
+export function createImageObserver(
+  callback: (entry: IntersectionObserverEntry) => void
+) {
   if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
     return null;
   }
 
   return new IntersectionObserver(
-    (entries) => {
+    entries => {
       entries.forEach(callback);
     },
     {
@@ -44,7 +51,7 @@ export function createImageObserver(callback: (entry: IntersectionObserverEntry)
 }
 
 // Debounce function for performance
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
@@ -56,7 +63,7 @@ export function debounce<T extends (...args: any[]) => any>(
 }
 
 // Throttle function for performance
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: unknown[]) => unknown>(
   func: T,
   limit: number
 ): (...args: Parameters<T>) => void {
@@ -82,11 +89,16 @@ export function getConnectionSpeed(): 'slow' | 'fast' | 'unknown' {
     return 'unknown';
   }
 
-  const connection = (navigator as any).connection;
+  const connection = (
+    navigator as Navigator & { connection?: { effectiveType?: string } }
+  ).connection;
   if (!connection) return 'unknown';
 
   // Consider 2G and slow-2g as slow
-  if (connection.effectiveType === '2g' || connection.effectiveType === 'slow-2g') {
+  if (
+    connection.effectiveType === '2g' ||
+    connection.effectiveType === 'slow-2g'
+  ) {
     return 'slow';
   }
 
@@ -94,7 +106,10 @@ export function getConnectionSpeed(): 'slow' | 'fast' | 'unknown' {
 }
 
 // Measure performance
-export function measurePerformance(name: string, fn: () => void | Promise<void>) {
+export function measurePerformance(
+  name: string,
+  fn: () => void | Promise<void>
+) {
   if (typeof performance === 'undefined') {
     return fn();
   }
@@ -126,15 +141,24 @@ export function preloadCriticalResources() {
   if (typeof window === 'undefined') return;
 
   // Preload critical fonts
-  preloadResource('/fonts/jetbrains-mono.woff2', 'font', 'font/woff2', 'anonymous');
-  
+  preloadResource(
+    '/fonts/jetbrains-mono.woff2',
+    'font',
+    'font/woff2',
+    'anonymous'
+  );
+
   // Preload critical images
   preloadImage('/images/placeholder.svg').catch(() => {
     // Silently fail if image doesn't exist
   });
 
   // Preload critical documents
-  preloadResource('/documents/tafara-rugara-cv.pdf', 'document', 'application/pdf');
+  preloadResource(
+    '/documents/tafara-rugara-cv.pdf',
+    'document',
+    'application/pdf'
+  );
 }
 
 // Initialize performance optimizations
@@ -147,7 +171,7 @@ export function initializePerformanceOptimizations() {
   // Add performance observer for long tasks
   if ('PerformanceObserver' in window) {
     try {
-      const observer = new PerformanceObserver((list) => {
+      const observer = new PerformanceObserver(list => {
         for (const entry of list.getEntries()) {
           if (entry.duration > 50) {
             console.warn('Long task detected:', {
@@ -159,7 +183,7 @@ export function initializePerformanceOptimizations() {
       });
 
       observer.observe({ entryTypes: ['longtask'] });
-    } catch (error) {
+    } catch {
       // Silently fail if not supported
     }
   }

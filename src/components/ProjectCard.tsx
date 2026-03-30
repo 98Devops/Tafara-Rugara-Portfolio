@@ -2,14 +2,21 @@
 
 import { motion } from 'framer-motion';
 import { Project } from '@/types';
-import { ArrowTopRightOnSquareIcon, CodeBracketIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowTopRightOnSquareIcon,
+  CodeBracketIcon,
+  DocumentArrowDownIcon,
+} from '@heroicons/react/24/outline';
 
 interface ProjectCardProps {
   project: Project;
   index: number;
 }
 
-export default function ProjectCard({ project, index }: ProjectCardProps) {
+export default function ProjectCard({
+  project,
+  index: _index,
+}: ProjectCardProps) {
   const cardVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -61,49 +68,68 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true, margin: '-50px' }}
       whileHover="hover"
       className="group relative"
     >
       <motion.div
         variants={hoverVariants}
-        className="relative h-full bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10"
+        className="relative h-full rounded-xl border border-gray-800 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/10"
       >
         {/* Project Header */}
-        <div className="flex items-start justify-between mb-4">
+        <div className="mb-4 flex items-start justify-between">
           <div className="flex-1">
-            <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
+            <h3 className="mb-2 text-xl font-semibold text-white transition-colors group-hover:text-blue-400">
               {project.title}
             </h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-4">
+            <p className="mb-4 text-sm leading-relaxed text-gray-400">
               {project.description}
             </p>
-            
+
             {/* Problem/Solution Structure */}
-            {(project.problem || project.technicalArchitecture || project.operationalValue || project.outcome) && (
-              <div className="space-y-3 mb-4">
+            {(project.problem ||
+              project.technicalArchitecture ||
+              project.operationalValue ||
+              project.outcome) && (
+              <div className="mb-4 space-y-3">
                 {project.problem && (
                   <div>
-                    <span className="text-xs font-medium text-orange-400 uppercase tracking-wide">Problem</span>
-                    <p className="text-gray-300 text-sm mt-1 leading-relaxed">{project.problem}</p>
+                    <span className="text-xs font-medium uppercase tracking-wide text-orange-400">
+                      Problem
+                    </span>
+                    <p className="mt-1 text-sm leading-relaxed text-gray-300">
+                      {project.problem}
+                    </p>
                   </div>
                 )}
                 {project.technicalArchitecture && (
                   <div>
-                    <span className="text-xs font-medium text-blue-400 uppercase tracking-wide">Technical Architecture</span>
-                    <p className="text-gray-300 text-sm mt-1 leading-relaxed">{project.technicalArchitecture}</p>
+                    <span className="text-xs font-medium uppercase tracking-wide text-blue-400">
+                      Technical Architecture
+                    </span>
+                    <p className="mt-1 text-sm leading-relaxed text-gray-300">
+                      {project.technicalArchitecture}
+                    </p>
                   </div>
                 )}
                 {project.operationalValue && (
                   <div>
-                    <span className="text-xs font-medium text-green-400 uppercase tracking-wide">Operational Value</span>
-                    <p className="text-gray-300 text-sm mt-1 leading-relaxed">{project.operationalValue}</p>
+                    <span className="text-xs font-medium uppercase tracking-wide text-green-400">
+                      Operational Value
+                    </span>
+                    <p className="mt-1 text-sm leading-relaxed text-gray-300">
+                      {project.operationalValue}
+                    </p>
                   </div>
                 )}
                 {project.outcome && (
                   <div>
-                    <span className="text-xs font-medium text-purple-400 uppercase tracking-wide">Outcome</span>
-                    <p className="text-gray-300 text-sm mt-1 leading-relaxed font-medium">{project.outcome}</p>
+                    <span className="text-xs font-medium uppercase tracking-wide text-purple-400">
+                      Outcome
+                    </span>
+                    <p className="mt-1 text-sm font-medium leading-relaxed text-gray-300">
+                      {project.outcome}
+                    </p>
                   </div>
                 )}
               </div>
@@ -113,18 +139,18 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
         {/* Technologies */}
         <div className="mb-6">
-          <motion.div 
+          <motion.div
             className="flex flex-wrap gap-2"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-30px" }}
+            viewport={{ once: true, margin: '-30px' }}
             transition={{ staggerChildren: 0.05, delayChildren: 0.2 }}
           >
             {project.technologies.map((tech, techIndex) => (
               <motion.span
                 key={techIndex}
                 variants={techVariants}
-                className="px-3 py-1 text-xs font-medium bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20"
+                className="rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400"
               >
                 {tech}
               </motion.span>
@@ -134,28 +160,30 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
         {/* Highlights */}
         <div className="mb-6">
-          <h4 className="text-sm font-medium text-gray-300 mb-3">Key Features:</h4>
-          <motion.ul 
+          <h4 className="mb-3 text-sm font-medium text-gray-300">
+            Key Features:
+          </h4>
+          <motion.ul
             className="space-y-2"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-30px" }}
+            viewport={{ once: true, margin: '-30px' }}
             transition={{ staggerChildren: 0.1, delayChildren: 0.3 }}
           >
             {project.highlights.slice(0, 4).map((highlight, highlightIndex) => (
               <motion.li
                 key={highlightIndex}
                 variants={highlightVariants}
-                className="text-sm text-gray-400 flex items-start"
+                className="flex items-start text-sm text-gray-400"
               >
-                <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0" />
+                <span className="mr-3 mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-blue-500" />
                 {highlight}
               </motion.li>
             ))}
             {project.highlights.length > 4 && (
-              <motion.li 
+              <motion.li
                 variants={highlightVariants}
-                className="text-sm text-gray-500 italic"
+                className="text-sm italic text-gray-500"
               >
                 +{project.highlights.length - 4} more features...
               </motion.li>
@@ -164,16 +192,19 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
 
         {/* Links */}
-        <div className="flex items-center gap-4 pt-4 border-t border-gray-800">
+        <div className="flex flex-wrap items-center gap-4 border-t border-gray-800 pt-4">
           {project.githubUrl && (
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors group/link focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-md px-1 py-1"
+              className="group/link flex items-center gap-2 rounded-md px-1 py-1 text-sm text-gray-400 transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
               aria-label={`View ${project.title} source code on GitHub`}
             >
-              <CodeBracketIcon className="w-4 h-4 group-hover/link:text-blue-400 transition-colors" aria-hidden="true" />
+              <CodeBracketIcon
+                className="h-4 w-4 transition-colors group-hover/link:text-blue-400"
+                aria-hidden="true"
+              />
               <span>View Code</span>
             </a>
           )}
@@ -182,17 +213,34 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors group/link focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-md px-1 py-1"
+              className="group/link flex items-center gap-2 rounded-md px-1 py-1 text-sm text-gray-400 transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
               aria-label={`View ${project.title} live demo`}
             >
-              <ArrowTopRightOnSquareIcon className="w-4 h-4 group-hover/link:text-blue-400 transition-colors" aria-hidden="true" />
+              <ArrowTopRightOnSquareIcon
+                className="h-4 w-4 transition-colors group-hover/link:text-blue-400"
+                aria-hidden="true"
+              />
               <span>Live Demo</span>
+            </a>
+          )}
+          {project.documentationUrl && (
+            <a
+              href={project.documentationUrl}
+              download
+              className="group/link flex items-center gap-2 rounded-md px-1 py-1 text-sm text-gray-400 transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+              aria-label={`Download ${project.title} documentation`}
+            >
+              <DocumentArrowDownIcon
+                className="h-4 w-4 transition-colors group-hover/link:text-green-400"
+                aria-hidden="true"
+              />
+              <span>Documentation</span>
             </a>
           )}
         </div>
 
         {/* Hover Effect Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+        <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       </motion.div>
     </motion.div>
   );

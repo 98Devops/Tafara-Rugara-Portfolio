@@ -129,7 +129,11 @@ describe('ProjectGrid', () => {
     fireEvent.change(searchInput, { target: { value: 'nonexistent' } });
 
     expect(screen.getByText('No projects found')).toBeInTheDocument();
-    expect(screen.getByText('Try adjusting your search terms or filters to find what you\'re looking for.')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Try adjusting your search terms or filters to find what you're looking for."
+      )
+    ).toBeInTheDocument();
   });
 
   it('clears search when clear button is clicked', () => {
@@ -166,7 +170,7 @@ describe('ProjectGrid', () => {
     render(<ProjectGrid projects={mockProjects} />);
 
     const filterSelect = screen.getByDisplayValue(/All Projects/);
-    
+
     // Check that the options contain the correct counts
     expect(screen.getByText('All Projects (3)')).toBeInTheDocument();
   });

@@ -37,7 +37,8 @@ export function OptimizedImage({
   const [hasError, setHasError] = useState(false);
 
   // Generate a simple blur placeholder if none provided
-  const defaultBlurDataURL = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==';
+  const defaultBlurDataURL =
+    'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==';
 
   const handleLoad = () => {
     setIsLoading(false);
@@ -50,13 +51,21 @@ export function OptimizedImage({
 
   if (hasError) {
     return (
-      <div 
-        className={`bg-gray-800 border border-gray-700 rounded-lg flex items-center justify-center ${className}`}
+      <div
+        className={`flex items-center justify-center rounded-lg border border-gray-700 bg-gray-800 ${className}`}
         style={{ width, height }}
       >
-        <div className="text-gray-400 text-center p-4">
-          <svg className="w-8 h-8 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+        <div className="p-4 text-center text-gray-400">
+          <svg
+            className="mx-auto mb-2 h-8 w-8"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fillRule="evenodd"
+              d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+              clipRule="evenodd"
+            />
           </svg>
           <p className="text-sm">Image unavailable</p>
         </div>
@@ -65,10 +74,10 @@ export function OptimizedImage({
   }
 
   return (
-    <div className={`relative ${fill ? 'w-full h-full' : ''}`}>
+    <div className={`relative ${fill ? 'h-full w-full' : ''}`}>
       {isLoading && (
-        <div 
-          className={`absolute inset-0 bg-gray-800 animate-pulse rounded-lg ${className}`}
+        <div
+          className={`absolute inset-0 animate-pulse rounded-lg bg-gray-800 ${className}`}
           style={!fill ? { width, height } : undefined}
         />
       )}

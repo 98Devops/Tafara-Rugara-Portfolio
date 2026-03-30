@@ -4,14 +4,30 @@ import Contact from '../page';
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, initial, animate, whileInView, viewport, transition, ...props }: any) => 
-      <div {...props}>{children}</div>,
-    h1: ({ children, initial, animate, transition, ...props }: any) => 
-      <h1 {...props}>{children}</h1>,
-    p: ({ children, initial, animate, transition, ...props }: any) => 
-      <p {...props}>{children}</p>,
-    a: ({ children, initial, whileInView, viewport, transition, whileHover, ...props }: any) => 
-      <a {...props}>{children}</a>,
+    div: ({
+      children,
+      initial,
+      animate,
+      whileInView,
+      viewport,
+      transition,
+      ...props
+    }: any) => <div {...props}>{children}</div>,
+    h1: ({ children, initial, animate, transition, ...props }: any) => (
+      <h1 {...props}>{children}</h1>
+    ),
+    p: ({ children, initial, animate, transition, ...props }: any) => (
+      <p {...props}>{children}</p>
+    ),
+    a: ({
+      children,
+      initial,
+      whileInView,
+      viewport,
+      transition,
+      whileHover,
+      ...props
+    }: any) => <a {...props}>{children}</a>,
   },
 }));
 
@@ -62,25 +78,29 @@ jest.mock('next/dynamic', () => {
 describe('Contact Page', () => {
   it('renders the contact page correctly', () => {
     render(<Contact />);
-    
+
     // Check main heading
     expect(screen.getByText("Let's Work Together")).toBeInTheDocument();
-    
+
     // Check description
-    expect(screen.getByText(/Cloud & DevOps engineering, AI automation consulting/)).toBeInTheDocument();
-    
+    expect(
+      screen.getByText(/Cloud & DevOps engineering, AI automation consulting/)
+    ).toBeInTheDocument();
+
     // Check contact form section
     expect(screen.getByText(/Send a Message/)).toBeInTheDocument();
-    
+
     // Check contact info section
     expect(screen.getByText("Let's Build Together")).toBeInTheDocument();
-    
+
     // Check form fields
     expect(screen.getByLabelText(/full name/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/email address/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/message/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /send via whatsapp/i })).toBeInTheDocument();
-    
+    expect(
+      screen.getByRole('button', { name: /send via whatsapp/i })
+    ).toBeInTheDocument();
+
     // Check contact methods
     expect(screen.getByText('Email')).toBeInTheDocument();
     expect(screen.getByText('LinkedIn')).toBeInTheDocument();
@@ -89,18 +109,24 @@ describe('Contact Page', () => {
 
   it('displays availability badge', () => {
     render(<Contact />);
-    
+
     expect(screen.getByText('Open to Opportunities')).toBeInTheDocument();
   });
 
   it('includes WhatsApp CTA section', () => {
     render(<Contact />);
-    
-    expect(screen.getByText('Prefer a direct conversation?')).toBeInTheDocument();
-    expect(screen.getByText(/Message me directly on WhatsApp/)).toBeInTheDocument();
-    
+
+    expect(
+      screen.getByText('Prefer a direct conversation?')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Message me directly on WhatsApp/)
+    ).toBeInTheDocument();
+
     // Check for WhatsApp link
-    const whatsappLink = screen.getByRole('link', { name: /chat on whatsapp/i });
+    const whatsappLink = screen.getByRole('link', {
+      name: /chat on whatsapp/i,
+    });
     expect(whatsappLink).toHaveAttribute('href', 'https://wa.me/263777553271');
     expect(whatsappLink).toHaveAttribute('target', '_blank');
     expect(whatsappLink).toHaveAttribute('rel', 'noopener noreferrer');
@@ -108,22 +134,22 @@ describe('Contact Page', () => {
 
   it('includes email CTA link', () => {
     render(<Contact />);
-    
+
     const emailLink = screen.getByRole('link', { name: /send email/i });
     expect(emailLink).toHaveAttribute('href', 'mailto:tfrsuperfx@gmail.com');
   });
 
   it('has proper semantic structure', () => {
     render(<Contact />);
-    
+
     // Check for main element
     const main = screen.getByRole('main');
     expect(main).toBeInTheDocument();
-    
+
     // Check for proper heading hierarchy
     const h1 = screen.getByRole('heading', { level: 1 });
     expect(h1).toHaveTextContent("Let's Work Together");
-    
+
     const h2Elements = screen.getAllByRole('heading', { level: 2 });
     expect(h2Elements.length).toBeGreaterThan(0);
     expect(h2Elements[0]).toHaveTextContent('💬 Send a Message');
@@ -131,13 +157,17 @@ describe('Contact Page', () => {
 
   it('displays response time promise', () => {
     render(<Contact />);
-    
+
     expect(screen.getByText(/respond within 24 hours/)).toBeInTheDocument();
   });
 
   it('shows service offerings', () => {
     render(<Contact />);
-    
-    expect(screen.getByText(/Cloud & DevOps engineering, AI automation consulting, infrastructure architecture/)).toBeInTheDocument();
+
+    expect(
+      screen.getByText(
+        /Cloud & DevOps engineering, AI automation consulting, infrastructure architecture/
+      )
+    ).toBeInTheDocument();
   });
 });

@@ -16,12 +16,13 @@ export function AnimatedBackground() {
   }, []);
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       {/* Animated gradient orbs */}
       <motion.div
-        className="absolute w-96 h-96 rounded-full blur-3xl opacity-20"
+        className="absolute h-96 w-96 rounded-full opacity-20 blur-3xl"
         style={{
-          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, transparent 70%)',
+          background:
+            'radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, transparent 70%)',
         }}
         animate={{
           x: mousePosition.x * 0.02,
@@ -34,11 +35,12 @@ export function AnimatedBackground() {
           scale: { duration: 8, repeat: Infinity, ease: 'easeInOut' },
         }}
       />
-      
+
       <motion.div
-        className="absolute right-0 top-1/4 w-96 h-96 rounded-full blur-3xl opacity-20"
+        className="absolute right-0 top-1/4 h-96 w-96 rounded-full opacity-20 blur-3xl"
         style={{
-          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, transparent 70%)',
+          background:
+            'radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, transparent 70%)',
         }}
         animate={{
           x: -mousePosition.x * 0.03,
@@ -53,9 +55,10 @@ export function AnimatedBackground() {
       />
 
       <motion.div
-        className="absolute left-1/4 bottom-1/4 w-96 h-96 rounded-full blur-3xl opacity-15"
+        className="absolute bottom-1/4 left-1/4 h-96 w-96 rounded-full opacity-15 blur-3xl"
         style={{
-          background: 'radial-gradient(circle, rgba(34, 211, 238, 0.5) 0%, transparent 70%)',
+          background:
+            'radial-gradient(circle, rgba(34, 211, 238, 0.5) 0%, transparent 70%)',
         }}
         animate={{
           x: mousePosition.x * 0.015,
@@ -70,7 +73,7 @@ export function AnimatedBackground() {
       />
 
       {/* Grid pattern */}
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage: `

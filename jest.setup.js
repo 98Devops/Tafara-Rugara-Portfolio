@@ -1,14 +1,14 @@
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom';
 
 // Configure fast-check for property-based testing
-import fc from 'fast-check'
+import fc from 'fast-check';
 
 // Set global configuration for fast-check
 fc.configureGlobal({
   numRuns: 100, // Run each property test 100 times
   verbose: true,
   seed: 42, // Use consistent seed for reproducible tests
-})
+});
 
 // Mock Next.js router for testing
 jest.mock('next/navigation', () => ({
@@ -22,13 +22,16 @@ jest.mock('next/navigation', () => ({
   }),
   usePathname: () => '/',
   useSearchParams: () => new URLSearchParams(),
-}))
+}));
 
 // Mock Framer Motion for testing
 jest.mock('framer-motion', () => {
   const React = require('react');
 
-  const createMock = (tag) => ({ children, ...props }) => React.createElement(tag, props, children);
+  const createMock =
+    tag =>
+    ({ children, ...props }) =>
+      React.createElement(tag, props, children);
 
   const motion = {
     div: createMock('div'),
@@ -46,7 +49,8 @@ jest.mock('framer-motion', () => {
 
   return {
     motion,
-    AnimatePresence: ({ children }) => React.createElement(React.Fragment, null, children),
+    AnimatePresence: ({ children }) =>
+      React.createElement(React.Fragment, null, children),
     useAnimation: () => ({
       start: jest.fn(),
       stop: jest.fn(),
@@ -61,11 +65,11 @@ global.ResizeObserver = jest.fn().mockImplementation(() => ({
   observe: jest.fn(),
   unobserve: jest.fn(),
   disconnect: jest.fn(),
-}))
+}));
 
 // Mock IntersectionObserver
 global.IntersectionObserver = jest.fn().mockImplementation(() => ({
   observe: jest.fn(),
   unobserve: jest.fn(),
   disconnect: jest.fn(),
-}))
+}));
