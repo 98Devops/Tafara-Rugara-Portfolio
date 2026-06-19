@@ -173,7 +173,7 @@ export const portfolioData: PortfolioData = {
   projects: [
     {
       id: 'acquisitions-api',
-      title: 'Acquisitions — SaaS M&A Platform',
+      title: 'Acquisitions — Platform for Buying & Selling SaaS Businesses',
       description:
         'Production-ready API platform for SaaS business acquisitions with JWT/RBAC authentication, deal state management, Kubernetes orchestration, and a full DevOps lifecycle.',
       problem: 'SaaS businesses needed a secure, scalable platform for managing acquisition transactions with role-based access, deal workflows, and comprehensive monitoring.',
@@ -198,7 +198,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: 'voice-to-vector-api',
-      title: 'Voice-to-Vector Platform API',
+      title: 'Voice-to-Vector API (Platform Variant)',
       description:
         'Flask-based internal platform service exposing an end-to-end AI pipeline — converting voice inputs into vector embeddings for semantic search and downstream workflow automation.',
       problem: 'Teams needed a reliable internal service to process voice inputs, transcribe, enrich, and store vector embeddings for semantic retrieval.',
@@ -217,16 +217,16 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: 'legacy-migration',
-      title: 'Legacy Java App — AWS Platform Migration',
+      title: 'Managed Legacy Migration — Platform Modernization',
       description:
-        'Strategic migration of a 15-year-old Java application from manual on-premises server management to a fully managed AWS platform with a documented "Golden Path" for onboarding.',
+        'Strategic lift-and-shift migration of a 15-year-old Java application from manual on-premises server management to a fully managed AWS platform with a documented "Golden Path" for onboarding.',
       problem: 'Legacy Java app faced operational overhead, scalability limits, and manual server management complexity.',
       technicalArchitecture: 'AWS Elastic Beanstalk for orchestrated deployment, RDS & ElastiCache for managed data layers, CloudFront for distribution.',
       operationalValue: '60% operational overhead reduction, dramatically improved scalability, and reusable migration template for future projects.',
       outcome: 'Successfully migrated with documented patterns adopted as a reusable playbook.',
       technologies: ['Java', 'AWS Elastic Beanstalk', 'RDS', 'ElastiCache', 'CloudFront', 'Platform Engineering'],
       highlights: [
-        'Migrated 15-year-old application with zero downtime strategy',
+        'Migrated 15-year-old application with lift-and-shift zero downtime strategy',
         'Elastic Beanstalk for automated deployment orchestration',
         'RDS + ElastiCache for fully managed data layer',
         'Documented "Golden Path" for standardised team onboarding',
@@ -236,16 +236,17 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: 'serverless-platform-pattern',
-      title: 'Serverless IaC Platform Pattern',
+      title: 'Serverless App Pattern — IaC & CI/CD Platform',
       description:
         'Reusable serverless application platform built with Terraform IaC and GitHub Actions — standardising lightweight API and static app deployments with security-by-default principles.',
       problem: 'Teams needed repeatable, secure patterns for rapid API and static application deployments.',
       technicalArchitecture: 'Infrastructure entirely in Terraform; secure-by-default config; fully automated GitHub Actions CI/CD.',
       operationalValue: 'Reduces deployment time from days to minutes with zero configuration drift across projects.',
       outcome: 'Reusable pattern adopted across multiple projects including this portfolio site.',
-      technologies: ['Terraform', 'AWS Lambda', 'GitHub Actions', 'CloudFront', 'API Gateway', 'S3'],
+      technologies: ['Terraform', 'AWS Lambda', 'DynamoDB', 'GitHub Actions', 'CloudFront', 'API Gateway', 'S3'],
       highlights: [
         'Infrastructure-as-Code with Terraform (100% automation)',
+        'DynamoDB database integration with Lambda backend function',
         'Secure-by-default: IAM least privilege, HTTPS-only, signed CDN',
         'GitHub Actions pipeline with full deployment gates',
         'Adopted across multiple projects — zero config drift',

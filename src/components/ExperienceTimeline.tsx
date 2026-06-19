@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Experience } from '@/types';
+import { SpotlightCard } from '@/components/SpotlightCard';
 
 interface ExperienceTimelineProps {
   experiences: Experience[];
@@ -10,126 +11,121 @@ interface ExperienceTimelineProps {
 export default function ExperienceTimeline({ experiences }: ExperienceTimelineProps) {
   return (
     <div className="relative">
-      {/* Glowing vertical line */}
+      {/* Gradient vertical line */}
       <motion.div
         className="absolute left-8 top-0 bottom-0 w-px"
-        style={{
-          background: 'linear-gradient(to bottom, #00D4FF, #7C3AED, rgba(0,212,255,0.1))',
-          boxShadow: '0 0 8px rgba(0,212,255,0.3)',
-        }}
+        style={{ background: 'linear-gradient(to bottom, transparent, #3F3F46 15%, #27272A 50%, #3F3F46 85%, transparent)' }}
         initial={{ scaleY: 0, originY: 0 }}
         whileInView={{ scaleY: 1 }}
         viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 1.4, ease: 'easeOut', delay: 0.3 }}
+        transition={{ duration: 1.2, ease: 'easeOut', delay: 0.2 }}
       />
 
       {experiences.map((experience, index) => (
         <motion.div
           key={`${experience.company}-${experience.position}`}
-          className="relative pl-20 pb-14 last:pb-0"
-          initial={{ opacity: 0, x: -24 }}
+          className="relative pl-20 pb-12 last:pb-0"
+          initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.7, ease: 'easeOut', delay: index * 0.15 }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.1 }}
         >
-          {/* Pulsing timeline dot */}
+          {/* Timeline dot — white square with glow */}
           <motion.div
             className="absolute left-[26px] top-2"
             initial={{ scale: 0 }}
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.3, delay: 0.15 }}
           >
-            <div className="w-4 h-4 rounded-full flex items-center justify-center"
-              style={{ background: 'rgba(0,212,255,0.15)', border: '2px solid #00D4FF', boxShadow: '0 0 12px rgba(0,212,255,0.4)' }}>
-              <div className="w-2 h-2 rounded-full" style={{ background: '#00D4FF', animation: 'pulseDot 2s ease-in-out infinite' }} />
-            </div>
+            <div
+              className="glow-pulse"
+              style={{
+                width: 8, height: 8,
+                background: '#FFFFFF',
+                borderRadius: 2,
+                boxShadow: '0 0 8px rgba(255,255,255,0.2)',
+              }}
+            />
           </motion.div>
 
           {/* Card */}
-          <motion.div
-            whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            className="glass-card p-6 shadow-xl"
-          >
-            {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-5">
-              <div>
-                <h3 className="text-xl font-bold text-white mb-1">{experience.position}</h3>
-                <p className="font-semibold" style={{ color: '#00D4FF' }}>{experience.company}</p>
-                <p className="text-sm mt-1 font-mono" style={{ color: '#64748b' }}>{experience.duration}</p>
+          <SpotlightCard>
+            <motion.div
+              whileHover={{ y: -2, transition: { duration: 0.15 } }}
+              className="glass-card p-6"
+              style={{ borderRadius: 12 }}
+            >
+              {/* Header */}
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-6">
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-1" style={{ letterSpacing: '-0.01em' }}>
+                    {experience.position}
+                  </h3>
+                  <p className="font-medium" style={{ color: '#A1A1AA' }}>{experience.company}</p>
+                  <p className="text-xs mt-1 font-mono" style={{ color: '#71717A' }}>{experience.duration}</p>
+                </div>
+                {/* Impact badge — enhanced with blur and refined border */}
+                {experience.impact && (
+                  <div
+                    className="flex-shrink-0 px-3 py-2 text-center"
+                    style={{
+                      background: '#111111',
+                      border: '1px solid rgba(39,39,42,0.8)',
+                      borderRadius: 8,
+                      backdropFilter: 'blur(4px)',
+                    }}
+                  >
+                    <div className="text-xs font-mono uppercase tracking-widest mb-1" style={{ color: '#71717A' }}>
+                      Key Impact
+                    </div>
+                    <div className="text-sm font-semibold text-white">
+                      {experience.impact}
+                    </div>
+                  </div>
+                )}
               </div>
-              {/* Impact badge */}
-              {experience.impact && (
-                <motion.div
-                  className="flex-shrink-0 px-4 py-2 rounded-xl text-center"
-                  style={{
-                    background: 'rgba(16,185,129,0.12)',
-                    border: '1px solid rgba(16,185,129,0.35)',
-                    boxShadow: '0 0 16px rgba(16,185,129,0.15)',
-                  }}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.35 }}
+
+              {/* Achievements */}
+              <div className="mb-6">
+                <p className="mono-label mb-3">Key Achievements</p>
+                <motion.ul
+                  className="space-y-2"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ staggerChildren: 0.06, delayChildren: 0.1 }}
                 >
-                  <div className="text-xs font-mono uppercase tracking-widest mb-1" style={{ color: '#34d399' }}>
-                    Key Impact
-                  </div>
-                  <div className="text-sm font-bold" style={{ color: '#6ee7b7' }}>
-                    {experience.impact}
-                  </div>
-                </motion.div>
-              )}
-            </div>
-
-            {/* Achievements */}
-            <div className="mb-5">
-              <h4 className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: 'rgba(0,212,255,0.7)' }}>
-                Key Achievements
-              </h4>
-              <motion.ul
-                className="space-y-2"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ staggerChildren: 0.07, delayChildren: 0.2 }}
-              >
-                {experience.achievements.map((item, i) => (
-                  <motion.li
-                    key={i}
-                    variants={{ hidden: { opacity: 0, x: -12 }, visible: { opacity: 1, x: 0, transition: { duration: 0.4 } } }}
-                    className="flex items-start gap-3 text-sm leading-relaxed"
-                    style={{ color: 'rgba(203,213,225,0.85)' }}
-                  >
-                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#00D4FF', boxShadow: '0 0 6px rgba(0,212,255,0.5)' }} />
-                    {item}
-                  </motion.li>
-                ))}
-              </motion.ul>
-            </div>
-
-            {/* Technologies */}
-            <div>
-              <h4 className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: 'rgba(124,58,237,0.8)' }}>
-                Technologies
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {experience.technologies.map((tech, i) => (
-                  <motion.span
-                    key={tech}
-                    className={`tech-badge ${i % 3 === 1 ? 'tech-badge-violet' : i % 3 === 2 ? 'tech-badge-emerald' : ''}`}
-                    initial={{ opacity: 0, scale: 0.85 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + i * 0.04 }}
-                    whileHover={{ scale: 1.06, y: -2 }}
-                  >
-                    {tech}
-                  </motion.span>
-                ))}
+                  {experience.achievements.map((item, i) => (
+                    <motion.li
+                      key={i}
+                      variants={{ hidden: { opacity: 0, x: -10 }, visible: { opacity: 1, x: 0, transition: { duration: 0.35 } } }}
+                      className="flex items-start gap-3 text-sm leading-relaxed"
+                      style={{ color: '#A1A1AA' }}
+                    >
+                      <span
+                        className="mt-2 flex-shrink-0 text-white"
+                        style={{ fontSize: '6px', textShadow: '0 0 4px rgba(255,255,255,0.3)' }}
+                      >
+                        ●
+                      </span>
+                      {item}
+                    </motion.li>
+                  ))}
+                </motion.ul>
               </div>
-            </div>
-          </motion.div>
+
+              {/* Technologies */}
+              <div>
+                <p className="mono-label mb-3">Technologies</p>
+                <div className="flex flex-wrap gap-2">
+                  {experience.technologies.map((tech) => (
+                    <span key={tech} className="tech-badge">{tech}</span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </SpotlightCard>
         </motion.div>
       ))}
     </div>

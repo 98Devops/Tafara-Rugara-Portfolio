@@ -46,12 +46,12 @@ export default function RootLayout({
         <link rel="preload" href="/documents/tafara-rugara-cv.pdf" as="document" type="application/pdf" />
         {/* Viewport & theme */}
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#0A0F1E" />
+        <meta name="theme-color" content="#0A0A0A" />
         <meta name="color-scheme" content="dark" />
       </head>
       <body
         className={`${syne.variable} ${jetbrainsMono.variable} font-sans antialiased`}
-        style={{ background: "#0A0F1E", color: "#e2e8f0" }}
+        style={{ background: "#0A0A0A", color: "#A1A1AA" }}
       >
         <ClientShell>{children}</ClientShell>
       </body>

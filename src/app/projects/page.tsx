@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { portfolioData, automationSystems } from '@/data/portfolio';
 import { PlayIcon, CodeBracketIcon, ArrowTopRightOnSquareIcon, SparklesIcon } from '@heroicons/react/24/outline';
 import { FloatingCard } from '@/components/FloatingCard';
+
 const AnimatedBackground = dynamic(
   () => import('@/components/AnimatedBackground').then((mod) => mod.AnimatedBackground),
   { ssr: false, loading: () => null }
@@ -12,39 +13,25 @@ const AnimatedBackground = dynamic(
 
 const headerVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut"
-    }
-  }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
 };
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: 'easeOut',
-    },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
 };
 
 export default function ProjectsPage() {
-  const platformProjects = portfolioData.projects.filter(project => 
+  const platformProjects = portfolioData.projects.filter(project =>
     ['acquisitions-api', 'voice-to-vector-api', 'legacy-migration', 'serverless-platform-pattern'].includes(project.id)
   );
 
   return (
-    <main className="min-h-screen bg-gray-950 text-white relative">
+    <main className="min-h-screen text-white relative overflow-hidden" style={{ background: '#0A0A0A' }}>
       <AnimatedBackground />
-      
+
       <div className="container mx-auto px-6 py-16 relative z-10">
-        
+
         {/* SECTION 1: WORKFLOWS & AUTOMATION SYSTEMS */}
         <section className="mb-24">
           <motion.div
@@ -54,10 +41,14 @@ export default function ProjectsPage() {
             viewport={{ once: true, margin: "-100px" }}
             className="text-center mb-16"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Workflows & Automation Systems
-            </h1>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            {/* Ambient glow behind heading */}
+            <div className="relative inline-block">
+              <div className="ambient-glow" style={{ top: '-80%', left: '50%', transform: 'translateX(-50%)', width: '400px', height: '400px', opacity: 0.2 }} />
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 relative" style={{ color: '#FFFFFF', letterSpacing: '-0.03em' }}>
+                Workflows &amp; Automation Systems
+              </h1>
+            </div>
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#71717A' }}>
               Automation built for real teams, real decisions, real operational pressure.
             </p>
           </motion.div>
@@ -71,51 +62,32 @@ export default function ProjectsPage() {
             className="mb-16"
           >
             <FloatingCard>
-              <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
-                {/* Animated corner accents */}
+              <div className="p-8 shadow-2xl relative overflow-hidden glass-card" style={{ borderRadius: '16px' }}>
+                {/* Animated corner accent */}
                 <motion.div
-                  className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-transparent rounded-bl-full"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.5, 0.3],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
+                  className="absolute top-0 right-0 w-40 h-40 pointer-events-none"
+                  style={{ background: 'rgba(255, 255, 255, 0.02)', borderBottomLeftRadius: '100%' }}
+                  animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
                 />
 
                 <div className="mb-8 relative z-10">
-                  <motion.div 
+                  <motion.div
                     className="flex items-center gap-3 mb-4"
                     whileHover={{ x: 5 }}
                     transition={{ type: 'spring', stiffness: 300 }}
                   >
-                    <motion.div 
-                      className="w-3 h-3 bg-green-500 rounded-full"
-                      animate={{
-                        scale: [1, 1.3, 1],
-                        boxShadow: [
-                          '0 0 0 0 rgba(34, 197, 94, 0.7)',
-                          '0 0 0 10px rgba(34, 197, 94, 0)',
-                          '0 0 0 0 rgba(34, 197, 94, 0)',
-                        ],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                      }}
+                    <motion.div
+                      className="w-3 h-3 rounded-full glow-pulse"
+                      style={{ background: '#FFFFFF' }}
                     />
-                    <span className="text-sm font-medium text-green-400 uppercase tracking-wide">
-                      Production System
-                    </span>
-                    <SparklesIcon className="w-4 h-4 text-green-400" />
+                    <span className="mono-label">Production System</span>
+                    <SparklesIcon className="w-4 h-4" style={{ color: '#A1A1AA' }} />
                   </motion.div>
-                  
-                  <motion.h2 
+
+                  <motion.h2
                     className="text-2xl md:text-3xl font-bold text-white mb-2"
+                    style={{ letterSpacing: '-0.02em' }}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -123,8 +95,9 @@ export default function ProjectsPage() {
                   >
                     {automationSystems.flagship.title}
                   </motion.h2>
-                  <motion.p 
-                    className="text-lg text-gray-300 font-medium mb-4 leading-relaxed"
+                  <motion.p
+                    className="text-lg font-medium mb-4 leading-relaxed"
+                    style={{ color: '#A1A1AA' }}
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
@@ -136,12 +109,12 @@ export default function ProjectsPage() {
                     {['Business AI', 'Internal Tools', 'Intelligent Automation'].map((tag, index) => (
                       <motion.span
                         key={tag}
-                        className="px-3 py-1 text-xs font-medium bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20"
+                        className="tech-badge"
                         initial={{ opacity: 0, scale: 0.8 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.4 + index * 0.1 }}
-                        whileHover={{ scale: 1.1, y: -2 }}
+                        whileHover={{ scale: 1.05, y: -2 }}
                       >
                         {tag}
                       </motion.span>
@@ -152,7 +125,7 @@ export default function ProjectsPage() {
                 <div className="space-y-8 relative z-10">
                   <div>
                     <h3 className="text-lg font-semibold text-white mb-3">Business Context</h3>
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="leading-relaxed" style={{ color: '#A1A1AA' }}>
                       {automationSystems.flagship.businessContext}
                     </p>
                   </div>
@@ -161,8 +134,8 @@ export default function ProjectsPage() {
                     <h3 className="text-lg font-semibold text-white mb-3">System Capabilities</h3>
                     <ul className="space-y-2">
                       {automationSystems.flagship.systemCapabilities?.map((capability, index) => (
-                        <li key={index} className="flex items-start text-gray-300">
-                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0" />
+                        <li key={index} className="flex items-start" style={{ color: '#A1A1AA' }}>
+                          <span className="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0" style={{ background: '#FFFFFF', boxShadow: '0 0 4px rgba(255,255,255,0.3)' }} />
                           {capability}
                         </li>
                       ))}
@@ -170,14 +143,14 @@ export default function ProjectsPage() {
                   </div>
 
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-3">Architecture & Reliability</h3>
-                    <p className="text-gray-300 leading-relaxed mb-4">
+                    <h3 className="text-lg font-semibold text-white mb-3">Architecture &amp; Reliability</h3>
+                    <p className="leading-relaxed mb-4" style={{ color: '#A1A1AA' }}>
                       {automationSystems.flagship.description}
                     </p>
                     <ul className="space-y-2">
                       {automationSystems.flagship.architecture?.map((item, index) => (
-                        <li key={index} className="flex items-start text-gray-300">
-                          <span className="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0" />
+                        <li key={index} className="flex items-start" style={{ color: '#A1A1AA' }}>
+                          <span className="w-1.5 h-1.5 rounded-full mt-2 mr-3 flex-shrink-0" style={{ background: '#FFFFFF', boxShadow: '0 0 4px rgba(255,255,255,0.3)' }} />
                           {item}
                         </li>
                       ))}
@@ -186,20 +159,20 @@ export default function ProjectsPage() {
 
                   <div>
                     <h3 className="text-lg font-semibold text-white mb-3">Outcome</h3>
-                    <p className="text-gray-300 leading-relaxed font-medium">
+                    <p className="leading-relaxed font-medium" style={{ color: '#A1A1AA' }}>
                       {automationSystems.flagship.outcome}
                     </p>
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-gray-700/50 relative z-10">
+                <div className="mt-8 pt-6 relative z-10" style={{ borderTop: '1px solid rgba(39,39,42,0.6)' }}>
                   <div className="flex flex-col sm:flex-row gap-4">
                     {automationSystems.flagship.demoUrl && (
                       <motion.a
                         href={automationSystems.flagship.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg font-medium transition-all duration-200 shadow-lg hover:shadow-blue-500/25"
+                        className="btn-primary flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
@@ -209,7 +182,7 @@ export default function ProjectsPage() {
                     )}
                     <motion.a
                       href="/contact"
-                      className="flex items-center justify-center gap-2 px-6 py-3 border border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white rounded-lg font-medium transition-all duration-200 hover:bg-gray-800/50"
+                      className="btn-glass flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -230,11 +203,9 @@ export default function ProjectsPage() {
           >
             <div className="text-center mb-12">
               <div className="flex items-center justify-center gap-3 mb-4">
-                <div className="w-2 h-2 bg-purple-500 rounded-full" />
-                <span className="text-sm font-medium text-purple-400 uppercase tracking-wide">
-                  Supporting Systems
-                </span>
-                <div className="w-2 h-2 bg-purple-500 rounded-full" />
+                <div className="w-2 h-2 rounded-full glow-pulse" style={{ background: '#FFFFFF' }} />
+                <span className="mono-label">Supporting Systems</span>
+                <div className="w-2 h-2 rounded-full glow-pulse" style={{ background: '#FFFFFF' }} />
               </div>
             </div>
 
@@ -248,24 +219,19 @@ export default function ProjectsPage() {
                   transition={{ delay: index * 0.2 }}
                 >
                   <FloatingCard>
-                    <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-6 hover:border-blue-500/50 transition-all duration-300 h-full relative overflow-hidden group">
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:to-purple-500/10 transition-all duration-500"
-                        initial={false}
-                      />
-                      
+                    <div className="p-6 transition-all duration-300 h-full relative overflow-hidden glass-card group" style={{ borderRadius: '12px' }}>
                       <div className="relative z-10">
-                        <motion.h3 
-                          className="text-xl font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors"
+                        <motion.h3
+                          className="text-xl font-semibold text-white mb-3 transition-colors"
+                          style={{ letterSpacing: '-0.01em' }}
                           whileHover={{ x: 5 }}
                         >
                           {system.title}
                         </motion.h3>
-                        <p className="text-gray-400 text-sm mb-4 leading-relaxed">
+                        <p className="text-sm mb-4 leading-relaxed" style={{ color: '#71717A' }}>
                           {system.description}
                         </p>
-                        
-                        <p className="text-gray-300 text-sm mb-4">
+                        <p className="text-sm mb-4" style={{ color: '#A1A1AA' }}>
                           {system.systemPurpose}
                         </p>
 
@@ -273,8 +239,8 @@ export default function ProjectsPage() {
                           {system.tools?.map((tool, toolIndex) => (
                             <motion.span
                               key={toolIndex}
-                              className="px-2 py-1 text-xs font-medium bg-gray-800 text-gray-300 rounded border border-gray-700"
-                              whileHover={{ scale: 1.05, borderColor: 'rgb(59, 130, 246)' }}
+                              className="tech-badge"
+                              whileHover={{ scale: 1.05 }}
                               transition={{ type: 'spring', stiffness: 400 }}
                             >
                               {tool}
@@ -287,7 +253,8 @@ export default function ProjectsPage() {
                             href={system.demoUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                            className="flex items-center gap-2 text-sm transition-colors"
+                            style={{ color: '#A1A1AA' }}
                             whileHover={{ x: 5 }}
                           >
                             <PlayIcon className="w-4 h-4" />
@@ -312,10 +279,10 @@ export default function ProjectsPage() {
             viewport={{ once: true, margin: "-100px" }}
             className="text-center mb-16"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#FFFFFF', letterSpacing: '-0.03em' }}>
               Platform Case Studies
             </h1>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#71717A' }}>
               Architecture, Standards, and Value Delivery
             </p>
           </motion.div>
@@ -331,24 +298,17 @@ export default function ProjectsPage() {
                 transition={{ delay: index * 0.15 }}
               >
                 <FloatingCard>
-                  <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-6 hover:border-green-500/50 transition-all duration-300 h-full relative overflow-hidden group">
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
-                      initial={false}
-                    />
-                    
+                  <div className="p-6 transition-all duration-300 h-full relative overflow-hidden glass-card group" style={{ borderRadius: '12px' }}>
                     <div className="relative z-10">
-                      <motion.h2 
+                      <motion.h2
                         className="text-xl font-bold text-white mb-2"
+                        style={{ letterSpacing: '-0.01em' }}
                         whileHover={{ x: 5 }}
                       >
                         {project.title}
                       </motion.h2>
                       <div className="flex items-center gap-2 mb-4">
-                        <motion.span 
-                          className="px-2 py-1 text-xs font-medium bg-green-500/10 text-green-400 rounded border border-green-500/20"
-                          whileHover={{ scale: 1.05 }}
-                        >
+                        <motion.span className="tech-badge" whileHover={{ scale: 1.05 }}>
                           {project.id === 'acquisitions-api' ? 'Platform · API' :
                            project.id === 'voice-to-vector-api' ? 'Internal API' :
                            project.id === 'legacy-migration' ? 'Modernization' :
@@ -358,18 +318,18 @@ export default function ProjectsPage() {
 
                       <div className="space-y-6">
                         <div>
-                          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-2">Overview</h3>
-                          <p className="text-gray-300 text-sm leading-relaxed">
+                          <h3 className="mono-label mb-2">Overview</h3>
+                          <p className="text-sm leading-relaxed" style={{ color: '#A1A1AA' }}>
                             {project.description}
                           </p>
                         </div>
 
                         <div>
-                          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-2">Key Capabilities</h3>
+                          <h3 className="mono-label mb-2">Key Capabilities</h3>
                           <ul className="space-y-1">
                             {project.highlights?.slice(0, 4).map((highlight, hIndex) => (
-                              <li key={hIndex} className="flex items-start text-gray-300 text-sm">
-                                <span className="w-1 h-1 bg-green-500 rounded-full mt-2 mr-2 flex-shrink-0" />
+                              <li key={hIndex} className="flex items-start text-sm" style={{ color: '#A1A1AA' }}>
+                                <span className="w-1 h-1 rounded-full mt-2 mr-2 flex-shrink-0" style={{ background: '#FFFFFF', boxShadow: '0 0 3px rgba(255,255,255,0.3)' }} />
                                 {highlight}
                               </li>
                             ))}
@@ -377,11 +337,11 @@ export default function ProjectsPage() {
                         </div>
 
                         <div>
-                          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-2">Architecture & Stack</h3>
+                          <h3 className="mono-label mb-2">Architecture &amp; Stack</h3>
                           <ul className="space-y-1">
                             {project.highlights?.slice(4, 8).map((highlight, hIndex) => (
-                              <li key={hIndex} className="flex items-start text-gray-300 text-sm">
-                                <span className="w-1 h-1 bg-blue-500 rounded-full mt-2 mr-2 flex-shrink-0" />
+                              <li key={hIndex} className="flex items-start text-sm" style={{ color: '#A1A1AA' }}>
+                                <span className="w-1 h-1 rounded-full mt-2 mr-2 flex-shrink-0" style={{ background: '#FFFFFF', boxShadow: '0 0 3px rgba(255,255,255,0.3)' }} />
                                 {highlight}
                               </li>
                             ))}
@@ -389,21 +349,22 @@ export default function ProjectsPage() {
                         </div>
 
                         <div>
-                          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-2">Value Delivered</h3>
-                          <p className="text-gray-300 text-sm leading-relaxed">
+                          <h3 className="mono-label mb-2">Value Delivered</h3>
+                          <p className="text-sm leading-relaxed" style={{ color: '#A1A1AA' }}>
                             {project.outcome}
                           </p>
                         </div>
                       </div>
 
-                      <div className="mt-6 pt-4 border-t border-gray-700/50">
+                      <div className="mt-6 pt-4" style={{ borderTop: '1px solid rgba(39,39,42,0.6)' }}>
                         <div className="flex flex-col gap-3">
                           {project.githubUrl && (
                             <motion.a
                               href={project.githubUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                              className="flex items-center gap-2 text-sm transition-colors"
+                              style={{ color: '#A1A1AA' }}
                               whileHover={{ x: 5 }}
                             >
                               <CodeBracketIcon className="w-4 h-4" />
@@ -415,7 +376,8 @@ export default function ProjectsPage() {
                               href={project.demoUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 text-sm text-green-400 hover:text-green-300 transition-colors"
+                              className="flex items-center gap-2 text-sm transition-colors"
+                              style={{ color: '#A1A1AA' }}
                               whileHover={{ x: 5 }}
                             >
                               <ArrowTopRightOnSquareIcon className="w-4 h-4" />
@@ -424,7 +386,8 @@ export default function ProjectsPage() {
                           )}
                           <motion.a
                             href="/contact"
-                            className="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-300 transition-colors"
+                            className="flex items-center gap-2 text-sm transition-colors"
+                            style={{ color: '#71717A' }}
                             whileHover={{ x: 5 }}
                           >
                             <ArrowTopRightOnSquareIcon className="w-4 h-4" />
@@ -438,7 +401,7 @@ export default function ProjectsPage() {
                           {project.technologies?.slice(0, 6).map((tech, techIndex) => (
                             <motion.span
                               key={techIndex}
-                              className="px-2 py-1 text-xs font-medium bg-gray-800 text-gray-300 rounded border border-gray-700"
+                              className="tech-badge"
                               whileHover={{ scale: 1.05, y: -2 }}
                               transition={{ type: 'spring', stiffness: 400 }}
                             >
@@ -456,7 +419,7 @@ export default function ProjectsPage() {
         </section>
 
         {/* Final CTA */}
-        <motion.div 
+        <motion.div
           variants={headerVariants}
           initial="hidden"
           whileInView="visible"
@@ -464,50 +427,31 @@ export default function ProjectsPage() {
           className="mt-20 text-center"
         >
           <FloatingCard>
-            <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-8 border border-gray-800 relative overflow-hidden">
-              {[...Array(3)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-2 h-2 bg-blue-400 rounded-full"
-                  animate={{
-                    x: [0, 100, 0],
-                    y: [0, -100, 0],
-                    opacity: [0, 1, 0],
-                  }}
-                  transition={{
-                    duration: 3 + i,
-                    repeat: Infinity,
-                    delay: i * 0.5,
-                  }}
-                  style={{
-                    left: `${20 + i * 30}%`,
-                    top: '50%',
-                  }}
-                />
-              ))}
-              
-              <motion.h2 
-                className="text-2xl font-semibold mb-4 relative z-10"
+            <div className="p-8 relative overflow-hidden glass-card" style={{ borderRadius: '16px' }}>
+              <motion.h2
+                className="text-2xl font-semibold mb-4 relative z-10 text-white"
+                style={{ letterSpacing: '-0.02em' }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
                 Two Disciplines. One Engineer.
               </motion.h2>
-              <motion.p 
-                className="text-gray-400 mb-6 max-w-2xl mx-auto relative z-10"
+              <motion.p
+                className="mb-6 max-w-2xl mx-auto relative z-10"
+                style={{ color: '#71717A' }}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
               >
-                Automation Systems = Operational Intelligence. Platform Case Studies = Infrastructure & API Engineering.
+                Automation Systems = Operational Intelligence. Platform Case Studies = Infrastructure &amp; API Engineering.
               </motion.p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
                 <motion.a
                   href="/contact"
-                  className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
-                  whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)' }}
+                  className="btn-primary px-6 py-3 text-sm font-semibold"
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Get In Touch
@@ -516,7 +460,7 @@ export default function ProjectsPage() {
                   href={portfolioData.personal.socialLinks.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-8 py-3 border border-gray-700 hover:border-gray-600 text-gray-300 hover:text-white rounded-lg font-medium transition-colors"
+                  className="btn-glass px-6 py-3 text-sm font-semibold"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

@@ -28,21 +28,32 @@ jest.mock('next/navigation', () => ({
 jest.mock('framer-motion', () => {
   const React = require('react');
 
-  const createMock = (tag) => ({ children, ...props }) => React.createElement(tag, props, children);
-
-  const motion = {
-    div: createMock('div'),
-    section: createMock('section'),
-    h1: createMock('h1'),
-    h2: createMock('h2'),
-    p: createMock('p'),
-    button: createMock('button'),
-    a: createMock('a'),
-    nav: createMock('nav'),
-    ul: createMock('ul'),
-    li: createMock('li'),
-    span: createMock('span'),
+  const createMock = (tag) => {
+    const Component = ({ children, ...props }) => {
+      // Filter out framer-motion props to avoid React warnings in tests
+      const cleanProps = { ...props };
+      delete cleanProps.initial;
+      delete cleanProps.animate;
+      delete cleanProps.transition;
+      delete cleanProps.whileHover;
+      delete cleanProps.whileTap;
+      delete cleanProps.viewport;
+      delete cleanProps.variants;
+      delete cleanProps.whileInView;
+      return React.createElement(tag, cleanProps, children);
+    };
+    Component.displayName = `motion.${tag}`;
+    return Component;
   };
+
+  const motion = new Proxy({}, {
+    get: (target, prop) => {
+      if (typeof prop === 'string') {
+        return createMock(prop);
+      }
+      return undefined;
+    }
+  });
 
   return {
     motion,
