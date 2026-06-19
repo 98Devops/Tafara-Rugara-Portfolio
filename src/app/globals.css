@@ -100,6 +100,52 @@ body {
   padding-inline: var(--gutter);
 }
 
+/* ─── Buttons ────────────────────────────────────────────── */
+.btn-solid,
+.btn-ghost {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  padding: 0.75rem 1.3rem;
+  border-radius: var(--r-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
+  cursor: pointer;
+}
+.btn-solid { background: var(--bone); color: var(--ink); border: 1px solid var(--bone); }
+.btn-solid:hover { background: var(--ember); border-color: var(--ember); color: var(--ink); }
+.btn-ghost { background: transparent; border: 1px solid var(--line-2); color: var(--bone-dim); }
+.btn-ghost:hover { border-color: var(--bone-dim); color: var(--bone); }
+.btn-arr { transition: transform var(--dur-fast) var(--ease); }
+.btn-solid:hover .btn-arr,
+.btn-ghost:hover .btn-arr { transform: translateX(3px); }
+
+/* ─── Ember underline (for the one italic hero phrase) ───── */
+.ember-underline::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0.08em;
+  height: 2px;
+  background: var(--ember);
+}
+
+/* ─── Stack chip (tech tags) ─────────────────────────────── */
+.chip {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  color: var(--bone-dim);
+  border: 1px solid var(--line-2);
+  padding: 0.32rem 0.62rem;
+  border-radius: var(--r-sm);
+  white-space: nowrap;
+  transition: border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.chip:hover { border-color: var(--bone-faint); color: var(--bone); }
+
 /* ─── Mono label / eyebrow ───────────────────────────────── */
 .label {
   font-family: var(--font-mono);
@@ -107,6 +153,12 @@ body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--bone-faint);
+}
+
+/* Ledger meta tag hides on narrow screens (grid collapses to 2 cols) */
+@media (max-width: 620px) {
+  .metric-meta { display: none; }
+  .metric-row { grid-template-columns: auto 1fr !important; }
 }
 
 /* ─── Load motion — the deliberate few ───────────────────── */

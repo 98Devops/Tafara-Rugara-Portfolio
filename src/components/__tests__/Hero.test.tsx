@@ -33,15 +33,18 @@ const mockPersonalInfo: PersonalInfo = {
 };
 
 describe('Hero Component', () => {
-  it('displays correct professional information', () => {
+  it('displays the name and professional summary', () => {
     render(<Hero personal={mockPersonalInfo} />);
 
-    // Check name is displayed as main heading
+    // Name is present as a mono eyebrow (redesign: H1 is now the statement)
+    expect(screen.getByText('Tafara Rugara')).toBeInTheDocument();
+
+    // The H1 carries the editorial statement headline
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-      'Tafara Rugara'
+      /I build the systems that run quietly/i
     );
 
-    // Check professional summary is displayed
+    // Check professional summary is displayed (keywords preserved for SEO)
     expect(
       screen.getByText(
         /Cloud & DevOps Engineer specializing in AI-powered automation systems/
@@ -71,10 +74,10 @@ describe('Hero Component', () => {
     });
   });
 
-  it('provides all required call-to-action buttons', () => {
+  it('provides the primary call-to-action buttons and contact link', () => {
     render(<Hero personal={mockPersonalInfo} />);
 
-    // Check all required buttons/links are present
+    // Two primary CTAs + inline contact link
     expect(
       screen.getByRole('link', { name: /view projects/i })
     ).toBeInTheDocument();
@@ -101,42 +104,25 @@ describe('Hero Component', () => {
     );
   });
 
-  it('displays availability badge', () => {
+  it('displays the availability status line', () => {
     render(<Hero personal={mockPersonalInfo} />);
 
-    // Check availability badge is displayed
+    // Status line: availability + location
     expect(screen.getByText(/open to opportunities/i)).toBeInTheDocument();
     expect(screen.getByText(/harare & johannesburg/i)).toBeInTheDocument();
   });
 
-  it('displays stats section', () => {
+  it('displays the metrics ledger', () => {
     render(<Hero personal={mockPersonalInfo} />);
 
-    // Check stats are displayed
-    expect(screen.getByText('60%')).toBeInTheDocument();
-    expect(screen.getByText(/pipeline downtime reduced/i)).toBeInTheDocument();
-    expect(screen.getByText('3+')).toBeInTheDocument();
-    expect(screen.getByText(/ai systems built/i)).toBeInTheDocument();
-    expect(screen.getByText('5+')).toBeInTheDocument();
-    expect(screen.getByText(/cloud projects delivered/i)).toBeInTheDocument();
-  });
-
-  it('displays tech badges', () => {
-    render(<Hero personal={mockPersonalInfo} />);
-
-    const expectedTags = [
-      'Cloud Platform',
-      'DevOps & CI/CD',
-      'AI Automation',
-      'n8n Workflows',
-      'Kubernetes',
-      'Terraform',
-      'AWS',
-    ];
-
-    expectedTags.forEach(tag => {
-      expect(screen.getByText(tag)).toBeInTheDocument();
-    });
+    // Ledger renders the operating record from real metrics data
+    expect(screen.getByText(/operating record/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/pipeline downtime removed/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/AI automation systems shipped to real teams/i)
+    ).toBeInTheDocument();
   });
 
   it('handles CV download button click', async () => {
