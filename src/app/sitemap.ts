@@ -4,7 +4,7 @@ export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://tafara-rugara.com';
-  
+
   return [
     {
       url: baseUrl,

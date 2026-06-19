@@ -28,6 +28,8 @@ export const automationSystems = {
       'Delivered as a ClickUp pilot assignment for Crebos.online — shortlisted in senior evaluation. Demonstrates system-level thinking and production readiness for real operational automation.',
     technologies: ['n8n', 'Docker', 'ClickUp', 'AI/LLMs', 'Observability', 'Retry Logic', 'JSON Schema Validation'],
     demoUrl: 'https://www.youtube.com/watch?v=c8ETK5kOh08',
+    githubUrl: 'https://github.com/98Devops/AI-Powered-Delivery-Health-Operations-Intelligence-System',
+    documentationUrl: '/documents/crebos-documentation.pdf',
   },
   supporting: [
     {

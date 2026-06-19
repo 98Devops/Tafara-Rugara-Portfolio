@@ -28,7 +28,7 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { 
+      use: {
         ...devices['Desktop Chrome'],
         // Enable remote debugging for Lighthouse
         launchOptions: {

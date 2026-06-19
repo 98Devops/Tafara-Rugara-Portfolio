@@ -8,11 +8,11 @@ import { useState, useEffect } from 'react';
  * and only starts animating after hydration.
  */
 export function useHydrated(): boolean {
-    const [hydrated, setHydrated] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
 
-    useEffect(() => {
-        setHydrated(true);
-    }, []);
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
-    return hydrated;
+  return hydrated;
 }

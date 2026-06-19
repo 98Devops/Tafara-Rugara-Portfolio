@@ -1,4 +1,8 @@
-import { checkDocumentExists, downloadDocument, showDownloadError } from '../downloadUtils';
+import {
+  checkDocumentExists,
+  downloadDocument,
+  showDownloadError,
+} from '../downloadUtils';
 
 // Mock fetch for testing
 global.fetch = jest.fn();
@@ -36,9 +40,11 @@ describe('downloadUtils', () => {
       });
 
       const result = await checkDocumentExists('/documents/test.pdf');
-      
+
       expect(result).toBe(true);
-      expect(fetch).toHaveBeenCalledWith('/documents/test.pdf', { method: 'HEAD' });
+      expect(fetch).toHaveBeenCalledWith('/documents/test.pdf', {
+        method: 'HEAD',
+      });
     });
 
     it('returns false when document does not exist', async () => {
@@ -47,7 +53,7 @@ describe('downloadUtils', () => {
       });
 
       const result = await checkDocumentExists('/documents/missing.pdf');
-      
+
       expect(result).toBe(false);
     });
 
@@ -55,7 +61,7 @@ describe('downloadUtils', () => {
       (fetch as jest.Mock).mockRejectedValueOnce(new Error('Network error'));
 
       const result = await checkDocumentExists('/documents/test.pdf');
-      
+
       expect(result).toBe(false);
     });
   });
@@ -75,7 +81,7 @@ describe('downloadUtils', () => {
       (document.createElement as jest.Mock).mockReturnValueOnce(mockLink);
 
       const result = await downloadDocument('/documents/test.pdf', 'test.pdf');
-      
+
       expect(result.success).toBe(true);
       expect(result.error).toBeUndefined();
       expect(mockLink.href).toBe('/documents/test.pdf');
@@ -88,10 +94,15 @@ describe('downloadUtils', () => {
         ok: false,
       });
 
-      const result = await downloadDocument('/documents/missing.pdf', 'missing.pdf');
-      
+      const result = await downloadDocument(
+        '/documents/missing.pdf',
+        'missing.pdf'
+      );
+
       expect(result.success).toBe(false);
-      expect(result.error).toBe('Document not found. Please contact the site administrator.');
+      expect(result.error).toBe(
+        'Document not found. Please contact the site administrator.'
+      );
     });
 
     it('handles download errors gracefully', async () => {
@@ -104,17 +115,21 @@ describe('downloadUtils', () => {
       });
 
       const result = await downloadDocument('/documents/test.pdf', 'test.pdf');
-      
+
       expect(result.success).toBe(false);
-      expect(result.error).toBe('Failed to download document. Please try again or contact support.');
+      expect(result.error).toBe(
+        'Failed to download document. Please try again or contact support.'
+      );
     });
   });
 
   describe('showDownloadError', () => {
     it('displays error message using alert', () => {
       showDownloadError('Test error message');
-      
-      expect(global.alert).toHaveBeenCalledWith('Download Error: Test error message');
+
+      expect(global.alert).toHaveBeenCalledWith(
+        'Download Error: Test error message'
+      );
     });
   });
 });

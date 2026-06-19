@@ -15,7 +15,7 @@ console.log('1. Checking build output...');
 const buildDir = path.join(__dirname, '..', '.next');
 if (fs.existsSync(buildDir)) {
   console.log('✅ Build directory exists');
-  
+
   // Check for static files
   const staticDir = path.join(buildDir, 'static');
   if (fs.existsSync(staticDir)) {
@@ -33,9 +33,9 @@ console.log('\n2. Checking Netlify configuration...');
 const netlifyConfig = path.join(__dirname, '..', 'netlify.toml');
 if (fs.existsSync(netlifyConfig)) {
   console.log('✅ netlify.toml exists');
-  
+
   const config = fs.readFileSync(netlifyConfig, 'utf8');
-  
+
   // Check for required configurations
   const checks = [
     { name: 'Build command', pattern: /command = "npm run build"/ },
@@ -45,7 +45,7 @@ if (fs.existsSync(netlifyConfig)) {
     { name: 'Cache headers', pattern: /Cache-Control/ },
     { name: 'Content Security Policy', pattern: /Content-Security-Policy/ },
   ];
-  
+
   checks.forEach(check => {
     if (check.pattern.test(config)) {
       console.log(`✅ ${check.name} configured`);
@@ -73,17 +73,23 @@ requiredDocs.forEach(doc => {
 
 // Test 4: Verify form configuration
 console.log('\n4. Checking form configuration...');
-const contactFormPath = path.join(__dirname, '..', 'src', 'components', 'ContactForm.tsx');
+const contactFormPath = path.join(
+  __dirname,
+  '..',
+  'src',
+  'components',
+  'ContactForm.tsx'
+);
 if (fs.existsSync(contactFormPath)) {
   const formContent = fs.readFileSync(contactFormPath, 'utf8');
-  
+
   const formChecks = [
     { name: 'Netlify form attribute', pattern: /data-netlify="true"/ },
     { name: 'Form name', pattern: /name="contact"/ },
     { name: 'Hidden form-name field', pattern: /name="form-name"/ },
     { name: 'Required form fields', pattern: /name="(name|email|message)"/ },
   ];
-  
+
   formChecks.forEach(check => {
     if (check.pattern.test(formContent)) {
       console.log(`✅ ${check.name} configured`);
@@ -100,7 +106,7 @@ console.log('\n5. Checking build scripts...');
 const packageJsonPath = path.join(__dirname, '..', 'package.json');
 if (fs.existsSync(packageJsonPath)) {
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-  
+
   const requiredScripts = ['build', 'start', 'lint', 'test'];
   requiredScripts.forEach(script => {
     if (packageJson.scripts && packageJson.scripts[script]) {

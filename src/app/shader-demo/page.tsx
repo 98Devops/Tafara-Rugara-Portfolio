@@ -32,11 +32,11 @@ export default function ShaderHeroDemoPage() {
       />
 
       {/* Usage reference */}
-      <div className="bg-gray-950 text-gray-100 p-10">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6 text-white">How to Use</h2>
-          <pre className="bg-gray-800/60 border border-gray-700 rounded-xl p-6 text-sm text-gray-300 overflow-x-auto leading-relaxed">
-{`import AnimatedShaderHero from '@/components/ui/animated-shader-hero';
+      <div className="bg-gray-950 p-10 text-gray-100">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="mb-6 text-3xl font-bold text-white">How to Use</h2>
+          <pre className="overflow-x-auto rounded-xl border border-gray-700 bg-gray-800/60 p-6 text-sm leading-relaxed text-gray-300">
+            {`import AnimatedShaderHero from '@/components/ui/animated-shader-hero';
 
 <AnimatedShaderHero
   trustBadge={{ text: "Your trust badge", icons: ["🚀"] }}

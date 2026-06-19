@@ -7,14 +7,16 @@ import { Navigation } from '@/components/Navigation';
 import { PerformanceMonitor } from '@/components/PerformanceMonitor';
 import Footer from '@/components/Footer';
 
-export default function ClientShell({ children }: { children: React.ReactNode }) {
+export default function ClientShell({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <ErrorBoundary>
       <ClientPerformanceInit />
       <Navigation />
-      <div className="min-h-screen">
-        {children}
-      </div>
+      <div className="min-h-screen">{children}</div>
       <Footer />
       <PerformanceMonitor />
     </ErrorBoundary>

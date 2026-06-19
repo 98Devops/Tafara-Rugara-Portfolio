@@ -5,10 +5,10 @@ export interface PersonalInfo {
   summary: string;
   profileImage?: string;
   socialLinks: {
-    github:    string;
-    linkedin:  string;
-    email:     string;
-    youtube?:  string;
+    github: string;
+    linkedin: string;
+    email: string;
+    youtube?: string;
     whatsapp?: string;
   };
   documents: {
@@ -18,7 +18,12 @@ export interface PersonalInfo {
 }
 
 export interface TechnicalCapability {
-  category: 'Cloud Architecture' | 'DevOps & CI/CD' | 'Automation Engineering' | 'Monitoring & Reliability';
+  category:
+    | 'Cloud Architecture'
+    | 'DevOps & CI/CD'
+    | 'Automation Engineering'
+    | 'Monitoring & Reliability'
+    | 'Website Development';
   skills: string[];
   description: string;
   icon?: string;
@@ -36,6 +41,7 @@ export interface Project {
   highlights: string[];
   demoUrl?: string;
   githubUrl?: string;
+  documentationUrl?: string;
   imageUrl?: string;
 }
 
@@ -53,6 +59,7 @@ export interface AutomationSystem {
   technologies?: string[];
   demoUrl?: string;
   githubUrl?: string;
+  documentationUrl?: string;
 }
 
 export interface Experience {

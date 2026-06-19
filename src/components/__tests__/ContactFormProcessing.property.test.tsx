@@ -14,9 +14,33 @@ import { ContactFormData } from '@/types';
 // Mock framer-motion to avoid animation issues in tests
 jest.mock('framer-motion', () => ({
   motion: {
-    form: ({ children, initial, animate, transition, whileHover, whileTap, ...props }: any) => <form {...props}>{children}</form>,
-    button: ({ children, initial, animate, transition, whileHover, whileTap, ...props }: any) => <button {...props}>{children}</button>,
-    div: ({ children, initial, animate, transition, whileHover, whileTap, ...props }: any) => <div {...props}>{children}</div>,
+    form: ({
+      children,
+      initial,
+      animate,
+      transition,
+      whileHover,
+      whileTap,
+      ...props
+    }: any) => <form {...props}>{children}</form>,
+    button: ({
+      children,
+      initial,
+      animate,
+      transition,
+      whileHover,
+      whileTap,
+      ...props
+    }: any) => <button {...props}>{children}</button>,
+    div: ({
+      children,
+      initial,
+      animate,
+      transition,
+      whileHover,
+      whileTap,
+      ...props
+    }: any) => <div {...props}>{children}</div>,
   },
 }));
 
@@ -33,8 +57,8 @@ describe('Contact Form Processing Property Tests', () => {
   /**
    * Property 7: Contact Form Processing
    * **Validates: Requirements 6.2**
-   * 
-   * For any contact form submission, the Portfolio_System should process the submission 
+   *
+   * For any contact form submission, the Portfolio_System should process the submission
    * using Netlify Forms with proper field validation.
    */
   it('Property 7: processes all valid contact form submissions with proper Netlify Forms integration', async () => {
@@ -43,7 +67,11 @@ describe('Contact Form Processing Property Tests', () => {
         // Generate valid contact form data with simple constraints
         fc.record({
           name: fc.constantFrom('John Doe', 'Jane Smith', 'Bob Johnson'),
-          email: fc.constantFrom('john@example.com', 'jane@test.com', 'bob@demo.org'),
+          email: fc.constantFrom(
+            'john@example.com',
+            'jane@test.com',
+            'bob@demo.org'
+          ),
           message: fc.constantFrom(
             'This is a test message that is long enough to pass validation.',
             'Hello, I would like to discuss a potential project opportunity.'
@@ -53,50 +81,63 @@ describe('Contact Form Processing Property Tests', () => {
           // Mock window.open for WhatsApp integration
           const mockWindowOpen = jest.fn();
           window.open = mockWindowOpen;
-          
+
           const { container } = render(<ContactForm />);
-          
+
           // Verify form attributes are present (kept for potential fallback)
           const form = container.querySelector('form');
           expect(form).toHaveAttribute('data-netlify', 'true');
           expect(form).toHaveAttribute('name', 'contact');
           expect(form).toHaveAttribute('method', 'POST');
-          
+
           // Verify hidden form-name field
-          const hiddenField = container.querySelector('input[name="form-name"]');
+          const hiddenField = container.querySelector(
+            'input[name="form-name"]'
+          );
           expect(hiddenField).toBeInTheDocument();
           expect(hiddenField).toHaveAttribute('type', 'hidden');
           expect(hiddenField).toHaveAttribute('value', 'contact');
-          
+
           // Fill out the form with generated valid data
-          const nameInput = container.querySelector('input[name="name"]') as HTMLInputElement;
-          const emailInput = container.querySelector('input[name="email"]') as HTMLInputElement;
-          const messageInput = container.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
-          
+          const nameInput = container.querySelector(
+            'input[name="name"]'
+          ) as HTMLInputElement;
+          const emailInput = container.querySelector(
+            'input[name="email"]'
+          ) as HTMLInputElement;
+          const messageInput = container.querySelector(
+            'textarea[name="message"]'
+          ) as HTMLTextAreaElement;
+
           expect(nameInput).toBeInTheDocument();
           expect(emailInput).toBeInTheDocument();
           expect(messageInput).toBeInTheDocument();
-          
+
           // Set values directly
           fireEvent.change(nameInput, { target: { value: formData.name } });
           fireEvent.change(emailInput, { target: { value: formData.email } });
-          fireEvent.change(messageInput, { target: { value: formData.message } });
-          
+          fireEvent.change(messageInput, {
+            target: { value: formData.message },
+          });
+
           // Submit the form
           const formElement = container.querySelector('form');
           expect(formElement).toBeInTheDocument();
           fireEvent.submit(formElement!);
-          
+
           // Verify WhatsApp was opened with correct URL
-          await waitFor(() => {
-            expect(mockWindowOpen).toHaveBeenCalled();
-            const callArgs = mockWindowOpen.mock.calls[0];
-            expect(callArgs[0]).toContain('https://wa.me/263777553271');
-            expect(callArgs[0]).toContain('text=');
-            // Verify the message contains the form data
-            const url = callArgs[0];
-            expect(url).toMatch(/name|email|message/i);
-          }, { timeout: 1000 });
+          await waitFor(
+            () => {
+              expect(mockWindowOpen).toHaveBeenCalled();
+              const callArgs = mockWindowOpen.mock.calls[0];
+              expect(callArgs[0]).toContain('https://wa.me/263777553271');
+              expect(callArgs[0]).toContain('text=');
+              // Verify the message contains the form data
+              const url = callArgs[0];
+              expect(url).toMatch(/name|email|message/i);
+            },
+            { timeout: 1000 }
+          );
         }
       ),
       { numRuns: 5 } // Reduced for async tests
@@ -116,13 +157,17 @@ describe('Contact Form Processing Property Tests', () => {
           fc.record({
             name: fc.constant(''),
             email: fc.constant('valid@example.com'),
-            message: fc.constant('This is a valid message that is long enough.'),
+            message: fc.constant(
+              'This is a valid message that is long enough.'
+            ),
           }),
           // Invalid email
           fc.record({
             name: fc.constant('Valid Name'),
             email: fc.constant('invalid-email'),
-            message: fc.constant('This is a valid message that is long enough.'),
+            message: fc.constant(
+              'This is a valid message that is long enough.'
+            ),
           }),
           // Invalid message (too short)
           fc.record({
@@ -131,36 +176,53 @@ describe('Contact Form Processing Property Tests', () => {
             message: fc.constant('short'),
           })
         ),
-        async (invalidFormData) => {
+        async invalidFormData => {
           const mockOnSubmit = jest.fn();
-          
+
           const { container } = render(<ContactForm onSubmit={mockOnSubmit} />);
-          
+
           // Fill out the form with invalid data using direct DOM manipulation for speed
-          const nameInput = container.querySelector('input[name="name"]') as HTMLInputElement;
-          const emailInput = container.querySelector('input[name="email"]') as HTMLInputElement;
-          const messageInput = container.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
-          
+          const nameInput = container.querySelector(
+            'input[name="name"]'
+          ) as HTMLInputElement;
+          const emailInput = container.querySelector(
+            'input[name="email"]'
+          ) as HTMLInputElement;
+          const messageInput = container.querySelector(
+            'textarea[name="message"]'
+          ) as HTMLTextAreaElement;
+
           expect(nameInput).toBeInTheDocument();
           expect(emailInput).toBeInTheDocument();
           expect(messageInput).toBeInTheDocument();
-          
+
           // Set values directly
-          fireEvent.change(nameInput, { target: { value: invalidFormData.name } });
-          fireEvent.change(emailInput, { target: { value: invalidFormData.email } });
-          fireEvent.change(messageInput, { target: { value: invalidFormData.message } });
-          
+          fireEvent.change(nameInput, {
+            target: { value: invalidFormData.name },
+          });
+          fireEvent.change(emailInput, {
+            target: { value: invalidFormData.email },
+          });
+          fireEvent.change(messageInput, {
+            target: { value: invalidFormData.message },
+          });
+
           // Submit the form using the container's form
           const formElement = container.querySelector('form');
           expect(formElement).toBeInTheDocument();
           fireEvent.submit(formElement!);
-          
+
           // Verify validation errors are shown and submission is prevented
-          await waitFor(() => {
-            const errorMessages = container.querySelectorAll('[class*="text-red-400"]');
-            expect(errorMessages.length).toBeGreaterThan(0);
-          }, { timeout: 500 });
-          
+          await waitFor(
+            () => {
+              const errorMessages = container.querySelectorAll(
+                '[class*="text-red-400"]'
+              );
+              expect(errorMessages.length).toBeGreaterThan(0);
+            },
+            { timeout: 500 }
+          );
+
           // Verify onSubmit was not called due to validation failure
           expect(mockOnSubmit).not.toHaveBeenCalled();
         }
@@ -179,36 +241,57 @@ describe('Contact Form Processing Property Tests', () => {
         fc.boolean(), // whether form has been interacted with
         fc.boolean(), // whether form is in error state
         (hasInteracted, hasError) => {
-          const mockOnSubmit = hasError 
+          const mockOnSubmit = hasError
             ? jest.fn().mockRejectedValue(new Error('Test error'))
             : jest.fn().mockResolvedValue(undefined);
-          
+
           const { container } = render(<ContactForm onSubmit={mockOnSubmit} />);
-          
+
           // Verify all required Netlify Forms attributes are present
           const form = container.querySelector('form');
           expect(form).toHaveAttribute('data-netlify', 'true');
           expect(form).toHaveAttribute('name', 'contact');
           expect(form).toHaveAttribute('method', 'POST');
-          
+
           // Verify hidden form-name field
-          const hiddenField = container.querySelector('input[name="form-name"][type="hidden"]');
+          const hiddenField = container.querySelector(
+            'input[name="form-name"][type="hidden"]'
+          );
           expect(hiddenField).toBeInTheDocument();
           expect(hiddenField).toHaveAttribute('value', 'contact');
-          
+
           // Verify all form fields have proper name attributes for Netlify
-          expect(screen.getByLabelText(/name/i)).toHaveAttribute('name', 'name');
-          expect(screen.getByLabelText(/email/i)).toHaveAttribute('name', 'email');
-          expect(screen.getByLabelText(/message/i)).toHaveAttribute('name', 'message');
-          
+          expect(screen.getByLabelText(/name/i)).toHaveAttribute(
+            'name',
+            'name'
+          );
+          expect(screen.getByLabelText(/email/i)).toHaveAttribute(
+            'name',
+            'email'
+          );
+          expect(screen.getByLabelText(/message/i)).toHaveAttribute(
+            'name',
+            'message'
+          );
+
           // Verify form fields have proper types
-          expect(screen.getByLabelText(/name/i)).toHaveAttribute('type', 'text');
-          expect(screen.getByLabelText(/email/i)).toHaveAttribute('type', 'email');
-          expect(screen.getByLabelText(/message/i).tagName.toLowerCase()).toBe('textarea');
-          
+          expect(screen.getByLabelText(/name/i)).toHaveAttribute(
+            'type',
+            'text'
+          );
+          expect(screen.getByLabelText(/email/i)).toHaveAttribute(
+            'type',
+            'email'
+          );
+          expect(screen.getByLabelText(/message/i).tagName.toLowerCase()).toBe(
+            'textarea'
+          );
+
           // Verify form structure remains consistent
           expect(form?.tagName.toLowerCase()).toBe('form');
-          expect(container.querySelectorAll('input, textarea, button')).toHaveLength(5); // 3 visible + 1 hidden + 1 button
+          expect(
+            container.querySelectorAll('input, textarea, button')
+          ).toHaveLength(5); // 3 visible + 1 hidden + 1 button
         }
       ),
       { numRuns: 10 }

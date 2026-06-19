@@ -19,12 +19,24 @@ describe('Performance Standards Property Tests', () => {
       fc.property(
         fc.constantFrom(
           { name: 'Navigation', component: Navigation, props: {} },
-          { name: 'Hero', component: Hero, props: { personal: portfolioData.personal } },
-          { name: 'CapabilityCard', component: CapabilityCard, props: { capability: portfolioData.capabilities[0], index: 0 } },
-          { name: 'ProjectCard', component: ProjectCard, props: { project: portfolioData.projects[0], index: 0 } },
+          {
+            name: 'Hero',
+            component: Hero,
+            props: { personal: portfolioData.personal },
+          },
+          {
+            name: 'CapabilityCard',
+            component: CapabilityCard,
+            props: { capability: portfolioData.capabilities[0], index: 0 },
+          },
+          {
+            name: 'ProjectCard',
+            component: ProjectCard,
+            props: { project: portfolioData.projects[0], index: 0 },
+          },
           { name: 'ContactForm', component: ContactForm, props: {} }
         ),
-        (testComponent) => {
+        testComponent => {
           const Component = testComponent.component;
           const { container } = render(<Component {...testComponent.props} />);
           const semanticElements = container.querySelectorAll(
@@ -42,7 +54,11 @@ describe('Performance Standards Property Tests', () => {
       fc.property(
         fc.constantFrom(
           { name: 'Navigation', component: Navigation, props: {} },
-          { name: 'Hero', component: Hero, props: { personal: portfolioData.personal } }
+          {
+            name: 'Hero',
+            component: Hero,
+            props: { personal: portfolioData.personal },
+          }
         ),
         fc.constantFrom(...viewportSizes),
         (testComponent, viewport) => {

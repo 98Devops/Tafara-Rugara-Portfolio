@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -8,13 +8,13 @@ const nextConfig: NextConfig = {
   // Static export configuration for Netlify (production only)
   ...(process.env.NODE_ENV === 'production' && { output: 'export' }),
   trailingSlash: true,
-  
+
   // Performance optimizations
   experimental: {
     optimizePackageImports: ['@heroicons/react', 'framer-motion', 'fast-check'],
     // optimizeCss: true, // Disabled due to critters dependency issue
   },
-  
+
   // Image optimization - disabled for static export
   images: {
     unoptimized: true, // Required for static export
@@ -25,13 +25,13 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  
+
   // Compression and caching
   compress: true,
   poweredByHeader: false, // Remove X-Powered-By header for security
-  
+
   // Bundle optimization
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config, { dev }) => {
     // Production optimizations
     if (!dev) {
       config.optimization = {
@@ -78,10 +78,10 @@ const nextConfig: NextConfig = {
       config.optimization.usedExports = true;
       // Note: Do NOT set sideEffects to false — it strips CSS/Tailwind imports
     }
-    
+
     return config;
   },
-  
+
   // Headers for caching and security - handled by netlify.toml for static export
   // async headers() removed - not compatible with output: 'export'
 };

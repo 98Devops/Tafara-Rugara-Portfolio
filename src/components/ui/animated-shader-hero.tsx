@@ -101,7 +101,10 @@ const useShaderBackground = () => {
     if (!gl) return;
 
     // Helper: create & compile a shader
-    const compileShader = (type: number, source: string): WebGLShader | null => {
+    const compileShader = (
+      type: number,
+      source: string
+    ): WebGLShader | null => {
       const shader = gl.createShader(type);
       if (!shader) return null;
       gl.shaderSource(shader, source);
@@ -144,11 +147,11 @@ void main(){gl_Position=position;}`;
     const uResolution = gl.getUniformLocation(program, 'resolution');
     const uTime = gl.getUniformLocation(program, 'time');
 
-    // Pointer state
-    let touchX = 0, touchY = 0;
-    const onPointerMove = (e: PointerEvent) => {
-      touchX = e.clientX;
-      touchY = canvas.height - e.clientY;
+    // Pointer state (reserved for future interactivity)
+    // let touchX = 0, touchY = 0;
+    const onPointerMove = (_e: PointerEvent) => {
+      // touchX = e.clientX;
+      // touchY = canvas.height - e.clientY;
     };
     canvas.addEventListener('pointermove', onPointerMove);
 
@@ -201,7 +204,9 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
   const canvasRef = useShaderBackground();
 
   return (
-    <div className={`relative w-full h-screen overflow-hidden bg-black ${className}`}>
+    <div
+      className={`relative h-screen w-full overflow-hidden bg-black ${className}`}
+    >
       {/* Keyframe styles — injected via a plain <style> tag, compatible with App Router */}
       <style
         dangerouslySetInnerHTML={{
@@ -236,7 +241,7 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
       {/* WebGL Canvas */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full touch-none"
+        className="absolute inset-0 h-full w-full touch-none"
         style={{ background: 'black' }}
       />
 
@@ -244,8 +249,9 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-white">
         {/* Trust Badge */}
         {trustBadge && (
-          <div className="mb-8 shader-fade-in-down">
-            <div className="flex items-center gap-2 px-6 py-3 rounded-full border text-sm"
+          <div className="shader-fade-in-down mb-8">
+            <div
+              className="flex items-center gap-2 rounded-full border px-6 py-3 text-sm"
               style={{
                 background: 'rgba(249,115,22,0.10)',
                 backdropFilter: 'blur(12px)',
@@ -253,7 +259,9 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
               }}
             >
               {trustBadge.icons?.map((icon, i) => (
-                <span key={i} className="text-yellow-300">{icon}</span>
+                <span key={i} className="text-yellow-300">
+                  {icon}
+                </span>
               ))}
               <span className="text-orange-100">{trustBadge.text}</span>
             </div>
@@ -261,25 +269,32 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
         )}
 
         {/* Heading */}
-        <div className="text-center space-y-6 max-w-5xl mx-auto px-4">
+        <div className="mx-auto max-w-5xl space-y-6 px-4 text-center">
           <div className="space-y-2">
             <h1
-              className="text-5xl md:text-7xl lg:text-8xl font-bold bg-clip-text text-transparent shader-fade-in-up shader-delay-200 shader-animate-gradient"
-              style={{ backgroundImage: 'linear-gradient(135deg, #fdba74, #fbbf24, #f59e0b)' }}
+              className="shader-fade-in-up shader-delay-200 shader-animate-gradient bg-clip-text text-5xl font-bold text-transparent md:text-7xl lg:text-8xl"
+              style={{
+                backgroundImage:
+                  'linear-gradient(135deg, #fdba74, #fbbf24, #f59e0b)',
+              }}
             >
               {headline.line1}
             </h1>
             <h1
-              className="text-5xl md:text-7xl lg:text-8xl font-bold bg-clip-text text-transparent shader-fade-in-up shader-delay-400 shader-animate-gradient"
-              style={{ backgroundImage: 'linear-gradient(135deg, #fde68a, #fb923c, #ef4444)' }}
+              className="shader-fade-in-up shader-delay-400 shader-animate-gradient bg-clip-text text-5xl font-bold text-transparent md:text-7xl lg:text-8xl"
+              style={{
+                backgroundImage:
+                  'linear-gradient(135deg, #fde68a, #fb923c, #ef4444)',
+              }}
             >
               {headline.line2}
             </h1>
           </div>
 
           {/* Subtitle */}
-          <div className="max-w-3xl mx-auto shader-fade-in-up shader-delay-600">
-            <p className="text-lg md:text-xl lg:text-2xl font-light leading-relaxed"
+          <div className="shader-fade-in-up shader-delay-600 mx-auto max-w-3xl">
+            <p
+              className="text-lg font-light leading-relaxed md:text-xl lg:text-2xl"
               style={{ color: 'rgba(254,215,170,0.90)' }}
             >
               {subtitle}
@@ -288,17 +303,23 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
 
           {/* CTA Buttons */}
           {buttons && (
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10 shader-fade-in-up shader-delay-800">
+            <div className="shader-fade-in-up shader-delay-800 mt-10 flex flex-col justify-center gap-4 sm:flex-row">
               {buttons.primary && (
                 <button
                   onClick={buttons.primary.onClick}
-                  className="px-8 py-4 rounded-full font-semibold text-lg text-black transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  className="rounded-full px-8 py-4 text-lg font-semibold text-black transition-all duration-300 hover:scale-105 hover:shadow-xl"
                   style={{
                     background: 'linear-gradient(135deg, #f97316, #eab308)',
                     boxShadow: '0 4px 24px rgba(249,115,22,0.25)',
                   }}
-                  onMouseOver={e => (e.currentTarget.style.boxShadow = '0 8px 32px rgba(249,115,22,0.45)')}
-                  onMouseOut={e => (e.currentTarget.style.boxShadow = '0 4px 24px rgba(249,115,22,0.25)')}
+                  onMouseOver={e =>
+                    (e.currentTarget.style.boxShadow =
+                      '0 8px 32px rgba(249,115,22,0.45)')
+                  }
+                  onMouseOut={e =>
+                    (e.currentTarget.style.boxShadow =
+                      '0 4px 24px rgba(249,115,22,0.25)')
+                  }
                 >
                   {buttons.primary.text}
                 </button>
@@ -306,7 +327,7 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
               {buttons.secondary && (
                 <button
                   onClick={buttons.secondary.onClick}
-                  className="px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105"
+                  className="rounded-full px-8 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105"
                   style={{
                     background: 'rgba(249,115,22,0.10)',
                     backdropFilter: 'blur(8px)',
@@ -315,11 +336,13 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
                   }}
                   onMouseOver={e => {
                     e.currentTarget.style.background = 'rgba(249,115,22,0.20)';
-                    e.currentTarget.style.borderColor = 'rgba(253,186,116,0.50)';
+                    e.currentTarget.style.borderColor =
+                      'rgba(253,186,116,0.50)';
                   }}
                   onMouseOut={e => {
                     e.currentTarget.style.background = 'rgba(249,115,22,0.10)';
-                    e.currentTarget.style.borderColor = 'rgba(253,186,116,0.30)';
+                    e.currentTarget.style.borderColor =
+                      'rgba(253,186,116,0.30)';
                   }}
                 >
                   {buttons.secondary.text}

@@ -15,20 +15,20 @@ describe('Documentation Completeness Property Tests', () => {
   /**
    * Property 12: Documentation Completeness
    * **Validates: Requirements 9.5**
-   * 
-   * For any project setup request, the Portfolio_System should include comprehensive 
+   *
+   * For any project setup request, the Portfolio_System should include comprehensive
    * README documentation with setup and deployment instructions.
    */
-  
+
   /**
    * Property 12.1: README.md exists and contains comprehensive project information
    */
   it('Property 12.1: README.md exists and contains comprehensive project information', () => {
     const readmePath = path.join(projectRoot, 'README.md');
     expect(fs.existsSync(readmePath)).toBe(true);
-    
+
     const readmeContent = fs.readFileSync(readmePath, 'utf8');
-    
+
     // Essential sections that must be present in README
     const requiredSections = [
       'Features',
@@ -37,18 +37,18 @@ describe('Documentation Completeness Property Tests', () => {
       'Development',
       'Deployment',
       'Testing',
-      'Project Structure'
+      'Project Structure',
     ];
-    
+
     requiredSections.forEach(section => {
       const sectionRegex = new RegExp(`#{1,3}\\s*.*${section}`, 'i');
       expect(readmeContent).toMatch(sectionRegex);
     });
-    
+
     // Should contain project title and description
     expect(readmeContent).toContain('Tafara Rugara Portfolio');
     expect(readmeContent).toMatch(/portfolio.*website/i);
-    
+
     // Should contain technology stack information
     expect(readmeContent).toContain('Next.js');
     expect(readmeContent).toContain('TypeScript');
@@ -62,7 +62,7 @@ describe('Documentation Completeness Property Tests', () => {
   it('Property 12.2: setup instructions are comprehensive and actionable', () => {
     const readmePath = path.join(projectRoot, 'README.md');
     const readmeContent = fs.readFileSync(readmePath, 'utf8');
-    
+
     // Property test: Setup instructions should be present for different scenarios
     fc.assert(
       fc.property(
@@ -73,29 +73,25 @@ describe('Documentation Completeness Property Tests', () => {
           'Getting Started',
           'Development'
         ),
-        (setupSection) => {
+        setupSection => {
           const sectionRegex = new RegExp(`#{1,3}\\s*.*${setupSection}`, 'i');
           expect(readmeContent).toMatch(sectionRegex);
         }
       ),
       { numRuns: 5 }
     );
-    
+
     // Should contain essential setup commands
-    const essentialCommands = [
-      'npm install',
-      'npm run dev',
-      'npm run build'
-    ];
-    
+    const essentialCommands = ['npm install', 'npm run dev', 'npm run build'];
+
     essentialCommands.forEach(command => {
       expect(readmeContent).toContain(command);
     });
-    
+
     // Should contain prerequisites
     expect(readmeContent).toMatch(/node\.?js.*1[8-9]/i); // Node.js 18+
     expect(readmeContent).toMatch(/npm|yarn/i);
-    
+
     // Should contain development server instructions
     expect(readmeContent).toMatch(/localhost:3000|http:\/\/localhost:3000/);
   });
@@ -106,26 +102,21 @@ describe('Documentation Completeness Property Tests', () => {
   it('Property 12.3: deployment instructions are detailed and platform-specific', () => {
     const readmePath = path.join(projectRoot, 'README.md');
     const readmeContent = fs.readFileSync(readmePath, 'utf8');
-    
+
     // Should contain deployment section
     expect(readmeContent).toMatch(/#{1,3}.*deployment/i);
-    
+
     // Should mention Netlify (the target deployment platform)
     expect(readmeContent).toContain('Netlify');
-    
+
     // Should contain deployment-related commands or instructions
-    const deploymentKeywords = [
-      'deploy',
-      'build',
-      'production',
-      'environment'
-    ];
-    
+    const deploymentKeywords = ['deploy', 'build', 'production', 'environment'];
+
     deploymentKeywords.forEach(keyword => {
       const keywordRegex = new RegExp(keyword, 'i');
       expect(readmeContent).toMatch(keywordRegex);
     });
-    
+
     // Should reference deployment configuration
     expect(readmeContent).toMatch(/netlify\.toml|deployment.*config/i);
   });
@@ -139,23 +130,23 @@ describe('Documentation Completeness Property Tests', () => {
       fc.property(
         fc.constantFrom(
           'DEPLOYMENT.md',
-          'DEVELOPMENT.md', 
+          'DEVELOPMENT.md',
           'ARCHITECTURE.md',
           'TESTING.md'
         ),
-        (docFile) => {
+        docFile => {
           const docPath = path.join(projectRoot, docFile);
           expect(fs.existsSync(docPath)).toBe(true);
-          
+
           const docContent = fs.readFileSync(docPath, 'utf8');
-          
+
           // Each documentation file should be substantial (not empty)
           expect(docContent.length).toBeGreaterThan(1000);
-          
+
           // Should contain proper markdown structure
           expect(docContent).toMatch(/^#\s+/m); // Should have at least one main heading
           expect(docContent).toMatch(/#{2,3}\s+/m); // Should have subheadings
-          
+
           // File-specific content validation
           switch (docFile) {
             case 'DEPLOYMENT.md':
@@ -187,23 +178,25 @@ describe('Documentation Completeness Property Tests', () => {
   it('Property 12.5: documentation includes project structure and file organization', () => {
     const readmePath = path.join(projectRoot, 'README.md');
     const readmeContent = fs.readFileSync(readmePath, 'utf8');
-    
+
     // Should contain project structure section
-    expect(readmeContent).toMatch(/#{1,3}.*(?:project.*structure|file.*structure|directory)/i);
-    
+    expect(readmeContent).toMatch(
+      /#{1,3}.*(?:project.*structure|file.*structure|directory)/i
+    );
+
     // Should document key directories
     const keyDirectories = [
       'src/',
       'src/app/',
       'src/components/',
       'public/',
-      'e2e/'
+      'e2e/',
     ];
-    
+
     keyDirectories.forEach(dir => {
       expect(readmeContent).toContain(dir);
     });
-    
+
     // Should explain the purpose of key directories
     expect(readmeContent).toMatch(/app.*router|next\.js.*app/i);
     expect(readmeContent).toMatch(/components.*reusable/i);
@@ -216,30 +209,26 @@ describe('Documentation Completeness Property Tests', () => {
   it('Property 12.6: documentation includes testing and quality assurance information', () => {
     const readmePath = path.join(projectRoot, 'README.md');
     const readmeContent = fs.readFileSync(readmePath, 'utf8');
-    
+
     // Should contain testing section
     expect(readmeContent).toMatch(/#{1,3}.*test/i);
-    
+
     // Should document testing commands
     const testingCommands = [
       'npm test',
       'npm run test',
       'test:e2e',
-      'test:coverage'
+      'test:coverage',
     ];
-    
-    const hasTestingCommands = testingCommands.some(command => 
+
+    const hasTestingCommands = testingCommands.some(command =>
       readmeContent.includes(command)
     );
     expect(hasTestingCommands).toBe(true);
-    
+
     // Should mention testing frameworks
-    const testingFrameworks = [
-      'Jest',
-      'Playwright',
-      'React Testing Library'
-    ];
-    
+    const testingFrameworks = ['Jest', 'Playwright', 'React Testing Library'];
+
     const hasTestingFrameworks = testingFrameworks.some(framework =>
       readmeContent.includes(framework)
     );
@@ -252,30 +241,30 @@ describe('Documentation Completeness Property Tests', () => {
   it('Property 12.7: documentation includes performance and quality metrics', () => {
     const readmePath = path.join(projectRoot, 'README.md');
     const readmeContent = fs.readFileSync(readmePath, 'utf8');
-    
+
     // Should mention performance targets or metrics
     const performanceKeywords = [
       'performance',
       'lighthouse',
       'speed',
       'optimization',
-      'metrics'
+      'metrics',
     ];
-    
+
     const hasPerformanceInfo = performanceKeywords.some(keyword =>
       readmeContent.toLowerCase().includes(keyword)
     );
     expect(hasPerformanceInfo).toBe(true);
-    
+
     // Should mention quality standards
     const qualityKeywords = [
       'quality',
       'standards',
       'best practices',
       'accessibility',
-      'SEO'
+      'SEO',
     ];
-    
+
     const hasQualityInfo = qualityKeywords.some(keyword =>
       readmeContent.toLowerCase().includes(keyword)
     );
@@ -296,25 +285,25 @@ describe('Documentation Completeness Property Tests', () => {
           'ARCHITECTURE.md',
           'TESTING.md'
         ),
-        (docFile) => {
+        docFile => {
           const docPath = path.join(projectRoot, docFile);
           const docContent = fs.readFileSync(docPath, 'utf8');
-          
+
           // Should have proper heading hierarchy
           expect(docContent).toMatch(/^#\s+[^\n]+/m); // Main title
           expect(docContent).toMatch(/^#{2,3}\s+[^\n]+/m); // Subsections
-          
+
           // Should use proper markdown formatting
           expect(docContent).toMatch(/```[\s\S]*?```/); // Code blocks
           expect(docContent).toMatch(/`[^`]+`/); // Inline code
-          
+
           // Should have proper list formatting
           expect(docContent).toMatch(/^[-*+]\s+/m); // Unordered lists
-          
+
           // Should not have broken markdown links
           const brokenLinks = docContent.match(/\[([^\]]+)\]\(\s*\)/g);
           expect(brokenLinks).toBeNull();
-          
+
           // Should have consistent heading style (ATX style preferred)
           const underlineHeadings = docContent.match(/^.+\n[=-]+$/gm);
           if (underlineHeadings) {
@@ -334,23 +323,24 @@ describe('Documentation Completeness Property Tests', () => {
     // Check if troubleshooting information exists in README or separate file
     const readmePath = path.join(projectRoot, 'README.md');
     const troubleshootingPath = path.join(projectRoot, 'TROUBLESHOOTING.md');
-    
+
     const readmeContent = fs.readFileSync(readmePath, 'utf8');
-    
+
     // Should have troubleshooting information either in README or separate file
-    const hasTroubleshootingInReadme = /troubleshoot|common.*issues?|problems?/i.test(readmeContent);
+    const hasTroubleshootingInReadme =
+      /troubleshoot|common.*issues?|problems?/i.test(readmeContent);
     const hasTroubleshootingFile = fs.existsSync(troubleshootingPath);
-    
+
     expect(hasTroubleshootingInReadme || hasTroubleshootingFile).toBe(true);
-    
+
     // Should mention maintenance or updates
     const maintenanceKeywords = [
       'maintenance',
       'update',
       'upgrade',
-      'dependencies'
+      'dependencies',
     ];
-    
+
     const hasMaintenanceInfo = maintenanceKeywords.some(keyword =>
       readmeContent.toLowerCase().includes(keyword)
     );
@@ -363,34 +353,29 @@ describe('Documentation Completeness Property Tests', () => {
   it('Property 12.10: documentation includes contribution and contact information', () => {
     const readmePath = path.join(projectRoot, 'README.md');
     const readmeContent = fs.readFileSync(readmePath, 'utf8');
-    
+
     // Should include author information
     expect(readmeContent).toContain('Tafara Rugara');
-    
+
     // Should include contact or social links
-    const contactKeywords = [
-      'github',
-      'linkedin',
-      'email',
-      'contact'
-    ];
-    
+    const contactKeywords = ['github', 'linkedin', 'email', 'contact'];
+
     const hasContactInfo = contactKeywords.some(keyword =>
       readmeContent.toLowerCase().includes(keyword)
     );
     expect(hasContactInfo).toBe(true);
-    
+
     // Should include license information
     expect(readmeContent).toMatch(/license|mit/i);
-    
+
     // Should mention how to contribute or report issues
     const contributionKeywords = [
       'contribut',
       'issues',
       'pull request',
-      'feedback'
+      'feedback',
     ];
-    
+
     const hasContributionInfo = contributionKeywords.some(keyword =>
       readmeContent.toLowerCase().includes(keyword)
     );

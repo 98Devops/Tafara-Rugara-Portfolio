@@ -5,11 +5,11 @@ const { chromium } = require('playwright');
   const browser = await chromium.launch();
   const page = await browser.newPage();
 
-  page.on('console', (msg) => {
+  page.on('console', msg => {
     console.log(`BROWSER LOG: [${msg.type()}] ${msg.text()}`);
   });
 
-  page.on('pageerror', (err) => {
+  page.on('pageerror', err => {
     console.log('BROWSER PAGE ERROR:', err);
   });
 
