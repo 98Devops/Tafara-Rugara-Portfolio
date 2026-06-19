@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import ProjectCard from '../ProjectCard';
+import ProjectCard from '../CaseCard';
 import { portfolioData } from '@/data/portfolio';
 
 // Mock framer-motion

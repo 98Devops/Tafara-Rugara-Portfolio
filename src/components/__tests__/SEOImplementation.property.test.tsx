@@ -15,7 +15,7 @@ import {
 } from '@/components/SEO';
 import { StructuredData } from '@/components/StructuredData';
 import { Hero } from '@/components/Hero';
-import ProjectCard from '@/components/ProjectCard';
+import ProjectCard from '@/components/CaseCard';
 import { portfolioData } from '@/data/portfolio';
 
 // Mock IntersectionObserver for testing environment

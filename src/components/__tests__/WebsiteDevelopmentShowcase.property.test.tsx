@@ -8,7 +8,7 @@ import fc from 'fast-check';
 import { render, screen } from '@testing-library/react';
 import { portfolioData } from '@/data/portfolio';
 import { PortfolioData, Project } from '@/types';
-import ProjectCard from '@/components/ProjectCard';
+import ProjectCard from '@/components/CaseCard';
 
 describe('Website Development Showcase Property Tests', () => {
   /**

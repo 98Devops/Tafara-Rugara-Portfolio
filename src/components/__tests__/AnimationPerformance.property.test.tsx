@@ -9,7 +9,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import fc from 'fast-check';
 import { Hero } from '../Hero';
-import ProjectCard from '../ProjectCard';
+import ProjectCard from '../CaseCard';
 import CapabilityCard from '../CapabilityCard';
 import ExperienceTimeline from '../ExperienceTimeline';
 import { portfolioData } from '@/data/portfolio';
@@ -230,35 +230,19 @@ describe('Animation Performance Property Tests', () => {
           data: portfolioData.projects[0],
         }),
         scenario => {
-          const renderComponent = () => {
-            switch (scenario.component) {
-              case 'ProjectCard':
-                render(
-                  <ProjectCard project={scenario.data as any} index={0} />
-                );
-                break;
-            }
-          };
+          // Redesign: hover micro-interactions are CSS-based (Tailwind `hover:`
+          // + `transition-*`), not framer-motion `whileHover`. Validate the card
+          // exposes a performant CSS hover transition on its border/colors.
+          const { container } =
+            scenario.component === 'ProjectCard'
+              ? render(<ProjectCard project={scenario.data as any} index={0} />)
+              : render(<div />);
 
-          renderComponent();
-
-          // Requirement 7.3: Light hover transitions should be performant
-          const hoverAnimations = mockMotionValues.filter(mv => mv.whileHover);
-          expect(hoverAnimations.length).toBeGreaterThan(0);
-
-          hoverAnimations.forEach(animation => {
-            // Hover transitions should be quick and smooth
-            if (animation.transition?.duration) {
-              expect(animation.transition.duration).toBeLessThanOrEqual(0.3);
-            }
-
-            // Should use performance-friendly easing
-            if (animation.transition?.ease) {
-              expect(['easeOut', 'easeInOut', 'linear']).toContain(
-                animation.transition.ease
-              );
-            }
-          });
+          const card = container.querySelector('.group');
+          expect(card).toBeInTheDocument();
+          const className = card?.getAttribute('class') ?? '';
+          expect(className).toMatch(/transition-/);
+          expect(className).toMatch(/hover:/);
         }
       ),
       { numRuns: 10 }

@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { Navigation } from '@/components/Navigation';
 import { Hero } from '@/components/Hero';
 import CapabilityCard from '@/components/CapabilityCard';
-import ProjectCard from '@/components/ProjectCard';
+import ProjectCard from '@/components/CaseCard';
 import ContactForm from '@/components/ContactForm';
 import { portfolioData } from '@/data/portfolio';
 
