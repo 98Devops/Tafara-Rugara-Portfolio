@@ -9,38 +9,33 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        // Zinc monochrome design system
-        surface:  "#111111",
-        border:   "#27272A",
-        "border-hover": "#3F3F46",
-        "text-secondary": "#A1A1AA",
-        "text-muted":     "#71717A",
-        accent:   "#E4E4E7",
+        // Editorial token system — mirror of globals.css :root
+        ink:        "var(--ink)",
+        surface:    "var(--surface)",
+        "surface-2": "var(--surface-2)",
+        line:       "var(--line)",
+        "line-2":   "var(--line-2)",
+        bone:       "var(--bone)",
+        "bone-dim": "var(--bone-dim)",
+        "bone-faint": "var(--bone-faint)",
+        ember:      "var(--ember)",
+        danger:     "var(--danger)",
       },
       fontFamily: {
-        sans:    ["Inter", "system-ui", "sans-serif"],
-        heading: ["Inter", "system-ui", "sans-serif"],
-        mono:    ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "Consolas", "monospace"],
+        display: ["var(--font-fraunces)", "Georgia", "serif"],
+        sans:    ["var(--font-archivo)", "system-ui", "sans-serif"],
+        mono:    ["var(--font-jetbrains-mono)", "ui-monospace", "SFMono-Regular", "Consolas", "monospace"],
       },
-      boxShadow: {
-        // No glow shadows — depth via borders only
-        "card": "none",
+      borderRadius: {
+        sm: "var(--r-sm)",
+        md: "var(--r-md)",
+        lg: "var(--r-lg)",
       },
-      animation: {
-        "fade-in":    "fadeIn 0.5s ease-out",
-        "fade-in-up": "fadeInUp 0.5s ease-out",
+      maxWidth: {
+        wrap: "var(--maxw)",
       },
-      keyframes: {
-        fadeIn: {
-          "0%":   { opacity: "0" },
-          "100%": { opacity: "1" },
-        },
-        fadeInUp: {
-          "0%":   { opacity: "0", transform: "translateY(20px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
+      transitionTimingFunction: {
+        editorial: "var(--ease)",
       },
       letterSpacing: {
         tight: "-0.02em",

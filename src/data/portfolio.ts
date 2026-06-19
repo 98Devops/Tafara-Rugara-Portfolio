@@ -1,4 +1,36 @@
-import { PortfolioData } from '@/types';
+import { PortfolioData, Metric } from '@/types';
+
+// Operating record — drives the Hero metrics ledger.
+// NOTE: Trevis billing-migration and property-management figures are placeholders
+// pending confirmation of exact wording.
+export const metrics: Metric[] = [
+  {
+    value: '60',
+    unit: '%',
+    label: 'Pipeline downtime removed',
+    detail: 'CI/CD reliability work, Excellessence',
+    meta: '2025 · prod',
+  },
+  {
+    value: '168',
+    label: 'Tests green on a live billing migration',
+    detail: 'Tenancy-cycle coverage rebuild, Trevis',
+    meta: '2026 · zero-downtime',
+  },
+  {
+    value: '4',
+    label: 'Properties under automated management',
+    detail: '~138 active tenants, arrears + payments',
+    meta: 'live',
+  },
+  {
+    value: '3',
+    unit: '+',
+    label: 'AI automation systems shipped to real teams',
+    detail: 'Retention, delivery-health, document pipelines',
+    meta: 'n8n · LLMs',
+  },
+];
 
 export const automationSystems = {
   flagship: {

@@ -71,6 +71,19 @@ export interface Experience {
   impact?: string;
 }
 
+export interface Metric {
+  /** Large numeral, e.g. "60", "168", "3" */
+  value: string;
+  /** Accent unit appended to the numeral, e.g. "%", "+" */
+  unit?: string;
+  /** One-line description */
+  label: string;
+  /** Muted supporting line */
+  detail?: string;
+  /** Mono meta tag shown at row end, e.g. "2025 · prod" */
+  meta?: string;
+}
+
 export interface ContactFormData {
   name: string;
   email: string;
