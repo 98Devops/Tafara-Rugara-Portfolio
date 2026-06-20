@@ -113,8 +113,6 @@ export const certifications = [
     issuer: 'Amazon Web Services',
     year: '2024',
     status: 'Certified',
-    color: '#FF9900',
-    icon: '☁️',
     badge: 'CCP',
   },
   {
@@ -122,8 +120,6 @@ export const certifications = [
     issuer: 'Amazon Web Services',
     year: '2025',
     status: 'In Progress',
-    color: '#00D4FF',
-    icon: '🏗️',
     badge: 'SAA-C03',
   },
 ];
