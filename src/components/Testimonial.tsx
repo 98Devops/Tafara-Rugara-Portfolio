@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { testimonial } from '@/data/portfolio';
 
 export default function Testimonial() {
@@ -10,16 +9,12 @@ export default function Testimonial() {
         <div className="max-w-3xl">
           <p className="label mb-8">// what they say</p>
 
-          <motion.blockquote
-            className="font-display text-bone"
+          <blockquote
+            className="rise font-display text-bone"
             style={{ fontWeight: 400, fontSize: 'clamp(1.4rem, 3.2vw, 2rem)', lineHeight: 1.35, letterSpacing: '-0.01em' }}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
             <span className="text-ember">“</span>{testimonial.quote}<span className="text-ember">”</span>
-          </motion.blockquote>
+          </blockquote>
 
           <div className="mt-8 flex items-center gap-4">
             <span className="w-8 h-px" style={{ background: 'var(--line-2)' }} aria-hidden="true" />

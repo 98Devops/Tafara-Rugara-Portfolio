@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { certifications } from '@/data/portfolio';
 
 export default function Certifications() {
@@ -18,14 +17,10 @@ export default function Certifications() {
         {/* Cert rows */}
         <div className="grid sm:grid-cols-2 gap-4">
           {certifications.map((cert, i) => (
-            <motion.div
+            <div
               key={cert.name}
-              className="border border-line rounded-md p-6"
-              style={{ background: 'var(--surface)' }}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="rise border border-line rounded-md p-6"
+              style={{ background: 'var(--surface)', animationDelay: `${i * 0.08}s` }}
             >
               <div className="flex items-center justify-between mb-4">
                 <span className="font-mono" style={{ fontSize: '0.7rem', letterSpacing: '0.1em', color: 'var(--bone-faint)' }}>
@@ -54,17 +49,11 @@ export default function Certifications() {
                     <span>Exam prep</span><span>~60%</span>
                   </div>
                   <div className="h-px overflow-hidden" style={{ background: 'var(--line-2)' }}>
-                    <motion.div
-                      style={{ height: '100%', background: 'var(--ember)' }}
-                      initial={{ width: 0 }}
-                      whileInView={{ width: '60%' }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.9, delay: 0.2, ease: 'easeOut' }}
-                    />
+                    <div style={{ height: '100%', width: '60%', background: 'var(--ember)' }} />
                   </div>
                 </div>
               )}
-            </motion.div>
+            </div>
           ))}
         </div>
 

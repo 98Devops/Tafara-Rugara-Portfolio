@@ -6,8 +6,8 @@ import { TechMarquee } from '@/components/TechMarquee';
 import { AutomationSystems } from '@/components/AutomationSystems';
 import dynamic from 'next/dynamic';
 
-const Certifications = dynamic(() => import('@/components/Certifications'), { ssr: false });
-const Testimonial = dynamic(() => import('@/components/Testimonial'), { ssr: false });
+const Certifications = dynamic(() => import('@/components/Certifications'));
+const Testimonial = dynamic(() => import('@/components/Testimonial'));
 
 export default function Home() {
   const { personal } = portfolioData;

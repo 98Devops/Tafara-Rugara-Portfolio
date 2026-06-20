@@ -11,7 +11,6 @@ const ContactForm = dynamic(() => import('@/components/ContactForm'), {
       ))}
     </div>
   ),
-  ssr: false,
 });
 
 export default function Contact() {

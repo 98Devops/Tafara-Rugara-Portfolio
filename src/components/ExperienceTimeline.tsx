@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Experience } from '@/types';
 
 interface ExperienceTimelineProps {
@@ -14,13 +13,10 @@ export default function ExperienceTimeline({ experiences }: ExperienceTimelinePr
       <div className="absolute left-2 top-1 bottom-1 w-px" style={{ background: 'var(--line-2)' }} aria-hidden="true" />
 
       {experiences.map((experience, index) => (
-        <motion.div
+        <div
           key={`${experience.company}-${experience.position}`}
-          className="relative pl-10 pb-12 last:pb-0"
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: index * 0.08 }}
+          className="rise relative pl-10 pb-12 last:pb-0"
+          style={{ animationDelay: `${index * 0.08}s` }}
         >
           {/* Node */}
           <span
@@ -71,7 +67,7 @@ export default function ExperienceTimeline({ experiences }: ExperienceTimelinePr
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       ))}
     </div>
   );
