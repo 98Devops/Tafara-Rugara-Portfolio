@@ -206,8 +206,136 @@ export const portfolioData: PortfolioData = {
   ],
   projects: [
     {
+      id: 'trevis-property-management',
+      title: 'Trevis — Student Accommodation Management',
+      category: 'webapp',
+      description:
+        'A production property-management web app for multi-property student accommodation: occupancy, rent collection, arrears, transfers, and reporting. Live on real data — ~130 students across several properties — not a demo.',
+      problem:
+        'Student-accommodation operators tracked rent in calendar-month "paid/unpaid" flags, losing prepaid days and mishandling partial or early payments — with no way to trust the numbers or rebuild them from source.',
+      technicalArchitecture:
+        'React + Vite SPA talking directly to Supabase (Postgres, Auth, Row-Level Security); a day-based rent-coverage engine where each payment buys stacking days of coverage, replayed from an immutable payment ledger by one pure writer. Deployed on Netlify.',
+      operationalValue:
+        'Runs in production on a live portfolio: payments persist, coverage is computed from the immutable ledger, drift auto-reconciles on every mutation, and a nightly integrity audit plus a 07:00 daily owner report keep the data honest.',
+      outcome:
+        'Live system at trevis.netlify.app — single source of truth for coverage, ~190 Vitest tests under local and UTC timezones, GitHub Actions monitoring (nightly integrity audit + daily owner report via Resend/WhatsApp).',
+      technologies: ['React', 'Vite', 'Supabase', 'PostgreSQL', 'Row-Level Security', 'Vitest', 'GitHub Actions', 'Resend', 'Netlify'],
+      highlights: [
+        'Live in production on real data — ~130 students across several properties',
+        'Day-based coverage engine: payments buy stacking days, replayed from an immutable ledger by one writer',
+        'Auto-reconciliation on every mutation (payment, transfer, rent change, vacate) — drift cannot accumulate',
+        'Supabase Auth + Row-Level Security; per-student access governed by RLS, not client logic',
+        '~190 Vitest unit tests run under both local and UTC timezones',
+        'GitHub Actions: nightly coverage-integrity audit + 07:00 daily owner report via Resend + WhatsApp',
+        'Dashboard KPIs, per-property collected-vs-expected, attention list, CSV export',
+      ],
+      githubUrl: 'https://github.com/98Devops/trevis-app',
+      demoUrl: 'https://trevis.netlify.app/',
+    },
+    {
+      id: 'litho-solutions',
+      title: 'Litho Solutions',
+      category: 'website',
+      description:
+        'A cutting-edge web platform dedicated to modernizing mineral exploration. By leveraging high-accuracy data and dynamic visualization, provides decision-ready data to prevent blind drilling and maximize targeting precision.',
+      technicalArchitecture:
+        'Next.js 15 App Router with React 19, Tailwind CSS v4 for styling, Three.js and React Three Fiber for 3D visualizations, Framer Motion for animations, fully static export for optimal performance.',
+      operationalValue:
+        'Transforms complex geological data into interactive 3D visualizations, enabling mining companies to make data-driven exploration decisions and reduce costly blind drilling operations.',
+      outcome:
+        'Deployed on Netlify with fully static export, featuring interactive 3D floating gold nuggets, smooth animations, and responsive design across all devices.',
+      technologies: ['Next.js 15', 'React 19', 'Tailwind CSS v4', 'Framer Motion', 'Three.js', 'React Three Fiber', 'Drei', 'Lucide React', 'Netlify'],
+      highlights: [
+        'Interactive 3D visualizations with floating gold nuggets using Three.js',
+        'Smooth page transitions and micro-interactions with Framer Motion',
+        'Performant static export optimized for fast loading',
+        'Responsive layout adapting to mobile, tablet, and desktop',
+        'Mineral categorization system for exploration data',
+        'Modern UI with Tailwind CSS v4 utility-first approach',
+        'Deployed on Netlify with continuous deployment',
+      ],
+      githubUrl: 'https://github.com/98Devops/Litho-Solutions',
+      demoUrl: 'https://litho-solution.netlify.app/',
+    },
+    {
+      id: 'proair-zimbabwe',
+      title: 'ProAir Zimbabwe',
+      category: 'website',
+      description:
+        "High-performance business website for Zimbabwe's leading air conditioning, heating & ventilation specialists. Multi-page Vite build with WhatsApp-first lead generation.",
+      technicalArchitecture:
+        'Vite 5 build system with vanilla JavaScript, CSS3 for styling and animations, vite-plugin-image-optimizer with Sharp for asset optimization, Open-Meteo API integration for live weather data.',
+      operationalValue:
+        'Provides instant customer engagement through WhatsApp integration, showcases services with interactive UI elements, and demonstrates technical expertise through live weather integration.',
+      outcome:
+        'Deployed on Netlify with CI/CD from main branch, achieving ~45% image file size reduction through optimization, SEO-ready with Schema.org structured data.',
+      technologies: ['Vite 5', 'HTML5', 'CSS3', 'Vanilla JavaScript', 'Google Fonts', 'Lucide Icons', 'Sharp', 'Open-Meteo API', 'Netlify'],
+      highlights: [
+        'WhatsApp integration for instant lead generation',
+        'Live weather widget powered by Open-Meteo API',
+        'Particle system background effects',
+        '3D tilt card interactions',
+        'Counter animations and typing effects',
+        'Smooth page transitions and scroll progress bar',
+        'Image optimization achieving ~45% file size reduction',
+        'SEO optimized with Schema.org LocalBusiness JSON-LD and Open Graph tags',
+        'Button micro-interactions for enhanced UX',
+      ],
+      githubUrl: '',
+      demoUrl: 'https://proairzw.netlify.app/',
+    },
+    {
+      id: 'mero-tech-ai',
+      title: 'Mero Tech AI',
+      category: 'website',
+      description:
+        'A premium, highly interactive marketing website showcasing AI automation, internal tools, and cloud infrastructure services. Built with modern web technologies and featuring stunning animations.',
+      technicalArchitecture:
+        'Next.js 14 App Router with TypeScript for type safety, Tailwind CSS for styling, Framer Motion for animations, Zod for form validation, DOMPurify for XSS sanitization, comprehensive testing with Jest and Fast-check.',
+      operationalValue:
+        'Demonstrates technical expertise through interactive UI, validates business credibility through comprehensive testing (235+ tests), and provides secure contact form processing with XSS protection.',
+      outcome:
+        'Production-ready marketing site with 235+ tests, property-based testing for correctness guarantees, bundle size optimization, and WCAG accessibility considerations.',
+      technologies: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Zod', 'DOMPurify', 'Jest', 'React Testing Library', 'Fast-check', 'Netlify'],
+      highlights: [
+        'Interactive animations: custom cursor, parallax effects, 3D card tilts, floating particles',
+        'Performance optimized: bundle size optimization, WebP/AVIF images, lazy loading',
+        'Fully responsive design across all devices',
+        'SEO ready with Open Graph tags, structured data, and sitemap',
+        'Type-safe with TypeScript throughout',
+        'Comprehensive testing: 235+ tests with Jest, React Testing Library, and Fast-check property-based testing',
+        'Accessible with WCAG considerations',
+        'Services showcased: AI Automation, Internal Tools, Web Applications, Cloud Infrastructure, AI Consulting',
+      ],
+      githubUrl: '',
+      demoUrl: 'https://mero-tech-ai.netlify.app/',
+    },
+    {
+      id: 'aws-cloud-resume',
+      title: 'AWS Cloud Resume Challenge',
+      category: 'platform',
+      description:
+        'Reusable serverless application platform built with Terraform IaC and GitHub Actions — standardising lightweight API and static app deployments with security-by-default principles.',
+      technicalArchitecture:
+        'Infrastructure entirely in Terraform; secure-by-default config; fully automated GitHub Actions CI/CD.',
+      operationalValue:
+        'Reduces deployment time from days to minutes with zero configuration drift across projects.',
+      outcome:
+        'Reusable pattern adopted across multiple projects including this portfolio site.',
+      technologies: ['AWS Lambda', 'API Gateway', 'S3', 'CloudFront', 'IAM', 'Terraform', 'VPC', 'GitHub Actions'],
+      highlights: [
+        'Infrastructure-as-Code with Terraform (100% automation)',
+        'Secure-by-default: IAM least privilege, HTTPS-only, signed CDN',
+        'GitHub Actions pipeline with full deployment gates',
+        'Adopted across multiple projects — zero config drift',
+      ],
+      githubUrl: '',
+      demoUrl: 'https://d3tr9ufxy7e85m.cloudfront.net/',
+    },
+    {
       id: 'acquisitions-api',
       title: 'Acquisitions — Platform for Buying & Selling SaaS Businesses',
+      category: 'platform',
       description:
         'Production-ready API platform for SaaS business acquisitions with JWT/RBAC authentication, deal state management, Kubernetes orchestration, and a full DevOps lifecycle.',
       problem: 'SaaS businesses needed a secure, scalable platform for managing acquisition transactions with role-based access, deal workflows, and comprehensive monitoring.',
@@ -233,6 +361,7 @@ export const portfolioData: PortfolioData = {
     {
       id: 'voice-to-vector-api',
       title: 'Voice-to-Vector API (Platform Variant)',
+      category: 'platform',
       description:
         'Flask-based internal platform service exposing an end-to-end AI pipeline — converting voice inputs into vector embeddings for semantic search and downstream workflow automation.',
       problem: 'Teams needed a reliable internal service to process voice inputs, transcribe, enrich, and store vector embeddings for semantic retrieval.',
@@ -252,6 +381,7 @@ export const portfolioData: PortfolioData = {
     {
       id: 'legacy-migration',
       title: 'Managed Legacy Migration — Platform Modernization',
+      category: 'platform',
       description:
         'Strategic lift-and-shift migration of a 15-year-old Java application from manual on-premises server management to a fully managed AWS platform with a documented "Golden Path" for onboarding.',
       problem: 'Legacy Java app faced operational overhead, scalability limits, and manual server management complexity.',
@@ -271,6 +401,7 @@ export const portfolioData: PortfolioData = {
     {
       id: 'serverless-platform-pattern',
       title: 'Serverless App Pattern — IaC & CI/CD Platform',
+      category: 'platform',
       description:
         'Reusable serverless application platform built with Terraform IaC and GitHub Actions — standardising lightweight API and static app deployments with security-by-default principles.',
       problem: 'Teams needed repeatable, secure patterns for rapid API and static application deployments.',

@@ -29,9 +29,12 @@ export interface TechnicalCapability {
   icon?: string;
 }
 
+export type ProjectCategory = 'website' | 'webapp' | 'automation' | 'platform';
+
 export interface Project {
   id: string;
   title: string;
+  category?: ProjectCategory;
   description: string;
   problem?: string;
   technicalArchitecture?: string;
