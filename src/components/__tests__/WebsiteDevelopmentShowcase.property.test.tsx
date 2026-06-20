@@ -227,9 +227,8 @@ describe('Website Development Showcase Property Tests', () => {
               expect(container.querySelector('h3')).toHaveTextContent(
                 project.title
               );
-              expect(container.querySelector('p')).toHaveTextContent(
-                project.description
-              );
+              // Description is rendered somewhere in the card body
+              expect(container.textContent).toContain(project.description);
 
               // Clean up after each render to avoid duplicates
               unmount();
@@ -705,20 +704,14 @@ describe('Website Development Showcase Property Tests', () => {
               <ProjectCard project={project} index={0} />
             );
 
-            // Verify card has background color defined
-            const card = container.querySelector(
-              '.bg-gray-900\\/50, .bg-gray-900, .bg-gray-800'
-            );
+            // Redesign: card uses the token surface background.
+            const card = container.querySelector('.bg-surface');
             expect(card).toBeTruthy();
 
-            // Verify text elements exist with appropriate contrast classes
-            const whiteText = container.querySelectorAll('.text-white');
-            const lightText = container.querySelectorAll(
-              '.text-gray-300, .text-gray-400'
-            );
-
-            // Should have either white or light gray text on dark background
-            expect(whiteText.length + lightText.length).toBeGreaterThan(0);
+            // Token text colors all pass WCAG AA on the ink background.
+            const primaryText = container.querySelectorAll('.text-bone');
+            const mutedText = container.querySelectorAll('.text-bone-dim, .text-bone-faint');
+            expect(primaryText.length + mutedText.length).toBeGreaterThan(0);
           });
         }),
         { numRuns: 10 }
@@ -749,13 +742,11 @@ describe('Website Development Showcase Property Tests', () => {
               links.forEach(link => {
                 const className = link.className;
 
-                // Links should use accessible color classes
-                // text-gray-400, text-blue-400, text-cyan-400 on dark backgrounds meet WCAG AA
+                // Redesign: links use token text colors, all WCAG AA on ink.
                 const hasAccessibleColor =
-                  className.includes('text-gray-400') ||
-                  className.includes('text-blue-400') ||
-                  className.includes('text-cyan-400') ||
-                  className.includes('text-white');
+                  className.includes('text-bone-dim') ||
+                  className.includes('text-bone-faint') ||
+                  className.includes('text-bone');
 
                 expect(hasAccessibleColor).toBe(true);
               });

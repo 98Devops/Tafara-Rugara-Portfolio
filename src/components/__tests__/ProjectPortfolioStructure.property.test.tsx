@@ -403,7 +403,9 @@ describe('Project Portfolio Structure Property Tests', () => {
                 ${project.technologies.join(' ')}
               `.toLowerCase();
 
-            // Should contain core technical terms relevant to DevOps/Cloud
+            // Should contain core technical terms. The portfolio now spans
+            // DevOps/Cloud, platform, and web/web-app work, so web stack terms
+            // (react/next.js/vite/typescript) also count as technical depth.
             const coreTerms = [
               'api',
               'aws',
@@ -411,6 +413,11 @@ describe('Project Portfolio Structure Property Tests', () => {
               'kubernetes',
               'terraform',
               'ci/cd',
+              'react',
+              'next.js',
+              'vite',
+              'typescript',
+              'supabase',
             ];
             const hasRelevantTerms = coreTerms.some(term =>
               combinedTechText.includes(term)
