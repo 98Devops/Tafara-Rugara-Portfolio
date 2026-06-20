@@ -29,11 +29,12 @@ jest.mock('framer-motion', () => ({
 
 describe('Hover and Interaction Effects', () => {
   describe('Navigation Component', () => {
-    it('should have proper focus outline for logo link', () => {
+    it('keeps the logo link visibly focusable (no blanket outline removal)', () => {
       render(<Navigation />);
 
       const logoLink = screen.getByRole('link', { name: /tafara rugara/i });
-      expect(logoLink).toHaveClass('focus:outline-none');
+      // Redesign: rely on the global :focus-visible ember ring; never suppress it.
+      expect(logoLink).not.toHaveClass('focus:outline-none');
       expect(logoLink).toBeInTheDocument();
     });
 
@@ -41,14 +42,14 @@ describe('Hover and Interaction Effects', () => {
       render(<Navigation />);
 
       const projectsLink = screen.getByRole('link', { name: /projects/i });
-      expect(projectsLink).toHaveClass('transition-all', 'duration-200');
+      expect(projectsLink.className).toMatch(/transition-/);
     });
 
-    it('should have proper focus state for mobile menu button', () => {
+    it('keeps the mobile menu button visibly focusable', () => {
       render(<Navigation />);
 
       const menuButton = screen.getByRole('button', { name: /toggle menu/i });
-      expect(menuButton).toHaveClass('focus:outline-none');
+      expect(menuButton).not.toHaveClass('focus:outline-none');
       expect(menuButton).toBeInTheDocument();
     });
   });
@@ -69,8 +70,9 @@ describe('Hover and Interaction Effects', () => {
     it('should have transition effects for form inputs', () => {
       render(<ContactForm />);
 
-      const nameInput = screen.getByLabelText(/full name/i);
-      expect(nameInput).toHaveClass('transition-all', 'duration-200');
+      const nameInput = screen.getByLabelText(/full name/i) as HTMLInputElement;
+      // Redesign: inputs transition border-color on focus via inline style.
+      expect(nameInput.style.transition).toMatch(/border-color/);
     });
 
     it('should have proper focus state for submit button', () => {
@@ -88,7 +90,8 @@ describe('Hover and Interaction Effects', () => {
       const submitButton = screen.getByRole('button', {
         name: /send via whatsapp/i,
       });
-      expect(submitButton).toHaveClass('transition-all', 'duration-200');
+      // Redesign: submit uses the shared .btn-solid class (CSS transition).
+      expect(submitButton).toHaveClass('btn-solid');
     });
   });
 
@@ -130,9 +133,7 @@ describe('Hover and Interaction Effects', () => {
         );
 
       navLinks.forEach(link => {
-        const classes = link.className;
-        expect(classes).toContain('transition-all');
-        expect(classes).toContain('duration-200');
+        expect(link.className).toMatch(/transition-/);
       });
     });
   });

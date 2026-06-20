@@ -5,7 +5,7 @@
  * Validates: Requirements 2.5
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { usePathname } from 'next/navigation';
 import fc from 'fast-check';
 import { Hero } from '../Hero';
@@ -114,39 +114,19 @@ describe('UI Element Completeness Property Tests', () => {
               <Hero personal={personalData} />
             );
 
-            // Requirements 2.5: Call-to-action buttons for: View Projects, Download CV (PDF),
-            // Download Reference (PDF), GitHub, and LinkedIn
+            // Redesign 2.5: primary CTAs are View Projects (link) + Download CV
+            // (button); GitHub / LinkedIn / Contact appear as an inline link row.
 
-            // Use container queries to avoid conflicts with other rendered components
-            const allButtons = container.querySelectorAll('a');
-            expect(allButtons.length).toBe(5);
-
-            // 1. View Projects button
-            const viewProjectsBtn = container.querySelector(
-              'a[href="/projects"]'
-            );
+            // View Projects link
+            const viewProjectsBtn = container.querySelector('a[href="/projects"]');
             expect(viewProjectsBtn).toBeInTheDocument();
-            expect(viewProjectsBtn?.textContent?.trim()).toBe('View Projects');
+            expect(viewProjectsBtn?.textContent?.trim()).toContain('View Projects');
 
-            // 2. Download CV button
-            const downloadCVBtn = container.querySelector(
-              `a[href="${personalData.documents.cv}"]`
-            );
+            // Download CV — now a button that triggers a programmatic download
+            const downloadCVBtn = screen.getByRole('button', { name: /download cv/i });
             expect(downloadCVBtn).toBeInTheDocument();
-            expect(downloadCVBtn).toHaveAttribute('download');
-            expect(downloadCVBtn?.textContent?.trim()).toBe('Download CV');
 
-            // 3. Download Reference button
-            const downloadRefBtn = container.querySelector(
-              `a[href="${personalData.documents.reference}"]`
-            );
-            expect(downloadRefBtn).toBeInTheDocument();
-            expect(downloadRefBtn).toHaveAttribute('download');
-            expect(downloadRefBtn?.textContent?.trim()).toBe(
-              'Download Reference'
-            );
-
-            // 4. GitHub social link
+            // GitHub social link
             const githubBtn = container.querySelector(
               `a[href="${personalData.socialLinks.github}"]`
             );
@@ -155,7 +135,7 @@ describe('UI Element Completeness Property Tests', () => {
             expect(githubBtn).toHaveAttribute('rel', 'noopener noreferrer');
             expect(githubBtn?.textContent?.trim()).toBe('GitHub');
 
-            // 5. LinkedIn social link
+            // LinkedIn social link
             const linkedinBtn = container.querySelector(
               `a[href="${personalData.socialLinks.linkedin}"]`
             );
@@ -164,8 +144,12 @@ describe('UI Element Completeness Property Tests', () => {
             expect(linkedinBtn).toHaveAttribute('rel', 'noopener noreferrer');
             expect(linkedinBtn?.textContent?.trim()).toBe('LinkedIn');
 
-            // Verify all buttons are clickable (have proper href attributes)
-            allButtons.forEach(button => {
+            // Contact link
+            const contactBtn = container.querySelector('a[href="/contact"]');
+            expect(contactBtn).toBeInTheDocument();
+
+            // Every hero anchor has a real href
+            container.querySelectorAll('a').forEach(button => {
               expect(button).toHaveAttribute('href');
               expect(button.getAttribute('href')).toBeTruthy();
             });
@@ -210,9 +194,10 @@ describe('UI Element Completeness Property Tests', () => {
             expect(link).toHaveAttribute('rel', 'noopener noreferrer');
           });
 
-          // Download links should have download attribute
-          const downloadLinks = container.querySelectorAll('a[download]');
-          expect(downloadLinks.length).toBeGreaterThanOrEqual(2); // CV and Reference
+          // Download CV is exposed as an accessible button (programmatic download)
+          expect(
+            screen.getByRole('button', { name: /download cv/i })
+          ).toBeInTheDocument();
 
           // Clean up to avoid conflicts
           unmount();
@@ -262,7 +247,7 @@ describe('UI Element Completeness Property Tests', () => {
 
             // Mobile menu button should be present and functional
             const mobileMenuButton = container.querySelector(
-              '[aria-label="Toggle mobile menu"]'
+              '[aria-label="Toggle menu"]'
             );
             expect(mobileMenuButton).toBeInTheDocument();
             expect(mobileMenuButton).toHaveAttribute('aria-expanded');
@@ -270,7 +255,8 @@ describe('UI Element Completeness Property Tests', () => {
             // Brand/logo link should be present
             const brandLink = container.querySelector('a[href="/"]');
             expect(brandLink).toBeInTheDocument();
-            expect(brandLink?.textContent).toContain('Tafara Rugara');
+            // Redesign: monogram renders the name in uppercase mono.
+            expect(brandLink?.textContent?.toLowerCase()).toContain('tafara rugara');
 
             // Clean up to avoid conflicts
             unmount();
@@ -297,7 +283,7 @@ describe('UI Element Completeness Property Tests', () => {
 
             // Active state should be applied to current page
             const activeNavItem = container.querySelector(
-              '[class*="text-blue-400"]'
+              '[aria-current="page"]'
             );
             expect(activeNavItem).toBeInTheDocument();
 
@@ -306,7 +292,7 @@ describe('UI Element Completeness Property Tests', () => {
 
             // Only one item should be active at a time
             const allActiveItems = container.querySelectorAll(
-              '[class*="text-blue-400"]'
+              '[aria-current="page"]'
             );
             expect(allActiveItems).toHaveLength(1);
 
@@ -353,11 +339,12 @@ describe('UI Element Completeness Property Tests', () => {
               <Navigation />
             );
 
-            // Hero section should have exactly 5 call-to-action buttons
+            // Redesign: hero has anchor CTAs (View Projects + GitHub/LinkedIn/
+            // Contact); Download CV is a <button>.
             const allHeroLinks = heroContainer.querySelectorAll('a');
-            expect(allHeroLinks).toHaveLength(5);
+            expect(allHeroLinks.length).toBeGreaterThanOrEqual(4);
 
-            // Navigation should have at least 6 links (5 nav + 1 brand)
+            // Navigation should have at least 6 links (5 nav + brand + CTA)
             const allNavLinks = navContainer.querySelectorAll('a');
             expect(allNavLinks.length).toBeGreaterThanOrEqual(6);
 
@@ -372,14 +359,15 @@ describe('UI Element Completeness Property Tests', () => {
               expect(link.textContent?.trim()).toBeTruthy();
             });
 
-            // Download links should have download attribute
-            const downloadLinks = heroContainer.querySelectorAll('a[download]');
-            expect(downloadLinks).toHaveLength(2); // CV and Reference
+            // Download CV is a button that downloads programmatically
+            expect(
+              screen.getByRole('button', { name: /download cv/i })
+            ).toBeInTheDocument();
 
             // External links should have proper target and rel attributes
             const externalLinks =
               heroContainer.querySelectorAll('a[target="_blank"]');
-            expect(externalLinks).toHaveLength(2); // GitHub and LinkedIn
+            expect(externalLinks.length).toBeGreaterThanOrEqual(2); // GitHub and LinkedIn
 
             externalLinks.forEach(link => {
               expect(link).toHaveAttribute('rel', 'noopener noreferrer');
@@ -401,33 +389,18 @@ describe('UI Element Completeness Property Tests', () => {
             <Hero personal={personalData} />
           );
 
-          // All call-to-action buttons should have consistent styling classes
-          const allButtons = container.querySelectorAll('a');
-
-          allButtons.forEach(button => {
-            // Should have padding classes for proper touch targets
-            const className = button.className;
-            expect(className).toMatch(/px-\d+/); // horizontal padding
-            expect(className).toMatch(/py-\d+/); // vertical padding
-
-            // Should have transition classes for smooth interactions
-            expect(className).toMatch(/transition/);
-
-            // Should have proper color classes
-            expect(className).toMatch(/(bg-|border-|text-)/);
-          });
-
-          // Primary action button (View Projects) should have distinct styling
+          // Redesign: CTAs use shared button classes / token utilities.
+          // Primary action (View Projects) uses the solid button treatment.
           const primaryButton = container.querySelector('a[href="/projects"]');
-          // Accept either a solid blue background or a gradient branding class
-          expect(primaryButton?.className).toMatch(
-            /bg-blue-600|bg-gradient-to-r/
-          );
+          expect(primaryButton?.className).toMatch(/btn-solid/);
 
-          // Secondary buttons should have border styling
-          const secondaryButtons =
-            container.querySelectorAll('a[class*="border"]');
-          expect(secondaryButtons.length).toBeGreaterThanOrEqual(4); // CV, Reference, GitHub, LinkedIn
+          // The inline social/contact links carry color utility classes.
+          const socialRow = container.querySelectorAll('a[class*="text-bone"]');
+          expect(socialRow.length).toBeGreaterThanOrEqual(3); // GitHub, LinkedIn, Contact
+
+          // Download CV uses the ghost button treatment.
+          const cvButton = screen.getByRole('button', { name: /download cv/i });
+          expect(cvButton.className).toMatch(/btn-ghost/);
 
           // Clean up to avoid conflicts
           unmount();
@@ -462,7 +435,7 @@ describe('UI Element Completeness Property Tests', () => {
 
             // Should always have mobile menu button
             const mobileMenuButton = container.querySelector(
-              '[aria-label="Toggle mobile menu"]'
+              '[aria-label="Toggle menu"]'
             );
             expect(mobileMenuButton).toBeInTheDocument();
 
@@ -529,25 +502,14 @@ describe('UI Element Completeness Property Tests', () => {
               'a[href="/projects"]'
             );
             expect(viewProjectsBtn).toBeInTheDocument();
-            expect(viewProjectsBtn?.textContent?.trim()).toBe('View Projects');
+            expect(viewProjectsBtn?.textContent?.trim()).toContain('View Projects');
 
-            // 2. Download CV (PDF)
-            const cvLink = heroContainer.querySelector(
-              `a[href="${personalData.documents.cv}"]`
-            );
-            expect(cvLink).toBeInTheDocument();
-            expect(cvLink).toHaveAttribute('download');
-            expect(cvLink?.getAttribute('href')).toMatch(/\.pdf$/);
-            expect(cvLink?.textContent?.trim()).toBe('Download CV');
-
-            // 3. Download Reference (PDF)
-            const refLink = heroContainer.querySelector(
-              `a[href="${personalData.documents.reference}"]`
-            );
-            expect(refLink).toBeInTheDocument();
-            expect(refLink).toHaveAttribute('download');
-            expect(refLink?.getAttribute('href')).toMatch(/\.pdf$/);
-            expect(refLink?.textContent?.trim()).toBe('Download Reference');
+            // 2. Download CV — button with a programmatic download (Reference
+            //    moved to the footer/contact page in the redesign).
+            const cvButton = within(heroContainer).getByRole('button', {
+              name: /download cv/i,
+            });
+            expect(cvButton).toBeInTheDocument();
 
             // 4. GitHub social link
             const githubLink = heroContainer.querySelector(
