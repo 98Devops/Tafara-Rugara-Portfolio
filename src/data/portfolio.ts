@@ -203,6 +203,23 @@ export const portfolioData: PortfolioData = {
         'Alert Aggregation & Anti-Spam Logic',
       ],
     },
+    {
+      category: 'Website Development',
+      description:
+        'Building modern, performant websites and web apps with React, Next.js, and cutting-edge web technologies. Specializing in interactive UI, performance optimization, and SEO-ready implementations.',
+      skills: [
+        'Next.js & React',
+        'TypeScript',
+        'Tailwind CSS',
+        'Responsive Design',
+        'Performance Optimization',
+        'SEO Best Practices',
+        'Framer Motion',
+        'Property-Based Testing',
+        'Static Site Generation',
+        'Netlify Deployment',
+      ],
+    },
   ],
   projects: [
     {

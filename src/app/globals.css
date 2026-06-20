@@ -146,6 +146,12 @@ body {
 }
 .chip:hover { border-color: var(--bone-faint); color: var(--bone); }
 
+/* ─── Capability card ────────────────────────────────────── */
+.capability-card {
+  transition: border-color var(--dur-fast) var(--ease);
+}
+.capability-card:hover { border-color: var(--line-2); }
+
 /* ─── Contact tile (download + social rows) ──────────────── */
 .contact-tile {
   background: var(--surface);

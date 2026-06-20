@@ -1,15 +1,23 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { TechnicalCapability } from '@/types';
-import { SpotlightCard } from '@/components/SpotlightCard';
+import {
+  CloudIcon,
+  CommandLineIcon,
+  CpuChipIcon,
+  SignalIcon,
+  CodeBracketIcon,
+  WrenchScrewdriverIcon,
+} from '@heroicons/react/24/outline';
+import type { ComponentType, SVGProps } from 'react';
 
-// Category → icon mapping
-const CATEGORY_ICONS: Record<string, string> = {
-  'Cloud Architecture':         '☁️',
-  'DevOps & CI/CD':             '⚙️',
-  'Automation Engineering':     '🤖',
-  'Monitoring & Reliability':   '📡',
+// Category → Heroicon mapping (no emoji)
+const CATEGORY_ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
+  'Cloud Architecture':       CloudIcon,
+  'DevOps & CI/CD':           CommandLineIcon,
+  'Automation Engineering':   CpuChipIcon,
+  'Monitoring & Reliability': SignalIcon,
+  'Website Development':      CodeBracketIcon,
 };
 
 interface CapabilityCardProps {
@@ -17,68 +25,35 @@ interface CapabilityCardProps {
   index: number;
 }
 
-export default function CapabilityCard({ capability, index }: CapabilityCardProps) {
-  const icon = CATEGORY_ICONS[capability.category] ?? '🔧';
+export default function CapabilityCard({ capability }: CapabilityCardProps) {
+  const Icon = CATEGORY_ICONS[capability.category] ?? WrenchScrewdriverIcon;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.5, delay: index * 0.08, ease: 'easeOut' }}
-    >
-      <SpotlightCard className="h-full">
-        <div className="glass-card p-6 flex flex-col h-full">
-          {/* Category header */}
-          <div className="flex items-center gap-3 mb-4 relative z-10">
-            <motion.div
-              className="flex items-center justify-center flex-shrink-0"
-              style={{
-                width: 36, height: 36,
-                background: 'rgba(24, 24, 27, 0.9)',
-                border: '1px solid rgba(39, 39, 42, 0.8)',
-                borderRadius: 8,
-                transition: 'box-shadow 0.3s ease',
-              }}
-              whileHover={{
-                boxShadow: '0 0 16px rgba(255,255,255,0.08)',
-              }}
-            >
-              <span style={{ fontSize: '18px' }}>{icon}</span>
-            </motion.div>
-            <h3 className="text-base font-semibold text-white leading-tight">
-              {capability.category}
-            </h3>
-          </div>
+    <div className="capability-card flex flex-col h-full p-6 border border-line rounded-md" style={{ background: 'var(--surface)' }}>
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-4">
+        <span
+          className="flex items-center justify-center flex-shrink-0 border border-line rounded-sm"
+          style={{ width: 36, height: 36, background: 'var(--surface-2)', color: 'var(--ember)' }}
+        >
+          <Icon className="w-[18px] h-[18px]" aria-hidden="true" />
+        </span>
+        <h3 className="font-display text-bone" style={{ fontWeight: 400, fontSize: '1.15rem', lineHeight: 1.2 }}>
+          {capability.category}
+        </h3>
+      </div>
 
-          {/* Description */}
-          <p className="text-sm leading-relaxed mb-5 relative z-10" style={{ color: '#A1A1AA' }}>
-            {capability.description}
-          </p>
+      {/* Description */}
+      <p className="text-bone-dim mb-5" style={{ fontSize: '0.92rem', lineHeight: 1.6 }}>
+        {capability.description}
+      </p>
 
-          {/* Skills as monospace tags — staggered reveal */}
-          <motion.div
-            className="flex flex-wrap gap-2 mt-auto relative z-10"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-30px' }}
-            transition={{ staggerChildren: 0.04, delayChildren: 0.2 + index * 0.08 }}
-          >
-            {capability.skills.map((skill) => (
-              <motion.span
-                key={skill}
-                className="tech-badge"
-                variants={{
-                  hidden: { opacity: 0, scale: 0.8, y: 4 },
-                  visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.3 } },
-                }}
-              >
-                {skill}
-              </motion.span>
-            ))}
-          </motion.div>
-        </div>
-      </SpotlightCard>
-    </motion.div>
+      {/* Skills as mono chips */}
+      <div className="flex flex-wrap gap-2 mt-auto">
+        {capability.skills.map((skill) => (
+          <span key={skill} className="chip">{skill}</span>
+        ))}
+      </div>
+    </div>
   );
 }

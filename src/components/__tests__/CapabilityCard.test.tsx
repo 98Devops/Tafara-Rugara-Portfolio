@@ -63,23 +63,23 @@ describe('CapabilityCard', () => {
     expect(skillElements).toHaveLength(mockCapability.skills.length);
   });
 
-  it('displays category icon', () => {
+  it('displays a category icon (Heroicon SVG, no emoji)', () => {
     const { container } = render(
       <CapabilityCard capability={mockCapability} index={0} />
     );
 
-    // Check that the icon is rendered (Cloud Architecture should have ☁️)
-    expect(container.textContent).toContain('☁️');
+    // Redesign: category icon is a Heroicon SVG, not an emoji.
+    expect(container.querySelector('svg')).toBeInTheDocument();
+    expect(container.textContent).not.toContain('☁️');
   });
 
-  it('applies glass-card styling', () => {
+  it('applies capability-card styling', () => {
     const { container } = render(
       <CapabilityCard capability={mockCapability} index={0} />
     );
 
-    // Check that the main card has the glass-card class
     const cardElement = container.firstChild as HTMLElement;
-    expect(cardElement).toHaveClass('glass-card');
+    expect(cardElement).toHaveClass('capability-card');
   });
 
   it('renders different category with correct icon', () => {
@@ -95,8 +95,8 @@ describe('CapabilityCard', () => {
     );
 
     expect(screen.getByText('DevOps & CI/CD')).toBeInTheDocument();
-    // DevOps & CI/CD should have ⚙️ icon
-    expect(container.textContent).toContain('⚙️');
+    // DevOps & CI/CD renders a Heroicon SVG (no emoji)
+    expect(container.querySelector('svg')).toBeInTheDocument();
   });
 
   it('renders Website Development category with correct icon and styling', () => {
@@ -112,8 +112,8 @@ describe('CapabilityCard', () => {
     );
 
     expect(screen.getByText('Website Development')).toBeInTheDocument();
-    // Website Development should have 🌐 icon
-    expect(container.textContent).toContain('🌐');
+    // Website Development renders a Heroicon SVG (no emoji)
+    expect(container.querySelector('svg')).toBeInTheDocument();
 
     // Check that skills are rendered
     expect(screen.getByText('Next.js & React')).toBeInTheDocument();
