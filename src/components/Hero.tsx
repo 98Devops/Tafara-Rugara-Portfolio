@@ -2,7 +2,6 @@
 
 import { PersonalInfo } from '@/types';
 import { useEffect, useState, useCallback } from 'react';
-import Image from 'next/image';
 import { metrics } from '@/data/portfolio';
 import { MetricsLedger } from '@/components/MetricsLedger';
 
@@ -47,7 +46,7 @@ export function Hero({ personal }: HeroProps) {
           {clock && <span>{clock}</span>}
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-start">
+        <div>
           <div>
             {/* Name eyebrow */}
             <p className="rise label mb-5">{personal.name}</p>
@@ -90,25 +89,6 @@ export function Hero({ personal }: HeroProps) {
               <a href="/contact" className="text-bone-dim hover:text-bone transition-colors">Contact me</a>
             </div>
           </div>
-
-          {/* Profile image — restrained, hairline border, no tilt */}
-          {personal.profileImage && (
-            <div className="rise d2 order-first lg:order-none">
-              <div
-                className="overflow-hidden border border-line"
-                style={{ width: 112, height: 112, borderRadius: 'var(--r-md)' }}
-              >
-                <Image
-                  src={personal.profileImage}
-                  alt={personal.name}
-                  width={112}
-                  height={112}
-                  className="w-full h-full object-cover"
-                  priority
-                />
-              </div>
-            </div>
-          )}
         </div>
       </div>
 

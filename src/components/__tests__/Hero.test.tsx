@@ -159,11 +159,11 @@ describe('Hero Component', () => {
     removeChildSpy.mockRestore();
   });
 
-  it('displays profile image', () => {
+  it('does not render a profile image', () => {
     render(<Hero personal={mockPersonalInfo} />);
 
-    const profileImage = screen.getByAltText('Tafara Rugara');
-    expect(profileImage).toBeInTheDocument();
-    expect(profileImage).toHaveAttribute('src', '/images/tafara-rugara.jpg');
+    // Redesign: the hero no longer shows a profile photo.
+    expect(screen.queryByAltText('Tafara Rugara')).not.toBeInTheDocument();
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
   });
 });

@@ -136,7 +136,6 @@ export const portfolioData: PortfolioData = {
     location: 'Harare, Zimbabwe & Johannesburg, South Africa',
     summary:
       'Cloud & DevOps Engineer specializing in AI-powered automation systems, container orchestration, and infrastructure that ships. I build production-grade pipelines, automate complex workflows with n8n and LLMs, and turn operational chaos into intelligent, self-managing systems — deployable on AWS, Docker, and Kubernetes.',
-    profileImage: '/images/tafara-rugara.jpg',
     socialLinks: {
       github:   'https://github.com/98Devops',
       linkedin: 'https://www.linkedin.com/in/tafara-rugara-0627b819b/',
