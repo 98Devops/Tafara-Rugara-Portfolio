@@ -70,9 +70,9 @@ export const automationSystems = {
       description:
         'A hands-free automation pipeline built at Your EKA Services that turns a spoken voice note into a classified, prioritised task inside an Obsidian "second brain" — no manual typing, tagging, or filing.',
       businessContext:
-        'Capturing ideas and action items by voice is fast, but the notes end up as unstructured audio nobody revisits — there was no way to automatically transcribe speech, work out its intent, classify and prioritise the tasks inside it, and file them somewhere searchable. The goal was an AI-first "second brain" prototype where talking is the only input and an organised task dashboard is the output.',
+        'Voice is the fastest way to capture ideas, but the notes pile up as audio nobody revisits — no transcription, no sense of intent, no prioritised tasks, nothing searchable.',
       systemPurpose:
-        'Drop a voice note in Google Drive and the system transcribes it, uses an LLM to extract intent, tags, sentiment, and action items, then writes a structured, prioritised task into a date-linked Obsidian vault that syncs across desktop and mobile.',
+        'A hands-free "second brain": drop a voice note in Google Drive and it comes back as a transcribed, classified, prioritised task — filed automatically in an Obsidian vault that syncs across devices.',
       architecture: [
         'Google Drive upload triggers the n8n workflow and downloads the audio',
         'Whisper API transcribes the audio; a JavaScript node cleans the transcript for the model',
@@ -89,9 +89,9 @@ export const automationSystems = {
       description:
         'An n8n AI agent prototype giving Botswana small businesses reliable, on-demand accounting and BURS tax guidance — bookkeeping, VAT, PAYE, and compliance answers — without a full-time accountant.',
       businessContext:
-        'Small businesses in Botswana rarely have affordable, reliable access to accounting and tax expertise, and generic chatbots get local BURS regulations and compliance rules wrong. The prototype set out to validate whether a domain-grounded AI agent could give SMEs accurate, context-aware answers on bookkeeping, VAT, PAYE, and tax compliance.',
+        'Botswana SMEs rarely have affordable access to accounting and tax expertise, and generic chatbots get local BURS rules wrong — leaving owners guessing on bookkeeping, VAT, PAYE, and compliance.',
       systemPurpose:
-        'A conversational AI agent that answers Botswana SME accounting and tax questions, grounded in BURS regulations and accounting standards via retrieval — with a built-in calculator and session memory so it holds context across a conversation.',
+        'A conversational AI agent that answers Botswana SME accounting and tax questions — grounded in BURS regulations via retrieval, with a built-in calculator and session memory so it holds context across a conversation.',
       architecture: [
         'RAG retrieval over BURS regulations, tax compliance, and accounting standards for grounded answers',
         'Calculator tool for accurate on-the-fly figures (e.g. VAT/PAYE computations)',
@@ -230,9 +230,9 @@ export const portfolioData: PortfolioData = {
       description:
         'Replaced four spreadsheets with a live property-management system tracking 130+ tenants across a real student-housing portfolio.',
       problem:
-        'A student-accommodation operator ran four properties and 130+ tenants out of four separate Excel spreadsheets — no dashboard, no single view of occupancy or arrears, and inconsistent date formats and duplicated names making a property\'s collection rate an afternoon of manual cross-referencing. Worse, calendar-month billing didn\'t match how tenants actually paid: someone who paid on the 19th was flagged overdue on the 1st, and early payments silently lost their prepaid days. There was no way to trust whether a number on screen reflected reality or a calculation error compounding in the background.',
+        'An operator ran four properties and 130+ tenants across four separate spreadsheets — no single view of occupancy or arrears, and calendar-month billing that flagged on-time tenants overdue and quietly lost their prepaid days. No number on screen could be trusted.',
       technicalArchitecture:
-        'I replaced the four spreadsheets with one production system — a React + Vite app on Supabase giving the operator a single live dashboard (occupancy, collection rates, arrears) across all properties. At its centre is a day-based rent-coverage engine I designed and rebuilt twice after diagnosing the calendar-month flaw in production: each payment buys coverage days that stack from the tenant\'s existing end date, so early and partial payments are handled correctly and coverage is never hand-authored — it\'s always replayed from the immutable payment ledger by a single pure function, auditable and rebuildable from source at any time. I migrated 130+ tenant records and years of payment history into a relational Postgres schema with Row-Level Security, correcting date, duplicate, and naming errors in the process.',
+        'One live system replacing the spreadsheets: a React + Supabase dashboard across all properties, driven by a day-based coverage engine where each payment stacks coverage days and is always replayed from an immutable ledger — so early and partial payments are correct, and every figure is auditable from source.',
       operationalValue:
         'Runs in production on a live portfolio: payments persist, coverage is computed from the immutable ledger, drift auto-reconciles on every mutation, and a nightly integrity audit plus a 07:00 daily owner report keep the data honest.',
       outcome:
