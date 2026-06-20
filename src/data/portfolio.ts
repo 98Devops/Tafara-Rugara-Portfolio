@@ -66,34 +66,39 @@ export const automationSystems = {
   supporting: [
     {
       id: 'voice-to-vector-workflow',
-      title: 'Voice-to-Vector AI Workflow (Your EKA Services)',
+      title: 'Voice-to-Insight AI Workflow (Your EKA Services)',
       description:
-        'AI workflow system built during my role at Your EKA Services — transforms voice notes into structured insights and stores them in a vector database for semantic retrieval and downstream automation.',
+        'A hands-free automation pipeline built at Your EKA Services that turns a spoken voice note into a classified, prioritised task inside an Obsidian "second brain" — no manual typing, tagging, or filing.',
+      businessContext:
+        'Capturing ideas and action items by voice is fast, but the notes end up as unstructured audio nobody revisits — there was no way to automatically transcribe speech, work out its intent, classify and prioritise the tasks inside it, and file them somewhere searchable. The goal was an AI-first "second brain" prototype where talking is the only input and an organised task dashboard is the output.',
       systemPurpose:
-        'Enables teams to capture unstructured voice input and convert it into searchable, structured knowledge. Built to prototype AI-first knowledge management for client demos.',
+        'Drop a voice note in Google Drive and the system transcribes it, uses an LLM to extract intent, tags, sentiment, and action items, then writes a structured, prioritised task into a date-linked Obsidian vault that syncs across desktop and mobile.',
       architecture: [
-        'End-to-end voice intelligence pipeline',
-        'Vector storage using Qdrant for semantic search',
-        'Integrates Whisper transcription and LLM reasoning',
-        'Exposed as a reliable internal service for downstream workflows',
+        'Google Drive upload triggers the n8n workflow and downloads the audio',
+        'Whisper API transcribes the audio; a JavaScript node cleans the transcript for the model',
+        'Gemini 2.5 Pro (via OpenRouter) performs intent recognition, tagging, sentiment, and action-item extraction into schema-validated JSON',
+        'A markdown builder converts the output into Obsidian-ready notes (Tasks / Dataview / Calendar plugins), filed and linked by the voice-note date',
+        'Notes are written to a DigitalOcean Ubuntu + Docker server and synced to desktop and mobile vaults via Syncthing',
       ],
-      tools: ['n8n', 'Qdrant', 'Whisper API', 'Gemini Pro', 'Docker', 'Workflow Automation'],
+      tools: ['n8n', 'Whisper API', 'Gemini 2.5 Pro', 'OpenRouter', 'Obsidian', 'Syncthing', 'DigitalOcean', 'Docker'],
       demoUrl: 'https://www.youtube.com/watch?v=b5xatvQ6TQQ',
     },
     {
       id: 'telegram-ai-bot',
-      title: 'AI Accounting & Tax Assistant — Telegram MVP (Personal Project)',
+      title: 'AI Accounting & Tax Agent for Botswana SMEs (Prototype)',
       description:
-        'Personal MVP project — a domain-specific AI agent for small businesses navigating accounting and tax questions in the Botswana context. Built to validate retrieval-augmented generation in a productivity chatbot format.',
+        'An n8n AI agent prototype giving Botswana small businesses reliable, on-demand accounting and BURS tax guidance — bookkeeping, VAT, PAYE, and compliance answers — without a full-time accountant.',
+      businessContext:
+        'Small businesses in Botswana rarely have affordable, reliable access to accounting and tax expertise, and generic chatbots get local BURS regulations and compliance rules wrong. The prototype set out to validate whether a domain-grounded AI agent could give SMEs accurate, context-aware answers on bookkeeping, VAT, PAYE, and tax compliance.',
       systemPurpose:
-        'Provides RAG-based retrieval for tax and regulatory information with local compliance workflows. Proof-of-concept for deploying AI agents via Telegram as a low-friction user interface.',
+        'A conversational AI agent that answers Botswana SME accounting and tax questions, grounded in BURS regulations and accounting standards via retrieval — with a built-in calculator and session memory so it holds context across a conversation.',
       architecture: [
-        'RAG-based retrieval for regulatory and tax information',
-        'Domain-specific prompt engineering for local compliance context',
-        'Telegram Bot API as the delivery interface',
-        'Lightweight deployment for rapid iteration and validation',
+        'RAG retrieval over BURS regulations, tax compliance, and accounting standards for grounded answers',
+        'Calculator tool for accurate on-the-fly figures (e.g. VAT/PAYE computations)',
+        'Session memory that carries context across queries for natural multi-step interactions',
+        'Domain-specific prompt engineering for the Botswana SME compliance context',
       ],
-      tools: ['RAG', 'AI/LLMs', 'Telegram Bot API', 'Document Parsing', 'Workflow Automation'],
+      tools: ['n8n', 'AI Agent', 'RAG', 'LLMs', 'Tax & BURS Compliance', 'Telegram'],
       demoUrl: 'https://www.youtube.com/watch?v=IEMl8c1U_4s',
     },
   ],
@@ -223,15 +228,15 @@ export const portfolioData: PortfolioData = {
       title: 'Trevis — Student Accommodation Management',
       category: 'webapp',
       description:
-        'A production property-management web app for multi-property student accommodation: occupancy, rent collection, arrears, transfers, and reporting. Live on real data — ~130 students across several properties — not a demo.',
+        'Replaced four spreadsheets with a live property-management system tracking 130+ tenants across a real student-housing portfolio.',
       problem:
-        'Student-accommodation operators tracked rent in calendar-month "paid/unpaid" flags, losing prepaid days and mishandling partial or early payments — with no way to trust the numbers or rebuild them from source.',
+        'A student-accommodation operator ran four properties and 130+ tenants out of four separate Excel spreadsheets — no dashboard, no single view of occupancy or arrears, and inconsistent date formats and duplicated names making a property\'s collection rate an afternoon of manual cross-referencing. Worse, calendar-month billing didn\'t match how tenants actually paid: someone who paid on the 19th was flagged overdue on the 1st, and early payments silently lost their prepaid days. There was no way to trust whether a number on screen reflected reality or a calculation error compounding in the background.',
       technicalArchitecture:
-        'React + Vite SPA talking directly to Supabase (Postgres, Auth, Row-Level Security); a day-based rent-coverage engine where each payment buys stacking days of coverage, replayed from an immutable payment ledger by one pure writer. Deployed on Netlify.',
+        'I replaced the four spreadsheets with one production system — a React + Vite app on Supabase giving the operator a single live dashboard (occupancy, collection rates, arrears) across all properties. At its centre is a day-based rent-coverage engine I designed and rebuilt twice after diagnosing the calendar-month flaw in production: each payment buys coverage days that stack from the tenant\'s existing end date, so early and partial payments are handled correctly and coverage is never hand-authored — it\'s always replayed from the immutable payment ledger by a single pure function, auditable and rebuildable from source at any time. I migrated 130+ tenant records and years of payment history into a relational Postgres schema with Row-Level Security, correcting date, duplicate, and naming errors in the process.',
       operationalValue:
         'Runs in production on a live portfolio: payments persist, coverage is computed from the immutable ledger, drift auto-reconciles on every mutation, and a nightly integrity audit plus a 07:00 daily owner report keep the data honest.',
       outcome:
-        'Live system at trevis.netlify.app — single source of truth for coverage, ~190 Vitest tests under local and UTC timezones, GitHub Actions monitoring (nightly integrity audit + daily owner report via Resend/WhatsApp).',
+        'Live at trevis.netlify.app and running unattended: a single source of truth for coverage, ~190 Vitest tests under local and UTC timezones, a nightly GitHub Actions job that replays every tenant and alarms on any drift from the ledger, and a daily owner report (portfolio health, outstanding balances, tenants needing attention) emailed each morning before he opens his laptop.',
       technologies: ['React', 'Vite', 'Supabase', 'PostgreSQL', 'Row-Level Security', 'Vitest', 'GitHub Actions', 'Resend', 'Netlify'],
       highlights: [
         'Live in production on real data — ~130 students across several properties',
