@@ -5,99 +5,44 @@ import { testimonial } from '@/data/portfolio';
 
 export default function Testimonial() {
   return (
-    <section className="py-20 relative overflow-hidden" style={{ background: '#0A0A0A' }}>
-      {/* Ambient glow */}
-      <div className="ambient-glow" style={{ top: '-20%', left: '50%', transform: 'translateX(-50%)', opacity: 0.25 }} />
+    <section className="border-b border-line" style={{ paddingBlock: 'var(--section-pad)' }}>
+      <div className="wrap">
+        <div className="max-w-3xl">
+          <p className="label mb-8">// what they say</p>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          className="max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
-        >
-          {/* Section label */}
-          <div className="flex items-center justify-center gap-4 mb-12">
-            <div className="h-px flex-1 max-w-16" style={{ background: 'linear-gradient(90deg, transparent, #3F3F46)' }} />
-            <p className="mono-label">What They Say</p>
-            <div className="h-px flex-1 max-w-16" style={{ background: 'linear-gradient(90deg, #3F3F46, transparent)' }} />
-          </div>
-
-          {/* Card */}
-          <div
-            className="relative p-8 md:p-12 glass-card spotlight-card"
-            style={{
-              borderRadius: '16px',
-            }}
+          <motion.blockquote
+            className="font-display text-bone"
+            style={{ fontWeight: 400, fontSize: 'clamp(1.4rem, 3.2vw, 2rem)', lineHeight: 1.35, letterSpacing: '-0.01em' }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Large quote mark — breathing animation */}
-            <div
-              className="absolute top-6 left-8 text-8xl font-serif leading-none select-none pointer-events-none quote-breathe"
-              style={{ color: '#27272A', fontFamily: 'Georgia, serif', lineHeight: 1 }}
-              aria-hidden="true"
-            >
-              &ldquo;
-            </div>
+            <span className="text-ember">“</span>{testimonial.quote}<span className="text-ember">”</span>
+          </motion.blockquote>
 
-            {/* Stars — sparkle effect */}
-            <div className="flex gap-1 mb-6 justify-center relative z-10">
-              {[...Array(5)].map((_, i) => (
-                <motion.span
-                  key={i}
-                  className="text-white text-lg star-sparkle"
-                  style={{ animationDelay: `${i * 0.3}s` }}
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 + i * 0.06, type: 'spring', stiffness: 400 }}
-                >
-                  ★
-                </motion.span>
-              ))}
-            </div>
-
-            {/* Quote */}
-            <blockquote
-              className="text-base md:text-lg leading-loose text-center mb-8 relative z-10"
-              style={{ color: '#A1A1AA', fontStyle: 'italic' }}
-            >
-              &ldquo;{testimonial.quote}&rdquo;
-            </blockquote>
-
-            {/* Attribution */}
-            <div className="flex flex-col items-center gap-1 relative z-10">
-              <div className="w-8 h-px mb-4" style={{ background: 'linear-gradient(90deg, transparent, #3F3F46, transparent)' }} />
-              <p className="font-semibold text-white">{testimonial.author}</p>
-              <p className="text-sm" style={{ color: '#A1A1AA' }}>{testimonial.title}</p>
-              <p className="text-xs font-mono mt-0.5" style={{ color: '#71717A' }}>{testimonial.company}</p>
-              <a
-                href="/documents/tafara-rugara-reference.pdf"
-                download="Tafara-Rugara-Reference-Letter.pdf"
-                className="inline-flex items-center gap-2 mt-5 px-4 py-2 text-xs font-mono transition-all duration-200"
-                style={{
-                  background: 'rgba(17,17,17,0.8)',
-                  border: '1px solid rgba(39,39,42,0.8)',
-                  color: '#A1A1AA',
-                  borderRadius: '6px',
-                  backdropFilter: 'blur(4px)',
-                }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.3)';
-                  (e.currentTarget as HTMLElement).style.color = '#FFFFFF';
-                  (e.currentTarget as HTMLElement).style.boxShadow = '0 0 12px rgba(255,255,255,0.05)';
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(39,39,42,0.8)';
-                  (e.currentTarget as HTMLElement).style.color = '#A1A1AA';
-                  (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-                }}
-              >
-                ↓ Download Reference Letter
-              </a>
+          <div className="mt-8 flex items-center gap-4">
+            <span className="w-8 h-px" style={{ background: 'var(--line-2)' }} aria-hidden="true" />
+            <div>
+              <p className="text-bone" style={{ fontSize: '0.95rem', fontWeight: 500 }}>{testimonial.author}</p>
+              <p className="font-mono" style={{ fontSize: '0.74rem', color: 'var(--bone-dim)' }}>
+                {testimonial.title} · {testimonial.company}
+              </p>
             </div>
           </div>
-        </motion.div>
+
+          <a
+            href="/documents/tafara-rugara-reference.pdf"
+            download="Tafara-Rugara-Reference-Letter.pdf"
+            className="contact-tile inline-flex items-center gap-2 mt-6 px-4 py-2 font-mono"
+            style={{ fontSize: '0.74rem' }}
+          >
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            Download Reference Letter
+          </a>
+        </div>
       </div>
     </section>
   );
