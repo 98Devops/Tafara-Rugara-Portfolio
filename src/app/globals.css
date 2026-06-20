@@ -146,6 +146,16 @@ body {
 }
 .chip:hover { border-color: var(--bone-faint); color: var(--bone); }
 
+/* ─── Contact tile (download + social rows) ──────────────── */
+.contact-tile {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  color: var(--bone-dim);
+  transition: border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.contact-tile:hover { border-color: var(--line-2); color: var(--bone); }
+
 /* ─── Mono label / eyebrow ───────────────────────────────── */
 .label {
   font-family: var(--font-mono);

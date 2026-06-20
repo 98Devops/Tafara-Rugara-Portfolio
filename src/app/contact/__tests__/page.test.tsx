@@ -152,7 +152,7 @@ describe('Contact Page', () => {
 
     const h2Elements = screen.getAllByRole('heading', { level: 2 });
     expect(h2Elements.length).toBeGreaterThan(0);
-    expect(h2Elements[0]).toHaveTextContent('💬 Send a Message');
+    expect(h2Elements[0]).toHaveTextContent('Send a Message');
   });
 
   it('displays response time promise', () => {

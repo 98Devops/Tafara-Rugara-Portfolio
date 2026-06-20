@@ -58,16 +58,13 @@ describe('ContactForm', () => {
     ).toBeInTheDocument();
   });
 
-  it('has Netlify form attributes', () => {
+  it('is an accessible contact form (WhatsApp submission, no Netlify pretense)', () => {
     render(<ContactForm onSubmit={mockOnSubmit} />);
 
     const form = screen.getByRole('form');
-    expect(form).toHaveAttribute('data-netlify', 'true');
     expect(form).toHaveAttribute('name', 'contact');
-    expect(form).toHaveAttribute('method', 'POST');
-
-    // Check for hidden form-name field
-    expect(screen.getByDisplayValue('contact')).toBeInTheDocument();
+    // Redesign: single honest submission path (WhatsApp deep link).
+    expect(form).not.toHaveAttribute('data-netlify');
   });
 
   it('validates required fields', async () => {

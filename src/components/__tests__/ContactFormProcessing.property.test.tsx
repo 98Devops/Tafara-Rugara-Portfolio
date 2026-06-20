@@ -84,19 +84,10 @@ describe('Contact Form Processing Property Tests', () => {
 
           const { container } = render(<ContactForm />);
 
-          // Verify form attributes are present (kept for potential fallback)
+          // Redesign: single honest submission path — WhatsApp deep link.
           const form = container.querySelector('form');
-          expect(form).toHaveAttribute('data-netlify', 'true');
           expect(form).toHaveAttribute('name', 'contact');
-          expect(form).toHaveAttribute('method', 'POST');
-
-          // Verify hidden form-name field
-          const hiddenField = container.querySelector(
-            'input[name="form-name"]'
-          );
-          expect(hiddenField).toBeInTheDocument();
-          expect(hiddenField).toHaveAttribute('type', 'hidden');
-          expect(hiddenField).toHaveAttribute('value', 'contact');
+          expect(form).not.toHaveAttribute('data-netlify');
 
           // Fill out the form with generated valid data
           const nameInput = container.querySelector(
@@ -216,7 +207,7 @@ describe('Contact Form Processing Property Tests', () => {
           await waitFor(
             () => {
               const errorMessages = container.querySelectorAll(
-                '[class*="text-red-400"]'
+                '.field-error'
               );
               expect(errorMessages.length).toBeGreaterThan(0);
             },
@@ -235,7 +226,7 @@ describe('Contact Form Processing Property Tests', () => {
    * Property 7 Extension: Netlify Forms compliance
    * Validates that all required Netlify Forms attributes and structure are present
    */
-  it('Property 7 Extension: maintains Netlify Forms compliance regardless of form state', () => {
+  it('Property 7 Extension: maintains accessible form structure regardless of form state', () => {
     fc.assert(
       fc.property(
         fc.boolean(), // whether form has been interacted with
@@ -247,20 +238,12 @@ describe('Contact Form Processing Property Tests', () => {
 
           const { container } = render(<ContactForm onSubmit={mockOnSubmit} />);
 
-          // Verify all required Netlify Forms attributes are present
+          // Redesign: WhatsApp-only submission, no Netlify pretense.
           const form = container.querySelector('form');
-          expect(form).toHaveAttribute('data-netlify', 'true');
           expect(form).toHaveAttribute('name', 'contact');
-          expect(form).toHaveAttribute('method', 'POST');
+          expect(form).not.toHaveAttribute('data-netlify');
 
-          // Verify hidden form-name field
-          const hiddenField = container.querySelector(
-            'input[name="form-name"][type="hidden"]'
-          );
-          expect(hiddenField).toBeInTheDocument();
-          expect(hiddenField).toHaveAttribute('value', 'contact');
-
-          // Verify all form fields have proper name attributes for Netlify
+          // Verify all form fields have proper name attributes
           expect(screen.getByLabelText(/name/i)).toHaveAttribute(
             'name',
             'name'
@@ -291,7 +274,7 @@ describe('Contact Form Processing Property Tests', () => {
           expect(form?.tagName.toLowerCase()).toBe('form');
           expect(
             container.querySelectorAll('input, textarea, button')
-          ).toHaveLength(5); // 3 visible + 1 hidden + 1 button
+          ).toHaveLength(4); // name + email + message + submit (no Netlify hidden field)
         }
       ),
       { numRuns: 10 }

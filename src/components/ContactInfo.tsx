@@ -1,7 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
-
 const contactMethods = [
   {
     key: 'email', label: 'Email', value: 'tfrsuperfx@gmail.com',
@@ -51,8 +49,8 @@ const contactMethods = [
 ];
 
 const documents = [
-  { label: '↓ Download CV',       path: '/documents/tafara-rugara-cv.pdf',       name: 'Tafara-Rugara-CV.pdf' },
-  { label: '↓ Reference Letter',  path: '/documents/tafara-rugara-reference.pdf', name: 'Tafara-Rugara-Reference.pdf' },
+  { label: 'Download CV',       path: '/documents/tafara-rugara-cv.pdf',       name: 'Tafara-Rugara-CV.pdf' },
+  { label: 'Reference Letter',  path: '/documents/tafara-rugara-reference.pdf', name: 'Tafara-Rugara-Reference.pdf' },
 ];
 
 export default function ContactInfo() {
@@ -64,126 +62,72 @@ export default function ContactInfo() {
   };
 
   return (
-    <motion.div
-      className="space-y-8"
-      initial={{ opacity: 0, x: -16 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-    >
+    <div className="space-y-8">
       {/* Intro */}
       <div>
-        <h3 className="text-2xl font-semibold text-white mb-3" style={{ letterSpacing: '-0.01em' }}>
+        <h3 className="font-display text-bone mb-3" style={{ fontWeight: 400, fontSize: 'clamp(1.5rem, 3vw, 2rem)', letterSpacing: '-0.01em' }}>
           Let&apos;s Build Together
         </h3>
-        <p className="text-sm leading-relaxed" style={{ color: '#A1A1AA' }}>
+        <p className="text-bone-dim" style={{ fontSize: '0.94rem', lineHeight: 1.65 }}>
           Open to Cloud &amp; DevOps engineering roles, AI automation consulting, and workflow architecture projects.
           Based in Harare &amp; Johannesburg.
         </p>
       </div>
 
       {/* Availability */}
-      <div
-        className="flex items-center gap-3 px-4 py-3"
-        style={{
-          background: 'rgba(17, 17, 17, 0.8)',
-          border: '1px solid rgba(39, 39, 42, 0.8)',
-          borderRadius: '10px',
-          backdropFilter: 'blur(4px)',
-        }}
-      >
-        <span className="glow-pulse" style={{ width: 6, height: 6, borderRadius: '50%', background: '#FFFFFF', flexShrink: 0, display: 'inline-block' }} />
+      <div className="flex items-center gap-3 px-4 py-3 border border-line rounded-md" style={{ background: 'var(--surface)' }}>
+        <span className="live-dot" aria-hidden="true" />
         <div>
-          <p className="text-sm font-medium text-white">Open to Opportunities</p>
-          <p className="text-xs mt-0.5 font-mono" style={{ color: '#71717A' }}>Harare, Zimbabwe &amp; Johannesburg, South Africa</p>
+          <p className="text-bone" style={{ fontSize: '0.9rem', fontWeight: 500 }}>Open to Opportunities</p>
+          <p className="label mt-0.5" style={{ textTransform: 'none', letterSpacing: '0.02em' }}>Harare, Zimbabwe &amp; Johannesburg, South Africa</p>
         </div>
       </div>
 
       {/* Document downloads */}
       <div className="space-y-2">
-        <p className="mono-label mb-3">Documents</p>
+        <p className="label mb-3">Documents</p>
         {documents.map(doc => (
           <button
             key={doc.label}
             onClick={() => handleDownload(doc.path, doc.name)}
-            className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-left transition-all duration-200"
-            style={{
-              background: 'rgba(17, 17, 17, 0.8)',
-              border: '1px solid rgba(39, 39, 42, 0.8)',
-              color: '#A1A1AA',
-              borderRadius: '8px',
-              backdropFilter: 'blur(4px)',
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.3)';
-              (e.currentTarget as HTMLElement).style.color = '#FFFFFF';
-              (e.currentTarget as HTMLElement).style.boxShadow = '0 0 12px rgba(255,255,255,0.05)';
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(39,39,42,0.8)';
-              (e.currentTarget as HTMLElement).style.color = '#A1A1AA';
-              (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-            }}
+            className="contact-tile w-full flex items-center gap-3 px-4 py-3 text-left"
           >
-            <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
             </svg>
-            {doc.label}
+            <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>{doc.label}</span>
           </button>
         ))}
       </div>
 
       {/* Contact links */}
       <div className="space-y-2">
-        <p className="mono-label mb-3">Contact &amp; Socials</p>
-        {contactMethods.map((m, i) => (
-          <motion.a
+        <p className="label mb-3">Contact &amp; Socials</p>
+        {contactMethods.map((m) => (
+          <a
             key={m.key}
             href={m.href}
             target={m.key !== 'email' ? '_blank' : undefined}
             rel="noopener noreferrer"
-            className="flex items-center gap-3 p-3 group transition-all duration-200"
-            style={{
-              background: 'rgba(17, 17, 17, 0.8)',
-              border: '1px solid rgba(39, 39, 42, 0.8)',
-              borderRadius: '8px',
-              backdropFilter: 'blur(4px)',
-            }}
-            initial={{ opacity: 0, x: -12 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.05 }}
+            className="contact-tile flex items-center gap-3 p-3"
             aria-label={`${m.label}: ${m.value}`}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(63, 63, 70, 0.9)';
-              (e.currentTarget as HTMLElement).style.boxShadow = '0 0 16px rgba(255,255,255,0.03)';
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(39, 39, 42, 0.8)';
-              (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-            }}
           >
-            <div
-              className="w-8 h-8 flex items-center justify-center flex-shrink-0 transition-all duration-200"
-              style={{
-                color: '#71717A',
-                background: 'rgba(24, 24, 27, 0.8)',
-                border: '1px solid rgba(39, 39, 42, 0.5)',
-                borderRadius: '6px',
-              }}
+            <span
+              className="w-8 h-8 flex items-center justify-center flex-shrink-0 border border-line rounded-sm"
+              style={{ color: 'var(--bone-faint)', background: 'var(--surface-2)' }}
             >
               {m.icon}
-            </div>
-            <div className="min-w-0">
-              <p className="mono-label mb-0">{m.label}</p>
-              <p className="text-sm font-medium text-white truncate mt-0.5">{m.value}</p>
-            </div>
-            <svg className="w-3.5 h-3.5 ml-auto flex-shrink-0 transition-colors duration-200" style={{ color: '#3F3F46' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            </span>
+            <span className="min-w-0">
+              <span className="label block mb-0">{m.label}</span>
+              <span className="block text-bone truncate mt-0.5" style={{ fontSize: '0.9rem', fontWeight: 500 }}>{m.value}</span>
+            </span>
+            <svg className="w-3.5 h-3.5 ml-auto flex-shrink-0" style={{ color: 'var(--line-2)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
             </svg>
-          </motion.a>
+          </a>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 }
