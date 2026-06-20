@@ -1,17 +1,18 @@
 'use client';
 
+import { useState, useMemo } from 'react';
 import { portfolioData, automationSystems } from '@/data/portfolio';
 import CaseCard from '@/components/CaseCard';
-import type { Project, AutomationSystem } from '@/types';
+import type { Project, ProjectCategory } from '@/types';
+import type { AutomationSystem } from '@/types';
 
-const PLATFORM_IDS = ['acquisitions-api', 'voice-to-vector-api', 'legacy-migration', 'serverless-platform-pattern'];
-
-// Map automation systems into the Project shape so they render as case cards.
+// Map an automation system into the Project shape so it renders as a case card.
 function automationToProject(s: AutomationSystem): Project {
   const arch = Array.isArray(s.architecture) ? s.architecture : s.architecture ? [s.architecture] : [];
   return {
     id: s.id,
     title: s.title,
+    category: 'automation',
     description: s.description,
     problem: s.businessContext ?? s.systemPurpose,
     technicalArchitecture: s.systemPurpose ?? s.description,
@@ -24,13 +25,39 @@ function automationToProject(s: AutomationSystem): Project {
   };
 }
 
-export default function ProjectsPage() {
-  const platformProjects = PLATFORM_IDS
-    .map(id => portfolioData.projects.find(p => p.id === id))
-    .filter((p): p is Project => Boolean(p));
+type Filter = 'all' | ProjectCategory;
 
-  const flagship = automationToProject(automationSystems.flagship);
-  const supporting = automationSystems.supporting.map(automationToProject);
+const FILTERS: { value: Filter; label: string }[] = [
+  { value: 'all',        label: 'All' },
+  { value: 'website',    label: 'Websites' },
+  { value: 'webapp',     label: 'Web Apps' },
+  { value: 'automation', label: 'Automation' },
+  { value: 'platform',   label: 'Platform' },
+];
+
+// Outcome numerals for the cards that have a headline metric.
+const OUTCOMES: Record<string, { big: string; unit?: string; label: string }> = {
+  'delivery-health-ai': { big: '2', unit: 'am', label: 'alerts, not outages' },
+  'legacy-migration':   { big: '60', unit: '%', label: 'overhead removed' },
+  'trevis-property-management': { big: '130', unit: '+', label: 'students live' },
+};
+
+export default function ProjectsPage() {
+  const [filter, setFilter] = useState<Filter>('all');
+
+  // Unified list: automation systems + data-file projects, in a sensible order.
+  const allProjects = useMemo<Project[]>(() => {
+    const automation = [automationSystems.flagship, ...automationSystems.supporting].map(automationToProject);
+    return [...automation, ...portfolioData.projects];
+  }, []);
+
+  const counts = useMemo(() => {
+    const c: Record<Filter, number> = { all: allProjects.length, website: 0, webapp: 0, automation: 0, platform: 0 };
+    allProjects.forEach(p => { if (p.category) c[p.category] += 1; });
+    return c;
+  }, [allProjects]);
+
+  const visible = filter === 'all' ? allProjects : allProjects.filter(p => p.category === filter);
 
   return (
     <main className="border-b border-line">
@@ -42,46 +69,59 @@ export default function ProjectsPage() {
             Systems I designed, built, and still operate.
           </h1>
           <p className="rise d2 mt-6 text-bone-dim" style={{ maxWidth: '54ch', fontSize: '1.05rem', lineHeight: 1.65 }}>
-            Automation and platform work shipped for real teams under real operational
-            pressure — each one measured by what it changed, not what it used.
+            Websites, web apps, automation, and platform work shipped for real teams
+            under real operational pressure — measured by what they changed, not what they used.
           </p>
         </div>
       </section>
 
-      {/* Automation systems */}
-      <section className="wrap" style={{ paddingBlock: 'var(--section-pad)' }}>
-        <div className="flex items-baseline justify-between gap-4 flex-wrap mb-8">
-          <h2 className="font-display text-bone" style={{ fontWeight: 400, fontSize: 'clamp(1.5rem, 3.4vw, 2.1rem)', letterSpacing: '-0.01em' }}>
-            Automation systems
-          </h2>
-          <p className="label">operational intelligence</p>
-        </div>
-
-        <div className="rise mb-8">
-          <CaseCard project={flagship} index={0} caseId="CASE 01 / AUTOMATION" outcome={{ big: '2', unit: 'am', label: 'alerts, not outages' }} />
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-6">
-          {supporting.map((p, i) => (
-            <CaseCard key={p.id} project={p} index={i + 1} caseId={`CASE 0${i + 2} / AUTOMATION`} />
-          ))}
+      {/* Filter bar */}
+      <section className="wrap" style={{ paddingTop: 'var(--section-pad)' }}>
+        <div className="rise flex flex-wrap gap-2" role="tablist" aria-label="Filter projects by category">
+          {FILTERS.map(f => {
+            const active = filter === f.value;
+            return (
+              <button
+                key={f.value}
+                role="tab"
+                aria-selected={active}
+                onClick={() => setFilter(f.value)}
+                className="font-mono rounded-sm transition-colors duration-150"
+                style={{
+                  fontSize: '0.74rem',
+                  letterSpacing: '0.04em',
+                  padding: '0.5rem 0.9rem',
+                  border: '1px solid',
+                  borderColor: active ? 'var(--ember)' : 'var(--line-2)',
+                  color: active ? 'var(--ember)' : 'var(--bone-dim)',
+                  background: active ? 'var(--ember-soft)' : 'transparent',
+                }}
+              >
+                {f.label}
+                <span style={{ color: 'var(--bone-faint)', marginLeft: '0.5rem' }}>{counts[f.value]}</span>
+              </button>
+            );
+          })}
         </div>
       </section>
 
-      {/* Platform case studies */}
-      <section className="wrap" style={{ paddingBottom: 'var(--section-pad)' }}>
-        <div className="flex items-baseline justify-between gap-4 flex-wrap mb-8">
-          <h2 className="font-display text-bone" style={{ fontWeight: 400, fontSize: 'clamp(1.5rem, 3.4vw, 2.1rem)', letterSpacing: '-0.01em' }}>
-            Platform case studies
-          </h2>
-          <p className="label">infrastructure &amp; APIs</p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-6">
-          {platformProjects.map((p, i) => (
-            <CaseCard key={p.id} project={p} index={i} caseId={`CASE 0${i + 1} / PLATFORM`} />
-          ))}
-        </div>
+      {/* Grid */}
+      <section className="wrap" style={{ paddingTop: '2rem', paddingBottom: 'var(--section-pad)' }}>
+        {visible.length > 0 ? (
+          <div className="grid lg:grid-cols-2 gap-6">
+            {visible.map((p, i) => (
+              <CaseCard
+                key={p.id}
+                project={p}
+                index={i}
+                caseId={`${(p.category ?? 'project').toUpperCase()} / ${String(i + 1).padStart(2, '0')}`}
+                outcome={OUTCOMES[p.id]}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="font-mono text-bone-faint" style={{ fontSize: '0.8rem' }}>No projects in this category yet.</p>
+        )}
       </section>
     </main>
   );
