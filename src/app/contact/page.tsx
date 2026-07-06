@@ -1,6 +1,7 @@
 'use client';
 
 import ContactInfo from '@/components/ContactInfo';
+import { BookingSection } from '@/components/BookingSection';
 import dynamic from 'next/dynamic';
 
 const ContactForm = dynamic(() => import('@/components/ContactForm'), {
@@ -48,6 +49,9 @@ export default function Contact() {
             </div>
           </div>
         </div>
+
+        {/* Booking — self-schedule a call (renders once CAL_LINK is set) */}
+        <BookingSection />
 
         {/* WhatsApp CTA banner */}
         <div className="border border-line rounded-md p-8 sm:p-10 text-center" style={{ background: 'var(--surface)' }}>

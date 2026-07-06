@@ -57,7 +57,7 @@
     X-DNS-Prefetch-Control = "on"
     
     # Content Security Policy
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; media-src 'self'; object-src 'none'; child-src 'none'; worker-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self';"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://app.cal.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://app.cal.com; media-src 'self'; object-src 'none'; child-src 'none'; frame-src 'self' https://app.cal.com https://cal.com; worker-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self';"
 
 # Static assets caching
 [[headers]]
