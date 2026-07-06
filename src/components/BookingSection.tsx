@@ -81,9 +81,10 @@ export function BookingSection() {
       <h2 className="font-display text-bone mb-3" style={{ fontWeight: 400, fontSize: 'clamp(1.4rem, 3vw, 1.9rem)' }}>
         Schedule a call
       </h2>
-      <p className="text-bone-dim mb-6" style={{ maxWidth: '48ch', fontSize: '0.94rem', lineHeight: 1.65 }}>
-        Pick a time that works for you — a 30-minute discovery call to talk through your
-        Cloud, DevOps, or AI-automation project.
+      <p className="text-bone-dim mb-6" style={{ maxWidth: '52ch', fontSize: '0.94rem', lineHeight: 1.65 }}>
+        Pick a time that works for you — a 30-minute discovery call to talk through your project,
+        whatever it is: web &amp; software development, web apps, Cloud, DevOps, or AI automation.
+        Tell me a bit about it in the notes when you book.
       </p>
 
       <div id="cal-inline" style={{ minHeight: 520, width: '100%', overflow: 'auto' }}>
