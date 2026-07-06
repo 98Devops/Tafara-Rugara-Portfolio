@@ -34,6 +34,9 @@ export default function ExperienceTimeline({ experiences }: ExperienceTimelinePr
                   {experience.position}
                 </h3>
                 <p className="text-bone-dim mt-1" style={{ fontSize: '0.95rem' }}>{experience.company}</p>
+                {experience.location && (
+                  <p className="label mt-1" style={{ textTransform: 'none', letterSpacing: '0.02em' }}>{experience.location}</p>
+                )}
                 <p className="label mt-1" style={{ textTransform: 'none', letterSpacing: '0.02em' }}>{experience.duration}</p>
               </div>
               {experience.impact && (

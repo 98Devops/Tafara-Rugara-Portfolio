@@ -439,9 +439,40 @@ export const portfolioData: PortfolioData = {
   ],
   experience: [
     {
+      company: 'Clear Elevation',
+      position: 'AI Automations & Systems Operator',
+      duration: 'May 2026 – Present',
+      location: 'Remote · International clients',
+      impact: '7 triggers fixed · 3 workflows shipped',
+      achievements: [
+        'Build and maintain client backend systems for an international marketing agency — automation workflows, CRM architecture, funnels, landing pages, and email campaigns in GoHighLevel — so clients operate like CEOs, not operators',
+        'Rescued a failing patient-retention system spanning Practice Better (EMR), GoHighLevel, and Zapier — root-caused a router that handled only one patient type while silently dropping the rest',
+        'Fixed 7 broken triggers and published 3 new lifecycle workflows (engagement tracking, at-risk reactivation, dormant reactivation) plus refill reminders and pipeline automation',
+        'Author comprehensive system prompts and briefing materials to run parallel AI agents consistently across builds',
+        'QA standard: every trigger, form, payment, domain, and workflow exit tested before delivery — never assumed, always verified',
+      ],
+      technologies: ['GoHighLevel', 'Zapier', 'Practice Better', 'CRM Architecture', 'Automation Workflows', 'AI Agents', 'Email Marketing', 'QA'],
+    },
+    {
+      company: 'Mero Tech',
+      position: 'Web & Systems Developer',
+      duration: 'December 2025 – April 2026',
+      location: 'Harare, Zimbabwe · Self-employed',
+      impact: '4 spreadsheets → 1 live system',
+      achievements: [
+        'Built and shipped production websites and web applications for real clients across the mining, HVAC, and property sectors — design, copy, build, and deploy',
+        'Delivered Trevis, a live React + Supabase property-management system that replaced 4 spreadsheets with one source of truth for 130+ tenants across 4 properties',
+        'Backed Trevis with ≈190 unit tests and automated nightly data-integrity checks for trustworthy, auditable numbers',
+        'Built Litho Solutions (Next.js 15 / React 19) with interactive Three.js 3D visualizations, deployed as a performant static export',
+        'Built ProAir Zimbabwe (Vite) with WhatsApp-first lead generation and a live weather API',
+      ],
+      technologies: ['React', 'Next.js 15', 'Supabase', 'Three.js', 'Vite', 'TypeScript', 'Tailwind CSS', 'Netlify'],
+    },
+    {
       company: 'Excellessence (Your EKA Services)',
       position: 'DevOps & Automation Engineer',
       duration: 'May 2025 – November 2025',
+      location: 'Remote',
       impact: '60% pipeline downtime reduction',
       achievements: [
         'Deployed production-ready AI workflow pipeline on DigitalOcean VPS with secure multi-container environment using Docker Compose',

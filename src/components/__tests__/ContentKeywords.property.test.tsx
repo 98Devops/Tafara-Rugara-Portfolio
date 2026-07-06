@@ -436,10 +436,17 @@ describe('Content Keyword Validation Property Tests', () => {
 
           // Experience should have substantial content
           expect(data.experience.length).toBeGreaterThan(0);
-          const devopsExp = data.experience[0];
-          expect(devopsExp.achievements.length).toBeGreaterThan(5);
-          expect(devopsExp.impact).toBeDefined();
-          expect(devopsExp.impact).toContain('60%');
+          data.experience.forEach(exp => {
+            expect(exp.achievements.length).toBeGreaterThan(2);
+          });
+          // The DevOps role carries the flagship 60% impact metric
+          const devopsExp = data.experience.find(exp =>
+            /DevOps/i.test(exp.position)
+          );
+          expect(devopsExp).toBeDefined();
+          expect(devopsExp!.achievements.length).toBeGreaterThan(5);
+          expect(devopsExp!.impact).toBeDefined();
+          expect(devopsExp!.impact).toContain('60%');
         }),
         { numRuns: 10 }
       );

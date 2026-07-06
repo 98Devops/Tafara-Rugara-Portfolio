@@ -69,6 +69,7 @@ export interface Experience {
   company: string;
   position: string;
   duration: string;
+  location?: string;
   achievements: string[];
   technologies: string[];
   impact?: string;
