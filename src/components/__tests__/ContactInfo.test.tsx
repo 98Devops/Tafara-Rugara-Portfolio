@@ -31,7 +31,7 @@ describe('ContactInfo', () => {
 
     expect(screen.getByText("Let's Build Together")).toBeInTheDocument();
     expect(
-      screen.getByText(/Open to Cloud & DevOps engineering roles/)
+      screen.getByText(/Available for remote Automation Engineer contracts/)
     ).toBeInTheDocument();
   });
 
@@ -85,9 +85,9 @@ describe('ContactInfo', () => {
   it('displays availability status', () => {
     render(<ContactInfo />);
 
-    expect(screen.getByText('Open to Opportunities')).toBeInTheDocument();
+    expect(screen.getByText('Open to Remote Automation Contracts')).toBeInTheDocument();
     expect(
-      screen.getByText('Harare, Zimbabwe & Johannesburg, South Africa')
+      screen.getByText('Harare, Zimbabwe · UTC+2 · Remote')
     ).toBeInTheDocument();
   });
 
