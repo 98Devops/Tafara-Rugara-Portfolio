@@ -212,7 +212,7 @@ describe('SEO Implementation Property Tests', () => {
             // Validate work organization
             expect(structuredData.worksFor).toBeDefined();
             expect(structuredData.worksFor['@type']).toBe('Organization');
-            expect(structuredData.worksFor.name).toContain('Clear Elevation');
+            expect(structuredData.worksFor.name).toContain('Clientharvest.io');
 
             // Validate skills/knowledge
             expect(structuredData.knowsAbout).toBeDefined();

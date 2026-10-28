@@ -38,7 +38,7 @@ describe('Capability Organization Property Tests', () => {
             'DevOps & CI/CD',
             'Automation Engineering',
             'Monitoring & Reliability',
-            'Website Development',
+            'Full-Stack Development',
           ];
 
           const actualCategories = data.capabilities.map(cap => cap.category);
@@ -281,7 +281,7 @@ describe('Capability Organization Property Tests', () => {
               'DevOps & CI/CD',
               'Automation Engineering',
               'Monitoring & Reliability',
-              'Website Development',
+              'Full-Stack Development',
             ];
             expect(validCategories).toContain(capability.category);
 
@@ -368,7 +368,7 @@ describe('Capability Organization Property Tests', () => {
                 'reliability',
                 'logging',
               ],
-              'Website Development': [
+              'Full-Stack Development': [
                 'website',
                 'web',
                 'next.js',
@@ -515,8 +515,8 @@ describe('Capability Organization Property Tests', () => {
               expect(hasMonitoringTerms).toBe(true);
             }
 
-            if (categoryLower.includes('website')) {
-              // Website Development should focus on web technologies
+            if (categoryLower.includes('full-stack')) {
+              // Full-Stack Development should focus on web technologies
               const websiteTerms = [
                 'website',
                 'web',

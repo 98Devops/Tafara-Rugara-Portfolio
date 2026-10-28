@@ -99,9 +99,9 @@ describe('CapabilityCard', () => {
     expect(container.querySelector('svg')).toBeInTheDocument();
   });
 
-  it('renders Website Development category with correct icon and styling', () => {
+  it('renders Full-Stack Development category with correct icon and styling', () => {
     const websiteCapability: TechnicalCapability = {
-      category: 'Website Development',
+      category: 'Full-Stack Development',
       description:
         'Building modern, performant websites with React, Next.js, and cutting-edge web technologies.',
       skills: ['Next.js & React', 'TypeScript', 'Tailwind CSS'],
@@ -111,8 +111,8 @@ describe('CapabilityCard', () => {
       <CapabilityCard capability={websiteCapability} index={4} />
     );
 
-    expect(screen.getByText('Website Development')).toBeInTheDocument();
-    // Website Development renders a Heroicon SVG (no emoji)
+    expect(screen.getByText('Full-Stack Development')).toBeInTheDocument();
+    // Full-Stack Development renders a Heroicon SVG (no emoji)
     expect(container.querySelector('svg')).toBeInTheDocument();
 
     // Check that skills are rendered

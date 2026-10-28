@@ -24,7 +24,7 @@ export interface TechnicalCapability {
     | 'DevOps & CI/CD'
     | 'Automation Engineering'
     | 'Monitoring & Reliability'
-    | 'Website Development';
+    | 'Full-Stack Development';
   skills: string[];
   description: string;
   icon?: string;
