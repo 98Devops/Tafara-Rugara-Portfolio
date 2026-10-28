@@ -1,35 +1,11 @@
 import { PortfolioData, Metric } from '@/types';
 
-// Operating record — drives the Hero metrics ledger.
-// NOTE: Trevis billing-migration and property-management figures are placeholders
-// pending confirmation of exact wording.
+// Results reported in the CV and documented project work.
 export const metrics: Metric[] = [
-  {
-    value: '60',
-    unit: '%',
-    label: 'Pipeline downtime removed',
-    detail: 'CI/CD reliability work, Excellessence',
-    meta: '2025 · prod',
-  },
-  {
-    value: '168',
-    label: 'Tests green on a live billing migration',
-    detail: 'Tenancy-cycle coverage rebuild, Trevis',
-    meta: '2026 · zero-downtime',
-  },
-  {
-    value: '4',
-    label: 'Properties under automated management',
-    detail: '~138 active tenants, arrears + payments',
-    meta: 'live',
-  },
-  {
-    value: '3',
-    unit: '+',
-    label: 'AI automation systems shipped to real teams',
-    detail: 'Retention, delivery-health, document pipelines',
-    meta: 'n8n · LLMs',
-  },
+  { value: '7', label: 'Broken automation triggers repaired', detail: 'Patient-retention system, Clear Elevation', meta: 'CRM automation' },
+  { value: '3', label: 'Lifecycle workflows delivered', detail: 'Engagement, at-risk and dormant reactivation', meta: 'GoHighLevel · Zapier' },
+  { value: '130', unit: '+', label: 'Tenants in one live property system', detail: 'Four spreadsheets replaced across four properties', meta: 'Trevis' },
+  { value: '~190', label: 'Tests supporting the coverage engine', detail: 'Vitest checks under local and UTC timezones', meta: 'quality & reliability' },
 ];
 
 export const automationSystems = {
@@ -132,10 +108,10 @@ export const certifications = [
 export const portfolioData: PortfolioData = {
   personal: {
     name: 'Tafara Rugara',
-    title: 'Cloud & DevOps + AI Automation Specialist',
-    location: 'Harare, Zimbabwe & Johannesburg, South Africa',
+    title: 'Automation Engineer | AI Workflows, CRM & API Integrations',
+    location: 'Harare, Zimbabwe · Remote contracts across Zimbabwe, South Africa and international teams',
     summary:
-      'Cloud & DevOps Engineer specializing in AI-powered automation systems, container orchestration, and infrastructure that ships. I build production-grade pipelines, automate complex workflows with n8n and LLMs, and turn operational chaos into intelligent, self-managing systems — deployable on AWS, Docker, and Kubernetes.',
+      'I build and maintain business automation with n8n, GoHighLevel, Zapier, JavaScript and REST APIs. From repairing CRM lifecycle workflows to deploying AI pipelines and automated reporting, I turn manual processes into tested, documented systems. Based in Harare and available for remote Automation Engineer contracts with Zimbabwean, South African and international teams.',
     socialLinks: {
       github:   'https://github.com/98Devops',
       linkedin: 'https://www.linkedin.com/in/tafara-rugara-0627b819b/',
@@ -144,11 +120,30 @@ export const portfolioData: PortfolioData = {
       whatsapp: 'https://wa.me/263777553271',
     },
     documents: {
-      cv:        '/documents/tafara-rugara-cv.pdf',
+      cv:        '/documents/tafara-rugara-automation-engineer-cv.pdf',
+      cvDocx:    '/documents/tafara-rugara-automation-engineer-cv.docx',
       reference: '/documents/tafara-rugara-reference.pdf',
     },
   },
   capabilities: [
+    {
+      category: 'Automation Engineering',
+      description: 'Designing, repairing and maintaining business workflows across CRM platforms, AI services and APIs, with testing, error handling and documented handover.',
+      skills: [
+        'n8n Workflow Orchestration',
+        'GoHighLevel (GHL) Workflows & CRM Architecture',
+        'Zapier Integrations & Conditional Routing',
+        'Patient Lifecycle, Reactivation & Reminder Workflows',
+        'Workflow QA, Root Cause Analysis & Documentation',
+        'Voice-to-Insight AI Pipelines',
+        'Prompt Engineering & LLM Integration',
+        'API Integration & Design',
+        'Vector Database Workflows (Qdrant)',
+        'Custom JavaScript Logic & Schema Enforcement',
+        'AI-Driven Operations Monitoring',
+        'Bash & Python Scripting',
+      ],
+    },
     {
       category: 'Cloud Architecture',
       description: 'Designing and deploying scalable cloud infrastructure on AWS with focus on cost efficiency, security, and operational excellence.',
@@ -172,21 +167,7 @@ export const portfolioData: PortfolioData = {
         'GitOps Workflows & Branching Strategies',
         'Container Reliability & Scheduling Optimisation',
         'SSH Key Auth, Firewalls, Security Patching',
-        'Pipeline Downtime Reduction (60% achieved)',
-      ],
-    },
-    {
-      category: 'Automation Engineering',
-      description: 'Creating intelligent automation workflows with n8n, LLMs, and APIs that replace manual processes with reliable, self-managing systems.',
-      skills: [
-        'n8n Workflow Orchestration',
-        'Voice-to-Insight AI Pipelines',
-        'Prompt Engineering & LLM Integration',
-        'API Integration & Design',
-        'Vector Database Workflows (Qdrant)',
-        'Custom JavaScript Logic & Schema Enforcement',
-        'AI-Driven Operations Monitoring',
-        'Bash & Python Scripting',
+        'Workflow Deployment & Execution Troubleshooting',
       ],
     },
     {
@@ -470,16 +451,16 @@ export const portfolioData: PortfolioData = {
     },
     {
       company: 'Excellessence (Your EKA Services)',
-      position: 'DevOps & Automation Engineer',
-      duration: 'May 2025 – November 2025',
-      location: 'Remote',
-      impact: '60% pipeline downtime reduction',
+      position: 'DevOps Engineer',
+      duration: 'June 2025 – October 2025',
+      location: 'Harare, Zimbabwe · Hybrid',
+      impact: 'AI workflow deployment & reliability',
       achievements: [
         'Deployed production-ready AI workflow pipeline on DigitalOcean VPS with secure multi-container environment using Docker Compose',
         'Built voice-to-insight automation system using n8n, Whisper API, and Gemini Pro — used for live client prototype demonstrations',
         'Supported LLM-powered prototypes end-to-end — handling environment variables, queues, and scheduled tasks for AI-driven demos',
         'Hardened Linux infrastructure with SSH key auth, UFW firewalls, and proactive patching — maintaining full operational integrity',
-        'Resolved container orchestration scheduling errors by configuring EXECUTIONS_PROCESS=main, reducing pipeline downtime by 60%',
+        'Diagnosed container execution and scheduling issues to improve workflow reliability',
         'Standardised AI outputs via prompt engineering with strict JSON schema enforcement for consistent downstream automation',
         'Replaced low-code nodes with custom JavaScript for intelligent workflow routing and data flow control',
         'Synced voice-to-insight outputs with Obsidian via Syncthing for structured knowledge capture',

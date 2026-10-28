@@ -13,7 +13,7 @@ export default function Experience() {
             Experience
           </h1>
           <p className="rise d2 mt-6 text-bone-dim" style={{ maxWidth: '54ch', fontSize: '1.05rem', lineHeight: 1.65 }}>
-            Measurable impact in DevOps engineering, AI automation, and cloud infrastructure.
+            Business automation, CRM workflow repair, production software and AI pipeline delivery.
           </p>
         </div>
 

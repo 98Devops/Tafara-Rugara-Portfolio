@@ -13,6 +13,7 @@ export interface PersonalInfo {
   };
   documents: {
     cv: string;
+    cvDocx?: string;
     reference: string;
   };
 }

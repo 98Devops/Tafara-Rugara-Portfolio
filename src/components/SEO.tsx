@@ -21,11 +21,16 @@ export interface PageSEOConfig {
 // SEO configuration for all pages
 export const pageSEOConfig: PageSEOConfig = {
   home: {
-    title: 'Tafara Rugara — Cloud & DevOps + AI Automation Specialist',
+    title: 'Tafara Rugara | Automation Engineer | AI Workflows & CRM',
     description:
-      'Cloud & DevOps Engineer specializing in Website Development, AI-powered automation systems, container orchestration, and infrastructure that ships. AWS Certified Cloud Practitioner building production-grade pipelines with n8n, Docker, Kubernetes, and Terraform. Based in Harare & Johannesburg.',
+      'Automation Engineer building n8n, GoHighLevel and Zapier workflows, REST API integrations and AI systems. Based in Harare, available for remote contracts with Zimbabwean, South African and international teams.',
     keywords: [
-      'Cloud DevOps Engineer',
+      'Automation Engineer',
+      'GoHighLevel Automation',
+      'Zapier',
+      'API Integration',
+      'Workflow Automation',
+      'CRM Automation',
       'AI Automation Specialist',
       'Website Developer',
       'AWS Certified Cloud Practitioner',
@@ -45,12 +50,12 @@ export const pageSEOConfig: PageSEOConfig = {
     ],
     ogImage: '/images/placeholder.svg',
     ogType: 'profile',
-    canonicalUrl: 'https://tafara-rugara.com',
+    canonicalUrl: 'https://tafara.netlify.app',
   },
   whatIDo: {
     title: 'What I Do - Technical Capabilities | Tafara Rugara',
     description:
-      'Website Development, Cloud Architecture, DevOps & CI/CD, Automation Engineering, and Monitoring & Reliability expertise. AWS Engineer specializing in Kubernetes, Terraform, Docker, and modern DevOps practices. Platform Engineer with Infrastructure as Code experience.',
+      'Automation engineering with n8n, GoHighLevel, Zapier, JavaScript and APIs. CRM lifecycle workflows, AI integration, quality assurance and cloud deployment.',
     keywords: [
       'Website Development',
       'Next.js Development',
@@ -62,6 +67,11 @@ export const pageSEOConfig: PageSEOConfig = {
       'Cloud Architecture',
       'DevOps CI/CD',
       'Automation Engineering',
+      'n8n',
+      'GoHighLevel',
+      'Zapier',
+      'REST APIs',
+      'JavaScript',
       'Monitoring Reliability',
       'AWS Services',
       'Kubernetes Management',
@@ -72,12 +82,12 @@ export const pageSEOConfig: PageSEOConfig = {
       'System Observability',
     ],
     ogImage: '/images/placeholder.svg',
-    canonicalUrl: 'https://tafara-rugara.com/what-i-do',
+    canonicalUrl: 'https://tafara.netlify.app/what-i-do',
   },
   projects: {
-    title: 'Featured Projects - Cloud & DevOps Portfolio | Tafara Rugara',
+    title: 'Featured Projects - Automation Engineering Portfolio | Tafara Rugara',
     description:
-      'Website development projects and Cloud & DevOps projects showcasing AWS infrastructure, Kubernetes deployment, and CI/CD automation. Portfolio featuring website development projects, Acquisitions API, Voice-to-Vector AI workflow, Legacy migration, and Serverless IaC patterns.',
+      'Automation and software projects: n8n delivery-health pilot, Trevis property operations, Voice-to-Vector semantic search, APIs and cloud deployment.',
     keywords: [
       'Website Portfolio',
       'Next.js Projects',
@@ -96,12 +106,12 @@ export const pageSEOConfig: PageSEOConfig = {
       'Automation Solutions',
     ],
     ogImage: '/images/placeholder.svg',
-    canonicalUrl: 'https://tafara-rugara.com/projects',
+    canonicalUrl: 'https://tafara.netlify.app/projects',
   },
   experience: {
-    title: 'Professional Experience - DevOps Engineer | Tafara Rugara',
+    title: 'Professional Experience - Automation Engineer | Tafara Rugara',
     description:
-      'DevOps & Automation Engineer at Your EKA Services — 60% pipeline downtime reduction, production AI workflow deployment, Docker container orchestration, and infrastructure hardening.',
+      'CRM automation at Clear Elevation, software delivery at Mero Tech and DevOps at Excellessence. Experience with GoHighLevel, Zapier, n8n, JavaScript and AI pipelines.',
     keywords: [
       'DevOps Engineer Experience',
       'Production Deployment',
@@ -115,12 +125,12 @@ export const pageSEOConfig: PageSEOConfig = {
       'Downtime Reduction',
     ],
     ogImage: '/images/placeholder.svg',
-    canonicalUrl: 'https://tafara-rugara.com/experience',
+    canonicalUrl: 'https://tafara.netlify.app/experience',
   },
   contact: {
     title: 'Contact - Get in Touch | Tafara Rugara',
     description:
-      'Contact Tafara Rugara for Cloud & DevOps engineering roles, AI automation consulting, and workflow architecture. AWS Certified — based in Harare & Johannesburg.',
+      'Contact Tafara Rugara for remote Automation Engineer contracts, n8n workflows, GoHighLevel CRM automation, Zapier integrations and AI systems. Based in Harare, Zimbabwe.',
     keywords: [
       'Contact Cloud Engineer',
       'Hire DevOps Engineer',
@@ -132,7 +142,7 @@ export const pageSEOConfig: PageSEOConfig = {
       'Cloud Architect Contact',
     ],
     ogImage: '/images/placeholder.svg',
-    canonicalUrl: 'https://tafara-rugara.com/contact',
+    canonicalUrl: 'https://tafara.netlify.app/contact',
   },
 };
 
@@ -141,7 +151,7 @@ export function generatePageMetadata(pageKey: keyof PageSEOConfig): Metadata {
   const config = pageSEOConfig[pageKey];
 
   const baseMetadata: Metadata = {
-    metadataBase: new URL('https://tafara-rugara.com'),
+    metadataBase: new URL('https://tafara.netlify.app'),
     title:
       pageKey === 'home'
         ? {
@@ -199,12 +209,6 @@ export function generatePageMetadata(pageKey: keyof PageSEOConfig): Metadata {
     },
   };
 
-  // Add verification only for home page
-  if (pageKey === 'home') {
-    baseMetadata.verification = {
-      google: 'google-site-verification-code',
-    };
-  }
 
   return baseMetadata;
 }
@@ -215,11 +219,11 @@ export function generateStructuredData(pageKey: keyof PageSEOConfig) {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Tafara Rugara',
-    jobTitle: 'Cloud & DevOps + AI Automation Specialist',
+    jobTitle: 'Automation Engineer',
     description:
-      'Cloud & DevOps Engineer specializing in AI-powered automation, container orchestration, and production-grade infrastructure on AWS.',
-    url: 'https://tafara-rugara.com',
-    image: 'https://tafara-rugara.com/images/placeholder.svg',
+      'Automation Engineer specializing in business workflows, GoHighLevel CRM automation, n8n, Zapier, API integrations and AI pipelines.',
+    url: 'https://tafara.netlify.app',
+    image: 'https://tafara.netlify.app/images/placeholder.svg',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Harare',
@@ -227,7 +231,7 @@ export function generateStructuredData(pageKey: keyof PageSEOConfig) {
     },
     worksFor: {
       '@type': 'Organization',
-      name: 'Excellessence (YourEKA Services)',
+      name: 'Clear Elevation',
     },
     knowsAbout: [
       'AWS',
@@ -239,12 +243,17 @@ export function generateStructuredData(pageKey: keyof PageSEOConfig) {
       'DevOps',
       'Cloud Architecture',
       'Automation Engineering',
+      'n8n',
+      'GoHighLevel',
+      'Zapier',
+      'REST APIs',
+      'JavaScript',
       'Monitoring',
       'Observability',
     ],
     sameAs: [
-      'https://github.com/tafara-rugara',
-      'https://linkedin.com/in/tafara-rugara',
+      'https://github.com/98Devops',
+      'https://www.linkedin.com/in/tafara-rugara-0627b819b/',
     ],
   };
 
@@ -339,7 +348,7 @@ export function generateStructuredData(pageKey: keyof PageSEOConfig) {
         ...basePersonData,
         hasOccupation: {
           '@type': 'Occupation',
-          name: 'DevOps Engineer',
+          name: 'Automation Engineer',
           occupationLocation: {
             '@type': 'Place',
             address: {
@@ -361,7 +370,7 @@ export function generateStructuredData(pageKey: keyof PageSEOConfig) {
         },
         worksFor: {
           '@type': 'Organization',
-          name: 'Excellessence (YourEKA Services)',
+          name: 'Clear Elevation',
           description: 'Technology services company',
         },
       };

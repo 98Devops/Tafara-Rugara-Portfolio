@@ -57,7 +57,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://github.com" />
         <link rel="dns-prefetch" href="https://linkedin.com" />
         {/* Preload critical assets */}
-        <link rel="preload" href="/documents/tafara-rugara-cv.pdf" as="document" type="application/pdf" />
+        <link rel="preload" href="/documents/tafara-rugara-automation-engineer-cv.pdf" as="document" type="application/pdf" />
         {/* Viewport & theme */}
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#14110D" />

@@ -14,10 +14,10 @@ jest.mock('next/image', () => ({
 
 const mockPersonalInfo: PersonalInfo = {
   name: 'Tafara Rugara',
-  title: 'Cloud & DevOps + AI Automation Specialist',
-  location: 'Harare, Zimbabwe & Johannesburg, South Africa',
+  title: 'Automation Engineer',
+  location: 'Harare, Zimbabwe · Remote',
   summary:
-    'Cloud & DevOps Engineer specializing in AI-powered automation systems, container orchestration, and infrastructure that ships. I build production-grade pipelines, automate complex workflows with n8n and LLMs, and turn operational chaos into intelligent, self-managing systems — deployable on AWS, Docker, and Kubernetes.',
+    'I build and maintain business automation with n8n, GoHighLevel, Zapier, JavaScript and REST APIs. I deliver tested workflows and AI pipelines for remote clients.',
   profileImage: '/images/tafara-rugara.jpg',
   socialLinks: {
     github: 'https://github.com/98Devops',
@@ -27,8 +27,9 @@ const mockPersonalInfo: PersonalInfo = {
     whatsapp: 'https://wa.me/263777553271',
   },
   documents: {
-    cv: '/documents/tafara-rugara-cv.pdf',
+    cv: '/documents/tafara-rugara-automation-engineer-cv.pdf',
     reference: '/documents/tafara-rugara-reference.pdf',
+    cvDocx: '/documents/tafara-rugara-automation-engineer-cv.docx',
   },
 };
 
@@ -37,17 +38,17 @@ describe('Hero Component', () => {
     render(<Hero personal={mockPersonalInfo} />);
 
     // Name is present as a mono eyebrow (redesign: H1 is now the statement)
-    expect(screen.getByText('Tafara Rugara')).toBeInTheDocument();
+    expect(screen.getByText(/Tafara Rugara · Automation Engineer/)).toBeInTheDocument();
 
     // The H1 carries the editorial statement headline
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-      /I build the systems that run quietly/i
+      /Business workflows, automated with care/i
     );
 
     // Check professional summary is displayed (keywords preserved for SEO)
     expect(
       screen.getByText(
-        /Cloud & DevOps Engineer specializing in AI-powered automation systems/
+        /I build and maintain business automation/
       )
     ).toBeInTheDocument();
   });
@@ -56,17 +57,15 @@ describe('Hero Component', () => {
     render(<Hero personal={mockPersonalInfo} />);
 
     const requiredKeywords = [
-      'AI-powered automation',
-      'container orchestration',
       'n8n',
-      'LLMs',
-      'AWS',
-      'Docker',
-      'Kubernetes',
+      'GoHighLevel',
+      'Zapier',
+      'JavaScript',
+      'REST APIs',
     ];
 
     const summaryText = screen.getByText(
-      /Cloud & DevOps Engineer specializing in AI-powered automation systems/
+      /I build and maintain business automation/
     ).textContent;
 
     requiredKeywords.forEach(keyword => {
@@ -82,7 +81,7 @@ describe('Hero Component', () => {
       screen.getByRole('link', { name: /view projects/i })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('button', { name: /download cv/i })
+      screen.getByRole('button', { name: /download automation cv/i })
     ).toBeInTheDocument();
     expect(
       screen.getByRole('link', { name: /contact me/i })
@@ -97,6 +96,8 @@ describe('Hero Component', () => {
       screen.getByRole('link', { name: /view projects/i })
     ).toHaveAttribute('href', '/projects');
 
+    expect(screen.getByRole('link', { name: /download the DOCX CV/i })).toHaveAttribute('href', mockPersonalInfo.documents.cvDocx);
+
     // Check Contact link
     expect(screen.getByRole('link', { name: /contact me/i })).toHaveAttribute(
       'href',
@@ -108,8 +109,8 @@ describe('Hero Component', () => {
     render(<Hero personal={mockPersonalInfo} />);
 
     // Status line: availability + location
-    expect(screen.getByText(/open to opportunities/i)).toBeInTheDocument();
-    expect(screen.getByText(/harare & johannesburg/i)).toBeInTheDocument();
+    expect(screen.getByText(/open to remote automation contracts/i)).toBeInTheDocument();
+    expect(screen.getByText(/harare, zimbabwe/i)).toBeInTheDocument();
   });
 
   it('displays the metrics ledger', () => {
@@ -118,10 +119,10 @@ describe('Hero Component', () => {
     // Ledger renders the operating record from real metrics data
     expect(screen.getByText(/operating record/i)).toBeInTheDocument();
     expect(
-      screen.getByText(/pipeline downtime removed/i)
+      screen.getByText(/broken automation triggers repaired/i)
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/AI automation systems shipped to real teams/i)
+      screen.getByText(/lifecycle workflows delivered/i)
     ).toBeInTheDocument();
   });
 
@@ -147,11 +148,13 @@ describe('Hero Component', () => {
       .spyOn(document.body, 'removeChild')
       .mockImplementation(() => mockAnchor as any);
 
-    const downloadButton = screen.getByRole('button', { name: /download cv/i });
+    const downloadButton = screen.getByRole('button', { name: /download automation cv/i });
     await user.click(downloadButton);
 
     expect(createElementSpy).toHaveBeenCalledWith('a');
     expect(mockAnchor.click).toHaveBeenCalled();
+    expect(mockAnchor.href).toBe(mockPersonalInfo.documents.cv);
+    expect(mockAnchor.download).toBe('Tafara-Rugara-Automation-Engineer-CV.pdf');
 
     // Cleanup
     createElementSpy.mockRestore();

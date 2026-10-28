@@ -19,7 +19,7 @@ const SOCIAL_LINKS = [
 ];
 
 const DOCS = [
-  { label: 'Download CV',      href: '/documents/tafara-rugara-cv.pdf',        name: 'Tafara-Rugara-CV.pdf' },
+  { label: 'Download CV',      href: '/documents/tafara-rugara-automation-engineer-cv.pdf',        name: 'Tafara-Rugara-Automation-Engineer-CV.pdf' },
   { label: 'Reference Letter', href: '/documents/tafara-rugara-reference.pdf', name: 'Tafara-Rugara-Reference.pdf' },
 ];
 
@@ -37,10 +37,10 @@ export default function Footer() {
               <span className="font-mono text-bone" style={{ fontSize: '0.82rem', letterSpacing: '0.04em' }}>TAFARA RUGARA</span>
             </div>
             <p className="text-bone-dim mb-4" style={{ fontSize: '0.9rem', lineHeight: 1.6, maxWidth: '34ch' }}>
-              Building intelligent infrastructure and AI-powered automation systems.
-              Available from Harare &amp; Johannesburg.
+              Automation engineering for CRM workflows, API integrations and AI systems.
+              Based in Harare; available for remote contracts.
             </p>
-            <p className="label" style={{ textTransform: 'none', letterSpacing: '0.02em' }}>Open to Opportunities</p>
+            <p className="label" style={{ textTransform: 'none', letterSpacing: '0.02em' }}>Open to Remote Automation Contracts</p>
           </div>
 
           {/* Nav */}

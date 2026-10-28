@@ -31,7 +31,7 @@ export default function Contact() {
             Let&apos;s Work Together
           </h1>
           <p className="rise d2 mt-6 text-bone-dim" style={{ maxWidth: '52ch', fontSize: '1.05rem', lineHeight: 1.65 }}>
-            Cloud &amp; DevOps engineering, AI automation consulting, infrastructure architecture.
+            Remote Automation Engineer contracts, CRM workflows, API integrations and AI systems.
             Drop a message and I&apos;ll respond within 24 hours.
           </p>
         </div>
@@ -61,7 +61,7 @@ export default function Contact() {
           </h3>
           <p className="text-bone-dim mx-auto mb-8" style={{ maxWidth: '40ch', fontSize: '0.94rem', lineHeight: 1.65 }}>
             Message me directly on WhatsApp for a quick reply — I respond fast to Cloud,
-            DevOps, and AI automation enquiries.
+            workflow automation and API integration enquiries.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <a

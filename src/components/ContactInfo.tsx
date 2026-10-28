@@ -49,7 +49,8 @@ const contactMethods = [
 ];
 
 const documents = [
-  { label: 'Download CV',       path: '/documents/tafara-rugara-cv.pdf',       name: 'Tafara-Rugara-CV.pdf' },
+  { label: 'Download CV',       path: '/documents/tafara-rugara-automation-engineer-cv.pdf',       name: 'Tafara-Rugara-Automation-Engineer-CV.pdf' },
+  { label: 'CV in Word format', path: '/documents/tafara-rugara-automation-engineer-cv.docx', name: 'Tafara-Rugara-Automation-Engineer-CV.docx' },
   { label: 'Reference Letter',  path: '/documents/tafara-rugara-reference.pdf', name: 'Tafara-Rugara-Reference.pdf' },
 ];
 
@@ -69,8 +70,8 @@ export default function ContactInfo() {
           Let&apos;s Build Together
         </h3>
         <p className="text-bone-dim" style={{ fontSize: '0.94rem', lineHeight: 1.65 }}>
-          Open to Cloud &amp; DevOps engineering roles, AI automation consulting, and workflow architecture projects.
-          Based in Harare &amp; Johannesburg.
+          Available for remote Automation Engineer contracts: n8n workflows, GoHighLevel and Zapier automation, API integrations and AI systems.
+          Based in Harare, working with Zimbabwean, South African and international teams.
         </p>
       </div>
 
@@ -78,8 +79,8 @@ export default function ContactInfo() {
       <div className="flex items-center gap-3 px-4 py-3 border border-line rounded-md" style={{ background: 'var(--surface)' }}>
         <span className="live-dot" aria-hidden="true" />
         <div>
-          <p className="text-bone" style={{ fontSize: '0.9rem', fontWeight: 500 }}>Open to Opportunities</p>
-          <p className="label mt-0.5" style={{ textTransform: 'none', letterSpacing: '0.02em' }}>Harare, Zimbabwe &amp; Johannesburg, South Africa</p>
+          <p className="text-bone" style={{ fontSize: '0.9rem', fontWeight: 500 }}>Open to Remote Automation Contracts</p>
+          <p className="label mt-0.5" style={{ textTransform: 'none', letterSpacing: '0.02em' }}>Harare, Zimbabwe · UTC+2 · Remote</p>
         </div>
       </div>
 
