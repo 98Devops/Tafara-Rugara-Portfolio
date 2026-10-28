@@ -40,24 +40,24 @@ export function Hero({ personal }: HeroProps) {
         <div className="rise flex flex-wrap items-center gap-x-6 gap-y-2 mb-8 font-mono" style={{ fontSize: '0.72rem', letterSpacing: '0.05em', color: 'var(--bone-dim)' }}>
           <span className="flex items-center gap-2">
             <span className="live-dot" aria-hidden="true" />
-            Open to Remote Automation Contracts
+            Open to Opportunities
           </span>
-          <span>Harare, Zimbabwe · UTC+2</span>
+          <span>Harare &amp; Johannesburg · GMT+2</span>
           {clock && <span>{clock}</span>}
         </div>
 
         <div>
           <div>
             {/* Name eyebrow */}
-            <p className="rise label mb-5">{personal.name} · Automation Engineer</p>
+            <p className="rise label mb-5">{personal.name}</p>
 
             {/* Statement headline */}
             <h1
               className="rise d1 font-display text-bone"
               style={{ fontWeight: 400, fontSize: 'clamp(2.4rem, 6vw, 4.3rem)', lineHeight: 1.04, letterSpacing: '-0.02em', maxWidth: '18ch' }}
             >
-              Business workflows, automated with{' '}
-              <span className="relative italic whitespace-nowrap ember-underline">care</span>.
+              I build the systems that run quietly, and I keep them{' '}
+              <span className="relative italic whitespace-nowrap ember-underline">that way</span>.
             </h1>
 
             {/* Summary — keeps technical keywords */}
@@ -75,18 +75,12 @@ export function Hero({ personal }: HeroProps) {
               </a>
               <button
                 type="button"
-                onClick={() => handleDownload(personal.documents.cv, 'Tafara-Rugara-Automation-Engineer-CV.pdf')}
+                onClick={() => handleDownload(personal.documents.cv, 'Tafara-Rugara-CV.pdf')}
                 className="btn-ghost inline-flex items-center gap-2"
               >
-                Download Automation CV
+                Download CV
               </button>
             </div>
-
-            {personal.documents.cvDocx && (
-              <a href={personal.documents.cvDocx} download="Tafara-Rugara-Automation-Engineer-CV.docx" className="mt-4 inline-block text-sm text-bone-dim underline hover:text-bone">
-                Prefer Word? Download the DOCX CV
-              </a>
-            )}
 
             {/* Inline social row */}
             <div className="rise d3 mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono" style={{ fontSize: '0.72rem', letterSpacing: '0.05em' }}>

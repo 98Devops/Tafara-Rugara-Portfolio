@@ -68,6 +68,7 @@ describe('Documentation Completeness Property Tests', () => {
       fc.property(
         fc.constantFrom(
           'Prerequisites',
+          'Quick Start',
           'Installation',
           'Getting Started',
           'Development'
@@ -81,14 +82,14 @@ describe('Documentation Completeness Property Tests', () => {
     );
 
     // Should contain essential setup commands
-    const essentialCommands = ['npm ci --legacy-peer-deps', 'npm run dev', 'npm run build'];
+    const essentialCommands = ['npm install', 'npm run dev', 'npm run build'];
 
     essentialCommands.forEach(command => {
       expect(readmeContent).toContain(command);
     });
 
     // Should contain prerequisites
-    expect(readmeContent).toMatch(/node\.?js.*22/i); // Node.js 22 for the current tooling
+    expect(readmeContent).toMatch(/node\.?js.*1[8-9]/i); // Node.js 18+
     expect(readmeContent).toMatch(/npm|yarn/i);
 
     // Should contain development server instructions

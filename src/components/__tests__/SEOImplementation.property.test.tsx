@@ -162,13 +162,13 @@ describe('SEO Implementation Property Tests', () => {
             expect(metadata.alternates).toBeDefined();
             expect(metadata.alternates!.canonical).toBeDefined();
             expect(metadata.alternates!.canonical).toContain(
-              'https://tafara.netlify.app'
+              'https://tafara-rugara.com'
             );
 
             // Validate metadata base
             expect(metadata.metadataBase).toBeDefined();
             expect(metadata.metadataBase!.toString()).toBe(
-              'https://tafara.netlify.app/'
+              'https://tafara-rugara.com/'
             );
           }
         ),
@@ -197,10 +197,10 @@ describe('SEO Implementation Property Tests', () => {
 
             // Validate Person properties
             expect(structuredData.name).toBe('Tafara Rugara');
-            expect(structuredData.jobTitle).toContain('Automation');
-            expect(structuredData.jobTitle).toContain('Engineer');
+            expect(structuredData.jobTitle).toContain('Cloud');
+            expect(structuredData.jobTitle).toContain('DevOps');
             expect(structuredData.description).toBeDefined();
-            expect(structuredData.url).toBe('https://tafara.netlify.app');
+            expect(structuredData.url).toBe('https://tafara-rugara.com');
             expect(structuredData.image).toBeDefined();
 
             // Validate address
@@ -212,7 +212,7 @@ describe('SEO Implementation Property Tests', () => {
             // Validate work organization
             expect(structuredData.worksFor).toBeDefined();
             expect(structuredData.worksFor['@type']).toBe('Organization');
-            expect(structuredData.worksFor.name).toContain('Clear Elevation');
+            expect(structuredData.worksFor.name).toContain('Excellessence');
 
             // Validate skills/knowledge
             expect(structuredData.knowsAbout).toBeDefined();
@@ -223,10 +223,10 @@ describe('SEO Implementation Property Tests', () => {
             expect(structuredData.sameAs).toBeDefined();
             expect(Array.isArray(structuredData.sameAs)).toBe(true);
             expect(structuredData.sameAs).toContain(
-              'https://github.com/98Devops'
+              'https://github.com/tafara-rugara'
             );
             expect(structuredData.sameAs).toContain(
-              'https://www.linkedin.com/in/tafara-rugara-0627b819b/'
+              'https://linkedin.com/in/tafara-rugara'
             );
           }
         ),
@@ -276,7 +276,7 @@ describe('SEO Implementation Property Tests', () => {
           // Validate occupation data
           expect(structuredData.hasOccupation).toBeDefined();
           expect(structuredData.hasOccupation['@type']).toBe('Occupation');
-          expect(structuredData.hasOccupation.name).toBe('Automation Engineer');
+          expect(structuredData.hasOccupation.name).toBe('DevOps Engineer');
 
           // Validate occupation location
           expect(structuredData.hasOccupation.occupationLocation).toBeDefined();
@@ -339,7 +339,17 @@ describe('SEO Implementation Property Tests', () => {
             const metadata = generatePageMetadata(pageKey);
 
             // Core target keywords from Requirements 8.3
-            const coreKeywords = ['Automation', 'n8n', 'API', 'Cloud', 'Docker', 'Workflow', 'CRM', 'GoHighLevel', 'Zapier', 'JavaScript'];
+            const coreKeywords = [
+              'Cloud Engineer',
+              'DevOps Engineer',
+              'AWS',
+              'Infrastructure',
+              'Kubernetes',
+              'CI/CD',
+              'Terraform',
+              'Docker',
+              'Automation',
+            ];
 
             // Combine all text content for keyword analysis
             const allContent = `
@@ -359,7 +369,7 @@ describe('SEO Implementation Property Tests', () => {
             switch (pageKey) {
               case 'home':
                 expect(allContent).toContain('cloud');
-                expect(allContent).toContain('automation');
+                expect(allContent).toContain('devops');
                 break;
               case 'whatIDo':
                 expect(allContent).toContain('cloud');
@@ -618,7 +628,7 @@ describe('SEO Implementation Property Tests', () => {
 
             // Canonical URLs should be properly formatted
             expect(pageConfig.canonicalUrl).toMatch(
-              /^https:\/\/tafara\.netlify\.app/
+              /^https:\/\/tafara-rugara\.com/
             );
 
             // Keywords should be relevant arrays
@@ -670,7 +680,7 @@ describe('SEO Implementation Property Tests', () => {
 
             // All canonical URLs should use the same domain
             metadataList.forEach(({ config }) => {
-              expect(config.canonicalUrl).toContain('tafara.netlify.app');
+              expect(config.canonicalUrl).toContain('tafara-rugara.com');
             });
           }
         ),

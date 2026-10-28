@@ -40,7 +40,7 @@ const mockPersonalInfo: PersonalInfo = {
     whatsapp: 'https://wa.me/263777553271',
   },
   documents: {
-    cv: '/documents/tafara-rugara-automation-engineer-cv.pdf',
+    cv: '/documents/tafara-rugara-cv.pdf',
     reference: '/documents/tafara-rugara-reference.pdf',
   },
 };
@@ -49,14 +49,14 @@ describe('Document Download Integration', () => {
   it('renders CV download button', () => {
     render(<Hero personal={mockPersonalInfo} />);
 
-    const cvButton = screen.getByRole('button', { name: /download automation cv/i });
+    const cvButton = screen.getByRole('button', { name: /download cv/i });
     expect(cvButton).toBeInTheDocument();
   });
 
   it('CV button has onClick handler', () => {
     render(<Hero personal={mockPersonalInfo} />);
 
-    const cvButton = screen.getByRole('button', { name: /download automation cv/i });
+    const cvButton = screen.getByRole('button', { name: /download cv/i });
     // Button should be clickable
     expect(cvButton.tagName).toBe('BUTTON');
   });
@@ -74,7 +74,7 @@ describe('Document Download Integration', () => {
 
     render(<Hero personal={mockPersonalInfo} />);
 
-    const cvButton = screen.getByRole('button', { name: /download automation cv/i });
+    const cvButton = screen.getByRole('button', { name: /download cv/i });
 
     // Should not throw error
     expect(() => fireEvent.click(cvButton)).not.toThrow();
@@ -86,9 +86,9 @@ describe('Document Download Integration', () => {
   it('download button is accessible', () => {
     render(<Hero personal={mockPersonalInfo} />);
 
-    const cvButton = screen.getByRole('button', { name: /download automation cv/i });
+    const cvButton = screen.getByRole('button', { name: /download cv/i });
     expect(cvButton).toBeVisible();
-    expect(cvButton.textContent).toMatch(/download automation cv/i);
+    expect(cvButton.textContent).toMatch(/download cv/i);
   });
 
   it('renders with correct document path in personal info', () => {
@@ -96,10 +96,10 @@ describe('Document Download Integration', () => {
 
     // Verify the component renders with the personal info that includes documents
     expect(mockPersonalInfo.documents.cv).toBe(
-      '/documents/tafara-rugara-automation-engineer-cv.pdf'
+      '/documents/tafara-rugara-cv.pdf'
     );
 
-    const cvButton = screen.getByRole('button', { name: /download automation cv/i });
+    const cvButton = screen.getByRole('button', { name: /download cv/i });
     expect(cvButton).toBeInTheDocument();
   });
 });

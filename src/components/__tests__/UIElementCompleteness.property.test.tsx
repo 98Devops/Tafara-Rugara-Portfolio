@@ -123,7 +123,7 @@ describe('UI Element Completeness Property Tests', () => {
             expect(viewProjectsBtn?.textContent?.trim()).toContain('View Projects');
 
             // Download CV — now a button that triggers a programmatic download
-            const downloadCVBtn = screen.getByRole('button', { name: /download automation cv/i });
+            const downloadCVBtn = screen.getByRole('button', { name: /download cv/i });
             expect(downloadCVBtn).toBeInTheDocument();
 
             // GitHub social link
@@ -196,7 +196,7 @@ describe('UI Element Completeness Property Tests', () => {
 
           // Download CV is exposed as an accessible button (programmatic download)
           expect(
-            screen.getByRole('button', { name: /download automation cv/i })
+            screen.getByRole('button', { name: /download cv/i })
           ).toBeInTheDocument();
 
           // Clean up to avoid conflicts
@@ -361,7 +361,7 @@ describe('UI Element Completeness Property Tests', () => {
 
             // Download CV is a button that downloads programmatically
             expect(
-              screen.getByRole('button', { name: /download automation cv/i })
+              screen.getByRole('button', { name: /download cv/i })
             ).toBeInTheDocument();
 
             // External links should have proper target and rel attributes
@@ -399,7 +399,7 @@ describe('UI Element Completeness Property Tests', () => {
           expect(socialRow.length).toBeGreaterThanOrEqual(3); // GitHub, LinkedIn, Contact
 
           // Download CV uses the ghost button treatment.
-          const cvButton = screen.getByRole('button', { name: /download automation cv/i });
+          const cvButton = screen.getByRole('button', { name: /download cv/i });
           expect(cvButton.className).toMatch(/btn-ghost/);
 
           // Clean up to avoid conflicts
@@ -507,7 +507,7 @@ describe('UI Element Completeness Property Tests', () => {
             // 2. Download CV — button with a programmatic download (Reference
             //    moved to the footer/contact page in the redesign).
             const cvButton = within(heroContainer).getByRole('button', {
-              name: /download automation cv/i,
+              name: /download cv/i,
             });
             expect(cvButton).toBeInTheDocument();
 

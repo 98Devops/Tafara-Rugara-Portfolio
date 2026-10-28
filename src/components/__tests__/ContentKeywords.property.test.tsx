@@ -17,7 +17,7 @@ import {
 describe('Content Keyword Validation Property Tests', () => {
   const countMatches = (text: string, keywords: string[]) =>
     keywords.reduce<number>(
-      (count, kw) => count + (text.toLowerCase().includes(kw.toLowerCase()) ? 1 : 0),
+      (count, kw) => count + (text.includes(kw.toLowerCase()) ? 1 : 0),
       0
     );
 
@@ -383,7 +383,7 @@ describe('Content Keyword Validation Property Tests', () => {
             'ssh',
             'firewall',
             'automation',
-            'reliability',
+            '60%',
           ];
 
           requiredKeywords.forEach(keyword => {
@@ -439,14 +439,14 @@ describe('Content Keyword Validation Property Tests', () => {
           data.experience.forEach(exp => {
             expect(exp.achievements.length).toBeGreaterThan(2);
           });
-          // The DevOps role describes workflow delivery and reliability
+          // The DevOps role carries the flagship 60% impact metric
           const devopsExp = data.experience.find(exp =>
             /DevOps/i.test(exp.position)
           );
           expect(devopsExp).toBeDefined();
           expect(devopsExp!.achievements.length).toBeGreaterThan(5);
           expect(devopsExp!.impact).toBeDefined();
-          expect(devopsExp!.impact).toContain('reliability');
+          expect(devopsExp!.impact).toContain('60%');
         }),
         { numRuns: 10 }
       );

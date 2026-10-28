@@ -13,8 +13,8 @@ export default function WhatIDo() {
             What I Do
           </h1>
           <p className="rise d2 mt-6 text-bone-dim" style={{ maxWidth: '54ch', fontSize: '1.05rem', lineHeight: 1.65 }}>
-            Workflow automation, CRM systems, API integrations and AI pipelines,
-            supported by software engineering, cloud deployment and operational reliability.
+            Cloud architecture, DevOps pipelines, AI-powered automation, and system
+            reliability — production-grade work that delivers measurable operational value.
           </p>
         </div>
 

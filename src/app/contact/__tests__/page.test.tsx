@@ -84,7 +84,7 @@ describe('Contact Page', () => {
 
     // Check description
     expect(
-      screen.getByText(/Remote Automation Engineer contracts, CRM workflows/)
+      screen.getByText(/Cloud & DevOps engineering, AI automation consulting/)
     ).toBeInTheDocument();
 
     // Check contact form section
@@ -166,7 +166,7 @@ describe('Contact Page', () => {
 
     expect(
       screen.getByText(
-        /Remote Automation Engineer contracts, CRM workflows, API integrations and AI systems/
+        /Cloud & DevOps engineering, AI automation consulting, infrastructure architecture/
       )
     ).toBeInTheDocument();
   });
