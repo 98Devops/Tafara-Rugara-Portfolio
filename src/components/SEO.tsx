@@ -57,7 +57,7 @@ export const pageSEOConfig: PageSEOConfig = {
     description:
       'Automation engineering with n8n, GoHighLevel, Zapier, JavaScript and APIs. CRM lifecycle workflows, AI integration, quality assurance and cloud deployment.',
     keywords: [
-      'Full-Stack Development',
+      'Website Development',
       'Next.js Development',
       'React Development',
       'Web Applications',
@@ -111,7 +111,7 @@ export const pageSEOConfig: PageSEOConfig = {
   experience: {
     title: 'Professional Experience - Automation Engineer | Tafara Rugara',
     description:
-      'GoHighLevel and CRM automation at Clientharvest.io, software delivery at Mero Tech and DevOps at Excellessence. Experience with GoHighLevel, Zapier, n8n, JavaScript and AI pipelines.',
+      'CRM automation at Clear Elevation, software delivery at Mero Tech and DevOps at Excellessence. Experience with GoHighLevel, Zapier, n8n, JavaScript and AI pipelines.',
     keywords: [
       'DevOps Engineer Experience',
       'Production Deployment',
@@ -231,7 +231,7 @@ export function generateStructuredData(pageKey: keyof PageSEOConfig) {
     },
     worksFor: {
       '@type': 'Organization',
-      name: 'Clientharvest.io',
+      name: 'Clear Elevation',
     },
     knowsAbout: [
       'AWS',
@@ -370,8 +370,8 @@ export function generateStructuredData(pageKey: keyof PageSEOConfig) {
         },
         worksFor: {
           '@type': 'Organization',
-          name: 'Clientharvest.io',
-          description: 'Automation and CRM agency',
+          name: 'Clear Elevation',
+          description: 'Technology services company',
         },
       };
 

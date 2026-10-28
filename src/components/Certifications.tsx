@@ -58,7 +58,7 @@ export default function Certifications() {
         </div>
 
         <p className="font-mono mt-8" style={{ fontSize: '0.72rem', color: 'var(--bone-faint)' }}>
-          In progress: AWS SAA-C03
+          Target: AWS SAA-C03 · April / May 2026
         </p>
       </div>
     </section>

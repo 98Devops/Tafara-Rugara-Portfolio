@@ -17,7 +17,7 @@ const CATEGORY_ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
   'DevOps & CI/CD':           CommandLineIcon,
   'Automation Engineering':   CpuChipIcon,
   'Monitoring & Reliability': SignalIcon,
-  'Full-Stack Development':   CodeBracketIcon,
+  'Website Development':      CodeBracketIcon,
 };
 
 interface CapabilityCardProps {

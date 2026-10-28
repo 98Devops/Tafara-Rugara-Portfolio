@@ -2,7 +2,7 @@ import { PortfolioData, Metric } from '@/types';
 
 // Results reported in the CV and documented project work.
 export const metrics: Metric[] = [
-  { value: '7', label: 'Broken automation triggers repaired', detail: 'Patient-retention system, Clientharvest.io', meta: 'CRM automation' },
+  { value: '7', label: 'Broken automation triggers repaired', detail: 'Patient-retention system, Clear Elevation', meta: 'CRM automation' },
   { value: '3', label: 'Lifecycle workflows delivered', detail: 'Engagement, at-risk and dormant reactivation', meta: 'GoHighLevel · Zapier' },
   { value: '130', unit: '+', label: 'Tenants in one live property system', detail: 'Four spreadsheets replaced across four properties', meta: 'Trevis' },
   { value: '~190', label: 'Tests supporting the coverage engine', detail: 'Vitest checks under local and UTC timezones', meta: 'quality & reliability' },
@@ -99,7 +99,7 @@ export const certifications = [
   {
     name: 'AWS Solutions Architect — Associate',
     issuer: 'Amazon Web Services',
-    year: '2026',
+    year: '2025',
     status: 'In Progress',
     badge: 'SAA-C03',
   },
@@ -108,10 +108,10 @@ export const certifications = [
 export const portfolioData: PortfolioData = {
   personal: {
     name: 'Tafara Rugara',
-    title: 'Automation Engineer | AI Workflows, CRM & API Integrations | Full-Stack Developer',
+    title: 'Automation Engineer | AI Workflows, CRM & API Integrations',
     location: 'Harare, Zimbabwe · Remote contracts across Zimbabwe, South Africa and international teams',
     summary:
-      'I build business automation with n8n, GoHighLevel and Zapier, and the full-stack apps around it in TypeScript, React, Next.js and Supabase. From repairing CRM lifecycle workflows to shipping paid client systems, an offline-first farm platform and my own n8n B2B client-acquisition engine, I deliver tested, documented systems. Based in Harare and available for remote Automation Engineer roles with South African, Zimbabwean and international teams.',
+      'I build and maintain business automation with n8n, GoHighLevel, Zapier, JavaScript and REST APIs. From repairing CRM lifecycle workflows to deploying AI pipelines and automated reporting, I turn manual processes into tested, documented systems. Based in Harare and available for remote Automation Engineer contracts with Zimbabwean, South African and international teams.',
     socialLinks: {
       github:   'https://github.com/98Devops',
       linkedin: 'https://www.linkedin.com/in/tafara-rugara-0627b819b/',
@@ -135,9 +135,8 @@ export const portfolioData: PortfolioData = {
         'Zapier Integrations & Conditional Routing',
         'Patient Lifecycle, Reactivation & Reminder Workflows',
         'Workflow QA, Root Cause Analysis & Documentation',
-        'AI Agents, Tool Calling & RAG',
-        'Prompt Engineering, Structured Output & LLM Evaluation',
-        'B2B Lead Scoring & Follow-Up Automation (Ops Engine)',
+        'Voice-to-Insight AI Pipelines',
+        'Prompt Engineering & LLM Integration',
         'API Integration & Design',
         'Vector Database Workflows (Qdrant)',
         'Custom JavaScript Logic & Schema Enforcement',
@@ -186,50 +185,24 @@ export const portfolioData: PortfolioData = {
       ],
     },
     {
-      category: 'Full-Stack Development',
+      category: 'Website Development',
       description:
-        'Building paid client systems and my own products end to end: TypeScript and React front ends, Supabase back ends with Row-Level Security, offline-first PWAs and AI features, all tested and deployed.',
+        'Building modern, performant websites and web apps with React, Next.js, and cutting-edge web technologies. Specializing in interactive UI, performance optimization, and SEO-ready implementations.',
       skills: [
-        'TypeScript & JavaScript',
-        'React, Next.js & Vite',
-        'TanStack Query & React Router',
-        'Supabase — PostgreSQL, RLS, Auth, Edge Functions',
-        'PL/pgSQL & Database Migrations',
-        'Offline-First PWAs (Dexie / IndexedDB)',
-        'Tailwind CSS & Responsive UI',
-        'Vitest, Jest & Playwright Testing',
-        'Python, Flask & FastAPI',
+        'Next.js & React',
+        'TypeScript',
+        'Tailwind CSS',
+        'Responsive Design',
+        'Performance Optimization',
+        'SEO Best Practices',
+        'Framer Motion',
+        'Property-Based Testing',
+        'Static Site Generation',
         'Netlify Deployment',
       ],
     },
   ],
   projects: [
-    {
-      id: 'munda-farm-inputs-ledger',
-      title: 'Munda — Farm Inputs Ledger (Tech Lead)',
-      category: 'webapp',
-      description:
-        'An offline-first double-entry ledger for everything a Zimbabwean commercial farm buys and uses — seed, fertiliser, chemicals and diesel — from purchase to issue, read back as spend and stock per category.',
-      problem:
-        'Farms track inputs in paper logbooks that record fuel filled but never what an activity consumed, so owners cannot see spend, stock or misuse until it is too late — and field capture happens where there is no signal.',
-      technicalArchitecture:
-        'Vite + React + TypeScript PWA (React Router, TanStack Query, Tailwind) with a Dexie offline queue and idempotent sync engine; Supabase Postgres is the entire backend and the only place that does arithmetic on farm figures (PL/pgSQL functions, Row-Level Security, Auth, Storage, pg_cron self-check); two Deno Edge Functions for the Ask Munda AI assistant and staff accounts.',
-      operationalValue:
-        'Capture always succeeds on a phone with no signal and syncs later; the owner gets one screen of spend and stock, and the storeman records every purchase and issue.',
-      outcome:
-        'Live demo on Netlify, covered by 2,000+ automated tests and an end-to-end suite, with Ask Munda answering owner questions on Groq through read-only tools, a number check and an eval harness.',
-      technologies: ['TypeScript', 'React', 'Vite', 'PWA', 'Dexie', 'Supabase', 'PostgreSQL', 'Row-Level Security', 'Deno Edge Functions', 'Groq', 'Netlify'],
-      highlights: [
-        'Double-entry ledger for all farm inputs, with a separate diesel verification ledger',
-        'Offline-first PWA: Dexie queue captures without signal and sends later',
-        'All farm arithmetic in Postgres SQL functions — the app formats numbers, never adds them',
-        'Row-Level Security and a pg_cron self-check in Supabase',
-        'Ask Munda AI assistant: read-only tools, number check and eval harness on Groq',
-        '2,000+ automated tests plus an end-to-end suite',
-      ],
-      githubUrl: '',
-      demoUrl: 'https://munda-mvp.netlify.app/',
-    },
     {
       id: 'trevis-property-management',
       title: 'Trevis — Student Accommodation Management',
@@ -447,16 +420,15 @@ export const portfolioData: PortfolioData = {
   ],
   experience: [
     {
-      company: 'Clientharvest.io',
-      position: 'Automation Engineer',
-      duration: 'April 2026 – Present',
-      location: 'Remote · Contract',
-      impact: '9 workflows · 7 live Zaps',
+      company: 'Clear Elevation',
+      position: 'AI Automations & Systems Operator',
+      duration: 'May 2026 – Present',
+      location: 'Remote · International clients',
+      impact: '7 triggers fixed · 3 workflows shipped',
       achievements: [
-        'Build and maintain GoHighLevel automation for agency clients — CRM architecture, pipelines, workflows, funnels, landing pages and email campaigns',
+        'Build and maintain client backend systems for an international marketing agency — automation workflows, CRM architecture, funnels, landing pages, and email campaigns in GoHighLevel — so clients operate like CEOs, not operators',
         'Rescued a failing patient-retention system spanning Practice Better (EMR), GoHighLevel, and Zapier — root-caused a router that handled only one patient type while silently dropping the rest',
-        'Repair phase: fixed 7 broken triggers and published 3 lifecycle workflows (engagement tracking, at-risk reactivation, dormant reactivation) plus refill reminders and pipeline automation',
-        'Full build: delivered 9 published GHL workflows and 7 live Zaps covering end-to-end patient lifecycle management',
+        'Fixed 7 broken triggers and published 3 new lifecycle workflows (engagement tracking, at-risk reactivation, dormant reactivation) plus refill reminders and pipeline automation',
         'Author comprehensive system prompts and briefing materials to run parallel AI agents consistently across builds',
         'QA standard: every trigger, form, payment, domain, and workflow exit tested before delivery — never assumed, always verified',
       ],
@@ -464,26 +436,23 @@ export const portfolioData: PortfolioData = {
     },
     {
       company: 'Mero Tech',
-      position: 'Full-Stack & Systems Engineer (Freelance)',
-      duration: 'December 2025 – Present',
-      location: 'Harare, Zimbabwe · Paid client systems and own products',
-      impact: 'Paid client systems + own products',
+      position: 'Web & Systems Developer',
+      duration: 'December 2025 – April 2026',
+      location: 'Harare, Zimbabwe · Self-employed',
+      impact: '4 spreadsheets → 1 live system',
       achievements: [
-        'Munda (tech lead, live): offline-first double-entry farm inputs ledger — React, TypeScript, TanStack Query and a Dexie queue with idempotent sync; Supabase PL/pgSQL does all farm arithmetic under Row-Level Security',
-        'Munda AI and quality: Ask Munda assistant on Groq in a Deno Edge Function with read-only tools, a number check and an eval harness; 2,000+ automated tests including ledger-invariant, RLS, WCAG contrast and end-to-end suites',
-        'RunProduce (client, prelaunch): Next.js + Supabase broiler planner on a pure TypeScript engine — harvest timing, gate-vs-bulk sales split, next-batch sizing and a projected cash calendar',
-        'Trevis (paid client project, live): replaced 4 spreadsheets for 130+ tenants across 4 properties with a ledger-based rent coverage engine, ≈190 Vitest tests, nightly integrity audits and a daily owner report; delivered and paid in full',
-        'IATS: multi-tenant ICT asset tracking SaaS — React 18, TypeScript, Zod, TanStack Query, Supabase RLS role-based access in PL/pgSQL, append-only chain-of-custody and QR scan workflows',
-        'Ops Engine (own B2B client-acquisition system): self-hosted n8n workflows ingest leads from Gmail and Telegram, score them against a rubric, draft proposals with Claude, Groq and Gemini and run follow-ups; Supabase metric views feed a React KPI dashboard',
-        'Synapse (AI engineering): voice-first knowledge app on Next.js 15 — Gemini entity extraction, a knowledge graph plus Qdrant embeddings, and a LangChain agent answering questions with RAG',
-        'Client websites: Litho Solutions (Next.js 15, Three.js) and ProAir Zimbabwe (Vite, WhatsApp lead capture, live weather API)',
+        'Built and shipped production websites and web applications for real clients across the mining, HVAC, and property sectors — design, copy, build, and deploy',
+        'Delivered Trevis, a live React + Supabase property-management system that replaced 4 spreadsheets with one source of truth for 130+ tenants across 4 properties',
+        'Backed Trevis with ≈190 unit tests and automated nightly data-integrity checks for trustworthy, auditable numbers',
+        'Built Litho Solutions (Next.js 15 / React 19) with interactive Three.js 3D visualizations, deployed as a performant static export',
+        'Built ProAir Zimbabwe (Vite) with WhatsApp-first lead generation and a live weather API',
       ],
-      technologies: ['TypeScript', 'React', 'Next.js', 'Vite', 'TanStack Query', 'Supabase', 'PostgreSQL', 'PL/pgSQL', 'Dexie', 'n8n', 'LangChain', 'Qdrant', 'Docker', 'Netlify'],
+      technologies: ['React', 'Next.js 15', 'Supabase', 'Three.js', 'Vite', 'TypeScript', 'Tailwind CSS', 'Netlify'],
     },
     {
       company: 'Excellessence (Your EKA Services)',
       position: 'DevOps Engineer',
-      duration: 'May 2025 – October 2025',
+      duration: 'June 2025 – October 2025',
       location: 'Harare, Zimbabwe · Hybrid',
       impact: 'AI workflow deployment & reliability',
       achievements: [
