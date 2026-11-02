@@ -1,128 +1,222 @@
 'use client';
-
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { portfolioData, automationSystems } from '@/data/portfolio';
-import CaseCard from '@/components/CaseCard';
-import type { Project, ProjectCategory } from '@/types';
-import type { AutomationSystem } from '@/types';
+import { PageIntro, NextChapter } from '@/components/PageIntro';
+import { ProjectArtwork } from '@/components/ProjectArtwork';
+import type { Project, ProjectCategory, AutomationSystem } from '@/types';
 
-// Map an automation system into the Project shape so it renders as a case card.
-function automationToProject(s: AutomationSystem): Project {
-  const arch = Array.isArray(s.architecture) ? s.architecture : s.architecture ? [s.architecture] : [];
+function toProject(system: AutomationSystem): Project {
   return {
-    id: s.id,
-    title: s.title,
+    id: system.id,
+    title: system.title,
     category: 'automation',
-    description: s.description,
-    problem: s.businessContext ?? s.systemPurpose,
-    technicalArchitecture: s.systemPurpose ?? s.description,
-    outcome: s.outcome,
-    technologies: s.technologies ?? s.tools ?? [],
-    highlights: s.systemCapabilities && s.systemCapabilities.length > 0 ? s.systemCapabilities : arch,
-    demoUrl: s.demoUrl,
-    githubUrl: s.githubUrl,
-    documentationUrl: s.documentationUrl,
+    description: system.description,
+    problem: system.businessContext,
+    technicalArchitecture: Array.isArray(system.architecture)
+      ? system.architecture.join(' · ')
+      : system.architecture,
+    outcome: system.outcome,
+    technologies: system.technologies ?? system.tools ?? [],
+    highlights: system.systemCapabilities ?? [],
+    demoUrl: system.demoUrl,
+    githubUrl: system.githubUrl,
+    documentationUrl: system.documentationUrl,
   };
 }
-
-type Filter = 'all' | ProjectCategory;
-
-const FILTERS: { value: Filter; label: string }[] = [
-  { value: 'all',        label: 'All' },
-  { value: 'website',    label: 'Websites' },
-  { value: 'webapp',     label: 'Web Apps' },
-  { value: 'automation', label: 'Automation' },
-  { value: 'platform',   label: 'Platform' },
+const projects = [
+  portfolioData.projects.find(p => p.id === 'trevis-property-management')!,
+  portfolioData.projects.find(p => p.id === 'munda')!,
+  toProject(automationSystems.flagship),
+  ...portfolioData.projects.filter(
+    p =>
+      ![
+        'trevis-property-management',
+        'munda',
+        'serverless-platform-pattern',
+      ].includes(p.id)
+  ),
+  ...automationSystems.supporting.map(toProject),
 ];
-
-// Outcome numerals for the cards that have a headline metric.
-const OUTCOMES: Record<string, { big: string; unit?: string; label: string }> = {
-  'delivery-health-ai': { big: '2', unit: 'am', label: 'alerts, not outages' },
-  'legacy-migration':   { big: '60', unit: '%', label: 'overhead removed' },
-  'trevis-property-management': { big: '130', unit: '+', label: 'students live' },
+const filters: { id: 'all' | ProjectCategory; name: string }[] = [
+  { id: 'all', name: 'All work' },
+  { id: 'webapp', name: 'Applications' },
+  { id: 'automation', name: 'AI & automation' },
+  { id: 'website', name: 'Websites' },
+  { id: 'platform', name: 'Cloud & APIs' },
+];
+const statuses: Record<string, string> = {
+  munda: 'LIVE PRODUCT',
+  'trevis-property-management': 'LIVE CLIENT SYSTEM',
+  'delivery-health-ai': 'CLIENT PILOT',
+  runproduce: 'PRELAUNCH',
+  synapse: 'INDEPENDENT PROJECT',
+  iats: 'INDEPENDENT PRODUCT',
+  'ops-engine': 'HOMELAB PROJECT',
+  'telegram-ai-bot': 'PROTOTYPE',
 };
-
 export default function ProjectsPage() {
-  const [filter, setFilter] = useState<Filter>('all');
-
-  // Unified list: automation systems + data-file projects, in a sensible order.
-  const allProjects = useMemo<Project[]>(() => {
-    const automation = [automationSystems.flagship, ...automationSystems.supporting].map(automationToProject);
-    return [...automation, ...portfolioData.projects];
-  }, []);
-
-  const counts = useMemo(() => {
-    const c: Record<Filter, number> = { all: allProjects.length, website: 0, webapp: 0, automation: 0, platform: 0 };
-    allProjects.forEach(p => { if (p.category) c[p.category] += 1; });
-    return c;
-  }, [allProjects]);
-
-  const visible = filter === 'all' ? allProjects : allProjects.filter(p => p.category === filter);
-
+  const [filter, setFilter] = useState<'all' | ProjectCategory>('all');
+  const visible = projects.filter(
+    p => filter === 'all' || p.category === filter
+  );
   return (
-    <main className="border-b border-line">
-      {/* Page header */}
-      <section className="border-b border-line">
-        <div className="wrap" style={{ paddingTop: 'clamp(5rem, 11vw, 8rem)', paddingBottom: 'var(--section-pad)' }}>
-          <p className="rise label mb-5">// selected work</p>
-          <h1 className="rise d1 font-display text-bone" style={{ fontWeight: 400, fontSize: 'clamp(2rem, 5vw, 3.2rem)', lineHeight: 1.06, letterSpacing: '-0.02em', maxWidth: '20ch' }}>
-            Systems I designed, built, and still operate.
-          </h1>
-          <p className="rise d2 mt-6 text-bone-dim" style={{ maxWidth: '54ch', fontSize: '1.05rem', lineHeight: 1.65 }}>
-            Websites, web apps, automation, and platform work shipped for real teams
-            under real operational pressure — measured by what they changed, not what they used.
+    <main className="cinematic-home inner-page">
+      <PageIntro
+        number="03"
+        label="SELECTED WORK"
+        title="Built for a reason."
+        emphasis="Made to be used."
+        description="Client systems, independent products and engineering experiments. The common thread: a real problem and a thoughtful way to solve it."
+      >
+        <div className="project-index">
+          <span>THE WORK, IN CONTEXT</span>
+          <strong>
+            Software.
+            <br />
+            Automation.
+            <br />
+            Infrastructure.
+          </strong>
+          <p>
+            Explore the problem, the build and the decisions behind each
+            project.
           </p>
         </div>
-      </section>
-
-      {/* Filter bar */}
-      <section className="wrap" style={{ paddingTop: 'var(--section-pad)' }}>
-        <div className="rise flex flex-wrap gap-2" role="tablist" aria-label="Filter projects by category">
-          {FILTERS.map(f => {
-            const active = filter === f.value;
-            return (
-              <button
-                key={f.value}
-                role="tab"
-                aria-selected={active}
-                onClick={() => setFilter(f.value)}
-                className="font-mono rounded-sm transition-colors duration-150"
-                style={{
-                  fontSize: '0.74rem',
-                  letterSpacing: '0.04em',
-                  padding: '0.5rem 0.9rem',
-                  border: '1px solid',
-                  borderColor: active ? 'var(--ember)' : 'var(--line-2)',
-                  color: active ? 'var(--ember)' : 'var(--bone-dim)',
-                  background: active ? 'var(--ember-soft)' : 'transparent',
-                }}
-              >
-                {f.label}
-                <span style={{ color: 'var(--bone-faint)', marginLeft: '0.5rem' }}>{counts[f.value]}</span>
-              </button>
-            );
-          })}
+      </PageIntro>
+      <section
+        className="wrap project-collection"
+        aria-label="Project portfolio"
+      >
+        <div
+          className="project-filter"
+          role="group"
+          aria-label="Filter projects"
+        >
+          {filters.map(item => (
+            <button
+              type="button"
+              key={item.id}
+              aria-pressed={filter === item.id}
+              onClick={() => setFilter(item.id)}
+            >
+              {item.name}
+              <span>
+                {
+                  projects.filter(
+                    p => item.id === 'all' || p.category === item.id
+                  ).length
+                }
+              </span>
+            </button>
+          ))}
+        </div>
+        <p className="collection-count" aria-live="polite">
+          {visible.length} projects ·{' '}
+          {filters.find(item => item.id === filter)?.name}
+        </p>
+        <div className="work-grid">
+          {visible.map((project, index) => (
+            <article
+              key={project.id}
+              id={project.id}
+              className="work-item reveal"
+            >
+              <ProjectArtwork
+                id={project.id}
+                category={project.category}
+                title={project.title}
+              />
+              <div className="work-item-content">
+                <p className="cinema-eyebrow">
+                  {String(index + 1).padStart(2, '0')} /{' '}
+                  {statuses[project.id] || project.category?.toUpperCase()}
+                </p>
+                <h2>{project.title}</h2>
+                <p>{project.description}</p>
+                <div className="project-tags">
+                  {project.technologies.slice(0, 5).map(tech => (
+                    <span key={tech}>{tech}</span>
+                  ))}
+                </div>
+                <details className="case-details">
+                  <summary>
+                    Inside the build <span aria-hidden="true">+</span>
+                  </summary>
+                  <div>
+                    {project.problem && (
+                      <>
+                        <h3>The problem</h3>
+                        <p>{project.problem}</p>
+                      </>
+                    )}
+                    {project.technicalArchitecture && (
+                      <>
+                        <h3>What I built</h3>
+                        <p>{project.technicalArchitecture}</p>
+                      </>
+                    )}
+                    {project.outcome && (
+                      <>
+                        <h3>Outcome & status</h3>
+                        <p>{project.outcome}</p>
+                      </>
+                    )}
+                    {project.highlights.length > 0 && (
+                      <ul>
+                        {project.highlights.map(item => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </details>
+                <div className="work-links">
+                  {project.demoUrl && (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {project.demoUrl.includes('youtube')
+                        ? 'Watch demo'
+                        : 'Visit project'}{' '}
+                      ↗
+                    </a>
+                  )}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Source code ↗
+                    </a>
+                  )}
+                  {project.documentationUrl && (
+                    <a
+                      href={project.documentationUrl}
+                      download="Delivery-Health-Documentation.pdf"
+                    >
+                      Documentation ↓
+                    </a>
+                  )}
+                  {!project.demoUrl && !project.githubUrl && (
+                    <a
+                      href={
+                        'mailto:tfrsuperfx@gmail.com?subject=' +
+                        encodeURIComponent('Tell me about ' + project.title)
+                      }
+                    >
+                      Ask for a walkthrough ↗
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
-
-      {/* Grid */}
-      <section className="wrap" style={{ paddingTop: '2rem', paddingBottom: 'var(--section-pad)' }}>
-        {visible.length > 0 ? (
-          <div className="grid lg:grid-cols-2 gap-6">
-            {visible.map((p, i) => (
-              <CaseCard
-                key={p.id}
-                project={p}
-                index={i}
-                caseId={`${(p.category ?? 'project').toUpperCase()} / ${String(i + 1).padStart(2, '0')}`}
-                outcome={OUTCOMES[p.id]}
-              />
-            ))}
-          </div>
-        ) : (
-          <p className="font-mono text-bone-faint" style={{ fontSize: '0.8rem' }}>No projects in this category yet.</p>
-        )}
-      </section>
+      <NextChapter title="Your problem could be next." />
     </main>
   );
 }

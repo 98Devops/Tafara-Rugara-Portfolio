@@ -162,13 +162,13 @@ describe('SEO Implementation Property Tests', () => {
             expect(metadata.alternates).toBeDefined();
             expect(metadata.alternates!.canonical).toBeDefined();
             expect(metadata.alternates!.canonical).toContain(
-              'https://tafara-rugara.com'
+              'https://tafara.netlify.app'
             );
 
             // Validate metadata base
             expect(metadata.metadataBase).toBeDefined();
             expect(metadata.metadataBase!.toString()).toBe(
-              'https://tafara-rugara.com/'
+              'https://tafara.netlify.app/'
             );
           }
         ),
@@ -200,7 +200,7 @@ describe('SEO Implementation Property Tests', () => {
             expect(structuredData.jobTitle).toContain('Cloud');
             expect(structuredData.jobTitle).toContain('DevOps');
             expect(structuredData.description).toBeDefined();
-            expect(structuredData.url).toBe('https://tafara-rugara.com');
+            expect(structuredData.url).toBe('https://tafara.netlify.app');
             expect(structuredData.image).toBeDefined();
 
             // Validate address

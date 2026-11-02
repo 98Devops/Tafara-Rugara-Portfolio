@@ -1,6 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { SystemVisual } from '@/components/SystemVisual';
+import { useMotionPreferences } from '@/components/MotionPreferences';
+import { documents } from '@/data/site';
 import Link from 'next/link';
 import {
   automationSystems,
@@ -64,111 +67,10 @@ function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return <span aria-hidden="true">{diagonal ? '↗' : '→'}</span>;
 }
 
-function Blueprint({ active }: { active: number }) {
-  const data = disciplines[active];
-  return (
-    <div className="system-blueprint">
-      <div className="blueprint-top">
-        <span>SYSTEM BLUEPRINT</span>
-        <span>0{active + 1} / 03</span>
-      </div>
-      <div className="blueprint-art" aria-hidden="true">
-        <svg viewBox="0 0 540 460" fill="none">
-          <defs>
-            <linearGradient
-              id="orbit-light"
-              x1="60"
-              y1="80"
-              x2="480"
-              y2="390"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#ff895e" />
-              <stop offset=".45" stopColor="#e2672e" />
-              <stop offset="1" stopColor="#35221a" />
-            </linearGradient>
-            <radialGradient id="core-light">
-              <stop stopColor="#ffb18f" />
-              <stop offset=".18" stopColor="#ed794a" />
-              <stop offset="1" stopColor="#9b3c1c" />
-            </radialGradient>
-          </defs>
-          <path
-            d="M270 20V440M35 230H505"
-            stroke="#383838"
-            strokeDasharray="3 7"
-          />
-          <circle cx="270" cy="230" r="185" stroke="#303133" />
-          <circle
-            cx="270"
-            cy="230"
-            r="151"
-            stroke="#262729"
-            strokeDasharray="2 9"
-          />
-          <g className="orbit-rings">
-            <ellipse
-              cx="270"
-              cy="230"
-              rx="205"
-              ry="75"
-              stroke="url(#orbit-light)"
-              strokeWidth="1.5"
-              transform="rotate(-32 270 230)"
-            />
-            <ellipse
-              cx="270"
-              cy="230"
-              rx="205"
-              ry="75"
-              stroke="url(#orbit-light)"
-              strokeWidth="1.5"
-              transform="rotate(32 270 230)"
-            />
-            <ellipse
-              cx="270"
-              cy="230"
-              rx="205"
-              ry="75"
-              stroke="url(#orbit-light)"
-              strokeWidth="1.5"
-              transform="rotate(90 270 230)"
-            />
-            <circle cx="96" cy="331" r="5" fill="#ffad82" />
-            <circle cx="444" cy="331" r="5" fill="#ffad82" />
-            <circle cx="270" cy="25" r="5" fill="#ffad82" />
-          </g>
-          <path
-            d="M270 156 335 193v74l-65 37-65-37v-74Z"
-            fill="#201b18"
-            stroke="#eb936e"
-          />
-          <path d="m270 156 65 37-65 38-65-38Z" fill="url(#core-light)" />
-          <path d="M270 231v73l65-37v-74Z" fill="#a24b29" />
-          <path d="M270 231v73l-65-37v-74Z" fill="#63341f" />
-          <path
-            d="m237 212 33 19 33-19M270 231v38"
-            stroke="#ffd5b9"
-            strokeWidth="1.5"
-          />
-        </svg>
-        <span className="orbit-label label-input">{data.input}</span>
-        <span className="orbit-label label-core">{data.core}</span>
-        <span className="orbit-label label-output">{data.output}</span>
-      </div>
-      <div className="blueprint-bottom">
-        <span className="live-dot" />
-        <span>{data.tools}</span>
-        <span aria-hidden="true">⌘</span>
-      </div>
-    </div>
-  );
-}
-
 export function CinematicHome() {
   const [active, setActive] = useState(0);
   const [step, setStep] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const { paused, toggle } = useMotionPreferences();
   const { personal } = portfolioData;
   const trevis = portfolioData.projects.find(
     project => project.id === 'trevis-property-management'
@@ -209,8 +111,8 @@ export function CinematicHome() {
                 </Link>
                 <a
                   className="cv-link"
-                  href={personal.documents.cv}
-                  download="Tafara-Rugara-CV.pdf"
+                  href={documents.cv.href}
+                  download={documents.cv.filename}
                 >
                   Download CV <span aria-hidden="true">↓</span>
                 </a>
@@ -236,7 +138,7 @@ export function CinematicHome() {
               </div>
             </div>
             <div className="hero-system">
-              <Blueprint active={active} />
+              <SystemVisual active={active} />
               <div
                 className="discipline-switch"
                 role="group"
@@ -260,11 +162,7 @@ export function CinematicHome() {
           </div>
           <div className="hero-baseline">
             <span>IDEA → INTERFACE → AUTOMATION → INFRASTRUCTURE</span>
-            <button
-              type="button"
-              onClick={() => setPaused(!paused)}
-              aria-pressed={paused}
-            >
+            <button type="button" onClick={toggle} aria-pressed={paused}>
               {paused ? 'Resume motion' : 'Pause motion'}{' '}
               <span aria-hidden="true">{paused ? '▷' : 'Ⅱ'}</span>
             </button>
@@ -570,8 +468,8 @@ export function CinematicHome() {
               someone’s day.
             </p>
             <a
-              href={personal.documents.cv}
-              download="Tafara-Rugara-CV.pdf"
+              href={documents.cv.href}
+              download={documents.cv.filename}
               className="text-link"
             >
               Download my CV <span aria-hidden="true">↓</span>

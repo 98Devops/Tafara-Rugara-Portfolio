@@ -1,3 +1,5 @@
+import { portfolioData, automationSystems } from '@/data/portfolio';
+import { site } from '@/data/site';
 import { Metadata } from 'next';
 
 export interface SEOProps {
@@ -21,9 +23,9 @@ export interface PageSEOConfig {
 // SEO configuration for all pages
 export const pageSEOConfig: PageSEOConfig = {
   home: {
-    title: 'Tafara Rugara — Cloud & DevOps + AI Automation Specialist',
+    title: 'Tafara Rugara — AI Systems, Automation & Full-Stack Engineering',
     description:
-      'Cloud & DevOps Engineer specializing in Website Development, AI-powered automation systems, container orchestration, and infrastructure that ships. AWS Certified Cloud Practitioner building production-grade pipelines with n8n, Docker, Kubernetes, and Terraform. Based in Harare & Johannesburg.',
+      'AI workflows, full-stack applications and dependable infrastructure. Explore Tafara Rugara’s projects, experience and approach to building useful systems.',
     keywords: [
       'Cloud DevOps Engineer',
       'AI Automation Specialist',
@@ -45,10 +47,10 @@ export const pageSEOConfig: PageSEOConfig = {
     ],
     ogImage: '/images/placeholder.svg',
     ogType: 'profile',
-    canonicalUrl: 'https://tafara-rugara.com',
+    canonicalUrl: 'https://tafara.netlify.app',
   },
   whatIDo: {
-    title: 'What I Do - Technical Capabilities | Tafara Rugara',
+    title: 'What I Do — Automation, Software & Cloud',
     description:
       'Website Development, Cloud Architecture, DevOps & CI/CD, Automation Engineering, and Monitoring & Reliability expertise. AWS Engineer specializing in Kubernetes, Terraform, Docker, and modern DevOps practices. Platform Engineer with Infrastructure as Code experience.',
     keywords: [
@@ -72,12 +74,12 @@ export const pageSEOConfig: PageSEOConfig = {
       'System Observability',
     ],
     ogImage: '/images/placeholder.svg',
-    canonicalUrl: 'https://tafara-rugara.com/what-i-do',
+    canonicalUrl: 'https://tafara.netlify.app/what-i-do',
   },
   projects: {
-    title: 'Featured Projects - Cloud & DevOps Portfolio | Tafara Rugara',
+    title: 'Projects — Software, AI & Automation',
     description:
-      'Website development projects and Cloud & DevOps projects showcasing AWS infrastructure, Kubernetes deployment, and CI/CD automation. Portfolio featuring website development projects, Acquisitions API, Voice-to-Vector AI workflow, Legacy migration, and Serverless IaC patterns.',
+      'Explore Trevis, Munda, Synapse, RunProduce and more: client systems, independent products, AI workflows and cloud engineering projects by Tafara Rugara.',
     keywords: [
       'Website Portfolio',
       'Next.js Projects',
@@ -96,12 +98,12 @@ export const pageSEOConfig: PageSEOConfig = {
       'Automation Solutions',
     ],
     ogImage: '/images/placeholder.svg',
-    canonicalUrl: 'https://tafara-rugara.com/projects',
+    canonicalUrl: 'https://tafara.netlify.app/projects',
   },
   experience: {
-    title: 'Professional Experience - DevOps Engineer | Tafara Rugara',
+    title: 'Experience — Automation & Systems Engineering',
     description:
-      'DevOps & Automation Engineer at Your EKA Services — 60% pipeline downtime reduction, production AI workflow deployment, Docker container orchestration, and infrastructure hardening.',
+      'Automation engineering at Clientharvest.io, full-stack systems at Mero Tech and DevOps experience at Excellessence YourEKA. Download Tafara Rugara’s current CV and reference.',
     keywords: [
       'DevOps Engineer Experience',
       'Production Deployment',
@@ -115,12 +117,12 @@ export const pageSEOConfig: PageSEOConfig = {
       'Downtime Reduction',
     ],
     ogImage: '/images/placeholder.svg',
-    canonicalUrl: 'https://tafara-rugara.com/experience',
+    canonicalUrl: 'https://tafara.netlify.app/experience',
   },
   contact: {
-    title: 'Contact - Get in Touch | Tafara Rugara',
+    title: 'Contact — Start a Conversation',
     description:
-      'Contact Tafara Rugara for Cloud & DevOps engineering roles, AI automation consulting, and workflow architecture. AWS Certified — based in Harare & Johannesburg.',
+      'Discuss a project, role or collaboration with Tafara Rugara. Prepare an email or WhatsApp message, download the CV, or book a 30-minute call.',
     keywords: [
       'Contact Cloud Engineer',
       'Hire DevOps Engineer',
@@ -132,7 +134,7 @@ export const pageSEOConfig: PageSEOConfig = {
       'Cloud Architect Contact',
     ],
     ogImage: '/images/placeholder.svg',
-    canonicalUrl: 'https://tafara-rugara.com/contact',
+    canonicalUrl: 'https://tafara.netlify.app/contact',
   },
 };
 
@@ -141,7 +143,7 @@ export function generatePageMetadata(pageKey: keyof PageSEOConfig): Metadata {
   const config = pageSEOConfig[pageKey];
 
   const baseMetadata: Metadata = {
-    metadataBase: new URL('https://tafara-rugara.com'),
+    metadataBase: new URL('https://tafara.netlify.app'),
     title:
       pageKey === 'home'
         ? {
@@ -199,190 +201,73 @@ export function generatePageMetadata(pageKey: keyof PageSEOConfig): Metadata {
     },
   };
 
-  // Add verification only for home page
-  if (pageKey === 'home') {
-    baseMetadata.verification = {
-      google: 'google-site-verification-code',
-    };
-  }
-
   return baseMetadata;
 }
 
-// Enhanced structured data for different page types
+// Keep search metadata aligned with the same source as the visible portfolio.
 export function generateStructuredData(pageKey: keyof PageSEOConfig) {
-  const basePersonData = {
+  const person = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Tafara Rugara',
-    jobTitle: 'Cloud & DevOps + AI Automation Specialist',
-    description:
-      'Cloud & DevOps Engineer specializing in AI-powered automation, container orchestration, and production-grade infrastructure on AWS.',
-    url: 'https://tafara-rugara.com',
-    image: 'https://tafara-rugara.com/images/placeholder.svg',
+    '@id': site.url + '/#person',
+    name: portfolioData.personal.name,
+    jobTitle: portfolioData.personal.title,
+    description: portfolioData.personal.summary,
+    url: site.url,
+    email: site.email,
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Harare',
       addressCountry: 'Zimbabwe',
     },
-    worksFor: {
-      '@type': 'Organization',
-      name: 'Excellessence (YourEKA Services)',
-    },
-    knowsAbout: [
-      'AWS',
-      'Terraform',
-      'Docker',
-      'Kubernetes',
-      'CI/CD',
-      'Infrastructure as Code',
-      'DevOps',
-      'Cloud Architecture',
-      'Automation Engineering',
-      'Monitoring',
-      'Observability',
-    ],
     sameAs: [
-      'https://github.com/tafara-rugara',
-      'https://linkedin.com/in/tafara-rugara',
+      portfolioData.personal.socialLinks.github,
+      portfolioData.personal.socialLinks.linkedin,
+    ],
+    knowsAbout: [
+      'AI workflow automation',
+      'n8n',
+      'React',
+      'TypeScript',
+      'Supabase',
+      'AWS',
+      'Docker',
+      'DevOps',
     ],
   };
-
-  switch (pageKey) {
-    case 'projects':
-      return {
-        ...basePersonData,
-        '@type': ['Person', 'CreativeWork'],
-        mainEntity: {
-          '@type': 'ItemList',
-          name: 'Featured Projects',
-          description:
-            'Website development, cloud infrastructure and DevOps automation projects',
-          numberOfItems: 8,
-          itemListElement: [
-            {
-              '@type': 'SoftwareApplication',
-              name: 'Litho Solutions',
-              description:
-                'A cutting-edge web platform dedicated to modernizing mineral exploration with interactive 3D visualizations',
-              applicationCategory: 'WebApplication',
-              programmingLanguage: ['Next.js', 'React', 'TypeScript'],
-              runtimePlatform: 'Netlify',
-            },
-            {
-              '@type': 'SoftwareApplication',
-              name: 'ProAir Zimbabwe',
-              description:
-                "High-performance business website for Zimbabwe's leading air conditioning, heating & ventilation specialists",
-              applicationCategory: 'WebApplication',
-              programmingLanguage: ['JavaScript', 'HTML5', 'CSS3'],
-              runtimePlatform: 'Netlify',
-            },
-            {
-              '@type': 'SoftwareApplication',
-              name: 'Mero Tech AI',
-              description:
-                'A premium, highly interactive marketing website showcasing AI automation and cloud infrastructure services',
-              applicationCategory: 'WebApplication',
-              programmingLanguage: ['Next.js', 'TypeScript', 'React'],
-              runtimePlatform: 'Netlify',
-            },
-            {
-              '@type': 'SoftwareApplication',
-              name: 'Serverless Portfolio Website',
-              description:
-                'Modern, performant showcase of professional work and capabilities built with Next.js',
-              applicationCategory: 'WebApplication',
-              programmingLanguage: ['Next.js', 'TypeScript', 'React'],
-              runtimePlatform: 'Netlify',
-            },
-            {
-              '@type': 'SoftwareApplication',
-              name: 'Acquisitions API',
-              description:
-                'Enterprise-grade REST API with JWT authentication and Kubernetes deployment',
-              applicationCategory: 'WebApplication',
-              operatingSystem: 'Linux',
-              programmingLanguage: ['Node.js', 'JavaScript'],
-              runtimePlatform: 'Kubernetes',
-            },
-            {
-              '@type': 'SoftwareApplication',
-              name: 'Voice-to-Vector Semantic Memory API',
-              description:
-                'AI-powered semantic search API with vector embeddings',
-              applicationCategory: 'WebApplication',
-              programmingLanguage: ['Python'],
-              runtimePlatform: 'AWS Lambda',
-            },
-            {
-              '@type': 'SoftwareApplication',
-              name: 'Serverless Resume',
-              description: 'Dynamic serverless resume built with AWS services',
-              applicationCategory: 'WebApplication',
-              runtimePlatform: 'AWS Lambda',
-            },
-            {
-              '@type': 'SoftwareApplication',
-              name: 'Tomcat App Modernization',
-              description:
-                'Legacy application modernization using AWS cloud services',
-              applicationCategory: 'WebApplication',
-              runtimePlatform: 'AWS Elastic Beanstalk',
-            },
-          ],
-        },
-      };
-
-    case 'experience':
-      return {
-        ...basePersonData,
-        hasOccupation: {
-          '@type': 'Occupation',
-          name: 'DevOps Engineer',
-          occupationLocation: {
-            '@type': 'Place',
-            address: {
-              '@type': 'PostalAddress',
-              addressLocality: 'Harare',
-              addressCountry: 'Zimbabwe',
-            },
-          },
-          skills: [
-            'AWS Cloud Services',
-            'Infrastructure as Code',
-            'Container Orchestration',
-            'CI/CD Pipeline Development',
-            'System Monitoring',
-            'Automation Scripting',
-          ],
-          experienceRequirements:
-            'Production AI workflow deployment, Docker environments, CI/CD optimization',
-        },
-        worksFor: {
-          '@type': 'Organization',
-          name: 'Excellessence (YourEKA Services)',
-          description: 'Technology services company',
-        },
-      };
-
-    case 'contact':
-      return {
-        ...basePersonData,
-        '@type': ['Person', 'ContactPoint'],
-        contactType: 'Professional Contact',
-        availableLanguage: ['English'],
-        areaServed: 'Worldwide',
-        serviceType: [
-          'Cloud Architecture',
-          'DevOps Engineering',
-          'Infrastructure as Code',
-          'CI/CD Implementation',
-          'System Monitoring',
-        ],
-      };
-
-    default:
-      return basePersonData;
+  if (pageKey === 'projects') {
+    const projects = [
+      ...portfolioData.projects.filter(
+        p => p.id !== 'serverless-platform-pattern'
+      ),
+      automationSystems.flagship,
+      ...automationSystems.supporting,
+    ];
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Projects by Tafara Rugara',
+      url: site.url + '/projects',
+      author: person,
+      mainEntity: {
+        '@type': 'ItemList',
+        numberOfItems: projects.length,
+        itemListElement: projects.map((project, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: project.title,
+          url: site.url + '/projects#' + project.id,
+        })),
+      },
+    };
   }
+  if (pageKey === 'contact')
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      name: 'Contact Tafara Rugara',
+      url: site.url + '/contact',
+      mainEntity: person,
+    };
+  return person;
 }

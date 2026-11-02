@@ -15,10 +15,20 @@ export default function GlobalError({
 
   return (
     <html lang="en">
-      <body className="bg-gray-900 text-white">
+      <body
+        style={{
+          margin: 0,
+          background: '#111214',
+          color: '#f1eee8',
+          fontFamily: 'system-ui, sans-serif',
+        }}
+      >
         <div className="flex min-h-screen items-center justify-center p-4">
           <div className="w-full max-w-md text-center">
-            <h1 className="mb-4 text-4xl font-bold text-red-500">
+            <h1
+              className="mb-4 text-4xl font-bold"
+              style={{ color: '#f18453' }}
+            >
               System Error
             </h1>
             <p className="mb-8 text-gray-300">
@@ -34,7 +44,8 @@ export default function GlobalError({
             )}
             <button
               onClick={() => reset()}
-              className="rounded-lg bg-blue-600 px-6 py-3 transition-colors hover:bg-blue-700"
+              className="rounded px-6 py-3"
+              style={{ background: '#f18453', color: '#171310' }}
             >
               Try again
             </button>

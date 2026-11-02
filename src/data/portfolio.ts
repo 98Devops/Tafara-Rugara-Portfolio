@@ -1,3 +1,5 @@
+import { documents } from './site';
+import { recentProjects } from './recent-projects';
 import { PortfolioData, Metric } from '@/types';
 
 // Operating record — drives the Hero metrics ledger.
@@ -36,7 +38,8 @@ export const automationSystems = {
   flagship: {
     id: 'delivery-health-ai',
     title: 'AI-Powered Delivery Health & Operations Intelligence System',
-    subtitle: 'Production-grade pilot built for Crebos.online — shortlisted in senior-facing evaluation',
+    subtitle:
+      'Production-grade pilot built for Crebos.online — shortlisted in senior-facing evaluation',
     description:
       'A production-grade automation system built for Crebos.online that monitors delivery health across multiple concurrent projects, scores them objectively, uses AI for diagnostics, and pushes consolidated reports to leadership — replacing gut-feel decisions with reliable, data-driven escalation paths.',
     businessContext:
@@ -58,9 +61,18 @@ export const automationSystems = {
     ],
     outcome:
       'Delivered as a ClickUp pilot assignment for Crebos.online — shortlisted in senior evaluation. Demonstrates system-level thinking and production readiness for real operational automation.',
-    technologies: ['n8n', 'Docker', 'ClickUp', 'AI/LLMs', 'Observability', 'Retry Logic', 'JSON Schema Validation'],
+    technologies: [
+      'n8n',
+      'Docker',
+      'ClickUp',
+      'AI/LLMs',
+      'Observability',
+      'Retry Logic',
+      'JSON Schema Validation',
+    ],
     demoUrl: 'https://www.youtube.com/watch?v=c8ETK5kOh08',
-    githubUrl: 'https://github.com/98Devops/AI-Powered-Delivery-Health-Operations-Intelligence-System',
+    githubUrl:
+      'https://github.com/98Devops/AI-Powered-Delivery-Health-Operations-Intelligence-System',
     documentationUrl: '/documents/crebos-documentation.pdf',
   },
   supporting: [
@@ -80,7 +92,16 @@ export const automationSystems = {
         'A markdown builder converts the output into Obsidian-ready notes (Tasks / Dataview / Calendar plugins), filed and linked by the voice-note date',
         'Notes are written to a DigitalOcean Ubuntu + Docker server and synced to desktop and mobile vaults via Syncthing',
       ],
-      tools: ['n8n', 'Whisper API', 'Gemini 2.5 Pro', 'OpenRouter', 'Obsidian', 'Syncthing', 'DigitalOcean', 'Docker'],
+      tools: [
+        'n8n',
+        'Whisper API',
+        'Gemini 2.5 Pro',
+        'OpenRouter',
+        'Obsidian',
+        'Syncthing',
+        'DigitalOcean',
+        'Docker',
+      ],
       demoUrl: 'https://www.youtube.com/watch?v=b5xatvQ6TQQ',
     },
     {
@@ -98,7 +119,14 @@ export const automationSystems = {
         'Session memory that carries context across queries for natural multi-step interactions',
         'Domain-specific prompt engineering for the Botswana SME compliance context',
       ],
-      tools: ['n8n', 'AI Agent', 'RAG', 'LLMs', 'Tax & BURS Compliance', 'Telegram'],
+      tools: [
+        'n8n',
+        'AI Agent',
+        'RAG',
+        'LLMs',
+        'Tax & BURS Compliance',
+        'Telegram',
+      ],
       demoUrl: 'https://www.youtube.com/watch?v=IEMl8c1U_4s',
     },
   ],
@@ -106,7 +134,7 @@ export const automationSystems = {
 
 export const testimonial = {
   quote:
-    "I recommend him without reservation. I would rehire him for DevOps and automation work. He is a systems thinker who traces cause and effect through the stack before he acts. Prototype deployments became routine and recoverable, and non-technical teammates could trigger reliable automations because his n8n flows were robust.",
+    'I recommend him without reservation. I would rehire him for DevOps and automation work. He is a systems thinker who traces cause and effect through the stack before he acts. Prototype deployments became routine and recoverable, and non-technical teammates could trigger reliable automations because his n8n flows were robust.',
   author: 'Bongani Wilson',
   title: 'Director',
   company: 'Excellessence (Your EKA Services)',
@@ -132,26 +160,27 @@ export const certifications = [
 export const portfolioData: PortfolioData = {
   personal: {
     name: 'Tafara Rugara',
-    title: 'Cloud & DevOps + AI Automation Specialist',
+    title: 'Automation Engineer & Full-Stack Developer',
     location: 'Harare, Zimbabwe & Johannesburg, South Africa',
     summary:
-      'Cloud & DevOps Engineer specializing in AI-powered automation systems, container orchestration, and infrastructure that ships. I build production-grade pipelines, automate complex workflows with n8n and LLMs, and turn operational chaos into intelligent, self-managing systems — deployable on AWS, Docker, and Kubernetes.',
+      'Automation and full-stack engineer building AI workflows, useful business software and dependable infrastructure. I connect n8n, GoHighLevel and APIs, build applications with React and Supabase, and bring a DevOps foundation to deployment, reliability and handover.',
     socialLinks: {
-      github:   'https://github.com/98Devops',
+      github: 'https://github.com/98Devops',
       linkedin: 'https://www.linkedin.com/in/tafara-rugara-0627b819b/',
-      email:    'tfrsuperfx@gmail.com',
-      youtube:  'https://www.youtube.com/@techwithtaf',
+      email: 'tfrsuperfx@gmail.com',
+      youtube: 'https://www.youtube.com/@techwithtaf',
       whatsapp: 'https://wa.me/263777553271',
     },
     documents: {
-      cv:        '/documents/tafara-rugara-cv.pdf?v=57bd2310',
-      reference: '/documents/tafara-rugara-reference.pdf',
+      cv: documents.cv.href,
+      reference: documents.reference.href,
     },
   },
   capabilities: [
     {
       category: 'Cloud Architecture',
-      description: 'Designing and deploying scalable cloud infrastructure on AWS with focus on cost efficiency, security, and operational excellence.',
+      description:
+        'Designing and deploying scalable cloud infrastructure on AWS with focus on cost efficiency, security, and operational excellence.',
       skills: [
         'AWS (EC2, S3, Lambda, API Gateway, RDS, CloudFront, Route 53, IAM)',
         'Infrastructure as Code — Terraform',
@@ -163,7 +192,8 @@ export const portfolioData: PortfolioData = {
     },
     {
       category: 'DevOps & CI/CD',
-      description: 'Building robust CI/CD pipelines and container orchestration for reliable, automated software delivery.',
+      description:
+        'Building robust CI/CD pipelines and container orchestration for reliable, automated software delivery.',
       skills: [
         'GitHub Actions CI/CD Pipelines',
         'Docker & Multi-Container Environments',
@@ -177,7 +207,8 @@ export const portfolioData: PortfolioData = {
     },
     {
       category: 'Automation Engineering',
-      description: 'Creating intelligent automation workflows with n8n, LLMs, and APIs that replace manual processes with reliable, self-managing systems.',
+      description:
+        'Creating intelligent automation workflows with n8n, LLMs, and APIs that replace manual processes with reliable, self-managing systems.',
       skills: [
         'n8n Workflow Orchestration',
         'Voice-to-Insight AI Pipelines',
@@ -191,7 +222,8 @@ export const portfolioData: PortfolioData = {
     },
     {
       category: 'Monitoring & Reliability',
-      description: 'Implementing observability and ensuring system reliability through proactive monitoring, structured logging, and continuous deployment.',
+      description:
+        'Implementing observability and ensuring system reliability through proactive monitoring, structured logging, and continuous deployment.',
       skills: [
         'Prometheus & Grafana Dashboards',
         'Winston Structured Logging',
@@ -222,6 +254,7 @@ export const portfolioData: PortfolioData = {
     },
   ],
   projects: [
+    ...recentProjects,
     {
       id: 'trevis-property-management',
       title: 'Trevis — Student Accommodation Management',
@@ -236,7 +269,17 @@ export const portfolioData: PortfolioData = {
         'Runs in production on a live portfolio: payments persist, coverage is computed from the immutable ledger, drift auto-reconciles on every mutation, and a nightly integrity audit plus a 07:00 daily owner report keep the data honest.',
       outcome:
         'Live at trevis.netlify.app and running unattended: a single source of truth for coverage, ~190 Vitest tests under local and UTC timezones, a nightly GitHub Actions job that replays every tenant and alarms on any drift from the ledger, and a daily owner report (portfolio health, outstanding balances, tenants needing attention) emailed each morning before he opens his laptop.',
-      technologies: ['React', 'Vite', 'Supabase', 'PostgreSQL', 'Row-Level Security', 'Vitest', 'GitHub Actions', 'Resend', 'Netlify'],
+      technologies: [
+        'React',
+        'Vite',
+        'Supabase',
+        'PostgreSQL',
+        'Row-Level Security',
+        'Vitest',
+        'GitHub Actions',
+        'Resend',
+        'Netlify',
+      ],
       highlights: [
         'Live in production on real data — ~130 students across several properties',
         'Day-based coverage engine: payments buy stacking days, replayed from an immutable ledger by one writer',
@@ -261,7 +304,17 @@ export const portfolioData: PortfolioData = {
         'Transforms complex geological data into interactive 3D visualizations, enabling mining companies to make data-driven exploration decisions and reduce costly blind drilling operations.',
       outcome:
         'Deployed on Netlify with fully static export, featuring interactive 3D floating gold nuggets, smooth animations, and responsive design across all devices.',
-      technologies: ['Next.js 15', 'React 19', 'Tailwind CSS v4', 'Framer Motion', 'Three.js', 'React Three Fiber', 'Drei', 'Lucide React', 'Netlify'],
+      technologies: [
+        'Next.js 15',
+        'React 19',
+        'Tailwind CSS v4',
+        'Framer Motion',
+        'Three.js',
+        'React Three Fiber',
+        'Drei',
+        'Lucide React',
+        'Netlify',
+      ],
       highlights: [
         'Interactive 3D visualizations with floating gold nuggets using Three.js',
         'Smooth page transitions and micro-interactions with Framer Motion',
@@ -286,7 +339,17 @@ export const portfolioData: PortfolioData = {
         'Provides instant customer engagement through WhatsApp integration, showcases services with interactive UI elements, and demonstrates technical expertise through live weather integration.',
       outcome:
         'Deployed on Netlify with CI/CD from main branch, achieving ~45% image file size reduction through optimization, SEO-ready with Schema.org structured data.',
-      technologies: ['Vite 5', 'HTML5', 'CSS3', 'Vanilla JavaScript', 'Google Fonts', 'Lucide Icons', 'Sharp', 'Open-Meteo API', 'Netlify'],
+      technologies: [
+        'Vite 5',
+        'HTML5',
+        'CSS3',
+        'Vanilla JavaScript',
+        'Google Fonts',
+        'Lucide Icons',
+        'Sharp',
+        'Open-Meteo API',
+        'Netlify',
+      ],
       highlights: [
         'WhatsApp integration for instant lead generation',
         'Live weather widget powered by Open-Meteo API',
@@ -313,7 +376,18 @@ export const portfolioData: PortfolioData = {
         'Demonstrates technical expertise through interactive UI, validates business credibility through comprehensive testing (235+ tests), and provides secure contact form processing with XSS protection.',
       outcome:
         'Production-ready marketing site with 235+ tests, property-based testing for correctness guarantees, bundle size optimization, and WCAG accessibility considerations.',
-      technologies: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Zod', 'DOMPurify', 'Jest', 'React Testing Library', 'Fast-check', 'Netlify'],
+      technologies: [
+        'Next.js 14',
+        'TypeScript',
+        'Tailwind CSS',
+        'Framer Motion',
+        'Zod',
+        'DOMPurify',
+        'Jest',
+        'React Testing Library',
+        'Fast-check',
+        'Netlify',
+      ],
       highlights: [
         'Interactive animations: custom cursor, parallax effects, 3D card tilts, floating particles',
         'Performance optimized: bundle size optimization, WebP/AVIF images, lazy loading',
@@ -339,7 +413,16 @@ export const portfolioData: PortfolioData = {
         'Reduces deployment time from days to minutes with zero configuration drift across projects.',
       outcome:
         'Reusable pattern adopted across multiple projects including this portfolio site.',
-      technologies: ['AWS Lambda', 'API Gateway', 'S3', 'CloudFront', 'IAM', 'Terraform', 'VPC', 'GitHub Actions'],
+      technologies: [
+        'AWS Lambda',
+        'API Gateway',
+        'S3',
+        'CloudFront',
+        'IAM',
+        'Terraform',
+        'VPC',
+        'GitHub Actions',
+      ],
       highlights: [
         'Infrastructure-as-Code with Terraform (100% automation)',
         'Secure-by-default: IAM least privilege, HTTPS-only, signed CDN',
@@ -355,13 +438,28 @@ export const portfolioData: PortfolioData = {
       category: 'platform',
       description:
         'Production-ready API platform for SaaS business acquisitions with JWT/RBAC authentication, deal state management, Kubernetes orchestration, and a full DevOps lifecycle.',
-      problem: 'SaaS businesses needed a secure, scalable platform for managing acquisition transactions with role-based access, deal workflows, and comprehensive monitoring.',
+      problem:
+        'SaaS businesses needed a secure, scalable platform for managing acquisition transactions with role-based access, deal workflows, and comprehensive monitoring.',
       technicalArchitecture:
         'Microservices API on AWS with JWT/RBAC, Kubernetes, Terraform IaC, serverless Postgres (Neon + Drizzle ORM), Prometheus/Grafana observability.',
       operationalValue:
         'Demonstrates end-to-end production engineering: security, automation, and DevOps lifecycle for a real business workflow domain.',
-      outcome: 'Fully deployed API with automated CI/CD, rolling Kubernetes deployments, and monitoring stack. Docker image available: devops263/acquisitions-api:latest',
-      technologies: ['Node.js', 'JWT', 'Zod', 'Winston', 'Docker', 'Kubernetes', 'GitHub Actions', 'Neon DB', 'Terraform', 'Prometheus', 'Grafana', 'Jest'],
+      outcome:
+        'Fully deployed API with automated CI/CD, rolling Kubernetes deployments, and monitoring stack. Docker image available: devops263/acquisitions-api:latest',
+      technologies: [
+        'Node.js',
+        'JWT',
+        'Zod',
+        'Winston',
+        'Docker',
+        'Kubernetes',
+        'GitHub Actions',
+        'Neon DB',
+        'Terraform',
+        'Prometheus',
+        'Grafana',
+        'Jest',
+      ],
       highlights: [
         'JWT authentication with role-based access control (Admin, User)',
         'Deal lifecycle management — pending → active → completed state transitions',
@@ -381,11 +479,23 @@ export const portfolioData: PortfolioData = {
       category: 'platform',
       description:
         'Flask-based internal platform service exposing an end-to-end AI pipeline — converting voice inputs into vector embeddings for semantic search and downstream workflow automation.',
-      problem: 'Teams needed a reliable internal service to process voice inputs, transcribe, enrich, and store vector embeddings for semantic retrieval.',
-      technicalArchitecture: 'Flask REST API with Whisper transcription, LLM reasoning, and a Qdrant vector database for storage; containerised for portability.',
-      operationalValue: 'Turns AI workflows into reliable internal platform services — consistent voice intelligence processing and semantic search.',
-      outcome: 'Containerised internal-service API with vector storage, transcript enrichment, and REST endpoints for downstream consumption.',
-      technologies: ['Python', 'Flask', 'Qdrant', 'Whisper', 'LLMs', 'Docker', 'REST API'],
+      problem:
+        'Teams needed a reliable internal service to process voice inputs, transcribe, enrich, and store vector embeddings for semantic retrieval.',
+      technicalArchitecture:
+        'Flask REST API with Whisper transcription, LLM reasoning, and a Qdrant vector database for storage; containerised for portability.',
+      operationalValue:
+        'Turns AI workflows into reliable internal platform services — consistent voice intelligence processing and semantic search.',
+      outcome:
+        'Containerised internal-service API with vector storage, transcript enrichment, and REST endpoints for downstream consumption.',
+      technologies: [
+        'Python',
+        'Flask',
+        'Qdrant',
+        'Whisper',
+        'LLMs',
+        'Docker',
+        'REST API',
+      ],
       highlights: [
         'End-to-end voice-to-vector intelligence pipeline',
         'Whisper API transcription + LLM reasoning + Qdrant vector database storage',
@@ -401,11 +511,22 @@ export const portfolioData: PortfolioData = {
       category: 'platform',
       description:
         'Strategic lift-and-shift migration of a 15-year-old Java application from manual on-premises server management to a fully managed AWS platform with a documented "Golden Path" for onboarding.',
-      problem: 'Legacy Java app faced operational overhead, scalability limits, and manual server management complexity.',
-      technicalArchitecture: 'AWS Elastic Beanstalk for orchestrated deployment, RDS & ElastiCache for managed data layers, CloudFront for distribution.',
-      operationalValue: '60% operational overhead reduction, dramatically improved scalability, and reusable migration template for future projects.',
-      outcome: 'Successfully migrated with documented patterns adopted as a reusable playbook.',
-      technologies: ['Java', 'AWS Elastic Beanstalk', 'RDS', 'ElastiCache', 'CloudFront', 'Platform Engineering'],
+      problem:
+        'Legacy Java app faced operational overhead, scalability limits, and manual server management complexity.',
+      technicalArchitecture:
+        'AWS Elastic Beanstalk for orchestrated deployment, RDS & ElastiCache for managed data layers, CloudFront for distribution.',
+      operationalValue:
+        '60% operational overhead reduction, dramatically improved scalability, and reusable migration template for future projects.',
+      outcome:
+        'Successfully migrated with documented patterns adopted as a reusable playbook.',
+      technologies: [
+        'Java',
+        'AWS Elastic Beanstalk',
+        'RDS',
+        'ElastiCache',
+        'CloudFront',
+        'Platform Engineering',
+      ],
       highlights: [
         'Migrated 15-year-old application with lift-and-shift zero downtime strategy',
         'Elastic Beanstalk for automated deployment orchestration',
@@ -421,11 +542,23 @@ export const portfolioData: PortfolioData = {
       category: 'platform',
       description:
         'Reusable serverless application platform built with Terraform IaC and GitHub Actions — standardising lightweight API and static app deployments with security-by-default principles.',
-      problem: 'Teams needed repeatable, secure patterns for rapid API and static application deployments.',
-      technicalArchitecture: 'Infrastructure entirely in Terraform; secure-by-default config; fully automated GitHub Actions CI/CD.',
-      operationalValue: 'Reduces deployment time from days to minutes with zero configuration drift across projects.',
-      outcome: 'Reusable pattern adopted across multiple projects including this portfolio site.',
-      technologies: ['Terraform', 'AWS Lambda', 'DynamoDB', 'GitHub Actions', 'CloudFront', 'API Gateway', 'S3'],
+      problem:
+        'Teams needed repeatable, secure patterns for rapid API and static application deployments.',
+      technicalArchitecture:
+        'Infrastructure entirely in Terraform; secure-by-default config; fully automated GitHub Actions CI/CD.',
+      operationalValue:
+        'Reduces deployment time from days to minutes with zero configuration drift across projects.',
+      outcome:
+        'Reusable pattern adopted across multiple projects including this portfolio site.',
+      technologies: [
+        'Terraform',
+        'AWS Lambda',
+        'DynamoDB',
+        'GitHub Actions',
+        'CloudFront',
+        'API Gateway',
+        'S3',
+      ],
       highlights: [
         'Infrastructure-as-Code with Terraform (100% automation)',
         'DynamoDB database integration with Lambda backend function',
@@ -439,52 +572,68 @@ export const portfolioData: PortfolioData = {
   ],
   experience: [
     {
-      company: 'Clear Elevation',
-      position: 'AI Automations & Systems Operator',
-      duration: 'May 2026 – Present',
-      location: 'Remote · International clients',
-      impact: '7 triggers fixed · 3 workflows shipped',
+      company: 'Clientharvest.io',
+      position: 'Automation Engineer',
+      duration: 'April 2026 \u2013 Present',
+      location: 'Remote \u00b7 Contract',
+      impact: 'CRM architecture + patient lifecycle automation',
       achievements: [
-        'Build and maintain client backend systems for an international marketing agency — automation workflows, CRM architecture, funnels, landing pages, and email campaigns in GoHighLevel — so clients operate like CEOs, not operators',
-        'Rescued a failing patient-retention system spanning Practice Better (EMR), GoHighLevel, and Zapier — root-caused a router that handled only one patient type while silently dropping the rest',
-        'Fixed 7 broken triggers and published 3 new lifecycle workflows (engagement tracking, at-risk reactivation, dormant reactivation) plus refill reminders and pipeline automation',
-        'Author comprehensive system prompts and briefing materials to run parallel AI agents consistently across builds',
-        'QA standard: every trigger, form, payment, domain, and workflow exit tested before delivery — never assumed, always verified',
+        'Build and maintain GoHighLevel CRM architecture, pipelines, workflows, funnels, landing pages and email campaigns for agency clients.',
+        'Diagnosed a patient-retention router that processed one patient type and silently dropped the rest across Practice Better, GoHighLevel and Zapier.',
+        'Repaired 7 broken triggers and published 3 lifecycle workflows; the full build delivered 9 GHL workflows and 7 live Zaps.',
+        'Test triggers, forms, payments and workflow exits before handover; document implementation decisions and operating procedures.',
       ],
-      technologies: ['GoHighLevel', 'Zapier', 'Practice Better', 'CRM Architecture', 'Automation Workflows', 'AI Agents', 'Email Marketing', 'QA'],
+      technologies: [
+        'GoHighLevel',
+        'Zapier',
+        'Practice Better',
+        'CRM Architecture',
+        'Workflow QA',
+      ],
     },
     {
       company: 'Mero Tech',
-      position: 'Web & Systems Developer',
-      duration: 'December 2025 – April 2026',
-      location: 'Harare, Zimbabwe · Self-employed',
-      impact: '4 spreadsheets → 1 live system',
+      position: 'Full-Stack & Systems Engineer',
+      duration: 'December 2025 \u2013 Present',
+      location: 'Harare \u00b7 Freelance',
+      impact: 'Paid client systems + independent products',
       achievements: [
-        'Built and shipped production websites and web applications for real clients across the mining, HVAC, and property sectors — design, copy, build, and deploy',
-        'Delivered Trevis, a live React + Supabase property-management system that replaced 4 spreadsheets with one source of truth for 130+ tenants across 4 properties',
-        'Backed Trevis with ≈190 unit tests and automated nightly data-integrity checks for trustworthy, auditable numbers',
-        'Built Litho Solutions (Next.js 15 / React 19) with interactive Three.js 3D visualizations, deployed as a performant static export',
-        'Built ProAir Zimbabwe (Vite) with WhatsApp-first lead generation and a live weather API',
+        'Built Trevis, a paid property-operations system replacing four spreadsheets for 130+ tenants across four properties.',
+        'Lead development of Munda, an offline-first farm-control product with a double-entry input ledger, idempotent sync and a read-only AI assistant.',
+        'Build AI knowledge tools, asset tracking and broiler operations software, including Synapse, IATS and the prelaunch RunProduce project.',
+        'Deliver mining and HVAC business websites with API integrations, WhatsApp lead capture and automated deployment.',
       ],
-      technologies: ['React', 'Next.js 15', 'Supabase', 'Three.js', 'Vite', 'TypeScript', 'Tailwind CSS', 'Netlify'],
+      technologies: [
+        'TypeScript',
+        'React',
+        'Next.js',
+        'Supabase',
+        'PostgreSQL',
+        'n8n',
+        'Groq',
+      ],
     },
     {
-      company: 'Excellessence (Your EKA Services)',
-      position: 'DevOps & Automation Engineer',
-      duration: 'May 2025 – November 2025',
-      location: 'Remote',
-      impact: '60% pipeline downtime reduction',
+      company: 'Excellessence (YourEKA Services)',
+      position: 'DevOps Engineer',
+      duration: 'May 2025 \u2013 October 2025',
+      location: 'Harare \u00b7 Hybrid',
+      impact: 'AI workflows + container infrastructure',
       achievements: [
-        'Deployed production-ready AI workflow pipeline on DigitalOcean VPS with secure multi-container environment using Docker Compose',
-        'Built voice-to-insight automation system using n8n, Whisper API, and Gemini Pro — used for live client prototype demonstrations',
-        'Supported LLM-powered prototypes end-to-end — handling environment variables, queues, and scheduled tasks for AI-driven demos',
-        'Hardened Linux infrastructure with SSH key auth, UFW firewalls, and proactive patching — maintaining full operational integrity',
-        'Resolved container orchestration scheduling errors by configuring EXECUTIONS_PROCESS=main, reducing pipeline downtime by 60%',
-        'Standardised AI outputs via prompt engineering with strict JSON schema enforcement for consistent downstream automation',
-        'Replaced low-code nodes with custom JavaScript for intelligent workflow routing and data flow control',
-        'Synced voice-to-insight outputs with Obsidian via Syncthing for structured knowledge capture',
+        'Built voice-to-insight automation with n8n, Whisper and Gemini, producing schema-validated tasks filed in Obsidian.',
+        'Deployed AI workflow pipelines on DigitalOcean using Docker Compose and connected webhooks, APIs, background jobs and scheduled tasks.',
+        'Replaced low-code nodes with custom JavaScript for routing and strict JSON output validation.',
+        'Hardened Linux servers with SSH keys, firewall rules and patching; resolved container and scheduling failures at root cause.',
       ],
-      technologies: ['Docker', 'n8n', 'Linux', 'CI/CD', 'Whisper API', 'Gemini Pro', 'ClickUp', 'SSH', 'Security Hardening', 'AI/ML Ops'],
+      technologies: [
+        'Docker',
+        'Linux',
+        'DigitalOcean',
+        'n8n',
+        'Whisper',
+        'Gemini',
+        'JavaScript',
+      ],
     },
   ],
 };

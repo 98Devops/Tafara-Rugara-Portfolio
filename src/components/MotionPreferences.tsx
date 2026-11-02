@@ -1,0 +1,34 @@
+'use client';
+
+import { createContext, useContext, useState } from 'react';
+
+const MotionContext = createContext({ paused: false, toggle: () => {} });
+export function MotionPreferences({ children }: { children: React.ReactNode }) {
+  const [paused, setPaused] = useState(false);
+  return (
+    <MotionContext.Provider
+      value={{ paused, toggle: () => setPaused(value => !value) }}
+    >
+      <div className={paused ? 'site-frame motion-paused' : 'site-frame'}>
+        {children}
+      </div>
+    </MotionContext.Provider>
+  );
+}
+export function useMotionPreferences() {
+  return useContext(MotionContext);
+}
+export function MotionToggle() {
+  const { paused, toggle } = useMotionPreferences();
+  return (
+    <button
+      className="motion-toggle"
+      type="button"
+      aria-pressed={paused}
+      onClick={toggle}
+    >
+      {paused ? 'Resume animation' : 'Pause animation'}{' '}
+      <span aria-hidden="true">{paused ? '▷' : 'Ⅱ'}</span>
+    </button>
+  );
+}
