@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import "./cinematic.css";
 import { StructuredData } from "@/components/StructuredData";
 import { generatePageMetadata } from "@/components/SEO";
 import ClientShell from "@/components/ClientShell";
@@ -60,7 +61,7 @@ export default function RootLayout({
         <link rel="preload" href="/documents/tafara-rugara-cv.pdf" as="document" type="application/pdf" />
         {/* Viewport & theme */}
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#14110D" />
+        <meta name="theme-color" content="#111214" />
         <meta name="color-scheme" content="dark" />
       </head>
       <body

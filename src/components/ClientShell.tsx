@@ -15,8 +15,13 @@ export default function ClientShell({
   return (
     <ErrorBoundary>
       <ClientPerformanceInit />
+      <a href="#portfolio-content" className="skip-link">
+        Skip to content
+      </a>
       <Navigation />
-      <div className="min-h-screen">{children}</div>
+      <div id="portfolio-content" tabIndex={-1} className="min-h-screen">
+        {children}
+      </div>
       <Footer />
       <PerformanceMonitor />
     </ErrorBoundary>
