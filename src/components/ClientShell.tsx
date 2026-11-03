@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { ThemeProvider } from './ThemeProvider';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { ClientPerformanceInit } from '@/components/ClientPerformanceInit';
 import { Navigation } from '@/components/Navigation';
@@ -15,18 +16,20 @@ export default function ClientShell({
 }) {
   return (
     <ErrorBoundary>
-      <MotionPreferences>
-        <ClientPerformanceInit />
-        <a href="#portfolio-content" className="skip-link">
-          Skip to content
-        </a>
-        <Navigation />
-        <div id="portfolio-content" tabIndex={-1} className="min-h-screen">
-          {children}
-        </div>
-        <Footer />
-        <PerformanceMonitor />
-      </MotionPreferences>
+      <ThemeProvider>
+        <MotionPreferences>
+          <ClientPerformanceInit />
+          <a href="#portfolio-content" className="skip-link">
+            Skip to content
+          </a>
+          <Navigation />
+          <div id="portfolio-content" tabIndex={-1} className="min-h-screen">
+            {children}
+          </div>
+          <Footer />
+          <PerformanceMonitor />
+        </MotionPreferences>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 }

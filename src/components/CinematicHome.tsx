@@ -1,15 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { SystemVisual } from '@/components/SystemVisual';
+import { HeroExperience } from './HeroExperience';
+import { WorkShowcase } from './WorkShowcase';
 import { useMotionPreferences } from '@/components/MotionPreferences';
 import { documents } from '@/data/site';
 import Link from 'next/link';
-import {
-  automationSystems,
-  portfolioData,
-  testimonial,
-} from '@/data/portfolio';
+import { portfolioData, testimonial } from '@/data/portfolio';
 
 const disciplines = [
   {
@@ -72,9 +69,6 @@ export function CinematicHome() {
   const [step, setStep] = useState(0);
   const { paused, toggle } = useMotionPreferences();
   const { personal } = portfolioData;
-  const trevis = portfolioData.projects.find(
-    project => project.id === 'trevis-property-management'
-  )!;
 
   return (
     <main
@@ -138,7 +132,7 @@ export function CinematicHome() {
               </div>
             </div>
             <div className="hero-system">
-              <SystemVisual active={active} />
+              <HeroExperience active={active} />
               <div
                 className="discipline-switch"
                 role="group"
@@ -179,206 +173,7 @@ export function CinematicHome() {
           </p>
         </div>
       </section>
-      <section
-        className="selected-work wrap"
-        id="selected-work"
-        aria-labelledby="work-heading"
-      >
-        <div className="section-heading">
-          <div>
-            <p className="cinema-eyebrow">01 / SELECTED WORK</p>
-            <h2 id="work-heading">
-              Real problems.
-              <br />
-              <span>Working systems.</span>
-            </h2>
-          </div>
-          <p>
-            From daily business operations to AI-powered workflows. A closer
-            look at what I build.
-          </p>
-        </div>
-        <article className="featured-project trevis-feature">
-          <div
-            className="project-visual dashboard-visual"
-            role="img"
-            aria-label="Illustrative Trevis interface showing property management, payment tracking and reporting. No live tenant data."
-          >
-            <div className="visual-label">
-              <span>BUSINESS APPLICATION</span>
-              <span>01</span>
-            </div>
-            <div className="mini-dashboard">
-              <aside>
-                <strong>
-                  t<span>revis</span>
-                </strong>
-                <span className="mini-nav-active">◫ Overview</span>
-                <span>⌂ Properties</span>
-                <span>↔ Payments</span>
-                <span>▤ Reports</span>
-                <small>ONE SOURCE OF TRUTH</small>
-              </aside>
-              <div className="mini-dashboard-main">
-                <div className="mini-dashboard-top">
-                  <span>Portfolio overview</span>
-                  <i />
-                </div>
-                <p>
-                  Your properties.
-                  <br />
-                  <strong>One clear picture.</strong>
-                </p>
-                <div className="mini-stats">
-                  <div>
-                    <small>PROPERTIES</small>
-                    <b>Connected</b>
-                  </div>
-                  <div>
-                    <small>PAYMENTS</small>
-                    <b>Traceable</b>
-                  </div>
-                  <div>
-                    <small>REPORTING</small>
-                    <b>Automated</b>
-                  </div>
-                </div>
-                <div className="mini-chart">
-                  <span>From scattered records to clarity</span>
-                  <div>
-                    {[36, 55, 44, 69, 58, 82, 73, 95, 87, 110, 104, 127].map(
-                      (height, index) => (
-                        <i key={index} style={{ height }} />
-                      )
-                    )}
-                  </div>
-                </div>
-                <div className="mini-dashboard-foot">
-                  <span>React + Supabase</span>
-                  <span>Built for daily operations ↗</span>
-                </div>
-              </div>
-            </div>
-            <span className="visual-disclaimer">
-              INTERFACE ILLUSTRATION · NOT LIVE DATA
-            </span>
-          </div>
-          <div className="project-copy">
-            <div>
-              <p className="cinema-eyebrow">
-                FULL-STACK DEVELOPMENT / AUTOMATION
-              </p>
-              <h3>Trevis</h3>
-              <p>
-                Four spreadsheets became one working system. Property
-                management, tenant payments and reporting brought together for a
-                real student accommodation business.
-              </p>
-              <div className="project-tags">
-                <span>React</span>
-                <span>Supabase</span>
-                <span>PostgreSQL</span>
-              </div>
-            </div>
-            <div className="project-links">
-              <a
-                href={trevis.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Visit live app <Arrow diagonal />
-              </a>
-              <a
-                href={trevis.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View source <Arrow diagonal />
-              </a>
-            </div>
-          </div>
-        </article>
-        <article className="featured-project automation-feature">
-          <div className="project-visual workflow-visual">
-            <div className="visual-label">
-              <span>AI OPERATIONS / PILOT</span>
-              <span>02</span>
-            </div>
-            <div className="workflow-scene">
-              <p>
-                Less chasing.
-                <br />
-                <em>More clarity.</em>
-              </p>
-              <div className="workflow-path">
-                <div>
-                  <span>01</span>
-                  <b>ClickUp</b>
-                  <small>Project signals</small>
-                </div>
-                <i aria-hidden="true">→</i>
-                <div className="workflow-core">
-                  <span>02</span>
-                  <b>n8n + AI</b>
-                  <small>Score & diagnose</small>
-                </div>
-                <i aria-hidden="true">→</i>
-                <div>
-                  <span>03</span>
-                  <b>Leadership</b>
-                  <small>Review & act</small>
-                </div>
-              </div>
-              <div className="workflow-safeguards">
-                <span>↳ Schema validation</span>
-                <span>↳ Retry handling</span>
-                <span>↳ Human review</span>
-              </div>
-            </div>
-            <span className="visual-disclaimer">
-              DELIVERY HEALTH · WORKFLOW OVERVIEW
-            </span>
-          </div>
-          <div className="project-copy">
-            <div>
-              <p className="cinema-eyebrow">AI WORKFLOWS / API INTEGRATION</p>
-              <h3>Delivery Intelligence</h3>
-              <p>
-                A ClickUp pilot that turns fragmented project updates into
-                structured health scores, AI-assisted diagnostics and
-                consolidated leadership reports.
-              </p>
-              <div className="project-tags">
-                <span>n8n</span>
-                <span>ClickUp</span>
-                <span>LLMs</span>
-              </div>
-            </div>
-            <div className="project-links">
-              <a
-                href={automationSystems.flagship.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Watch the demo <Arrow diagonal />
-              </a>
-              <a
-                href={automationSystems.flagship.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Explore the system <Arrow diagonal />
-              </a>
-            </div>
-          </div>
-        </article>
-        <Link href="/projects" className="all-projects">
-          More websites, applications & cloud projects{' '}
-          <span>
-            View all work <Arrow />
-          </span>
-        </Link>
-      </section>
+      <WorkShowcase />
       <section className="capability-section">
         <div className="wrap">
           <div className="section-heading">

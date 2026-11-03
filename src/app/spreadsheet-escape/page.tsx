@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { PageIntro, NextChapter } from '@/components/PageIntro';
-import { ProjectArtwork } from '@/components/ProjectArtwork';
+import { ProjectMedia } from '@/components/ProjectMedia';
 export default function SpreadsheetEscape() {
   return (
     <main className="cinematic-home inner-page">
@@ -55,7 +55,7 @@ export default function SpreadsheetEscape() {
             Explore the Trevis build ↗
           </Link>
         </div>
-        <ProjectArtwork
+        <ProjectMedia
           id="trevis-property-management"
           category="webapp"
           title="Trevis Property Management"

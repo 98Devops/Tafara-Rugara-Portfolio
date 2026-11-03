@@ -64,6 +64,7 @@ jest.mock('framer-motion', () => {
       set: jest.fn(),
     }),
     useInView: () => true,
+    useReducedMotion: () => false,
   };
 });
 
@@ -80,3 +81,5 @@ global.IntersectionObserver = jest.fn().mockImplementation(() => ({
   unobserve: jest.fn(),
   disconnect: jest.fn(),
 }))
+// Theme and motion preferences use the same browser media-query interface.
+Object.defineProperty(window, 'matchMedia', { writable: true, value: jest.fn().mockImplementation(query => ({ matches: false, media: query, onchange: null, addListener: jest.fn(), removeListener: jest.fn(), addEventListener: jest.fn(), removeEventListener: jest.fn(), dispatchEvent: jest.fn() })) });

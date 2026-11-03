@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { portfolioData, automationSystems } from '@/data/portfolio';
 import { PageIntro, NextChapter } from '@/components/PageIntro';
-import { ProjectArtwork } from '@/components/ProjectArtwork';
+import { ProjectMedia } from '@/components/ProjectMedia';
 import type { Project, ProjectCategory, AutomationSystem } from '@/types';
 
 function toProject(system: AutomationSystem): Project {
@@ -121,7 +121,7 @@ export default function ProjectsPage() {
               id={project.id}
               className="work-item reveal"
             >
-              <ProjectArtwork
+              <ProjectMedia
                 id={project.id}
                 category={project.category}
                 title={project.title}

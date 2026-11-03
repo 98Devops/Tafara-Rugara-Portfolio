@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useMotionPreferences } from './MotionPreferences';
+import { ThemeToggle } from './ThemeProvider';
 import { NavigationItem } from '@/types';
 
 const navigationItems: NavigationItem[] = [
@@ -67,7 +68,7 @@ export function Navigation() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden items-center gap-7 md:flex">
+          <div className="hidden items-center gap-7 lg:flex">
             {navigationItems.map(item => {
               const isActive = pathname === item.href;
               return (
@@ -89,32 +90,35 @@ export function Navigation() {
             })}
           </div>
 
-          {/* CTA (kept out of the nav-items group) */}
-          <Link
-            href="/contact"
-            className="hidden rounded-sm border border-line-2 font-mono text-bone transition-colors duration-150 hover:border-ember hover:text-ember md:inline-flex"
-            style={{
-              fontSize: '0.74rem',
-              letterSpacing: '0.06em',
-              padding: '0.5rem 1rem',
-            }}
-          >
-            Get in touch
-          </Link>
+          <div className="nav-actions">
+            <ThemeToggle />
+            {/* CTA (kept out of the nav-items group) */}
+            <Link
+              href="/contact"
+              className="hidden rounded-sm border border-line-2 font-mono text-bone transition-colors duration-150 hover:border-ember hover:text-ember lg:inline-flex"
+              style={{
+                fontSize: '0.74rem',
+                letterSpacing: '0.06em',
+                padding: '0.5rem 1rem',
+              }}
+            >
+              Get in touch
+            </Link>
 
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-bone-dim transition-colors hover:text-bone md:hidden"
-            aria-label="Toggle menu"
-            aria-expanded={isMobileMenuOpen}
-          >
-            <span className="flex h-4 w-5 flex-col justify-between">
-              <span className="block h-px w-5 bg-current" />
-              <span className="block h-px w-5 bg-current" />
-              <span className="block h-px w-5 bg-current" />
-            </span>
-          </button>
+            {/* Mobile hamburger */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 text-bone-dim transition-colors hover:text-bone lg:hidden"
+              aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+            >
+              <span className="flex h-4 w-5 flex-col justify-between">
+                <span className="block h-px w-5 bg-current" />
+                <span className="block h-px w-5 bg-current" />
+                <span className="block h-px w-5 bg-current" />
+              </span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -127,7 +131,7 @@ export function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: reducedMotion || paused ? 0 : 0.2 }}
-            className="border-b border-line md:hidden"
+            className="border-b border-line lg:hidden"
             style={{ background: 'var(--ink)' }}
           >
             <div className="wrap flex flex-col py-4">

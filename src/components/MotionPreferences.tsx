@@ -1,13 +1,25 @@
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
-const MotionContext = createContext({ paused: false, toggle: () => {} });
+const MotionContext = createContext({
+  paused: false,
+  reduced: false,
+  toggle: () => {},
+});
 export function MotionPreferences({ children }: { children: React.ReactNode }) {
   const [paused, setPaused] = useState(false);
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const sync = () => setReduced(media.matches);
+    sync();
+    media.addEventListener('change', sync);
+    return () => media.removeEventListener('change', sync);
+  }, []);
   return (
     <MotionContext.Provider
-      value={{ paused, toggle: () => setPaused(value => !value) }}
+      value={{ paused, reduced, toggle: () => setPaused(value => !value) }}
     >
       <div className={paused ? 'site-frame motion-paused' : 'site-frame'}>
         {children}

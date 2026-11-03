@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Fraunces, Archivo, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import './cinematic.css';
+import './studio.css';
 import { StructuredData } from '@/components/StructuredData';
 import { generatePageMetadata } from '@/components/SEO';
 import ClientShell from '@/components/ClientShell';
@@ -50,9 +51,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${fraunces.variable} ${archivo.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+      data-theme="light"
+      className={`${fraunces.variable} ${archivo.variable} ${jetbrainsMono.variable}`}
     >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var p=localStorage.getItem("tafara-theme");var t=p==="light"||p==="dark"?p:window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t;document.documentElement.classList.toggle("dark",t==="dark");}catch(e){}})();`,
+          }}
+        />
         <StructuredData pageKey="home" />
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -70,7 +78,7 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1, viewport-fit=cover"
         />
         <meta name="theme-color" content="#111214" />
-        <meta name="color-scheme" content="dark" />
+        <meta name="color-scheme" content="light dark" />
       </head>
       <body
         className="font-sans antialiased"

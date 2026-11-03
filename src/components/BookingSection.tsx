@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { useEffect, useId, useRef, useState } from 'react';
+import { useTheme } from './ThemeProvider';
 import { site } from '@/data/site';
 declare global {
   interface Window {
@@ -9,6 +10,7 @@ declare global {
 }
 
 export function BookingSection() {
+  const { theme } = useTheme();
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [slow, setSlow] = useState(false);
@@ -57,15 +59,22 @@ export function BookingSection() {
     Cal.ns[namespace]('inline', {
       elementOrSelector: host.current,
       calLink: site.bookingPath,
-      config: { layout: 'month_view', theme: 'dark' },
+      config: { layout: 'month_view' },
     });
-    Cal.ns[namespace]('ui', {
-      theme: 'dark',
-      cssVarsPerTheme: { dark: { 'cal-brand': '#F18453' } },
+  }, [visible, namespace, theme]);
+  useEffect(() => {
+    if (!visible || !window.Cal?.ns?.[namespace]) return;
+    window.Cal.ns[namespace]('ui', {
+      theme,
+      colorScheme: theme,
+      cssVarsPerTheme: {
+        dark: { 'cal-brand': '#F18453' },
+        light: { 'cal-brand': '#AE451F' },
+      },
       hideEventTypeDetails: false,
       layout: 'month_view',
     });
-  }, [visible, namespace]);
+  }, [visible, namespace, theme]);
   useEffect(() => {
     if (!visible || !host.current) return;
     const target = host.current;
