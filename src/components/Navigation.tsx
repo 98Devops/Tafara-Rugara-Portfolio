@@ -44,7 +44,7 @@ export function Navigation() {
 
   return (
     <nav
-      className="fixed left-0 right-0 top-0 z-50 border-b border-line"
+      className="portfolio-nav fixed left-0 right-0 top-0 z-50 border-b border-line"
       style={{
         background: 'color-mix(in srgb, var(--ink) 88%, transparent)',
         backdropFilter: 'blur(8px)',
@@ -94,7 +94,7 @@ export function Navigation() {
             <ThemeToggle />
             {/* CTA (kept out of the nav-items group) */}
             <Link
-              href="/contact"
+              href="/contact#book"
               className="hidden rounded-sm border border-line-2 font-mono text-bone transition-colors duration-150 hover:border-ember hover:text-ember lg:inline-flex"
               style={{
                 fontSize: '0.74rem',
@@ -102,7 +102,7 @@ export function Navigation() {
                 padding: '0.5rem 1rem',
               }}
             >
-              Get in touch
+              Book a call
             </Link>
 
             {/* Mobile hamburger */}
@@ -163,7 +163,7 @@ export function Navigation() {
                 className="mt-3 rounded-sm border border-line-2 py-3 text-center font-mono text-bone transition-colors hover:border-ember hover:text-ember"
                 style={{ fontSize: '0.78rem', letterSpacing: '0.06em' }}
               >
-                Get in touch
+                Book a call
               </Link>
             </div>
           </motion.div>

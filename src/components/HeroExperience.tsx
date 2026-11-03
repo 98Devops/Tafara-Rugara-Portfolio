@@ -1,43 +1,63 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useMotionPreferences } from './MotionPreferences';
+
 const scenes = [
   {
-    name: 'INTELLIGENCE, IN MOTION',
-    core: 'AI',
+    name: 'FROM SIGNAL TO SOMETHING USEFUL',
     input: 'A voice note.',
-    inputLabel: 'UNSTRUCTURED INPUT',
     output: 'A clear next step.',
-    outputLabel: 'STRUCTURED ACTION',
     steps: ['Capture', 'Understand', 'Validate', 'Connect'],
-    code: ['intent: task', 'priority: high', 'review: ready'],
+    details: [
+      'Capture the original thought.',
+      'Bring the right context into view.',
+      'Check the structure. Keep a human in the loop.',
+      'Route the reviewed output into the next workflow.',
+    ],
     tools: 'Whisper / LLMs / n8n',
-    type: 'voice',
+    symbol: '≈',
+    project: 'munda',
+    title: 'Munda',
+    href: '/projects#munda',
+    caption: 'In practice: read-only AI tools in Munda.',
   },
   {
-    name: 'IDEAS, MADE TANGIBLE',
-    core: '{ }',
+    name: 'FROM PROCESS TO PRODUCT',
     input: 'A real problem.',
-    inputLabel: 'PEOPLE + PROCESS',
     output: 'Software people use.',
-    outputLabel: 'INTERFACE TO DATABASE',
     steps: ['Discover', 'Build', 'Validate', 'Ship'],
-    code: ['types: checked', 'access: scoped', 'record: saved'],
+    details: [
+      'Understand the people and the process.',
+      'Connect the interface to the business logic.',
+      'Validate the record and check access.',
+      'Make the daily work simpler.',
+    ],
     tools: 'React / TypeScript / Supabase',
-    type: 'app',
+    symbol: '{ }',
+    project: 'trevis',
+    title: 'Trevis',
+    href: '/projects#trevis-property-management',
+    caption: 'In practice: property operations in Trevis.',
   },
   {
-    name: 'ENGINEERED FOR DELIVERY',
-    core: '⌘',
+    name: 'FROM SOURCE TO SERVICE',
     input: 'A code change.',
-    inputLabel: 'SOURCE TO SERVICE',
     output: 'Ready for the world.',
-    outputLabel: 'REPEATABLE DELIVERY',
     steps: ['Commit', 'Build', 'Test', 'Deploy'],
-    code: ['build: passed', 'checks: passed', 'release: ready'],
+    details: [
+      'Start with a versioned change.',
+      'Build a repeatable release.',
+      'Run the checks before promotion.',
+      'Deploy, observe and keep a recovery path.',
+    ],
     tools: 'GitHub Actions / Docker / AWS',
-    type: 'cloud',
+    symbol: '↗',
+    project: 'litho',
+    title: 'Litho',
+    href: '/projects#cloud-resume-challenge',
+    caption: 'Explore the cloud builds and deployment work.',
   },
 ];
 export function HeroExperience({ active = 0 }: { active?: number }) {
@@ -46,178 +66,54 @@ export function HeroExperience({ active = 0 }: { active?: number }) {
   const [inView, setInView] = useState(true);
   const [revision, setRevision] = useState(0);
   const host = useRef<HTMLDivElement>(null);
-  const raf = useRef(0);
   const scene = scenes[active];
-  const enabled = !paused && !reduced;
   useEffect(() => {
     setPhase(0);
   }, [active]);
   useEffect(() => {
-    if (!enabled || !inView) return;
+    if (paused || reduced || !inView) return;
     const timer = setInterval(() => setPhase(value => (value + 1) % 4), 2600);
     return () => clearInterval(timer);
-  }, [enabled, inView, active, revision]);
+  }, [paused, reduced, inView, active, revision]);
   useEffect(() => {
     if (!host.current || typeof IntersectionObserver === 'undefined') return;
     const observer = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
     observer.observe(host.current);
     return () => observer.disconnect();
   }, []);
-  useEffect(() => {
-    if (!enabled) {
-      host.current?.style.setProperty('--pointer-x', '0deg');
-      host.current?.style.setProperty('--pointer-y', '0deg');
-    }
-    return () => cancelAnimationFrame(raf.current);
-  }, [enabled]);
-  function track(event: React.PointerEvent<HTMLDivElement>) {
-    if (!enabled || event.pointerType !== 'mouse') return;
-    const bounds = event.currentTarget.getBoundingClientRect();
-    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-    cancelAnimationFrame(raf.current);
-    raf.current = requestAnimationFrame(() => {
-      host.current?.style.setProperty('--pointer-x', -y * 9 + 'deg');
-      host.current?.style.setProperty('--pointer-y', x * 11 + 'deg');
-    });
-  }
-  function reset() {
-    cancelAnimationFrame(raf.current);
-    host.current?.style.setProperty('--pointer-x', '0deg');
-    host.current?.style.setProperty('--pointer-y', '0deg');
-  }
   return (
     <div
       ref={host}
-      className={'hero-experience ' + (!inView ? 'scene-sleep' : '')}
+      className="build-scene"
       data-phase={phase}
-      data-scene={scene.type}
-      onPointerMove={track}
-      onPointerLeave={reset}
+      data-active={active}
     >
-      <div className="experience-topline">
-        <span>
-          <i />
-          {scene.name}
-        </span>
+      <div className="build-scene-top">
+        <span>THE CONNECTED SYSTEM</span>
         <span>0{active + 1} / 03</span>
       </div>
-      <div
-        className="engine-stage"
-        role="img"
-        aria-label={
-          scene.input +
-          ' ' +
-          scene.steps.join(', ') +
-          '. ' +
-          scene.output +
-          ' Illustrative engineering sequence.'
-        }
-      >
-        <div className="engine-atmosphere" aria-hidden="true" />
-        <span className="engine-coordinate coordinate-top" aria-hidden="true">
-          INPUT → INTELLIGENCE → IMPACT
-        </span>
-        <div className="engine-world" aria-hidden="true">
-          <div className="engine-orbit orbit-one">
-            <i />
-          </div>
-          <div className="engine-orbit orbit-two">
-            <i />
-          </div>
-          <div className="engine-orbit orbit-three">
-            <i />
-          </div>
-          <div className="engine-object">
-            <div className="engine-shell shell-back" />
-            <div className="engine-shell shell-middle" />
-            <div className="engine-shell shell-front">
-              <div className="engine-grooves" />
-              <div className="engine-heart">
-                <span>{scene.core}</span>
-                <small>
-                  {scene.type === 'voice'
-                    ? 'ORCHESTRATE'
-                    : scene.type === 'app'
-                      ? 'CREATE'
-                      : 'DELIVER'}
-                </small>
-              </div>
-            </div>
-            <div className="engine-halo" />
-          </div>
-          <div className="floating-input">
-            <div className="float-label">
-              <span>01 / INPUT</span>
-              <i />
-            </div>
-            <div className="voice-bars">
-              {[12, 25, 17, 36, 46, 29, 39, 17, 26, 10].map((h, i) => (
-                <i
-                  key={i}
-                  style={
-                    {
-                      '--bar-height': h + 'px',
-                      '--bar-delay': i * 0.12 + 's',
-                    } as React.CSSProperties
-                  }
-                />
-              ))}
-            </div>
-            <strong>{scene.input}</strong>
-            <small>{scene.inputLabel}</small>
-          </div>
-          <div className="floating-code">
-            <span>02 / THE LOGIC</span>
-            <div key={scene.type}>
-              {scene.code.map((line, i) => (
-                <p key={line}>
-                  <b>0{i + 1}</b>
-                  {line}
-                  <i>✓</i>
-                </p>
-              ))}
-            </div>
-          </div>
-          <div className="floating-output">
-            <div className="output-mark">
-              <span>↗</span>
-              <i>✓</i>
-            </div>
-            <div>
-              <small>{scene.outputLabel}</small>
-              <strong>{scene.output}</strong>
-            </div>
-          </div>
-          {scene.type === 'app' && (
-            <div className="floating-product">
-              <Image
-                src="/images/work/munda.jpg"
-                alt=""
-                width={1600}
-                height={800}
-                sizes="240px"
-              />
-              <span>MUNDA / AN ACTUAL BUILD</span>
-            </div>
-          )}
-          <div className="engine-ground" />
+      <div className="build-scene-cards">
+        <div className="signal-card">
+          <span className="signal-symbol" aria-hidden="true">
+            {scene.symbol}
+          </span>
+          <small>INPUT</small>
+          <strong>{scene.input}</strong>
         </div>
-        <span
-          className="engine-coordinate coordinate-bottom"
-          aria-hidden="true"
-        >
-          {scene.tools}
+        <span className="signal-connector" aria-hidden="true">
+          →
         </span>
-        <span className="engine-phase-number" aria-hidden="true">
-          0{phase + 1}
-        </span>
+        <div className={'result-card ' + (phase === 3 ? 'is-ready' : '')}>
+          <span aria-hidden="true">↗</span>
+          <small>OUTCOME</small>
+          <strong>{scene.output}</strong>
+        </div>
       </div>
       <div
-        className="engine-sequence"
+        className="build-sequence"
         role="group"
         aria-label="Explore the engineering sequence"
       >
@@ -225,21 +121,69 @@ export function HeroExperience({ active = 0 }: { active?: number }) {
           <button
             key={step}
             type="button"
+            aria-pressed={phase === i}
+            data-complete={i < phase}
             onClick={() => {
               setPhase(i);
               setRevision(v => v + 1);
             }}
-            aria-pressed={phase === i}
           >
             <span>0{i + 1}</span>
             {step}
-            <i />
           </button>
         ))}
       </div>
-      <p className="experience-disclaimer">
-        AN INTERACTIVE IDEA OF HOW I BUILD · NOT LIVE TELEMETRY
+      <p className="sequence-detail">{scene.details[phase]}</p>
+      <div className="product-fan" aria-hidden="true">
+        {scenes.map((item, i) => (
+          <div
+            key={item.project}
+            className={
+              'fan-shot ' +
+              (active === i
+                ? 'is-front'
+                : i === (active + 1) % 3
+                  ? 'is-left'
+                  : 'is-right')
+            }
+          >
+            <div className="fan-chrome">
+              <span>● ● ●</span>
+              {item.title}
+            </div>
+            <Image
+              src={'/images/work/' + item.project + '.jpg'}
+              alt=""
+              width={1600}
+              height={800}
+              sizes="(max-width: 760px) 78vw, 440px"
+              priority={i === 0}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="build-scene-bottom">
+        <span>{scene.tools}</span>
+        <button
+          type="button"
+          onClick={() => {
+            setPhase(0);
+            setRevision(v => v + 1);
+          }}
+          aria-label="Replay sequence"
+        >
+          Replay ↺
+        </button>
+      </div>
+      <p className="scene-honesty">
+        Illustrative workflow · screenshots from my projects
       </p>
+      <Link
+        className="scene-evidence"
+        href={active === 2 ? '/projects' : scene.href}
+      >
+        {scene.caption} <span aria-hidden="true">↗</span>
+      </Link>
     </div>
   );
 }

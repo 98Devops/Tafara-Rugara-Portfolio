@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { HeroExperience } from './HeroExperience';
 import { WorkShowcase } from './WorkShowcase';
 import { useMotionPreferences } from '@/components/MotionPreferences';
-import { documents } from '@/data/site';
+import { documents, availability } from '@/data/site';
 import Link from 'next/link';
 import { portfolioData, testimonial } from '@/data/portfolio';
 
@@ -78,10 +78,8 @@ export function CinematicHome() {
       <section className="cinema-hero" aria-labelledby="hero-heading">
         <div className="wrap">
           <div className="hero-meta">
-            <span>
-              <i className="live-dot" /> OPEN TO OPPORTUNITIES
-            </span>
-            <span>HARARE, ZIMBABWE · GMT+2</span>
+            <span>OPEN TO OPPORTUNITIES</span>
+            <span>{availability.short}</span>
           </div>
           <div className="cinema-hero-grid">
             <div className="hero-copy">
@@ -132,7 +130,6 @@ export function CinematicHome() {
               </div>
             </div>
             <div className="hero-system">
-              <HeroExperience active={active} />
               <div
                 className="discipline-switch"
                 role="group"
@@ -149,6 +146,7 @@ export function CinematicHome() {
                   </button>
                 ))}
               </div>
+              <HeroExperience active={active} />
               <p className="blueprint-caption" aria-live="polite">
                 {disciplines[active].label}
               </p>
@@ -253,9 +251,9 @@ export function CinematicHome() {
               <br />A builder at heart.
             </h2>
             <p>
-              Based in Harare, Zimbabwe. I work across software, automation and
-              cloud infrastructure, connecting the pieces that turn an idea into
-              something people can use.
+              Available in Harare, Zimbabwe and South Africa. I work across
+              software, automation and cloud infrastructure, connecting the
+              pieces that turn an idea into something people can use.
             </p>
             <p>
               I care about the work after launch: clear documentation, useful
@@ -282,6 +280,40 @@ export function CinematicHome() {
           </figure>
         </div>
       </section>
+      <section className="start-paths wrap" aria-labelledby="paths-heading">
+        <p className="chapter-label">
+          <span>YOUR NEXT STEP</span>
+          <span>A DIRECT ROUTE</span>
+        </p>
+        <h2 id="paths-heading">
+          Find <em>your way in.</em>
+        </h2>
+        <div className="path-grid">
+          <Link href="/experience">
+            <span>01 / HIRING</span>
+            <h3>A builder for your team.</h3>
+            <p>Experience, skills and a CV you can take with you.</p>
+            <b>Meet the engineer ↗</b>
+          </Link>
+          <Link href="/spreadsheet-escape">
+            <span>02 / BUSINESS</span>
+            <h3>Your process. Working better.</h3>
+            <p>
+              Turn scattered records and repeated tasks into useful software.
+            </p>
+            <b>Explore the approach ↗</b>
+          </Link>
+          <Link href="/what-i-do">
+            <span>03 / AUTOMATION</span>
+            <h3>Connect the moving parts.</h3>
+            <p>
+              AI workflows, integrations and infrastructure built to work
+              together.
+            </p>
+            <b>See what I do ↗</b>
+          </Link>
+        </div>
+      </section>
       <section className="cinema-contact wrap">
         <p className="cinema-eyebrow">HAVE A CHALLENGE WORTH SOLVING?</p>
         <h2>
@@ -297,7 +329,10 @@ export function CinematicHome() {
             {personal.socialLinks.email} <Arrow diagonal />
           </a>
         </div>
-        <p>Open to remote roles, contracts and thoughtful collaborations.</p>
+        <p>
+          Available in Harare, Zimbabwe and South Africa · Open to remote roles
+          and contracts.
+        </p>
       </section>
     </main>
   );

@@ -20,3 +20,9 @@ export const documents = {
     detail: 'Bongani Wilson · YourEKA Services',
   },
 };
+
+export const availability = {
+  short: 'HARARE, ZIMBABWE & SOUTH AFRICA · UTC+2',
+  description:
+    'Available in Harare, Zimbabwe and South Africa. Open to remote roles, contracts and project collaborations.',
+};

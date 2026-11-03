@@ -3,6 +3,7 @@ import { Fraunces, Archivo, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import './cinematic.css';
 import './studio.css';
+import './showcase.css';
 import { StructuredData } from '@/components/StructuredData';
 import { generatePageMetadata } from '@/components/SEO';
 import ClientShell from '@/components/ClientShell';
@@ -25,7 +26,7 @@ const archivo = Archivo({
   variable: '--font-archivo',
   display: 'swap',
   preload: true,
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '800'],
   fallback: ['system-ui', 'arial'],
   adjustFontFallback: true,
 });

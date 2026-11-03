@@ -14,9 +14,8 @@ export default function Contact() {
         description="Have a workflow to simplify, a product to build or a role that fits? Tell me what you have in mind."
       >
         <div className="contact-intro">
-          <span className="live-dot" />
           <p>Open to opportunities</p>
-          <span>REMOTE ROLES / CONTRACTS / COLLABORATIONS</span>
+          <span>HARARE, ZIMBABWE & SOUTH AFRICA · UTC+2</span>
           <a href="#book">
             Book a discovery call <b>↗</b>
           </a>

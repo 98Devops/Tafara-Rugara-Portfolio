@@ -69,7 +69,7 @@ export default function Footer() {
         </div>
         <div className="footer-baseline">
           <span>© {new Date().getFullYear()} TAFARA RUGARA</span>
-          <span>HARARE · GMT+2</span>
+          <span>HARARE, ZIMBABWE & SOUTH AFRICA · UTC+2</span>
           <MotionToggle />
         </div>
       </div>

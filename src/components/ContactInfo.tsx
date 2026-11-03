@@ -1,6 +1,6 @@
 import { portfolioData } from '@/data/portfolio';
 import { DownloadLinks } from '@/components/DownloadLinks';
-import { site } from '@/data/site';
+import { site, availability } from '@/data/site';
 
 export default function ContactInfo() {
   return (
@@ -9,10 +9,7 @@ export default function ContactInfo() {
       <a className="contact-email" href={'mailto:' + site.email}>
         {site.email} <span>↗</span>
       </a>
-      <p>
-        Based in Harare, Zimbabwe. Open to remote opportunities and project
-        collaborations.
-      </p>
+      <p>{availability.description}</p>
       <div className="contact-routes">
         <a href={site.whatsapp} target="_blank" rel="noopener noreferrer">
           <span>

@@ -5,6 +5,19 @@ import { MotionPreferences } from '../MotionPreferences';
 import { portfolioData } from '@/data/portfolio';
 
 describe('Cinematic portfolio', () => {
+  it('states both locations and keeps availability free of an animated marker', () => {
+    render(
+      <MotionPreferences>
+        <CinematicHome />
+      </MotionPreferences>
+    );
+    expect(
+      screen.getByText('HARARE, ZIMBABWE & SOUTH AFRICA · UTC+2')
+    ).toBeVisible();
+    const status = screen.getByText('OPEN TO OPPORTUNITIES');
+    expect(status.querySelector('.live-dot')).toBeNull();
+  });
+
   it('lets visitors explore disciplines without leaving the page', async () => {
     const user = userEvent.setup();
     render(

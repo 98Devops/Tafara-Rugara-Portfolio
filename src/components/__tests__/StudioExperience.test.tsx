@@ -78,21 +78,39 @@ describe('Studio themes and project media', () => {
       ...original,
       matches: query === '(prefers-reduced-motion: reduce)',
     }));
-    render(<MotionPreferences><HeroExperience /></MotionPreferences>);
+    render(
+      <MotionPreferences>
+        <HeroExperience />
+      </MotionPreferences>
+    );
     act(() => jest.advanceTimersByTime(10400));
-    expect(screen.getByRole('button', { name: '01 Capture' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('button', { name: '01 Capture' })).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
     fireEvent.click(screen.getByRole('button', { name: '04 Connect' }));
-    expect(screen.getByRole('button', { name: '04 Connect' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('button', { name: '04 Connect' })).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
   });
-  it('switches actual project screenshots with the selected featured build', async () => {
+  it('provides direct access to all six featured builds with real screenshots and honest status', () => {
     render(<WorkShowcase />);
     expect(
       screen.getByRole('link', { name: 'Visit live app ↗' })
     ).toHaveAttribute('href', 'https://trevis.netlify.app/');
-    await userEvent.click(screen.getByRole('button', { name: /02 Munda/ }));
+    expect(screen.getByRole('link', { name: '02 Munda' })).toHaveAttribute(
+      'href',
+      '#featured-munda'
+    );
     expect(
       screen.getByRole('link', { name: 'Explore Munda ↗' })
     ).toHaveAttribute('href', 'https://munda-mvp.netlify.app');
+    expect(screen.getAllByRole('article')).toHaveLength(6);
+    expect(screen.getByText('PRELAUNCH')).toBeVisible();
+    expect(
+      screen.getByRole('link', { name: 'Skip projects ↓' })
+    ).toHaveAttribute('href', '#after-work');
     expect(
       decodeURIComponent(
         screen
