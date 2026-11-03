@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Fraunces, Archivo, JetBrains_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 import './cinematic.css';
 import './studio.css';
@@ -9,37 +9,38 @@ import { generatePageMetadata } from '@/components/SEO';
 import ClientShell from '@/components/ClientShell';
 
 // Display — statements, section titles, numerals
-const fraunces = Fraunces({
-  subsets: ['latin'],
+const fraunces = localFont({
+  src: [
+    { path: './fonts/fraunces-normal-latin.woff2', weight: '400 500', style: 'normal' },
+    { path: './fonts/fraunces-italic-latin.woff2', weight: '400 500', style: 'italic' },
+  ],
   variable: '--font-fraunces',
   display: 'swap',
   preload: true,
-  weight: ['400', '500'],
-  style: ['normal', 'italic'],
   fallback: ['Georgia', 'serif'],
-  adjustFontFallback: true,
+  adjustFontFallback: 'Times New Roman',
 });
 
 // UI / body
-const archivo = Archivo({
-  subsets: ['latin'],
+const archivo = localFont({
+  src: './fonts/archivo-latin.woff2',
   variable: '--font-archivo',
   display: 'swap',
   preload: true,
-  weight: ['400', '500', '600', '800'],
+  weight: '400 800',
   fallback: ['system-ui', 'arial'],
-  adjustFontFallback: true,
+  adjustFontFallback: 'Arial',
 });
 
 // Data / labels / mono
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
+const jetbrainsMono = localFont({
+  src: './fonts/jetbrains-mono-latin.woff2',
   variable: '--font-jetbrains-mono',
   display: 'swap',
   preload: false,
-  weight: ['400', '500'],
+  weight: '400 500',
   fallback: ['ui-monospace', 'SFMono-Regular', 'Consolas', 'monospace'],
-  adjustFontFallback: true,
+  adjustFontFallback: 'Arial',
 });
 
 export const metadata: Metadata = generatePageMetadata('home');
@@ -63,13 +64,6 @@ export default function RootLayout({
           }}
         />
         <StructuredData pageKey="home" />
-        {/* Preconnect to external domains */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
         {/* DNS prefetch */}
         <link rel="dns-prefetch" href="https://github.com" />
         <link rel="dns-prefetch" href="https://linkedin.com" />

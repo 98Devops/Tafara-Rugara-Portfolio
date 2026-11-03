@@ -17,3 +17,7 @@ The designer package is implemented within the existing Next.js application; the
 - Browser QA: desktop light/dark; all six routes at phone/tablet widths without horizontal overflow; short-screen normal-flow fallback; mobile menu Escape; screenshot viewer loading, Escape and focus restoration; revised hero footprint and tablet headline.
 - Full legacy suite, full E2E and Lighthouse were not run. Existing Browserslist/ESLint configuration warnings remain.
 - Publish to the existing draft PR preview only. Production is unchanged.
+
+## Deployment font fix
+
+The first Netlify deployment failed in Next.js Google Fonts URL parsing. Fonts are now bundled locally with their SIL Open Font Licenses; the production build no longer downloads fonts. The same Archivo, Fraunces and JetBrains Mono families remain. Production build and export verification pass after this change.
