@@ -1,13 +1,13 @@
 import { Metadata } from 'next';
 
-const title = 'Escape the Spreadsheets — One Clean System in 21 Days | Tafara Rugara';
+const title = 'Spreadsheet Escape — Software for Your Business';
 const description =
-  'Your business runs on 3–5 spreadsheets. I replace them with one system — dashboard, logins, automations — in 21 days, or you get 20% off. Save 5+ hours a week or your money back. See the Trevis build: 132 tenants, one app.';
-const url = 'https://tafara-rugara.com/spreadsheet-escape';
-const ogImage = '/images/trevis/dashboard.png';
+  'Turn scattered spreadsheets into a focused business application. Explore the Trevis example and discuss a workflow built around your operations.';
+const url = 'https://tafara.netlify.app/spreadsheet-escape';
+const ogImage = '/images/placeholder.svg';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tafara-rugara.com'),
+  metadataBase: new URL('https://tafara.netlify.app'),
   title,
   description,
   keywords: [
@@ -18,7 +18,6 @@ export const metadata: Metadata = {
     'small business system',
     'React Supabase web app',
     'productized software development',
-    '21 day build',
     'Tafara Rugara',
     'Harare software developer',
   ],
@@ -30,7 +29,14 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url,
     siteName: 'Tafara Rugara',
-    images: [{ url: ogImage, width: 1200, height: 630, alt: 'One system replacing four spreadsheets — the Trevis dashboard' }],
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: 'Tafara Rugara — Business systems and automation',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -41,6 +47,10 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function SpreadsheetEscapeLayout({ children }: { children: React.ReactNode }) {
+export default function SpreadsheetEscapeLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return <>{children}</>;
 }

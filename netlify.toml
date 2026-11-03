@@ -7,24 +7,7 @@
   NPM_FLAGS = "--production=false"
   NEXT_TELEMETRY_DISABLED = "1"
 
-# SPA fallback for Next.js App Router
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-# API routes (if any are added later)
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
-
-# Document downloads with proper headers
-[[redirects]]
-  from = "/documents/*"
-  to = "/documents/:splat"
-  status = 200
-  headers = {Cache-Control = "public, max-age=0, must-revalidate", X-Content-Type-Options = "nosniff"}
+# Next.js static export supplies individual routes and a real 404.
 
 # Enable Netlify Forms processing
 [build.processing]
@@ -85,7 +68,7 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
     X-Content-Type-Options = "nosniff"
-    Content-Disposition = "inline"
+    Content-Disposition = "attachment"
 
 # SVG files
 [[headers]]
@@ -111,10 +94,6 @@
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=3600"
-
-# Form handling configuration
-[[forms]]
-  name = "contact"
 
 # Environment variables for build optimization
 [context.production.environment]

@@ -1,101 +1,177 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-
-import { useEffect, useRef } from 'react';
-
-/**
- * ─── ACTIVATE BOOKING ───────────────────────────────────────────────
- * Paste your Cal.com booking link below, e.g. 'tafara-rugara/30min'
- * (create a free account at cal.com, add an event type, copy its link).
- *
- * While this is empty, the section renders nothing — the Contact page is
- * unchanged. The moment you set it, a live inline calendar appears on the
- * Contact page. No other code changes needed. Cal.com is already allowed
- * in the site CSP (netlify.toml).
- * ────────────────────────────────────────────────────────────────────
- */
-const CAL_LINK: string = 'tfr263/30min';
-const CAL_NAMESPACE = 'book';
-const BRAND = '#E2672E'; // --ember
-
+import { useEffect, useId, useRef, useState } from 'react';
+import { useTheme } from './ThemeProvider';
+import { site } from '@/data/site';
 declare global {
-  interface Window { Cal?: any }
+  interface Window {
+    Cal?: any;
+  }
 }
 
 export function BookingSection() {
-  const initialised = useRef(false);
-
+  const { theme } = useTheme();
+  const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [slow, setSlow] = useState(false);
+  const host = useRef<HTMLDivElement>(null);
+  const initialized = useRef(false);
+  const namespace = 'book' + useId().replace(/:/g, '');
   useEffect(() => {
-    if (!CAL_LINK || initialised.current) return;
-    initialised.current = true;
-
+    if (!visible || initialized.current || !host.current) return;
+    initialized.current = true;
     // Official Cal.com embed loader (queues API calls until embed.js loads).
     (function (C: any, A: string, L: string) {
       const p = (a: any, ar: any) => a.q.push(ar);
       const d = C.document;
-      C.Cal = C.Cal || function (...args: any[]) {
-        const cal = C.Cal;
-        const ar = args;
-        if (!cal.loaded) {
-          cal.ns = {};
-          cal.q = cal.q || [];
-          d.head.appendChild(d.createElement('script')).src = A;
-          cal.loaded = true;
-        }
-        if (ar[0] === L) {
-          const api: any = function (...a2: any[]) { p(api, a2); };
-          const namespace = ar[1];
-          api.q = api.q || [];
-          if (typeof namespace === 'string') {
-            cal.ns[namespace] = cal.ns[namespace] || api;
-            p(cal.ns[namespace], ar);
-            p(cal, ['initNamespace', namespace]);
-          } else { p(cal, ar); }
-          return;
-        }
-        p(cal, ar);
-      };
+      C.Cal =
+        C.Cal ||
+        function (...args: any[]) {
+          const cal = C.Cal;
+          const ar = args;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement('script')).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api: any = function (...a2: any[]) {
+              p(api, a2);
+            };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === 'string') {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ['initNamespace', namespace]);
+            } else {
+              p(cal, ar);
+            }
+            return;
+          }
+          p(cal, ar);
+        };
     })(window, 'https://app.cal.com/embed/embed.js', 'init');
 
     const Cal = window.Cal!;
-    Cal('init', CAL_NAMESPACE, { origin: 'https://cal.com' });
-    Cal.ns[CAL_NAMESPACE]('inline', {
-      elementOrSelector: '#cal-inline',
-      calLink: CAL_LINK,
-      layout: 'month_view',
+    Cal('init', namespace, { origin: 'https://cal.com' });
+    Cal.ns[namespace]('inline', {
+      elementOrSelector: host.current,
+      calLink: site.bookingPath,
+      config: { layout: 'month_view' },
     });
-    Cal.ns[CAL_NAMESPACE]('ui', {
-      theme: 'dark',
-      cssVarsPerTheme: { dark: { 'cal-brand': BRAND } },
+  }, [visible, namespace, theme]);
+  useEffect(() => {
+    if (!visible || !window.Cal?.ns?.[namespace]) return;
+    window.Cal.ns[namespace]('ui', {
+      theme,
+      colorScheme: theme,
+      cssVarsPerTheme: {
+        dark: { 'cal-brand': '#F18453' },
+        light: { 'cal-brand': '#AE451F' },
+      },
       hideEventTypeDetails: false,
       layout: 'month_view',
     });
-  }, []);
-
-  // Not configured yet → render nothing (Contact page stays unchanged).
-  if (!CAL_LINK) return null;
-
+  }, [visible, namespace, theme]);
+  useEffect(() => {
+    if (!visible || !host.current) return;
+    const target = host.current;
+    const onLoad = () => {
+      setLoading(false);
+      setSlow(false);
+    };
+    const observeFrame = () => {
+      const frame = target.querySelector('iframe');
+      if (frame) {
+        frame.title = 'Book a 30-minute call with Tafara Rugara';
+        frame.addEventListener('load', onLoad, { once: true });
+      }
+    };
+    const observer = new MutationObserver(observeFrame);
+    observer.observe(target, { childList: true, subtree: true });
+    observeFrame();
+    const timer = setTimeout(() => setSlow(true), 15000);
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+      target.querySelector('iframe')?.removeEventListener('load', onLoad);
+    };
+  }, [visible]);
   return (
-    <section className="rise border border-line rounded-md p-6 sm:p-8 mb-16" style={{ background: 'var(--surface)' }}>
-      <p className="label mb-4">// book a call</p>
-      <h2 className="font-display text-bone mb-3" style={{ fontWeight: 400, fontSize: 'clamp(1.4rem, 3vw, 1.9rem)' }}>
-        Schedule a call
-      </h2>
-      <p className="text-bone-dim mb-6" style={{ maxWidth: '52ch', fontSize: '0.94rem', lineHeight: 1.65 }}>
-        Pick a time that works for you — a 30-minute discovery call to talk through your project,
-        whatever it is: web &amp; software development, web apps, Cloud, DevOps, or AI automation.
-        Tell me a bit about it in the notes when you book.
-      </p>
-
-      <div id="cal-inline" style={{ minHeight: 520, width: '100%', overflow: 'auto' }}>
-        <p className="label" style={{ textTransform: 'none' }}>Loading calendar…</p>
+    <section
+      className="booking-section"
+      id="book"
+      aria-labelledby="booking-title"
+    >
+      <div className="booking-heading">
+        <div>
+          <p className="cinema-eyebrow">02 / PUT SOME TIME ASIDE</p>
+          <h2 id="booking-title">
+            Let’s map out
+            <br />
+            <em>the next move.</em>
+          </h2>
+          <p>
+            A 30-minute discovery call to discuss the problem, what you need and
+            whether I can help.
+          </p>
+        </div>
+        <div className="booking-facts">
+          <span>30 MINUTES</span>
+          <span>PROJECT / ROLE / COLLABORATION</span>
+          <p>
+            Choose an available time in the calendar. Check the displayed time
+            zone before confirming.
+          </p>
+          <a href={site.bookingUrl} target="_blank" rel="noopener noreferrer">
+            Open booking page ↗
+          </a>
+        </div>
       </div>
-
-      <p className="text-bone-faint mt-4 font-mono" style={{ fontSize: '0.72rem' }}>
-        Calendar not loading?{' '}
-        <a href="https://wa.me/263777553271" target="_blank" rel="noopener noreferrer" className="text-bone-dim hover:text-bone transition-colors">
-          message me on WhatsApp
-        </a>.
+      {!visible && (
+        <div className="booking-launch">
+          <div aria-hidden="true" className="calendar-symbol">
+            <span>LET’S TALK</span>
+            <b>30</b>
+            <small>MINUTES</small>
+          </div>
+          <div>
+            <h3>A little clarity goes a long way.</h3>
+            <p>
+              Bring the problem, the goal and any constraints. We’ll start
+              there.
+            </p>
+            <button
+              type="button"
+              className="btn-solid"
+              onClick={() => setVisible(true)}
+            >
+              Show available times <span aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </div>
+      )}
+      <div className="booking-calendar" hidden={!visible}>
+        {loading && (
+          <p className="calendar-loading" role="status">
+            {slow
+              ? 'The calendar is taking a little longer. You can open the booking page directly below.'
+              : 'Loading available times…'}
+          </p>
+        )}
+        <div ref={host} className="calendar-host" />
+      </div>
+      <p className="booking-fallback">
+        Prefer a separate window?{' '}
+        <a href={site.bookingUrl} target="_blank" rel="noopener noreferrer">
+          Book directly on Cal.com ↗
+        </a>{' '}
+        ·{' '}
+        <a href={site.whatsapp} target="_blank" rel="noopener noreferrer">
+          Arrange a time on WhatsApp ↗
+        </a>
       </p>
     </section>
   );
